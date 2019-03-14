@@ -1,5 +1,6 @@
-# Welcome to OhTube
-**팀페이지 주소** -> https://kookmin-sw.github.io/ `{{자신의 리파지토리 아이디}}`
+
+# 유감(유튜브 감성분석)
+**팀페이지 주소** -> https://kookmin-sw.github.io/`{{자신의 리파지토리 아이디}}`
 
 ### 1. 프로잭트 소개
 
@@ -13,43 +14,49 @@
 
 ### 3. 팀 소개
 
-팀을 소개하세요.
+###OhTube
+<p>유감을 수행하는 OhTube팀입니다.</p>
+<img src="https://github.com/kookmin-sw/2019-cap1-2019_3/blob/master/Images/OhTube_Logo.png"  width = "300px" height = "300px"></img>
 
-팀원정보 및 담당이나 사진 및 SNS를 이용하여 소개하세요.
+### 정지연
+<img src="https://github.com/kookmin-sw/2019-cap1-2019_3/blob/master/Images/jeong.JPG"  width = "300px" height = "300px"></img>
 
-### 4. 사용법
-
-소스코드제출시 설치법이나 사용법을 작성하세요.
-
-### 5. 기타
-
-추가적인 내용은 자유롭게 작성하세요.
-
-
-## Markdown을 사용하여 내용꾸미기
-
-Markdown은 작문을 스타일링하기위한 가볍고 사용하기 쉬운 구문입니다. 여기에는 다음을위한 규칙이 포함됩니다.
 
 ```markdown
-Syntax highlighted code block
+* email: 97jjy@kookmin.ac.kr
+* role: 팀장 ,댓글 감성 분석 , 텍스트 전처리 
+```
+### 김주향
+<img src="https://github.com/kookmin-sw/2019-cap1-2019_3/blob/master/Images/kim.JPEG"   width = "300px" height = "300px"></img>
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
+```markdown
+* email: jh15501551@gmail.com
+* role: 영상 감성 분석  , 데이터 시각화
+```
+### 손태선
+<img src="https://github.com/kookmin-sw/2019-cap1-2019_3/blob/master/Images/son.JPEG"   width = "300px" height = "300px"></img>
 
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```markdown
+* email: escs34@gmail.com
+* role: 영상 감성 분석  , 영상 전처리
 ```
 
-자세한 내용은 [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+### 이진주
+<img src="https://github.com/kookmin-sw/2019-cap1-2019_3/blob/master/Images/lee.JPEG"  width = "300px" height = "300px"></img>
 
-### Support or Contact
 
-readme 파일 생성에 추가적인 도움이 필요하면 [도움말](https://help.github.com/articles/about-readmes/) 이나 [contact support](https://github.com/contact) 을 이용하세요.
+```markdown
+* email: leejj5645@gmail.com
+* role: 댓글 감성 분석  , 유튜브 댓글 크롤링
+```
+
+### 양동철
+<img src="https://github.com/kookmin-sw/2019-cap1-2019_3/blob/master/Images/yang.JPEG"  width = "300px" height = "300px"></img>
+
+```markdown
+* email: moxenorljr@gmail.com
+* role: Web Front End 개발
+```
+
+
