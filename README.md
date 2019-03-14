@@ -1,6 +1,6 @@
 
 # 유감(유튜브 감성분석)
-**팀페이지 주소** -> https://kookmin-sw.github.io/`{{자신의 리파지토리 아이디}}`
+**팀페이지 주소** -> https://kookmin-sw.github.io/2019-cap1-2019_3
 
 ### 1. 프로잭트 소개
 
@@ -14,7 +14,7 @@
 
 ### 3. 팀 소개
 
-###OhTube
+### OhTube
 <p>유감을 수행하는 OhTube팀입니다.</p>
 <img src="https://github.com/kookmin-sw/2019-cap1-2019_3/blob/master/Images/OhTube_Logo.png"  width = "300px" height = "300px"></img>
 
@@ -27,7 +27,7 @@
 * role: 팀장 ,댓글 감성 분석 , 텍스트 전처리 
 ```
 ### 김주향
-<img src="https://github.com/kookmin-sw/2019-cap1-2019_3/blob/master/Images/kim.JPEG"   width = "300px" height = "300px"></img>
+<img src="https://github.com/kookmin-sw/2019-cap1-2019_3/blob/master/Images/kim.jpeg"   width = "300px" height = "300px"></img>
 
 
 ```markdown
@@ -35,7 +35,7 @@
 * role: 영상 감성 분석  , 데이터 시각화
 ```
 ### 손태선
-<img src="https://github.com/kookmin-sw/2019-cap1-2019_3/blob/master/Images/son.JPEG"   width = "300px" height = "300px"></img>
+<img src="https://github.com/kookmin-sw/2019-cap1-2019_3/blob/master/Images/son.jpeg"   width = "300px" height = "300px"></img>
 
 ```markdown
 * email: escs34@gmail.com
@@ -43,7 +43,7 @@
 ```
 
 ### 이진주
-<img src="https://github.com/kookmin-sw/2019-cap1-2019_3/blob/master/Images/lee.JPEG"  width = "300px" height = "300px"></img>
+<img src="https://github.com/kookmin-sw/2019-cap1-2019_3/blob/master/Images/lee.jpeg"  width = "300px" height = "300px"></img>
 
 
 ```markdown
@@ -52,7 +52,7 @@
 ```
 
 ### 양동철
-<img src="https://github.com/kookmin-sw/2019-cap1-2019_3/blob/master/Images/yang.JPEG"  width = "300px" height = "300px"></img>
+<img src="https://github.com/kookmin-sw/2019-cap1-2019_3/blob/master/Images/yang.jpeg"  width = "300px" height = "300px"></img>
 
 ```markdown
 * email: moxenorljr@gmail.com
