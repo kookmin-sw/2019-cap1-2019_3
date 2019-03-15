@@ -17,7 +17,8 @@
 
 ### 2. 소개 영상
 
-https://www.youtube.com/watch?v=MMOWhNwm43I
+이 이미지를 클릭하시면 영상을 보실 수 있습니다.
+[![video](./Images/계획UI.png)](https://www.youtube.com/watch?v=MMOWhNwm43I)
 
 ### 3. 팀 소개
 
