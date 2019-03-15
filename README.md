@@ -62,4 +62,11 @@
 * role: Web Front End 개발
 ```
 
+### 4.Abstract
+The exponential growth of male and female creators is attracting attention, who quickly read trends and struggle to capture viewers. Now that there are as many different video content as there are creators, there are many different ways to evaluate it. However, the fastest way to show the evaluation of content is through comments. It's hard to read all the comments in the video, so it's hard to see the whole picture and choose what you want to read. So we've designed a project to analyze the explosion of YouTube videos so that creators and viewers can create and view quality video, and to analyze the emotion of YouTube. And if you can convey the emotions of the creator, and if you can convey your feelings, you can share them.
+
+<li> Analyze the face of the creator and provide a timeline.</li>
+<li> Analyze YouTube comment sensitivity and categorize positive negative comments.</li>
+<li> The six emotions, happiness, sadness, anger, surprise, neutrality, and fear, provide a distribution of emotions in the comments.</li>
+<li> Increase visual effects by showing word clouds based on the sensitivity of comments.</li>
 
