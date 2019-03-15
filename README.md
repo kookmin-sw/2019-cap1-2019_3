@@ -16,6 +16,8 @@
 <li> 댓글들의 감성에 따른 워드 클라우드를 보여주어 시각적인 효과를 높입니다. </li>
 
 ### 2. 소개 영상
+<iframe width="640" height="360" src="https://www.youtube.com/watch?v=MMOWhNwm43I" frameborder="0" gesture="media" allowfullscreen=""></iframe>
+
 ### 3. 팀 소개
 
 ### OhTube
