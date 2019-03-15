@@ -22,7 +22,7 @@
 <img src="https://github.com/kookmin-sw/2019-cap1-2019_3/blob/master/Images/OhTube_Logo.png"  width = "300px" height = "300px"></img>
 
 ### 정지연
-![team].(./Images/jeong.JPG)
+![team](./Images/jeong.JPG)
 <img src="https://github.com/kookmin-sw/2019-cap1-2019_3/blob/master/Images/jeong.JPG"  width = "300px" height = "300px"></img>
 
 
