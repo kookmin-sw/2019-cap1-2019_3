@@ -19,27 +19,24 @@
 ### 3. 팀 소개
 
 ### OhTube
-<img src="https://github.com/kookmin-sw/2019-cap1-2019_3/blob/master/Images/OhTube_Logo.png"  width = "300px" height = "300px"></img>
+![team](./Images/OhTube_Logo.png)
 
 ### 정지연
 ![team](./Images/jeong.JPG)
-<img src="https://github.com/kookmin-sw/2019-cap1-2019_3/blob/master/Images/jeong.JPG"  width = "300px" height = "300px"></img>
-
 
 ```markdown
 * email: 97jjy@kookmin.ac.kr
 * role: 팀장 ,댓글 감성 분석 , 텍스트 전처리 
 ```
 ### 김주향
-<img src="https://github.com/kookmin-sw/2019-cap1-2019_3/blob/master/Images/kim.jpeg"   width = "300px" height = "300px"></img>
-
+![team](./Images/kim.jpeg)
 
 ```markdown
 * email: jh15501551@gmail.com
 * role: 영상 감성 분석  , 데이터 시각화
 ```
 ### 손태선
-<img src="https://github.com/kookmin-sw/2019-cap1-2019_3/blob/master/Images/son.jpeg"   width = "300px" height = "300px"></img>
+![team](./Images/son.jpeg)
 
 ```markdown
 * email: escs34@gmail.com
@@ -47,7 +44,7 @@
 ```
 
 ### 이진주
-<img src="https://github.com/kookmin-sw/2019-cap1-2019_3/blob/master/Images/lee.jpeg"  width = "300px" height = "300px"></img>
+![team](./Images/lee.jpeg)
 
 
 ```markdown
@@ -56,7 +53,8 @@
 ```
 
 ### 양동철
-<img src="https://github.com/kookmin-sw/2019-cap1-2019_3/blob/master/Images/yang.jpeg"  width = "300px" height = "300px"></img>
+![team](./Images/yang.jpeg)
+
 
 ```markdown
 * email: moxenorljr@gmail.com
