@@ -1,22 +1,17 @@
-from ImgLoader import ImgLoader
-
+import cv2
 
 class Commander:
     def __init__(self):
-        self.imgLoader = ImgLoader()
         pass
 
-    def setThisFrames(self):
-        pass
+    def mainLogic(self, img):
+        if img != None:
+            cv2.imshow("image", img)
+            cv2.waitKey(1000)#pause for 1 second
+            cv2.destroyAllWindows()
+        else:
+            print("Img has not been received")
 
-    def setThisVideo(self):
-        pass
-
-    def getThisFrame(self):
-        pass
-
-    def next(self):
-        pass
 
 
 

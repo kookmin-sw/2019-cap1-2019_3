@@ -3,20 +3,39 @@ from Sender import Sender
 class JustShow:
     def __init__(self):
         self.sender = Sender()
-        pass#dummy
 
     def showMenu(self):
-        pass#dummy
+        selectNumber = -1
+        while True:
+            print()
+            print()
+            print("...................................................................")
+            print("Choose Menu")
+            print("...................................................................")
+            print("Service 1. open image on server.")
+            print("Service 2. send image to server.")
+            print("0. end")
+            print("...................................................................")
+            selectNumber = int(input("Input Menu Number. "))
 
-    def inputVideo(selfpath):
-        pass
+            if selectNumber == 0:
+                print("end. bye.")
+                break
 
-    def showNext1(self):
-        pass
+            elif selectNumber == 1:
+                print("you select Service 1.")
+                path = self.inputPath()
+                self.sender.send_path(path)
 
-    def showNext100(self):
-        pass
+            elif selectNumber == 2:
+                print("you select Service 2.")
+                path = self.inputPath()
+                self.sender.send_imgs(path)
 
-    def showNext1000(self):
-        pass
+            else:
+                print("Choose again!")
+
+    def inputPath(self):
+        path = str(input("input video's path. "))
+        return path
 

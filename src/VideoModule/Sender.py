@@ -5,17 +5,18 @@ class Sender:
     def __init__(self):
         self.imgLoader = ImgLoader()
         self.receiver = Receiver()
-        pass
 
-    def registVideo(self, path):
-        pass
+    def send_path(self, path):
+        self.receiver.video_service(path)
 
-    def getThisFrame(self):
-        #when it called, send 1 img and get 1 img 
-        #rec.passProcessing(this_img)#하나 넘기고, 결과 받음
-        pass
+    def send_imgs(self, path):
+        self.imgLoader.registVideo(path)
+        for i in range(1000):
+            if i==0 or i==99 or i==999:
+                img = self.imgLoader.getThisFrame()
+                self.receiver.web_cam_service(img)
+            else:
+                self.imgLoader.getThisFrame()
 
-    def next(self):
-        pass
 
- 
+
