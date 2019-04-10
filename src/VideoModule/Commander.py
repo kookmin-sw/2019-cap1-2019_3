@@ -5,7 +5,7 @@ class Commander:
         pass
 
     def mainLogic(self, img):
-        if img != None:
+        if img is not None:
             cv2.imshow("image", img)
             cv2.waitKey(1000)#pause for 1 second
             cv2.destroyAllWindows()
