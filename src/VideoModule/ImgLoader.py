@@ -1,4 +1,4 @@
-
+import cv2
 
 
 class ImgLoader:
@@ -6,15 +6,16 @@ class ImgLoader:
     '''
     def __init__(self):
         #self.cap = ##initialize member variable
-        pass
+        self.vidcap = None
 
     def registVideo(self, path):
         #Open Video by parameter path (string type)
-        pass
+        self.vidcap = cv2.VideoCapture(path)
 
     def getThisFrame(self):
         #Return current 1 frame
-        pass
+        res, img = self.vidcap.read()
+        return img
 
 
 
