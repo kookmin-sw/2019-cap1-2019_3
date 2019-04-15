@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>pie chart sample</title>
+<div class="one-graph"></div>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<script>
+var w = 400, h = 400;
+
+var dataName = ["Happy", "Sad", "Angry", "Natural", "Surprise"];
+var colorData = ["#FD2F56", "#F1E7DE", "#343F3A", "#5ED1D4", "#FFC001"];
+
+function graphData() {
+	var Data = [30, 10, 20, 10, 30];
+
+	return Data
+}
+
+
+var pie = d3.pie();
+var arc = d3.arc().innerRadius(70).outerRadius(200);
+ 
+var svg = d3.select(".one-graph")
+    .append("svg")
+    .attr("width", w)
+    .attr("height", h)
+    .attr("id", "graphWrap");
+ 
+var g = svg.selectAll(".pie")
+    .data(pie(graphData()))
+    .enter()
+    .append("g")
+    .attr("class", "pie")
+    .attr("transform","translate("+w/2+","+h/2+")");
+ 
+g.append("path")
+    .style("fill", function(d, i) {
+        return colorData[i];
+    }) 
+    .transition()
+    .duration(400)
+    .delay(function(d, i) { 
+        return i * 400;
+    })
+    .attrTween("d", function(d, i) { 
+        var interpolate = d3.interpolate(
+            {startAngle : d.startAngle, endAngle : d.startAngle}, 
+            {startAngle : d.startAngle, endAngle : d.endAngle} 
+        );
+        return function(t){
+            return arc(interpolate(t)); 
+        }
+    });
+ 
+g.append("text")
+    .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+    .attr("dy", ".35em")
+    .style("text-anchor", "middle")
+    .text(function(d, i) {
+        return  d.endAngle-d.startAngle > 0.2 ?
+                dataName[i] + " (" + Math.round(1000*(d.endAngle-d.startAngle)/(Math.PI*2))/10 + "%)" : ""
+    });
+ 
+svg.append("text")
+    .attr("class", "total")
+    .attr("transform", "translate("+(w/2-35)+", "+(h/2+5)+")")
+    .text(" Total:" + d3.sum(graphData()));
+ 
+ 
+</script>
