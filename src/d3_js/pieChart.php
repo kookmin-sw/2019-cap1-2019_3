@@ -20,10 +20,10 @@ var dataName = [];
 var dataValue = [];
 
 // json 파일 연동하여 label(감성), value(빈도) 가져오기
-d3.json("../output_video_data/sample_data.json",function(data) {
+d3.json("./output_video_data/sample_data.json",function(data) {
              
         for (var i = 0; i < data.length; i++) {
-             
+             //json 파일의 label, value 를 각각의 dataName, 
             dataName.push(data[i].label);
             dataValue.push(data[i].value);
         }
