@@ -23,7 +23,7 @@ var dataValue = [];
 d3.json("./output_video_data/sample_data.json",function(data) {
              
         for (var i = 0; i < data.length; i++) {
-             //json 파일의 label, value 를 각각의 dataName, 
+             //json 파일의 label, value 를 각각의 dataName, dataValue로 가져오기.
             dataName.push(data[i].label);
             dataValue.push(data[i].value);
         }
