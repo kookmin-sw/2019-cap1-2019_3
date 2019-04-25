@@ -63,12 +63,12 @@ def getCmt(url):
 
 		cmtlist=[]
 		aulist = []
+		pelist = []
 		for items in thread: 
 			#댓글 내용 
 			comments = items.find_all('yt-formatted-string', attrs={'id':'content-text'}) 
-			#print(comments)
 			#기간(시점) 
-			peirod = items.select('yt-formatted-string > a')[0].get_text() 
+			period = items.find_all('yt-formatted-string',attrs={'class':'published-time-text above-comment style-scope ytd-comment-renderer'})
 			#글쓴이
 			author = items.find_all('a',attrs={'id':'author-text'})
 
@@ -80,6 +80,7 @@ def getCmt(url):
 							cmt = c.a.string
 						cmt.replace("\ufeff","")
 						cmtlist.append(cmt)
+
 					except TypeError as e: 
 						pass 
 				else: 
@@ -97,15 +98,25 @@ def getCmt(url):
 				else: 
 					pass 
 
+			for c in period: 
+				if c != None: 
+					try: 
+						cmt = c.a.string 
+						cmt = cmt.strip()
+						pelist.append(cmt) 
+					except TypeError as e: 
+						pass 
+
+				else: 
+					pass
+
 		num_c = (len(cmtlist) + plus_c ) 
 		print("total:",num_c) 
 		if num_c >= last_t or num_c >= 150000: 
 			break  
-	print("cmt:",len(cmtlist)) 
-	print("auth:",len(aulist)) 
 
 	print('-'*50) 
-	raw_data = {'comments':cmtlist,'author':aulist}
+	raw_data = {'comments':cmtlist,'author':aulist,'period':pelist}
 	result = pd.DataFrame(raw_data)
 
 	#csv파일 저장 폴더 생성, 파일 저장 
