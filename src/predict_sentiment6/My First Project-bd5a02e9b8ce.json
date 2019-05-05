@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "crypto-abode-237705",
+  "private_key_id": "bd5a02e9b8ce2513a34935775b31dc1ed82cf2a6",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCyvOyBnERuafuq\nunUMAa72yRi2+h8pTmE9t5NWHT/gAefEMONAeYrE1k2S8T+8XqzZELM/zcJBeldt\nBJKMmPpdcEePL3aCRBUl3+OG8Psg/GmIkC7ChsDrOSSlRm964bMwqrZW5AjpOZ6G\nO+P2CBotK+VVxggYu2Iat5KUjsB4lDvXlWNbI3ERjsFtOOqZkkYz60zv6EVYuIMd\nwaFp+E6ZVDnp3C9uV24z0EZ8PEstriz2jLY5rjNzh+L/FZtXQUwNBbAxDJ61vCdH\n56FqxD7qolWFRSfV1EMNDYhknCFlIS2jr32NjlCWkiFBdafcuEHmBM1JO/mipwJP\nGCABPRh7AgMBAAECggEAPUDgfmSK0RoSDMbckPJMvzdYeHCMWFALpCZy4Dqi5sZQ\nYpxsbO6aP22/5QE3WftKGhOOkmmVznG6X1qHTJaqinYNmATohKkHZFTveRHBxmKq\nWgordC/REmuhYuCaGM8bZSzD01BPu3mrGY6Rx4GsUtmtvPDiWnNxIf3SRoYLcOar\noaghyprO2+Sk6CIKkEvR6YN5xOkg4LlzRvD9ZxLcUQkdg2qL36SMm1Hr1kqFnma2\nA0HMQF0rLaH7luzXE4Y3PGqS9tCXKCfmvqAuScsFCp3EdExNp0pirKLbofrllMf2\na2mOMmlxuHEvqcqKPyXilftS/K8VUfGnxSLM6zhTWQKBgQD5ta6DHpnFX4X2sgJN\nE/GtE4jA658DH2JCDXzIe2x7/4IGMeMAl+XBAwmp2LG44CP/sINcdJTPNL7yA6jb\nSmc8PYUMhgG5B4duMsbHrD8ulzxThMhYqNnQ+KETtjGGDgCimsVI/s8K3MpNgFFk\nxWOBiubyouLNtBdlj8PiRICMaQKBgQC3PZABIRbsqdbEX6PZQDrq01+nfOjn1lDy\nv0IaKGgYkJVkPabiS8R/2AovU6b6IX40NEBr4rre6QcsafRyZp8W95khQvJv0ElD\niwKlZGPUBvme4a+4Zp0DosD4mHrmY/A000NsmQJ8keSvuvv3+tzA0DlF5ubaNK7+\nvDX47O5xQwJ/OoZaYGDLqXa57xfJckc6XVY2twCCRDkWzmRa2qISyv0XfFw01+7B\n6nrLyQMApFPkHAlCwGiSd/3kwtQYv0yw5W2FwWmm/bbGBw3fiOzV4hWQDgMQ8bah\nVljvZ69L7B9cBsA/fNw7qlAVGhT4/qVErRfhCP0kKxIKacNIJb/oYQKBgQCDzYBb\nj5WRvciBj9mnVxAKAOh47NwKhpnLQc8mSZI2uSj75Wy4sY8x9g+9YwpkONsyabM8\n5uVLmYpTZBM0hqRAPPCkgCcqTkOklcTdeoxj4nCC3AstNIIUL2lmZydfuNr65EtH\nPfgP6lD4JiM/h+5psly/7wp2QhbtnCumVaZdSQKBgQCw7wi3VzNmdTTT8HSPQwEY\nME+xQrHP85NgkFuXeB6Nov4BrKN0agCDue+kx3quwpfx7ZOydj6sxGbPwrwp4FcM\nU5graLNmkmXtFJDgeb23pQuSZrYlryBMkXfqjV+QMtsKEpi2mKPX92cnVWzdAn6J\nnKK6XT38y+dz5i/BcNESUg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "sentiment@crypto-abode-237705.iam.gserviceaccount.com",
+  "client_id": "114019155763122358966",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/sentiment%40crypto-abode-237705.iam.gserviceaccount.com"
+}
