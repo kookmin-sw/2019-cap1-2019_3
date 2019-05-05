@@ -17,7 +17,8 @@ class ImgLoader:
         res, img = self.vidcap.read()
         return img
 
-
+    def isOpened(self):
+        return self.vidcap.isOpened()
 
 
 
