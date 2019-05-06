@@ -1,3 +1,7 @@
+<<<<<<< HEAD
 #ignore python's cache file and its folder
 .pyc
 __pycache__/
+=======
+.DS_Store
+>>>>>>> CommentModule_BiClassfi
