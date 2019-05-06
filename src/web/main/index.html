@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>유튜브 감성분석 - 유감</title>
+
+    <!-- 부트스트랩 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- 네이버 -->
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+    <!-- 페이스북 -->
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v3.3&appId=1715628155250059&autoLogAppEvents=1"></script>
+
+  </head>
+
+  
+  <style type="text/css">
+   
+   	@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+   
+    #naverIdLogin img{
+      width:155px !important;
+      height:auto !important;
+      float:left;
+    }
+
+    .content-movie img {
+      width:100% !important;
+      height:100% !important;
+    }
+
+    .hovereffect {
+      width: 100%;
+      height: 100%;
+      float: left;
+      overflow: hidden;
+      position: relative;
+      text-align: center;
+      cursor: default;
+    }
+
+    .hovereffect .overlay {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      /*background-color: rgba(75,75,75,0.7);*/
+      -webkit-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .hovereffect:hover .overlay {
+      background-color:rgba(0,0,0,0.7);
+    }
+
+    .hovereffect img {
+      display: block;
+      position: relative;
+    }
+
+    .hovereffect button {
+      display: inline-block;
+      background-color: transparent;
+      opacity: 0;
+
+      filter: alpha(opacity=0);
+      -webkit-transform: scale(0);
+      -ms-transform: scale(0);
+      transform: scale(0);
+      -webkit-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+      font-weight: normal;
+      margin: 7px;
+      color: #fff;
+      border: solid 1px;
+
+    }
+
+    .hovereffect:hover button {
+      margin-top:30%;
+
+      opacity: 1;
+      font-style: red;
+      filter: alpha(opacity=100);
+      -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+      transform: scale(1);
+    }
+
+    .thumbnail:hover {
+      text-decoration: none;
+      border: 5px solid rgb(220,43,64,0.7) !important;
+    }
+
+    .nav {
+      font-color: rgb(220,43,64);
+    }
+
+    .content-url {
+     /* background-image: url("../Images/image1.jpg");
+      background-size: cover;*/
+      
+
+    }
+   
+
+    /*비디오 삽입 태그*/
+   #myVideo {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+    overflow: hidden;
+    z-index: -999;
+  }
+
+  #overlayImg {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+    overflow: hidden;
+    z-index: -99;
+   background-color:rgba(0,0,0,0.5);
+  }
+
+  #snsLogin {
+    text-align: center;
+    margin: 0 auto;
+    width:200px;
+    padding-left:20px;
+
+  }
+
+
+</style>
+
+
+  <body>
+
+    
+
+    <div class="content" style="width:100%; float:left;" >
+
+        <!-- nav, logo, url strat -->
+        <div class="content-url" style="position: relative; height:400px; text-align: center ">
+
+
+                        <video autoplay muted loop id="myVideo" volume="0">
+                          <source src="Images/temp.mov" type="video/mp4">
+                        </video>
+
+                      <div id="overlayImg"></div>
+
+                      <div class="row">
+                          <div class="col-md-3" style=""></div>
+
+
+                          <!-- center 부분 (wide) -->
+                          <div class="col-md-6" style=" height:400px; text-align: center;  color:#fff; margin-top:50px;">
+
+                                <!-- 로고 -->
+                                <h3> 유튜브 감성분석 사이트 </h3><br>
+                                <!-- <img src="../../Images/OhTube_Logo.png" style="width:200px; height:200px;"><br> -->
+
+
+                                <!-- 소셜 로그인 부분 -->
+                                <div id="snsLogin"> 
+                                  <!-- 네이버아이디로로그인 버튼 노출 영역 -->
+                                    <p>
+                                      <div id="naverIdLogin"><a id="naverIdLogin_loginButton" href="#" role="button"><img src="https://static.nid.naver.com/oauth/big_g.PNG" width="150px"></a></div>
+                                    </p>
+
+                                    <br><br>
+
+                                    <!-- 페이스북 아이디 로그인 버튼 -->
+                                    <div class="fb-login-button" data-width="" data-size="medium" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="false" style="float:left;"></div>
+
+                                    <br><br>
+
+                                    
+                                </div>
+                                  <button id="gnbLogin"> 로그아웃 </button>
+
+                                
+                                
+
+
+                                <!-- 사용자 or 크리에이터 라디오 버튼 -->
+                                <div style="margin-top:20px;"> 
+                                    <label class="radio-inline">
+                                      <input type="radio" name="inlineRadioOptions" id="Radio1" value="user"> 시청자 분석 
+                                    </label>
+
+                                    <label class="radio-inline" style="margin-left:40px;">
+                                      <input type="radio" name="inlineRadioOptions" id="Radio2" value="creator"> 크리에이터 분석
+                                    </label>
+                                </div>
+                                
+
+                                <!-- 검색창 & 버튼-->
+                                <form class="form-inline" style="padding-top:20px;">
+                                  <div class="form-group" >
+                                    <input type="input" class="form-control" id="url" 
+                                          placeholder="Please enter a link to YouTube." style="width:400px;">
+                                  </div>
+
+                                  <button type="submit" class="btn btn-default">Go</button>
+                                </form>
+
+                                
+                          <div class="col-md-3" style=" "></div>
+                        </div>
+                      </div>
+
+        </div>
+        <!-- logo, url end -->
+            
+
+        <!-- movie list strat -->    
+        <div class="content-movie" style="height:400px; text-align: center; margin: 0 auto; margin-top: 50px; "> 
+                          <h2>추천 영상</h2><br><br>
+
+                          <div class="row" style="margin: 0 auto;">
+                                
+                                <!-- each card start -->
+                                <div class="col-xs-6 col-md-3">
+                                  <div class="thumbnail">
+
+                                    <!-- hover -->
+                                    <div class="hovereffect" style="margin-bottom: 20px;">
+                                        <img src="Images/sample1.png" alt="...">
+
+                                        <div class="overlay">
+                                          
+                                          <a href="#"><button type="button" class="btn btn-default">시청자 분석</button></a>
+                                           <button type="button" class="btn btn-default">크리에이터 분석</button>
+                                        </div>
+                                    </div>
+                                    
+
+                                    <!-- title -->
+                                    <div class="caption">
+                                      <h4>영국남자 불닭볶음면 도전</h4>
+                                    </div>
+                          
+                                  </div>
+                                </div>
+                                <!-- each card end -->
+
+
+                                <!-- each card start -->
+                                <div class="col-xs-6 col-md-3">
+                                  <div class="thumbnail">
+
+                                    <!-- hover -->
+                                    <div class="hovereffect" style="margin-bottom: 20px;">
+                                        <img src="Images/sample2.png" alt="...">
+
+                                        <div class="overlay">
+                                          
+                                          <button type="button" class="btn btn-default">시청자 분석</button>
+                                           <button type="button" class="btn btn-default">크리에이터 분석</button>
+                                        </div>
+                                    </div>
+                                    
+
+                                    <!-- title -->
+                                    <div class="caption">
+                                      <h4>도로시 매운 우족찜 먹방</h4>
+                                    </div>
+                          
+                                  </div>
+                                </div>
+                                <!-- each card end -->
+
+                                <!-- each card start -->
+                                <div class="col-xs-6 col-md-3">
+                                  <div class="thumbnail">
+
+                                    <!-- hover -->
+                                    <div class="hovereffect" style="margin-bottom: 20px;">
+                                        <img src="Images/sample3.png" alt="...">
+
+                                        <div class="overlay">
+                                          
+                                          <button type="button" class="btn btn-default">시청자 분석</button>
+                                           <button type="button" class="btn btn-default">크리에이터 분석</button>
+                                        </div>
+                                    </div>
+                                    
+
+                                    <!-- title -->
+                                    <div class="caption">
+                                      <h4>방탄소년단 외국인 리액션</h4>
+                                    </div>
+                          
+                                  </div>
+                                </div>
+                                <!-- each card end -->
+
+                                <!-- each card start -->
+                                <div class="col-xs-6 col-md-3">
+                                  <div class="thumbnail">
+
+                                    <!-- hover -->
+                                    <div class="hovereffect" style="margin-bottom: 20px;">
+                                        <img src="Images/sample4.png" alt="...">
+
+                                        <div class="overlay">
+                                          
+                                          <button type="button" class="btn btn-default">시청자 분석</button>
+                                           <button type="button" class="btn btn-default">크리에이터 분석</button>
+                                        </div>
+                                    </div>
+                                    
+
+                                    <!-- title -->
+                                    <div class="caption">
+                                      <h4>밴쯔 트러플 짜파게티 먹방</h4>
+                                    </div>
+                          
+                                  </div>
+                                </div>
+                                <!-- each card end -->
+
+                          
+   
+                          </div>
+                          <!-- row end -->
+
+        </div>
+
+        <!-- movie list end -->
+
+    </div>
+    <!-- content end -->
+  </body>
+
+
+
+<!-- script -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+
+  <!-- 네이버아디디로로그인 초기화 Script -->
+  <script>
+    
+    var naverLogin = new naver.LoginWithNaverId(
+      {
+        clientId: "ah9eNnFnHUdhrTafJWHw",
+        callbackUrl: "http://127.0.0.1:8080/index2.html",
+        isPopup: true,
+        loginButton: {color: "green", type: 3, height: 60}
+      }
+    );
+    /* (4) 네아로 로그인 정보를 초기화하기 위하여 init을 호출 */
+    naverLogin.init();
+
+    /* (5) 현재 로그인 상태를 확인 */
+    window.addEventListener('load', function () {
+      naverLogin.getLoginStatus(function (status) {
+        if (status) {
+          /* (6) 로그인 상태가 "true" 인 경우 로그인 버튼을 없애고 사용자 정보를 출력합니다. */
+          setLoginStatus();
+        }
+      });
+    });
+
+    $("#gnbLogin").attr("href", naverLogin.generateAuthorizeUrl());
+
+    /* (6) 로그인 상태가 "true" 인 경우 로그인 버튼을 없애고 사용자 정보를 출력합니다. */
+    function setLoginStatus() {
+      var profileImage = naverLogin.user.getProfileImage();
+      var nickName = naverLogin.user.getNickName();
+      var token = naverLogin.user.getId();
+
+      $("#snsLogin").html('<br><br><img src="' + profileImage + '" height=50 /> <p>' + nickName + '님 반갑습니다. 고유 토큰은 ' + token +'입니다.' +'</p>');
+      $("#gnbLogin").html("Logout");
+      
+      /* (7) 로그아웃 버튼을 설정하고 동작을 정의합니다. */
+      $("#gnbLogin").click(function () {
+        naverLogin.logout();
+        location.replace("http://nid.naver.com/nidlogin.logout");
+        location.replace("http://127.0.0.1:8080/index2.html");
+      });
+
+      // 로그아웃은 지원이 안된다. 직접 구현해야함
+
+    }
+  </script>
+  <!-- // 네이버아이디로로그인 초기화 Script -->
+
+</html>
