@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+{%load staticfiles %}
+<html lang="ko">
+
+<head>
+  <title>My Little Lotto</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <link href="//fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<style>
+body  {opacity:0;}
+
+</style>
+<body>
+  <button type = "button " id = "good" type="submit" class="btn btn-info">좋아요👍</button>
+  <button id = "soso" type="submit" class="btn btn-success">보통이에요👊</button>
+  <button id = "bad" type="submit" class="btn btn-danger">별로에요👎</button>
+  <ul id="positive" class = "list-group">
+    {% for comment in cmts%}
+      {% if comment.label == 2 %}
+        <li class="list-group-item">
+          <div class="media">
+            <div class="media-left">
+              {% if comment.randnum == 1 %}
+                <img src="{% static "img/img_avatar1.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %}
+              {% if comment.randnum == 2 %}
+                <img src="{% static "img/img_avatar2.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %}
+              {% if comment.randnum == 3 %}
+                <img src="{% static "img/img_avatar3.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %}
+              {% if comment.randnum == 4 %}
+                <img src="{% static "img/img_avatar4.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %}
+              {% if comment.randnum == 5 %}
+                <img src="{% static "img/img_avatar5.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %}
+              {% if comment.randnum == 6 %}
+                <img src="{% static "img/img_avatar6.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %}
+              {% if comment.randnum == 7 %}
+                <img src="{% static "img/img_avatar7.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %}
+              {% if comment.randnum == 8 %}
+                <img src="{% static "img/img_avatar8.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %} 
+              {% if comment.randnum == 9 %}
+                <img src="{% static "img/img_avatar9.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %}           
+              </div>
+            <div class="media-body">
+              <p><strong>{{comment.author}}</strong> {{comment.period}}</p>
+              <p>{{comment.cmt}}</p>
+
+            </div>
+          </div>
+
+        </li>
+
+      {% else %}
+      {% endif %}
+    {% endfor %}
+  </ul>
+
+  <ul id="negative" class = "list-group">
+    {% for comment in cmts%}
+      {% if comment.label == 0 %}
+        <li class="list-group-item">
+          <div class="media">
+            <div class="media-left">
+              {% if comment.randnum == 1 %}
+                <img src="{% static "img/img_avatar1.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %}
+              {% if comment.randnum == 2 %}
+                <img src="{% static "img/img_avatar2.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %}
+              {% if comment.randnum == 3 %}
+                <img src="{% static "img/img_avatar3.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %}
+              {% if comment.randnum == 4 %}
+                <img src="{% static "img/img_avatar4.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %}
+              {% if comment.randnum == 5 %}
+                <img src="{% static "img/img_avatar5.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %}
+              {% if comment.randnum == 6 %}
+                <img src="{% static "img/img_avatar6.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %}
+              {% if comment.randnum == 7 %}
+                <img src="{% static "img/img_avatar7.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %}
+              {% if comment.randnum == 8 %}
+                <img src="{% static "img/img_avatar8.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %} 
+              {% if comment.randnum == 9 %}
+                <img src="{% static "img/img_avatar9.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %}           
+              </div>
+            <div class="media-body">
+              <p><strong>{{comment.author}}</strong> {{comment.period}}</p>
+              <p>{{comment.cmt}}</p>
+
+            </div>
+          </div>
+
+        </li>
+
+      {% else %}
+      {% endif %}
+    {% endfor %}
+  </ul>
+  <ul id="netural" class = "list-group">
+    {% for comment in cmts%}
+      {% if comment.label == 1 %}
+        <li class="list-group-item">
+          <div class="media">
+            <div class="media-left">
+              {% if comment.randnum == 1 %}
+                <img src="{% static "img/img_avatar1.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %}
+              {% if comment.randnum == 2 %}
+                <img src="{% static "img/img_avatar2.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %}
+              {% if comment.randnum == 3 %}
+                <img src="{% static "img/img_avatar3.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %}
+              {% if comment.randnum == 4 %}
+                <img src="{% static "img/img_avatar4.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %}
+              {% if comment.randnum == 5 %}
+                <img src="{% static "img/img_avatar5.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %}
+              {% if comment.randnum == 6 %}
+                <img src="{% static "img/img_avatar6.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %}
+              {% if comment.randnum == 7 %}
+                <img src="{% static "img/img_avatar7.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %}
+              {% if comment.randnum == 8 %}
+                <img src="{% static "img/img_avatar8.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %} 
+              {% if comment.randnum == 9 %}
+                <img src="{% static "img/img_avatar9.png" %}" class="media-object" style="width:40px">
+              {% else %}
+              {% endif %}           
+              </div>
+            <div class="media-body">
+              <p><strong>{{comment.author}}</strong> {{comment.period}}</p>
+              <p>{{comment.cmt}}</p>
+
+            </div>
+          </div>
+
+        </li>
+
+      {% else %}
+      {% endif %}
+    {% endfor %}
+  </ul>
+
+</body>
+
+<script>
+window.onload = function() {setTimeout(function(){document.body.style.opacity="100";},10);};
+
+$(document).ready(function(){
+  $("#positive").hide();
+  $("#negative").hide();
+  $("#netural").hide();
+
+  $("#good").on("click",function(event){
+    $("#positive").toggle();
+    $("#bad").on("click",function(event){
+      $("#positive").hide();
+    });
+     $("#soso").on("click",function(event){
+      $("#positive").hide();
+    });
+  });
+
+  $("#soso").on("click",function(event){
+    $("#netural").toggle();
+    $("#good").on("click",function(event){
+      $("#netural").hide();
+    });
+    $("#bad").on("click",function(event){
+      $("#netural").hide();
+    });
+  });
+  $("#bad").on("click",function(event){
+    $("#negative").toggle();
+    $("#good").on("click",function(event){
+      $("#negative").hide();
+    });
+     $("#soso").on("click",function(event){
+      $("#negative").hide();
+    });
+  });
+});
+</script>
+
+</html>

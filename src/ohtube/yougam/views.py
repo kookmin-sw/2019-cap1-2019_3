@@ -1,3 +1,61 @@
-from django.shortcuts import render
+from django.shortcuts import render ,get_object_or_404,redirect
+from django.http import HttpResponse
+import sys
 
 # Create your views here.
+from .models import Comment
+from .models import Video
+from .forms import PostForm
+
+import os
+
+def post(request):
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            video = form.save(commit = False)
+            cnt = Video.objects.filter(url=video.url).count()
+
+            #이미 분석한 video
+            if(cnt > 0):
+                pass
+            #새로운 비디오
+            else:
+                video.generate()
+            v = Video.objects.get(url=video.url)
+            vid = str(v.id)
+            return redirect(vid+'/detail')
+
+        else:
+            return HttpResponse("not valid url!")
+    else:
+        form = PostForm()
+        return render(request, "yougam/first.html",{"form": form})
+
+def detail(request,video):
+	#새로운 비디오는 predict 해야함
+	if Comment.objects.filter(video=video).count() < 1:
+		module_path=os.path.join(os.path.dirname(os.path.abspath( __file__ ) ), 'code')
+		sys.path.append(module_path)
+		temp = Video.objects.get(id=video)
+		url = temp.url
+
+		import predict
+		from youtube_api_cmd import YouTubeApi
+		key = 'AIzaSyD5EuiUIl4UGa1uKt0yb1IGfUNWtISbIog'
+
+		y = YouTubeApi(100,url,key)
+		dic = {}
+		label = {}
+		dic = y.get_video_comment()
+		label = predict.labeling(dic)
+
+		for i in range(1,len(dic)+1):
+			c = Comment(video=video,cid=i,cmt=dic[i]["comment"],label=label[i],author=dic[i]["author"],period=dic[i]["period"])
+			c.generate()
+
+	#이미 분석한것은 보여주기만 하면됨
+	else:
+		pass
+	comments = Comment.objects.filter(video=video)
+	return render(request,"yougam/default.html",{"cmts":comments})
