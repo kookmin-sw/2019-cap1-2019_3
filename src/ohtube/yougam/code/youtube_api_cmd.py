@@ -93,8 +93,8 @@ class YouTubeApi():
             i = 2
             mat = json.loads(matches)
             nextPageToken = mat.get("nextPageToken")
-            print("\nPage : 1")
-            print("------------------------------------------------------------------")
+            #print("\nPage : 1")
+            #print("------------------------------------------------------------------")
             self.load_comments(mat)
 
             while nextPageToken:
@@ -113,7 +113,7 @@ class YouTubeApi():
         except:
             print("Cannot Open URL or Fetch comments at a moment")
         
-        print(self.comments)
+#        print(self.comments)
         return self.comments
 
 

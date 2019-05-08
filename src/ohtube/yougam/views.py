@@ -30,7 +30,7 @@ def post(request):
             return HttpResponse("not valid url!")
     else:
         form = PostForm()
-        return render(request, "yougam/first.html",{"form": form})
+        return render(request, "yougam/index.html",{"form": form})
 
 def detail(request,video):
 	#새로운 비디오는 predict 해야함
@@ -42,16 +42,22 @@ def detail(request,video):
 
 		import predict
 		from youtube_api_cmd import YouTubeApi
+		import spellcheck
+
 		key = 'AIzaSyD5EuiUIl4UGa1uKt0yb1IGfUNWtISbIog'
 
 		y = YouTubeApi(100,url,key)
 		dic = {}
 		label = {}
+		comments = {}
 		dic = y.get_video_comment()
-		label = predict.labeling(dic)
-
+		print("댓글 수집 완료")
+		comments = spellcheck.spellchecker(dic)
+		print("맞춤법 수정 완료")
+		label = predict.labeling(comments)
+		print("라벨링 완료")
 		for i in range(1,len(dic)+1):
-			c = Comment(video=video,cid=i,cmt=dic[i]["comment"],label=label[i],author=dic[i]["author"],period=dic[i]["period"])
+			c = Comment(video=video,cid=i,cmt=dic[i]['comment'],label=label[i],author=dic[i]["author"],period=dic[i]["period"])
 			c.generate()
 
 	#이미 분석한것은 보여주기만 하면됨

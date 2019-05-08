@@ -4,7 +4,7 @@ from . import views
 app_name = "yougam"
 
 urlpatterns = [
-    url(r'^$', views.post, name = "first"),
+    url(r'^$', views.post, name = "index"),
     url(r'^(?P<video>[0-9]+)/detail/$', views.detail, name='detail'),
 
 ]

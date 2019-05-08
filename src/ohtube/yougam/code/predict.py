@@ -31,7 +31,7 @@ def labeling(dic):
 
 	labels = {}
 	for i in range(1,len(dic)+1):
-		cmt = dic[i]['comment'].replace('\ufeff','')
+		cmt = dic[i]
 		grade = predict_pos_neg(cmt,selected_words,model)
 		labels[i] = grade
 	return labels

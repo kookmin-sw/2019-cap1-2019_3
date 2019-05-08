@@ -17,7 +17,8 @@
 </style>
 <body>
    <form method="POST" class="post-form">
-     {%csrf_token%} {{form.as_p}}
+      {%csrf_token%}
+      {{form}}
      <button type="submit" class="save btn btn-default">Save</button>
    </form>
 </body>
