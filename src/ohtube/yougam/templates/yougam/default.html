@@ -65,7 +65,7 @@ body  {opacity:0;}
               {% endif %}           
               </div>
             <div class="media-body">
-              <p><strong>{{comment.author}}</strong> {{comment.period}} &nbsp 
+            <div style="float:left"><strong>{{comment.author}}</strong> {{comment.period}} &nbsp </div>
  
 
               <div class="btn-group">
@@ -77,8 +77,8 @@ body  {opacity:0;}
                   </div>
               </div>
 
-              </p>
-              <p>{{comment.cmt}}</p>
+              <br>
+              <div>{{comment.cmt}}</div>
 
             </div>
           </div>
@@ -134,19 +134,18 @@ body  {opacity:0;}
               {% endif %}           
               </div>
            <div class="media-body">
-              <p><strong>{{comment.author}}</strong> {{comment.period}} &nbsp 
- 
+            <div style="float:left"><strong>{{comment.author}}</strong> {{comment.period}} &nbsp </div>
 
               <div class="btn-group">
+
                   <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
                      변경하기</button>
                   <div class="dropdown-menu">
                     <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/2">좋아요👍로 변경</a>
                     <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/1">보통이에요👊로 변경</a>
                   </div>
-              </div>
-            </p>
-            <p>{{comment.cmt}}</p>
+              </div><br>
+            <div>{{comment.cmt}}</div>
 
           </div>
 
@@ -200,7 +199,7 @@ body  {opacity:0;}
               {% endif %}           
               </div>
            <div class="media-body">
-              <p><strong>{{comment.author}}</strong> {{comment.period}} &nbsp 
+            <div style="float:left"><strong>{{comment.author}}</strong> {{comment.period}} &nbsp </div>
  
 
               <div class="btn-group">
@@ -211,8 +210,8 @@ body  {opacity:0;}
                     <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/0">별로에요👎로 변경</a>
                   </div>
               </div>
-            </p>
-             <p>{{comment.cmt}}</p>
+            <br>
+             <div>{{comment.cmt}}</div>
 
           </div>
 

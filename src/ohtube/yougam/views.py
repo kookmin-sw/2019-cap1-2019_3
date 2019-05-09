@@ -29,7 +29,6 @@ def change(request,video,cid,senti):
 		comments = Comment.objects.filter(video=video)
 		return render(request,"yougam/default.html",{"cmts":comments})
 
-
 def post(request):
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -53,8 +52,12 @@ def post(request):
         form = PostForm()
         return render(request, "yougam/index.html",{"form": form})
 
+def creator(request,video):
+	Comment.objects.filter(video=video)
+
 def detail(request,video):
 	#새로운 비디오는 predict 해야함
+	print("wow")
 	if Comment.objects.filter(video=video).count() < 1:
 		module_path=os.path.join(os.path.dirname(os.path.abspath( __file__ ) ), 'code')
 		sys.path.append(module_path)
@@ -78,7 +81,8 @@ def detail(request,video):
 		label = predict.labeling(comments)
 		print("라벨링 완료")
 		for i in range(1,len(dic)+1):
-			c = Comment(video=video,cid=i,cmt=dic[i]['comment'],label=label[i],author=dic[i]["author"],period=dic[i]["period"])
+			vid = Video.objects.get(id=video)
+			c = Comment(video=vid,cid=i,cmt=dic[i]['comment'],label=label[i],author=dic[i]["author"],period=dic[i]["period"])
 			c.generate()
 
 	#이미 분석한것은 보여주기만 하면됨
