@@ -9,6 +9,27 @@ from .forms import PostForm
 
 import os
 
+def change(request,video,cid,senti):
+	if(senti=="0"):
+		cmt = Comment.objects.get(video=video,cid=cid)
+		cmt.label = 0
+		cmt.save()
+		comments = Comment.objects.filter(video=video)
+		return render(request,"yougam/default.html",{"cmts":comments})
+	elif(senti=="1"):
+		cmt = Comment.objects.get(video=video,cid=cid)
+		cmt.label = 1
+		cmt.save()
+		comments = Comment.objects.filter(video=video)
+		return render(request,"yougam/default.html",{"cmts":comments})
+	else:
+		cmt = Comment.objects.get(video=video,cid=cid)
+		cmt.label = 2
+		cmt.save()
+		comments = Comment.objects.filter(video=video)
+		return render(request,"yougam/default.html",{"cmts":comments})
+
+
 def post(request):
     if request.method == "POST":
         form = PostForm(request.POST)

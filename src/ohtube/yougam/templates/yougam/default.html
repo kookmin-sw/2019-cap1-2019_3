@@ -5,11 +5,12 @@
 <head>
   <title>My Little Lotto</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
   <link href="//fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <style>
@@ -64,7 +65,19 @@ body  {opacity:0;}
               {% endif %}           
               </div>
             <div class="media-body">
-              <p><strong>{{comment.author}}</strong> {{comment.period}}</p>
+              <p><strong>{{comment.author}}</strong> {{comment.period}} &nbsp 
+ 
+
+              <div class="btn-group">
+                  <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                     변경하기</button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/1">보통이에요👊로 변경</a>
+                    <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/0">별로에요👎로 변경</a>
+                  </div>
+              </div>
+
+              </p>
               <p>{{comment.cmt}}</p>
 
             </div>
@@ -120,11 +133,21 @@ body  {opacity:0;}
               {% else %}
               {% endif %}           
               </div>
-            <div class="media-body">
-              <p><strong>{{comment.author}}</strong> {{comment.period}}</p>
-              <p>{{comment.cmt}}</p>
+           <div class="media-body">
+              <p><strong>{{comment.author}}</strong> {{comment.period}} &nbsp 
+ 
 
-            </div>
+              <div class="btn-group">
+                  <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                     변경하기</button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/2">좋아요👍로 변경</a>
+                    <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/1">보통이에요👊로 변경</a>
+                  </div>
+              </div>
+            </p>
+            <p>{{comment.cmt}}</p>
+
           </div>
 
         </li>
@@ -176,11 +199,21 @@ body  {opacity:0;}
               {% else %}
               {% endif %}           
               </div>
-            <div class="media-body">
-              <p><strong>{{comment.author}}</strong> {{comment.period}}</p>
-              <p>{{comment.cmt}}</p>
+           <div class="media-body">
+              <p><strong>{{comment.author}}</strong> {{comment.period}} &nbsp 
+ 
 
-            </div>
+              <div class="btn-group">
+                  <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                     변경하기</button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/2">좋아요👍로 변경</a>
+                    <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/0">별로에요👎로 변경</a>
+                  </div>
+              </div>
+            </p>
+             <p>{{comment.cmt}}</p>
+
           </div>
 
         </li>
