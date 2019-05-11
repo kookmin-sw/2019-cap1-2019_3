@@ -44,7 +44,7 @@ def post(request):
                 video.generate()
             v = Video.objects.get(url=video.url)
             vid = str(v.id)
-            return redirect(vid+'/detail')
+            return redirect(vid+'/creator')
 
         else:
             return HttpResponse("not valid url!")
@@ -53,11 +53,50 @@ def post(request):
         return render(request, "yougam/index.html",{"form": form})
 
 def creator(request,video):
-	Comment.objects.filter(video=video)
+	vid = Video.objects.get(id=video)
+	if Comment.objects.filter(video=vid).count() < 1:
+		module_path=os.path.join(os.path.dirname(os.path.abspath( __file__ ) ), 'code')
+		sys.path.append(module_path)
+		temp = Video.objects.get(id=video)
+		url = temp.url
+
+		import predict
+		from youtube_api_cmd import YouTubeApi
+		import spellcheck
+
+		key = 'AIzaSyD5EuiUIl4UGa1uKt0yb1IGfUNWtISbIog'
+
+		y = YouTubeApi(100,url,key)
+		dic = {}
+		label = {}
+		comments = {}
+		dic = y.get_video_comment()
+		print("댓글 수집 완료")
+		comments = spellcheck.spellchecker(dic)
+		print("맞춤법 수정 완료")
+		label = predict.labeling(comments)
+		print("라벨링 완료")
+		for i in range(1,len(dic)+1):
+			vid = Video.objects.get(id=video)
+			c = Comment(video=vid,cid=i,cmt=dic[i]['comment'],label=label[i],author=dic[i]["author"],period=dic[i]["period"],like=dic[i]["like"])
+			c.generate()
+
+	#이미 분석한것은 보여주기만 하면됨
+	else:	
+		pass
+	comments = Comment.objects.filter(video=video)
+
+	vid = Video.objects.get(id=video)
+	no1 = Comment.objects.filter(video=vid).order_by('-like')[0]
+	no2 = Comment.objects.filter(video=vid).order_by('-like')[1]
+	no3 = Comment.objects.filter(video=vid).order_by('-like')[2]
+
+
+	return render(request,"yougam/cre.html",{"no1":{no1.cmt,no1.label},"no2":{no2.cmt,no2.label}
+		,"no3":{no3.cmt,no3.label}})
 
 def detail(request,video):
 	#새로운 비디오는 predict 해야함
-	print("wow")
 	if Comment.objects.filter(video=video).count() < 1:
 		module_path=os.path.join(os.path.dirname(os.path.abspath( __file__ ) ), 'code')
 		sys.path.append(module_path)
@@ -82,7 +121,7 @@ def detail(request,video):
 		print("라벨링 완료")
 		for i in range(1,len(dic)+1):
 			vid = Video.objects.get(id=video)
-			c = Comment(video=vid,cid=i,cmt=dic[i]['comment'],label=label[i],author=dic[i]["author"],period=dic[i]["period"])
+			c = Comment(video=vid,cid=i,cmt=dic[i]['comment'],label=label[i],author=dic[i]["author"],period=dic[i]["period"],like=dic[i]["likt"])
 			c.generate()
 
 	#이미 분석한것은 보여주기만 하면됨

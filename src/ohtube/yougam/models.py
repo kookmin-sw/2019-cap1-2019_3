@@ -34,7 +34,7 @@ class Comment(models.Model):
 		self.save()
 
 	def __str__(self):
-		return "comment ID: {}, author: {}".format(self.cid, self.author)
+		return "comment ID: {}, author: {}".format(self.cid, self.cmt)
 
 
 
