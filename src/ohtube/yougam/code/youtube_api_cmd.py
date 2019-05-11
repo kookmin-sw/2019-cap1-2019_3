@@ -127,7 +127,8 @@ class YouTubeApi():
 
 
 def main():
-    y = YouTubeApi(100,'https://www.youtube.com/watch?v=r4fvSf4xGU4','AIzaSyD5EuiUIl4UGa1uKt0yb1IGfUNWtISbIog')
+    Api_key = ""
+    y = YouTubeApi(100,'https://www.youtube.com/watch?v=r4fvSf4xGU4',Api_key)
     y.get_video_comment()
 
 if __name__ == '__main__':
