@@ -113,7 +113,7 @@ class YouTubeApi():
         except:
             print("Cannot Open URL or Fetch comments at a moment")
         
-#        print(self.comments)
+        print(self.comments)
         return self.comments
 
 

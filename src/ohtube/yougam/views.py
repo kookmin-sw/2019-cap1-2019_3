@@ -6,8 +6,10 @@ import sys
 from .models import Comment
 from .models import Video
 from .forms import PostForm
+from .models import ReplyData
 
 import os
+import datetime, dateutil.parser
 
 def change(request,video,cid,senti):
 	if(senti=="0"):
@@ -30,12 +32,12 @@ def change(request,video,cid,senti):
 		return render(request,"yougam/default.html",{"cmts":comments})
 
 def post(request):
+ 
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
             video = form.save(commit = False)
             cnt = Video.objects.filter(url=video.url).count()
-
             #이미 분석한 video
             if(cnt > 0):
                 pass
@@ -44,7 +46,7 @@ def post(request):
                 video.generate()
             v = Video.objects.get(url=video.url)
             vid = str(v.id)
-            return redirect(vid+'/creator')
+            return redirect(vid+'/detail')
 
         else:
             return HttpResponse("not valid url!")
@@ -78,7 +80,9 @@ def creator(request,video):
 		print("라벨링 완료")
 		for i in range(1,len(dic)+1):
 			vid = Video.objects.get(id=video)
-			c = Comment(video=vid,cid=i,cmt=dic[i]['comment'],label=label[i],author=dic[i]["author"],period=dic[i]["period"],like=dic[i]["like"])
+			d = dateutil.parser.parse(dic[i]["period"])
+			d = d.strftime('%Y/%m/%d')
+			c = Comment(video=vid,cid=i,cmt=dic[i]['comment'],label=label[i],author=dic[i]["author"],period=d,like=dic[i]["like"])
 			c.generate()
 
 	#이미 분석한것은 보여주기만 하면됨
@@ -121,8 +125,19 @@ def detail(request,video):
 		print("라벨링 완료")
 		for i in range(1,len(dic)+1):
 			vid = Video.objects.get(id=video)
-			c = Comment(video=vid,cid=i,cmt=dic[i]['comment'],label=label[i],author=dic[i]["author"],period=dic[i]["period"],like=dic[i]["likt"])
+			d = dateutil.parser.parse(dic[i]["period"])
+			d = d.strftime('%Y/%m/%d')
+			c = Comment(video=vid,cid=i,cmt=dic[i]['comment'],label=label[i],author=dic[i]["author"],period=d,like=dic[i]["like"])
 			c.generate()
+
+
+			# if 'replies' in dic[i]:
+			# 	for j in range(1,len(dic[i]['replies'])+1):
+			# 		d = dateutil.parser.parse(dic[i]["replies"][j]['period'])
+			# 		d = d.strftime('%Y/%m/%d')
+			# 		cid = Comment.objects.get(cid=i)
+			# 		c = ReplyData(parent_id=cid,comment=dic[i]['replies'][j]['comment'],author=dic[i]['replies'][j]['author'],period=d)
+			# 		c.generate()
 
 	#이미 분석한것은 보여주기만 하면됨
 	else:
