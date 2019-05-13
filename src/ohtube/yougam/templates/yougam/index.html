@@ -100,7 +100,8 @@
     }
 
     .nav {
-      font-color: rgb(220,43,64);
+      position: fixed;
+
     }
 
     .content-url {
@@ -140,7 +141,7 @@
     padding-left:20px;
 
   }
-.container {
+.container2 {
   padding-left: 260px;
   height: 100vh;
   width: 100vw;
@@ -238,21 +239,28 @@
 }
 </style>
 
-
   <body>
+    <div class="content" style="width:100%; float:left; margin: 0 auto;" >
 
+        
 
-
-    <div class="content" style="width:100%; float:left;" >
 
         <!-- nav, logo, url strat -->
         <div class="content-url" style="position: relative; height:400px; text-align: center ">
 
-
+                        <nav class="navbar navbar-expand-sm bg-light" id="myNavbar">
+                          <ul class="nav navbar-nav navbar-right">
+           
+                            <li><a href="#overlayImg">Home</a></li>
+                            <li><a href="#service">Service</a></li>
+                            <li><a href="#guide">Guide</a></li>
+                            <li><a href="#about">Our Team</a></li>
+                            <li><a href="#contact">Contact Us</a></li>
+                          </ul>
+         </nav>
+          
                         <video autoplay muted loop id="myVideo" volume="0">
                           <source  src="{% static "img/temp.mov" %}" type="video/mp4">
-
-
                         </video>
 
                       <div id="overlayImg"></div>
@@ -262,7 +270,7 @@
 
 
                           <!-- center 부분 (wide) -->
-                          <div class="col-md-6" style=" height:400px; text-align: center;  color:#fff; margin-top:50px;">
+                          <div class="col-md-6" style=" height:400px; text-align: center;  color:#fff; padding-top:20px;">
 
                                 <!-- 로고 -->
                                 <h3> 유튜브 감성분석 사이트 </h3><br>
@@ -287,12 +295,8 @@
                                 </div>
                                   <button id="gnbLogin"> 로그아웃 </button>
 
-
-
-
-
                                 <!-- 사용자 or 크리에이터 라디오 버튼 -->
-                                <div style="margin-top:20px;">
+                                <div style="padding-top:20px;">
                                     <label class="radio-inline">
                                       <input type="radio" name="inlineRadioOptions" id="Radio1" value="user"> 시청자 분석
                                     </label>
@@ -316,7 +320,7 @@
 
                                   <button type="submit" class="btn btn-default" id = "Go">Go</button>
                                  <p id="loader-text" style="color:#ffffff"></p>
-                                <div class='container'>
+                                <div class='container2'>
                                   <div class='loader'>
                                     <div class='loader--dot'></div>
                                     <div class='loader--dot'></div>
@@ -338,14 +342,17 @@
         <!-- logo, url end -->
 
 
+        
+
         <!-- movie list strat -->
-        <div class="content-movie" style="height:400px; text-align: center; margin: 0 auto; margin-top: 50px; ">
-                          <h2>추천 영상</h2><br><br>
-
-                          <div class="row" style="margin: 0 auto;">
-
+        <div class="content-movie" style="height:400px; text-align: center; margin: 0 auto;
+        margin-top:0px; ">
+                                <div style="float:left; width:100%; height:100px; ">
+                                  <h2>추천 영상</h2>
+                                  <br>
+                                </div><br><br><br><br><br>
                                 <!-- each card start -->
-                                <div class="col-xs-6 col-md-3">
+                                <div class="col-xs-6 col-md-3" style="float:left; margin : 0 auto;">
                                   <div class="thumbnail">
 
                                     <!-- hover -->
@@ -450,11 +457,119 @@
                           </div>
                           <!-- row end -->
 
-        </div>
 
         <!-- movie list end -->
+        <!-- sevice info start-->
+        <div style="margin-top:300px;padding-top:100px;"id="service" class="section-padding">
+            <div class="container">
+              <div class="row"  >
+                <div class="page-title text-center">
+                  <h1>Our Service</h1><br>
+                  <p>본 프로젝트에서는 유튜브 영상을 분석하여 시청자에게는 원하는 감성의 영상과 댓글을 골라 볼 수 있도록 보여주고<br>크리에이터에게는 시청자의 반응을 웹캠으로 가져와서 감성을 분석한 결과를 제공하여 시청자가 어떤 감성으로 본인의 영상을 감상했는지 판단할 수 있는 새로운 지표를 제안함으로써 <br>유튜브 크리에이터와 시청자가 양질의 영상을 창작하고 시청할 수 있도록 하기 위해 유감, 즉 유튜브에 대한 감성분석을 하는 프로젝트를 기획했습니다.</p><br>
+                  <hr class="pg-titl-bdr-btm"></hr>
+                </div>
+                <div style="padding-top:20px;" class="col-md-4">
+                  <div class="service-box">
+                    <div style="text-align:center;" class="service-text">                                   
+                      <img src="{% static "img/video.png" %}" width="100px" height="100px" >
+                      <h3>Video Sentiment Analysis</h3>
+                      <p> 크리에이터의 표정 변화를 분석해 타임라인을 제공합니다.</p>
+                      <p>시청자의 웹캠으로 받은 표정을 화남, 두려움, 경멸, 놀람, 행복, 슬픔, 중립으로 분석하여 시청자가 어떤 감성으로 동영상을 시청했는지 차트로 나타냅니다.</p>
+                    </div>
+                  </div>
+                </div>
+                <div style="padding-top:20px;"  class="col-md-4">
+                  <div class="service-box">
+                    <div style="text-align:center;" class="service-text">
+                      <img src="{% static "img/speech-bubble.png" %}" width="100px" height="100px" >
 
-    </div>
+                      <h3>Commen Sentiment Analysis</h3>
+                      <p> 유튜브 댓글 감성을 분석해 긍정, 중립, 부정 댓글을 분류합니다. </p>
+                      <p> 6가지 감정인 행복, 슬픔, 화남, 놀람, 중립, 두려움으로 댓글의 감성 분포도와 워드클라우드를 제공합니다. </p>
+                    </div>
+                  </div>
+                </div>
+                <div style="padding-top:20px;"  class="col-md-4">
+                  <div class="service-box">
+
+                    <div style="text-align:center;" class="service-text">
+                    <img src="{% static "img/report.png" %}" width="100px" height="100px" >
+
+                      <h3>Visualization</h3>
+                      <p>댓글과 영상을 분석해 고객에 맞는 원형차트 , 타임라인 , 레이더차트와 같은 통계 자료를 제공합니다.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>          
+          <!--service info start-->
+
+          <!--guide info start-->
+          <div id="guide" style="margin-top:400px; class="section-padding">
+            <h1 style="text-align:center">Yougam Guide</h1><br>
+            <div class="container">
+              <div class="row">
+                <div class="page-title text-center">
+                  <div style="padding-top:20px;" class="col-md-3">
+
+                  <img src="{% static "img/user.png" %}" width="150px" height="150px" >
+                  <h1>1. SNS 로그인</h1><br>
+                  <p>yougam은 시청자의 표정을 받기 위해 사용자의 정보를 필요로 합니다.따라서 google,naver,facebook을 통한 로그인이 가능합니다.</p>
+
+                  <hr class="pg-titl-bdr-btm"></hr>
+                  </div>
+                  <div style="padding-top:20px;" class="col-md-6">
+                  <img src="{% static "img/domain.png" %}" width="150px" height="150px" >
+
+                 <h1>2. 시청자 분석 VS 크리에이터 분석</h1><br>
+                  <p>yougam은 타겟층을 시청자와 크리에이터로 분류해 각각 사용자의 목적에 맞게<br> 제공하는 정보를 달리 합니다.필요한 정보에 따라 라디오버튼을 선택할 수 있습니다.</p><br>
+
+                  <hr class="pg-titl-bdr-btm"></hr></div>
+                  <div style="padding-top:20px;" class="col-md-3">
+                  <img src="{% static "img/www.png" %}" width="150px" height="150px" >
+                 <h1>3. URL입력</h1><br>
+                  <p>분석하고싶은 유튜브 주소를<br> 입력할 수 있습니다.</p><br>
+                  <hr class="pg-titl-bdr-btm"></hr></div>     
+                </div>
+              </div>
+
+
+               <div class="row">
+                <div class="page-title text-center">
+                   <div style="padding-top:20px;" class="col-md-4">
+
+                  <img src="{% static "img/quality.png" %}" width="150px" height="150px" >
+
+                 <h1>4. 추천영상</h1><br>
+                  <p> url을 입력하지 않고도 yougam에서 제공하는 추천영상을 클릭해서 분석 결과를 볼 수 있습니다.
+                  해당 영상에 마우스를 올리면 시청자 시점과 크리에이터 시점을 클릭 할 수 있습니다.</p><br>
+
+                  <hr class="pg-titl-bdr-btm"></hr> </div> 
+                  <div style="padding-top:20px;" class="col-md-4">
+
+                  <img src="{% static "img/speech.png" %}" width="150px" height="150px" >
+                  <h1>5. 사용자가 <br>예측 내용 수정 </h1><br>
+                  <p>긍정,부정,중립으로 분류된 댓글을 사용자가 잘못된 추론이라고 판단할 경우 변경하기 버튼을 눌러 수정할 수 있습니다.</p><br>
+
+                  <hr class="pg-titl-bdr-btm"></hr></div>
+                  <div style="padding-top:20px;" class="col-md-4">
+
+                  <img src="{% static "img/cloud.png" %}" width="150px" height="150px" >
+
+                 <h1>6. 6가지 감정에 따른 <br>워드 클라우드</h1><br>
+                  <p>6가지 감정을 각각 클릭시 해당 감정의 댓글들을<br> 모아 워드 클라우드를 보여줍니다.</p><br>
+
+                  <hr class="pg-titl-bdr-btm"></hr></div>
+                     
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!--guide info end-->
+
+
     <!-- content end -->
   </body>
 

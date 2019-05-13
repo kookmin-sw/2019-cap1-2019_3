@@ -1,19 +1,12 @@
 from django.shortcuts import render ,get_object_or_404,redirect
 from django.http import HttpResponse
 import sys
-import json
-import os
-from urllib import *
-import argparse
-from urllib.parse import urlparse, urlencode, parse_qs
-from urllib.request import  urlopen
 
 # Create your views here.
 from .models import Comment
 from .models import Video
 from .forms import PostForm
 from .models import ReplyData
-from .models import CommentData, Video
 
 import os
 import datetime, dateutil.parser
@@ -73,7 +66,7 @@ def creator(request,video):
 		from youtube_api_cmd import YouTubeApi
 		import spellcheck
 
-		key = ''
+		key = 'AIzaSyD5EuiUIl4UGa1uKt0yb1IGfUNWtISbIog'
 
 		y = YouTubeApi(100,url,key)
 		dic = {}
@@ -152,7 +145,35 @@ def detail(request,video):
 	comments = Comment.objects.filter(video=video)
 	return render(request,"yougam/default.html",{"cmts":comments})
 
+def user(request):
+	return render(request,"yougam/user.html")
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+from django.http import HttpResponse
+from .models import CommentData, Video
+from .forms import PostForm
+from django.shortcuts import render, redirect
+import json
+import sys
+import os
+from urllib import *
+import argparse
+from urllib.parse import urlparse, urlencode, parse_qs
+from urllib.request import  urlopen
 
 def first_show(request, comment_id):
 
