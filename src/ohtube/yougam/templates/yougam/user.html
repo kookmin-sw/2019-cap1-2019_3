@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="tr">
+{% load staticfiles %}
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>유튜브 감성분석 - 유감</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="{% static 'css/user.css' %}">
+<link rel="stylesheet" href="{% static 'css/webcam.css' %}">
+<link rel="stylesheet" href="{% static 'css/tooltip.css' %}">
+
+<script src="//code.jquery.com/jquery.min.js"></script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+
+<script src="{% static 'js/webcam.js' %}"></script>
+
+
+<header>
+    <!--  3등분으로 나누어 어떤 모듈인지  -->
+    <div class = "row" style="height:100px;">
+          <div class="col" style="text-align: center;">
+
+
+            <div class="robot slideInUp animated">
+                <div class="tooltip bg" style="font-size:15px; padding-top:10px;"> 웹캠 켜서 표정 제공하기 !</div>
+
+                <a class="bg" style="padding-top:40px; color:white">
+                    ON AIR
+                </a>
+
+                <div class="wave"></div>
+            </div>
+
+
+          </div>
+
+
+
+          <div class="col-5" style="text-align: center;">
+              <p> 유튜브 감성분석 서비스 - 유감 </p>
+          </div>
+
+          <div class="col" style="text-align: center; background-color: orange">
+              <p> 댓 분석 모듈 </p>
+          </div>
+
+    </div>
+
+</header>
+
+<body>
+
+    <div class="row">
+
+            <!-- left partition -->
+            <div class="col">
+
+                     <!-- 영상 분석 모듈이 들어갈 부분 --->     
+                    <div class="row">
+      
+                      <div class="box" style="">
+                     
+                          <!-- 추후 iframe 태그 사용하여 모듈 삽입 -->
+                          <!-- <iframe></iframe> -->
+                          <p>1분마다 영상 감성 타임로그 시각화</p>
+                       </div>
+                          
+                     
+                      <div  class ="box" style="margin-top:20px; background-color: yellow;">
+                         <p>전체 영상 감성 분석 결과 시각화 </p>
+                      </div>
+                    
+                    </div>
+
+            </div>
+
+
+
+            <!-- wider -->
+            <!-- center partition -->
+            <div class="col-5">
+                
+                      <!-- 유튜브 영상 삽입 -->
+                      <div style="position: relative; height:0; padding-bottom: 56.25%;">
+                          <iframe width="560" height="315" src="https://www.youtube.com/embed/JWZmdWP67DA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; width:100%; height:100%;">
+                            
+                          </iframe>
+                        </div>  
+               
+
+                      <div class="box" style="background-color: pink; margin-top:5%">  
+                          <p> 댓글 분석 모듈 </p>
+                      </div>   
+            </div>
+
+
+
+            <!-- right partition -->
+            <div class="col">
+          			
+                    <!-- 댓글 모듈 부분 -->
+                    <div class="row" >
+                      
+                          <div class="box" style="background-color: red">
+                            <p> 전체 댓글 감성분석 그래프 </p>
+                          </div> 
+                      
+                    <!--  워드클라우드  -->
+
+                          <div class="box" style="margin-top:20px; background-color: skyblue">
+                            
+                            <p> 워드클라우드 부분 </p>
+                       
+                          </div>
+
+                    </div>
+                
+            </div>
+      
+      </div>
+
+    </div>       
+</body>
+
+
+ 
+<script>
+
+</script>

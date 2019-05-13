@@ -144,3 +144,6 @@ def detail(request,video):
 		pass
 	comments = Comment.objects.filter(video=video)
 	return render(request,"yougam/default.html",{"cmts":comments})
+
+def user(request):
+	return render(request,"yougam/user.html")
