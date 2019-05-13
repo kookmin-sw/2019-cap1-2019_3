@@ -1,12 +1,19 @@
 from django.shortcuts import render ,get_object_or_404,redirect
 from django.http import HttpResponse
 import sys
+import json
+import os
+from urllib import *
+import argparse
+from urllib.parse import urlparse, urlencode, parse_qs
+from urllib.request import  urlopen
 
 # Create your views here.
 from .models import Comment
 from .models import Video
 from .forms import PostForm
 from .models import ReplyData
+from .models import CommentData, Video
 
 import os
 import datetime, dateutil.parser
@@ -32,7 +39,7 @@ def change(request,video,cid,senti):
 		return render(request,"yougam/default.html",{"cmts":comments})
 
 def post(request):
- 
+
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
@@ -66,7 +73,7 @@ def creator(request,video):
 		from youtube_api_cmd import YouTubeApi
 		import spellcheck
 
-		key = 'AIzaSyD5EuiUIl4UGa1uKt0yb1IGfUNWtISbIog'
+		key = ''
 
 		y = YouTubeApi(100,url,key)
 		dic = {}
@@ -86,7 +93,7 @@ def creator(request,video):
 			c.generate()
 
 	#이미 분석한것은 보여주기만 하면됨
-	else:	
+	else:
 		pass
 	comments = Comment.objects.filter(video=video)
 
@@ -144,3 +151,99 @@ def detail(request,video):
 		pass
 	comments = Comment.objects.filter(video=video)
 	return render(request,"yougam/default.html",{"cmts":comments})
+
+
+
+def first_show(request, comment_id):
+
+    video_url = Video.objects.get(pk=comment_id)
+
+    comment_module_path=os.path.join(os.path.dirname( os.path.abspath( __file__ ) ), 'crawler')
+    sys.path.append(comment_module_path)
+    from youtube_api_cmd import YouTubeApi
+
+    comment_obj = YouTubeApi(100,video_url.url,YOUTUBE_API_KEY)
+    comment_list = comment_obj.get_video_comment()
+    print("--crawling complete--")
+     #------crawling----------
+
+    comment_module_path2=os.path.join(os.path.dirname( os.path.abspath( __file__ ) ), 'predict_sentiment6')
+    sys.path.append(comment_module_path2)
+    import sentiment_count
+
+
+    predicted_comment_list = sentiment_count.csvToDict(comment_list)
+    predict_replies_list = {}
+    reply_idx = 1
+
+    for comment_info in predicted_comment_list:
+        comment_text = predicted_comment_list[comment_info]['comment']
+        comment_author = predicted_comment_list[comment_info]['author']
+        comment_period = predicted_comment_list[comment_info]['period']
+        comment_like = predicted_comment_list[comment_info]['like']
+        comment_label = predicted_comment_list[comment_info]['label']
+        parent_comment = video_url.commentdata_set.create(comment_id = comment_id, comment = comment_text, label = comment_label, author = comment_author, period = comment_period, like = comment_like)
+        # print(predicted_comment_list[comment_info])
+
+        if 'replies' in predicted_comment_list[comment_info].keys():
+            replies_list = predicted_comment_list[comment_info]['replies']
+            predicted_replies_list = sentiment_count.csvToDict(replies_list)
+            parent_id = parent_comment.id
+            for reply_info in predicted_replies_list:
+                reply_text = predicted_replies_list[reply_info]["comment"]
+                reply_author = predicted_replies_list[reply_info]["author"]
+                reply_period = predicted_replies_list[reply_info]["period"]
+                reply_like = predicted_replies_list[reply_info]["like"]
+                reply_label = predicted_replies_list[reply_info]["label"]
+                predict_replies_list[reply_idx] = {'comment': reply_text, 'author': reply_author, 'label' : reply_label}
+                parent_comment.replydata_set.create(parent_id = parent_id, comment = reply_text, label = reply_label, author = reply_author, period = reply_period, like = reply_like)
+                reply_idx += 1
+
+        print("--predict complete--")
+    predict_count_cmt = sentiment_count.sentenceCount(predicted_comment_list)
+    predict_count_reply = sentiment_count.sentenceCount(predict_replies_list)
+
+    cmt_count_list = []
+    reply_count_list = []
+    count_list = []
+    for senti in predict_count_cmt:
+        cmt_count_list.append(predict_count_cmt[senti])
+    for senti in predict_count_reply:
+        reply_count_list.append(predict_count_reply[senti])
+
+    for i in range(0,6):
+        count_list.append(cmt_count_list[i] + reply_count_list[i])
+        print(count_list[i])
+    video_url.sentiment_neutral = count_list[0]
+    video_url.sentiment_happy = count_list[1]
+    video_url.sentiment_sad = count_list[2]
+    video_url.sentiment_surprise = count_list[3]
+    video_url.sentiment_anger = count_list[4]
+    video_url.sentiment_fear = count_list[5]
+    video_url.generate()
+    return render(request, 'input_url.html', {"count": count_list})
+
+
+def show(request, comment_id):
+
+    video_url = Video.objects.get(pk=comment_id)
+    loaded_count_list = []
+    loaded_count_list.append(video_url.sentiment_neutral)
+    loaded_count_list.append(video_url.sentiment_happy)
+    loaded_count_list.append(video_url.sentiment_sad)
+    loaded_count_list.append(video_url.sentiment_surprise)
+    loaded_count_list.append(video_url.sentiment_anger)
+    loaded_count_list.append(video_url.sentiment_fear)
+    print(loaded_count_list)
+    return render(request, 'input_url.html', {"count": loaded_count_list})
+
+def typeRecieve(request):
+
+    if 'user' in request.POST:
+        return render(request, 'input_url.html', {"chosenType": 1})
+
+    elif 'creator' in request.POST:
+        return render(request, 'input_url.html', {"chosenType": 2})
+
+    else:
+        return render(request, 'input_url.html')
