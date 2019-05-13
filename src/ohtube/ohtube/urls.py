@@ -16,18 +16,10 @@ Including another URLconf
 
 from django.conf.urls import url,include
 from django.contrib import admin
-<<<<<<< HEAD
-from . import views
-
-urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^$', views.post, name = "index")
-=======
 from yougam import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^yougam/', include('yougam.urls')),
 
->>>>>>> feature_cmt
 ]
