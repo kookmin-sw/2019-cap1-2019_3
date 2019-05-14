@@ -102,7 +102,7 @@ def creator(request,video):
 def detail(request,video):
 	#새로운 비디오는 predict 해야함
 	if Comment.objects.filter(video=video).count() < 1:
-		module_path=os.path.join(os.path.dirname(os.path.abspath( __file__ ) ), 'code')
+		module_path=os.path.join(os.path.dirname(os.path.abspath( __file__ ) ), 'code/predict_sentiment')
 		sys.path.append(module_path)
 		temp = Video.objects.get(id=video)
 		url = temp.url
