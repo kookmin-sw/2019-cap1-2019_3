@@ -175,7 +175,7 @@ import argparse
 from urllib.parse import urlparse, urlencode, parse_qs
 from urllib.request import  urlopen
 
-YOUTUBE_API_KEY = 'AIzaSyDFO3YIf_uiBzEd3fGBVEhm56yhgFJZGHo'
+YOUTUBE_API_KEY = ''
 
 def first_show(request, video):
 
