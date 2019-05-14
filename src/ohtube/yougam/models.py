@@ -13,7 +13,7 @@ class Video(models.Model):
    sentiment_fear = models.IntegerField(default=0)
 
    def __str__(self):
-      return self.url
+      return str(self.id)
 
    def generate(self):
       self.save()
@@ -23,7 +23,7 @@ class Comment(models.Model):
 	cid = models.CharField(max_length=255,default="")
 	cmt = models.TextField(default="")
 	label  = models.IntegerField(default=3)
-	label6 = models.CharField(max_length = 100)
+	label6 = models.CharField(max_length = 100, default="")
 	author = models.CharField(max_length=255,default="")
 	period = models.CharField(max_length=255,default="")
 	randnum = models.IntegerField(default = 1)
@@ -53,5 +53,3 @@ class ReplyData(models.Model):
 
 	def __str__(self):
 		return self.comment
-
-

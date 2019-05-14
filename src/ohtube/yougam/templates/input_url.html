@@ -1,0 +1,48 @@
+<!DOCTYPE html> {% load staticfiles %}
+<html>
+<head>
+  <title></title>
+  <style>
+  section {
+    width: 30%;
+}
+</style>
+</head>
+<body>
+  <form method="POST" class = "post-from">
+    {%csrf_token%}
+    {{form.as_p}}
+    <button type="submit" class="save btn btn-default">Save</button>
+    <section>
+    <canvas id="myChart" width="200" height="200"></canvas>
+    </section>
+    <script>var ans = JSON.parse("{{ count }}");
+    </script>
+
+    <script src="{% static 'chart_js/Chart.js' %}"></script>
+    <script>
+    window.onload = function() {
+      var ctx = document.getElementById('myChart');
+
+      var myChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels:  ['Neutral', 'Happy', 'Sad', 'Surprise', 'Anger', 'Fear'],
+            datasets: [{
+              label: 'sentiment',
+              backgroundColor: "rgba(200,0,0,0.2)",
+              data: ans
+            }]
+        }
+    });
+  }
+    </script>
+  </form>
+  <form method="POST" class = "post-type">
+  <INPUT type= "radio" name="user" id="user" value="user"> user
+  <INPUT type= "radio" name="creator" id="creator" value="creator"> creator
+  <INPUT type= "submit" value="submit">
+  {%csrf_token%}
+  <div>{{chosenType}}</div>
+  </form>
+</body>

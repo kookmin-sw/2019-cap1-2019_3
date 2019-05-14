@@ -45,8 +45,8 @@ def post(request):
             else:
                 video.generate()
             v = Video.objects.get(url=video.url)
-            vid = str(v.id)
-            return redirect(vid+'/detail')
+            vid = v.id
+            return redirect('detail', video = vid)
 
         else:
             return HttpResponse("not valid url!")
@@ -66,7 +66,7 @@ def creator(request,video):
 		from youtube_api_cmd import YouTubeApi
 		import spellcheck
 
-		key = 'AIzaSyD5EuiUIl4UGa1uKt0yb1IGfUNWtISbIog'
+		key = ''
 
 		y = YouTubeApi(100,url,key)
 		dic = {}
@@ -111,7 +111,7 @@ def detail(request,video):
 		from youtube_api_cmd import YouTubeApi
 		import spellcheck
 
-		key = 'AIzaSyD5EuiUIl4UGa1uKt0yb1IGfUNWtISbIog'
+		key = ''
 
 		y = YouTubeApi(100,url,key)
 		dic = {}
@@ -164,7 +164,7 @@ def user(request):
 
 
 from django.http import HttpResponse
-from .models import CommentData, Video
+from .models import Comment, Video
 from .forms import PostForm
 from django.shortcuts import render, redirect
 import json
@@ -175,11 +175,13 @@ import argparse
 from urllib.parse import urlparse, urlencode, parse_qs
 from urllib.request import  urlopen
 
-def first_show(request, comment_id):
+YOUTUBE_API_KEY = 'AIzaSyDFO3YIf_uiBzEd3fGBVEhm56yhgFJZGHo'
 
-    video_url = Video.objects.get(pk=comment_id)
+def first_show(request, video):
 
-    comment_module_path=os.path.join(os.path.dirname( os.path.abspath( __file__ ) ), 'crawler')
+    video_url = Video.objects.get(pk=video)
+
+    comment_module_path=os.path.join(os.path.dirname( os.path.abspath( __file__ ) ), 'code/crawler')
     sys.path.append(comment_module_path)
     from youtube_api_cmd import YouTubeApi
 
@@ -188,7 +190,7 @@ def first_show(request, comment_id):
     print("--crawling complete--")
      #------crawling----------
 
-    comment_module_path2=os.path.join(os.path.dirname( os.path.abspath( __file__ ) ), 'predict_sentiment6')
+    comment_module_path2=os.path.join(os.path.dirname( os.path.abspath( __file__ ) ), 'code/predict_sentiment6')
     sys.path.append(comment_module_path2)
     import sentiment_count
 
@@ -203,7 +205,7 @@ def first_show(request, comment_id):
         comment_period = predicted_comment_list[comment_info]['period']
         comment_like = predicted_comment_list[comment_info]['like']
         comment_label = predicted_comment_list[comment_info]['label']
-        parent_comment = video_url.commentdata_set.create(comment_id = comment_id, comment = comment_text, label = comment_label, author = comment_author, period = comment_period, like = comment_like)
+        parent_comment = video_url.comment_set.create(video = video, cmt = comment_text, label6 = comment_label, author = comment_author, period = comment_period, like = comment_like)
         # print(predicted_comment_list[comment_info])
 
         if 'replies' in predicted_comment_list[comment_info].keys():
@@ -217,7 +219,7 @@ def first_show(request, comment_id):
                 reply_like = predicted_replies_list[reply_info]["like"]
                 reply_label = predicted_replies_list[reply_info]["label"]
                 predict_replies_list[reply_idx] = {'comment': reply_text, 'author': reply_author, 'label' : reply_label}
-                parent_comment.replydata_set.create(parent_id = parent_id, comment = reply_text, label = reply_label, author = reply_author, period = reply_period, like = reply_like)
+                parent_comment.replydata_set.create(parent_id = parent_id, comment = reply_text, label6 = reply_label, author = reply_author, period = reply_period, like = reply_like)
                 reply_idx += 1
 
         print("--predict complete--")
@@ -245,18 +247,17 @@ def first_show(request, comment_id):
     return render(request, 'input_url.html', {"count": count_list})
 
 
-def show(request, comment_id):
-
-    video_url = Video.objects.get(pk=comment_id)
-    loaded_count_list = []
-    loaded_count_list.append(video_url.sentiment_neutral)
-    loaded_count_list.append(video_url.sentiment_happy)
-    loaded_count_list.append(video_url.sentiment_sad)
-    loaded_count_list.append(video_url.sentiment_surprise)
-    loaded_count_list.append(video_url.sentiment_anger)
-    loaded_count_list.append(video_url.sentiment_fear)
-    print(loaded_count_list)
-    return render(request, 'input_url.html', {"count": loaded_count_list})
+def show(request, video):
+	video_url = Video.objects.get(pk=video)
+	loaded_count_list = []
+	loaded_count_list.append(video_url.sentiment_neutral)
+	loaded_count_list.append(video_url.sentiment_happy)
+	loaded_count_list.append(video_url.sentiment_sad)
+	loaded_count_list.append(video_url.sentiment_surprise)
+	loaded_count_list.append(video_url.sentiment_anger)
+	loaded_count_list.append(video_url.sentiment_fear)
+	print(loaded_count_list)
+	return render(request, 'input_url.html', {"count": loaded_count_list})
 
 def typeRecieve(request):
 
@@ -268,3 +269,19 @@ def typeRecieve(request):
 
     else:
         return render(request, 'input_url.html')
+
+def post6(request):
+	if request.method == "POST":
+		form = PostForm(request.POST)
+		if form.is_valid():
+			video_url = form.save(commit = False)
+			if Video.objects.filter(url=video_url.url).count() == 1:
+				video_url = Video.objects.get(url=video_url.url)
+				print(1)
+				return redirect('shows', video = video_url.id)
+			elif Video.objects.filter(url=video_url.url).count() == 0:
+				video_url.generate()
+				return redirect('first_show', video = video_url.id)
+	else:
+		form = PostForm()
+		return render(request, 'input_url.html', {"form": form})
