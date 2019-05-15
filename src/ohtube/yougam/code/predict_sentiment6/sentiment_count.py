@@ -15,19 +15,21 @@ import sys
 # pip install mock
 
 
-def csvToDict(comment_list):
+def predict_senti6(comment_list):
 
   currentPath = os.getcwd()
-  os.chdir('C:/Users/ljj56/Desktop/Capstone/2019-cap1-2019_3/src/ohtube/yougam/code/predict_sentiment6')
-  filename = "dataset/test_dataset_bow.pkl"
+
+  module_path=os.path.join(os.path.dirname(os.path.abspath( __file__ ) ), '')
+  sys.path.append(module_path)
+  filename = module_path+"dataset/test_dataset_bow.pkl"
   with open(filename, "rb") as fp:
       X_test, Y_test, labels2names, text2features = pickle.load(fp)
 
-  filename2 = "dataset/trained_model_gboost2.pkl"
+  filename2 = module_path+"dataset/trained_model_gboost2.pkl"
   with open(filename2, "rb") as fp:
     net = pickle.load(fp)
 
-  translate_client = translate.Client.from_service_account_json('My First Project-e23890f11bd3.json')
+  translate_client = translate.Client.from_service_account_json(module_path+'My First Project-e23890f11bd3.json')
   hangul = re.compile('[^ ㄱ-ㅣ가-힣A-Za-z?!]+')
 
 

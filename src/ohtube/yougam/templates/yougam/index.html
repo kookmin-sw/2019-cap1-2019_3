@@ -242,7 +242,7 @@
   <body>
     <div class="content" style="width:100%; float:left; margin: 0 auto;" >
 
-        
+
 
 
         <!-- nav, logo, url strat -->
@@ -250,7 +250,7 @@
 
                         <nav class="navbar navbar-expand-sm bg-light" id="myNavbar">
                           <ul class="nav navbar-nav navbar-right">
-           
+
                             <li><a href="#overlayImg">Home</a></li>
                             <li><a href="#service">Service</a></li>
                             <li><a href="#guide">Guide</a></li>
@@ -258,7 +258,7 @@
                             <li><a href="#contact">Contact Us</a></li>
                           </ul>
          </nav>
-          
+
                         <video autoplay muted loop id="myVideo" volume="0">
                           <source  src="{% static "img/temp.mov" %}" type="video/mp4">
                         </video>
@@ -296,20 +296,21 @@
                                   <button id="gnbLogin"> 로그아웃 </button>
 
                                 <!-- 사용자 or 크리에이터 라디오 버튼 -->
-                                <div style="padding-top:20px;">
-                                    <label class="radio-inline">
-                                      <input type="radio" name="inlineRadioOptions" id="Radio1" value="user"> 시청자 분석
-                                    </label>
-
-                                    <label class="radio-inline" style="margin-left:40px;">
-                                      <input type="radio" name="inlineRadioOptions" id="Radio2" value="creator"> 크리에이터 분석
-                                    </label>
-                                </div>
-
-
 
                                 <!-- 검색창 & 버튼-->
                                 <form method= "POST" class="post-form form-inline" style="padding-top:20px;">
+                                  <div style="padding-top:20px;">
+                                      <label class="radio-inline">
+                                        <input type="radio" name="userRadio" id="Radio1" value="user"> 시청자 분석
+                                      </label>
+
+                                      <label class="radio-inline" style="margin-left:40px;">
+                                        <input type="radio" name="creatorRadio" id="Radio2" value="creator"> 크리에이터 분석
+                                      </label>
+                                  </div>
+
+
+
 
                                   <div class="form-group" >
 
@@ -342,7 +343,7 @@
         <!-- logo, url end -->
 
 
-        
+
 
         <!-- movie list strat -->
         <div class="content-movie" style="height:400px; text-align: center; margin: 0 auto;
@@ -470,7 +471,7 @@
                 </div>
                 <div style="padding-top:20px;" class="col-md-4">
                   <div class="service-box">
-                    <div style="text-align:center;" class="service-text">                                   
+                    <div style="text-align:center;" class="service-text">
                       <img src="{% static "img/video.png" %}" width="100px" height="100px" >
                       <h3>Video Sentiment Analysis</h3>
                       <p> 크리에이터의 표정 변화를 분석해 타임라인을 제공합니다.</p>
@@ -502,7 +503,7 @@
                 </div>
               </div>
             </div>
-          </div>          
+          </div>
           <!--service info start-->
 
           <!--guide info start-->
@@ -530,7 +531,7 @@
                   <img src="{% static "img/www.png" %}" width="150px" height="150px" >
                  <h1>3. URL입력</h1><br>
                   <p>분석하고싶은 유튜브 주소를<br> 입력할 수 있습니다.</p><br>
-                  <hr class="pg-titl-bdr-btm"></hr></div>     
+                  <hr class="pg-titl-bdr-btm"></hr></div>
                 </div>
               </div>
 
@@ -545,7 +546,7 @@
                   <p> url을 입력하지 않고도 yougam에서 제공하는 추천영상을 클릭해서 분석 결과를 볼 수 있습니다.
                   해당 영상에 마우스를 올리면 시청자 시점과 크리에이터 시점을 클릭 할 수 있습니다.</p><br>
 
-                  <hr class="pg-titl-bdr-btm"></hr> </div> 
+                  <hr class="pg-titl-bdr-btm"></hr> </div>
                   <div style="padding-top:20px;" class="col-md-4">
 
                   <img src="{% static "img/speech.png" %}" width="150px" height="150px" >
@@ -561,7 +562,7 @@
                   <p>6가지 감정을 각각 클릭시 해당 감정의 댓글들을<br> 모아 워드 클라우드를 보여줍니다.</p><br>
 
                   <hr class="pg-titl-bdr-btm"></hr></div>
-                     
+
                 </div>
               </div>
 

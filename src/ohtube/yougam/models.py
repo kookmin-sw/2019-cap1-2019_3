@@ -30,7 +30,6 @@ class Comment(models.Model):
 	like = models.IntegerField(default = 0)
 
 	def generate(self):
-		self.randnum = random.randrange(1,10)
 		self.save()
 
 	def __str__(self):
@@ -48,7 +47,6 @@ class ReplyData(models.Model):
 	randnum = models.IntegerField(default = 1)
 
 	def generate(self):
-		self.randnum = random.randrange(1,10)
 		self.save()
 
 	def __str__(self):

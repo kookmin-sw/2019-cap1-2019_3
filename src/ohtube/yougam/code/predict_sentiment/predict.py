@@ -15,7 +15,7 @@ module_dir = os.path.dirname(__file__)  # get current directory
 train_path = os.path.join(module_dir, 'train_docs.json')
 model_path = os.path.join(module_dir, 'comment_model.h5')
 
-def labeling(dic):
+def labeling(comment_list):
 	okt = Okt()
 	comment_dict = {}
 
@@ -29,12 +29,12 @@ def labeling(dic):
 	text = nltk.Text(tokens, name='NMSC')
 	selected_words = [f[0] for f in text.vocab().most_common(15000)]
 
-	labels = {}
-	for i in range(1,len(dic)+1):
-		cmt = dic[i]
-		grade = predict_pos_neg(cmt,selected_words,model)
-		labels[i] = grade
-	return labels
+	for comment_key in comment_list:
+		row = comment_list[comment_key]['cor_comment']
+		grade = predict_pos_neg(row,selected_words,model)
+		comment_list[comment_key]['label_pn'] = grade
+
+	return comment_list
 
 def tokenize(doc):
 	okt = Okt()

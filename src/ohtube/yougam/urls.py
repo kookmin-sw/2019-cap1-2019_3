@@ -6,12 +6,8 @@ from . import views
 
 urlpatterns = [
     path('', views.post, name = "index"),
-    path('<int:video>/detail/', views.detail, name='detail'),
     path('<str:video>/change/<int:cid>/<str:senti>', views.change, name='change'),
-    path('<int:video>/creator/', views.creator, name='creator'),
     path('user/',views.user, name='user'),
-    path('youtube/<int:video>/first_show/', views.first_show, name='first_show'),
-    path('youtube/', views.post6, name='post6'),
-    path('youtube/<int:video>/show/', views.show, name='shows'),
-    path('youtube_type/', views.typeRecieve, name='typeRecieve'),
+    path('<int:video>/user/', views.userdetail, name='userdetail'),
+    path('youtube_type/<int:video>/creator/', views.crtdetail, name='crtdetail'),
 ]
