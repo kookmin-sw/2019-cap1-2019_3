@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0ba222c7-fb2d-4598-a781-f07b6976e1e2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ohtube/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/ohtube/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yougam/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/yougam/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yougam/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/yougam/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yougam/static/js/webcam.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/yougam/templates/yougam/user.html" beforeDir="false" afterPath="$PROJECT_DIR$/yougam/templates/yougam/user.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yougam/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/yougam/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yougam/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/yougam/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="0ba222c7-fb2d-4598-a781-f07b6976e1e2" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +90,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/yougam/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="393">
+            <state relative-caret-position="795">
               <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
@@ -168,8 +158,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="133" />
-    <option name="y" value="23" />
+    <option name="x" value="35" />
+    <option name="y" value="634" />
     <option name="width" value="1440" />
     <option name="height" value="805" />
   </component>
@@ -436,7 +426,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/yougam/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
+        <state relative-caret-position="795">
           <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
