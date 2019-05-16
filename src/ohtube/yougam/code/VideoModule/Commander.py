@@ -37,9 +37,10 @@ def downloadYouTube(videourl, path):
     yt.download(path)
 
 
+
 def downloadYouTube_if_not_exist(video_url, download_path, serial):
-    my_download_path = download_path
-    my_video_path = download_path+'/'+serial
+    my_download_path = make_relative_to_absolute(download_path)
+    my_video_path = make_relative_to_absolute(download_path+'/'+serial)
 
     video_list = search(my_download_path)
 
@@ -47,7 +48,6 @@ def downloadYouTube_if_not_exist(video_url, download_path, serial):
     for each in video_list:
         if each == my_video_path:#serial:
             exist = True
-
     if exist == False:
         print("There's no video with this name. Download start.")
         downloadYouTube(video_url, my_video_path)
@@ -64,6 +64,7 @@ class Commander:
         face_detect_model = './haarcascade_files/FaceDetect/haarcascade_frontalface_default.xml'
         self.oracle = TMX(model_path, face_detect_model)#Oracle: 
         self.imgLoader = ImgLoader()
+
 
     def mainLogic(self, video_url):
         #downloading
@@ -135,6 +136,7 @@ class Commander:
         cv2.destroyAllWindows()
 
         return emotion_list
+
 
 
 
