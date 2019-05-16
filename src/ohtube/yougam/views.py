@@ -259,7 +259,27 @@ def crtdetail(request, video):
     video_instance = Video.objects.get(pk=video)
 
     video_url = video_instance.url
-    print(video_url)
+    use_i_th_frame = 300 #30==1sec
+
+    data = PieChart.objects.filter(video_id=video_url)
+    if data.count() < 1:
+        print("There are no data. start task")
+        current_path = os.path.dirname( os.path.abspath( __file__ ) )
+        code_path = os.path.abspath(os.path.join(current_path, 'code'))
+        videoModule_path = os.path.abspath(os.path.join(code_path, 'VideoModule'))
+        sys.path.append(videoModule_path)
+        from Commander import Commander
+
+        commander = Commander()
+        dumped = commander.for_youtube_video_piechart( use_i_th_frame, video_url)
+        will_inserted = PieChart(video_id = video_url, json_data = dumped)
+
+        will_inserted.save()
+
+    else: #already exist
+        print("data already exist")
+        pass
+
     return HttpResponse("")
 
 def user(request):
