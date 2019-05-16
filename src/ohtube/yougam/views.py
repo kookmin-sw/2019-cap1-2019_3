@@ -256,6 +256,8 @@ def userdetail(request, video):
    return render(request, "yougam/user.html", {"count":loaded_count_list,"cmts":comments,"iframe_url":iframe_url})
 
 def crtdetail(request, video):
+    from PIL import Image
+    import cv2
     video_instance = Video.objects.get(pk=video)
 
     video_url = video_instance.url
@@ -271,17 +273,55 @@ def crtdetail(request, video):
         from Commander import Commander
 
         commander = Commander()
-        dumped = commander.for_youtube_video_piechart( use_i_th_frame, video_url)
+        dumped, max_emotion_list, i_list, face_list = commander.for_youtube_video_TimeLine(use_i_th_frame, video_url)
         will_inserted = PieChart(video_id = video_url, json_data = dumped)
 
+        img_path_list = []
+        for j in range(len(i_list)):
+            fileName = str(video) + "_" + str(i_list[j]) + ".png"
+            save_dir = os.path.abspath(os.path.join(current_path, 'images'))
+            save_dir = os.path.abspath(os.path.join(save_dir, fileName))
+            destRGB = cv2.cvtColor(face_list[j], cv2.COLOR_BGR2RGB)
+            pic_file = Image.fromarray(destRGB, 'RGB')
+            pic_file.save(save_dir)
+            img_path_list.append( './images/' +fileName )
+
+        timeLog_list = []
+        for j in range(len(i_list)):
+            second = (i_list[j]//30)%60
+            minute = ((i_list[j]//30)//60 )%60
+            hour = ((i_list[j]//30)//60 )//60
+
+            time_str = ""
+            if hour<10:
+                time_str += ('0' + str(hour))
+            else:
+                time_str += str(hour)
+            time_str += ":"
+            if minute<10:
+                time_str += ('0' + str(minute))
+            else:
+                time_str += str(minute)
+            time_str += ":"
+            if second<10:
+                time_str += ('0' + str(second))
+            else:
+                time_str += str(second)
+            timeLog_list.append( TimeLog(top_sentiment = max_emotion_list[j], url = video_url, time = time_str, img_path = img_path_list[j]) )
+        for j in range(len(i_list)):
+            timeLog_list[j].save()
         will_inserted.save()
 
     else: #already exist
         print("data already exist")
         pass
 
-    return HttpResponse("")
 
+
+
+
+
+    return HttpResponse("")
 def user(request):
    video_id = 1
    logs = TimeLog.objects.filter()
