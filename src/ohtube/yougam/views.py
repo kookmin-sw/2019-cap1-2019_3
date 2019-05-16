@@ -1,4 +1,4 @@
-from django.shortcuts import render ,get_object_or_404,redirect
+﻿from django.shortcuts import render ,get_object_or_404,redirect
 from django.http import HttpResponse
 import sys
 import json #add 0516
@@ -256,89 +256,11 @@ def userdetail(request, video):
    return render(request, "yougam/user.html", {"count":loaded_count_list,"cmts":comments,"iframe_url":iframe_url})
 
 def crtdetail(request, video):
+    video_instance = Video.objects.get(pk=video)
 
-   video_url = Video.objects.get(pk=video)
-
-   if Comment.objects.filter(video=video_url.id).count() < 1:
-      comment_module_path=os.path.join(os.path.dirname( os.path.abspath( __file__ ) ), 'code/crawler')
-      sys.path.append(comment_module_path)
-
-      from youtube_api_cmd import YouTubeApi
-      with open("yougam/static/api_key/youtube_api.txt", "r") as y_api :
-         YOUTUBE_API_KEY = y_api.readline()
-
-      comment_obj = YouTubeApi(100,video_url.url,YOUTUBE_API_KEY)
-      comment_list = comment_obj.get_video_comment()
-      print("--crawling complete--")
-        #------crawling----------
-      comment_module_path2=os.path.join(os.path.dirname( os.path.abspath( __file__ ) ), 'code/predict_sentiment6')
-      sys.path.append(comment_module_path2)
-      import sentiment_count
-
-
-      predicted_comment_list = sentiment_count.predict_senti6(comment_list)
-      predict_replies_list = {}
-      reply_idx = 1
-
-      for comment_info in predicted_comment_list:
-         comment_text = predicted_comment_list[comment_info]['comment']
-         comment_author = predicted_comment_list[comment_info]['author']
-         comment_period = predicted_comment_list[comment_info]['period']
-         comment_like = predicted_comment_list[comment_info]['like']
-         comment_label = predicted_comment_list[comment_info]['label']
-         parent_comment = video_url.comment_set.create(video = video, cmt = comment_text, label6 = comment_label, author = comment_author, period = comment_period, like = comment_like)
-           # print(predicted_comment_list[comment_info])
-
-         if 'replies' in predicted_comment_list[comment_info].keys():
-            replies_list = predicted_comment_list[comment_info]['replies']
-            predicted_replies_list = sentiment_count.predict_senti6(replies_list)
-            parent_id = parent_comment.id
-            for reply_info in predicted_replies_list:
-               reply_text = predicted_replies_list[reply_info]["comment"]
-               reply_author = predicted_replies_list[reply_info]["author"]
-               reply_period = predicted_replies_list[reply_info]["period"]
-               reply_like = predicted_replies_list[reply_info]["like"]
-               reply_label = predicted_replies_list[reply_info]["label"]
-               predict_replies_list[reply_idx] = {'comment': reply_text, 'author': reply_author, 'label' : reply_label}
-               parent_comment.replydata_set.create(parent_id = parent_id, comment = reply_text, label6 = reply_label, author = reply_author, period = reply_period, like = reply_like)
-               reply_idx += 1
-
-         print("--predict complete--")
-      predict_count_cmt = sentiment_count.sentenceCount(predicted_comment_list)
-      predict_count_reply = sentiment_count.sentenceCount(predict_replies_list)
-
-      cmt_count_list = []
-      reply_count_list = []
-      count_list = []
-
-      for senti in predict_count_cmt:
-         cmt_count_list.append(predict_count_cmt[senti])
-      for senti in predict_count_reply:
-         reply_count_list.append(predict_count_reply[senti])
-
-      for i in range(0,6):
-         count_list.append(cmt_count_list[i] + reply_count_list[i])
-         print(count_list[i])
-      video_url.sentiment_neutral = count_list[0]
-      video_url.sentiment_happy = count_list[1]
-      video_url.sentiment_sad = count_list[2]
-      video_url.sentiment_surprise = count_list[3]
-      video_url.sentiment_anger = count_list[4]
-      video_url.sentiment_fear = count_list[5]
-      video_url.generate()
-      return render(request, 'input_url.html', {"count": count_list})
-
-   else :
-      loaded_count_list = []
-      loaded_count_list.append(video_url.sentiment_neutral)
-      loaded_count_list.append(video_url.sentiment_happy)
-      loaded_count_list.append(video_url.sentiment_sad)
-      loaded_count_list.append(video_url.sentiment_surprise)
-      loaded_count_list.append(video_url.sentiment_anger)
-      loaded_count_list.append(video_url.sentiment_fear)
-      print(loaded_count_list)
-      return render(request, 'input_url.html', {"count": loaded_count_list})
-
+    video_url = video_instance.url
+    print(video_url)
+    return HttpResponse("")
 
 def user(request):
    video_id = 1
