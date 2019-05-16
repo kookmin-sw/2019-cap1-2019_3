@@ -51,3 +51,16 @@ class ReplyData(models.Model):
 
 	def __str__(self):
 		return self.comment
+
+
+class TimeLog(models.Model):
+   top_sentiment = models.CharField(max_length = 255)
+   url = models.CharField(max_length=255)
+   time = models.CharField(max_length = 255)
+   img_path = models.ImageField()
+
+   def __str__(self):
+      return str(self.url)
+
+   def generate(self):
+      self.save()

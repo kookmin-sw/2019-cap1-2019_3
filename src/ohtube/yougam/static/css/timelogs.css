@@ -1,0 +1,33 @@
+      .timelog img {
+      width:80px;
+      height:80px;
+      border-radius: 50px;
+      border: 2px solid pink;s
+}
+
+
+.timelog {
+    width: 200px;
+    height:100%;
+    text-align: center;
+    margin : 0 auto;
+
+}
+
+.log {
+    width:200px;
+    margin-bottom :10px;
+    float: left;
+}
+
+.logboard {
+    padding-top:10px;
+    margin: 0 auto;
+    overflow-x: scroll;
+    height:300px;
+}
+
+scrollbar-face-color:pink;
+
+
+

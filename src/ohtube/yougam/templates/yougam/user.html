@@ -7,7 +7,6 @@
 <title>유튜브 감성분석 - 유감</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="{% static 'css/user.css' %}">
-<link rel="stylesheet" href="{% static 'css/webcam.css' %}">
 <link rel="stylesheet" href="{% static 'css/tooltip.css' %}">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -33,8 +32,6 @@ section {
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-
-<script src="{% static 'js/webcam.js' %}"></script>
 
 
 <header>
@@ -80,11 +77,37 @@ section {
                      <!-- 영상 분석 모듈이 들어갈 부분 --->
                     <div class="row">
 
-                      <div class="box" style="">
+                      <div class="box">
 
-                          <!-- 추후 iframe 태그 사용하여 모듈 삽입 -->
-                          <!-- <iframe></iframe> -->
-                          <p>1분마다 영상 감성 타임로그 시각화</p>
+                          <div style="height:40px; margin: 0 auto; padding-top: 10px;text-align:center; width:100%;">
+                              <h4> 영상 속 감성 타임로그 </h4>
+                          </div>
+
+                              <div class = "timelog" >
+                              <link rel="stylesheet" href="{% static 'css/timelogs.css' %}">
+
+                                      <div class="log ">
+
+                                            <div class="logboard">
+
+
+                                                    {% for i in logs %}
+
+                                                        <img src="/yougam/media/{{i.img_path }}">
+
+                                                        <h4>{{ i.top_sentiment}}</h4>  {{ i.time }}
+
+
+                                                        <br>
+                                                    {% endfor %}
+
+
+                                            </div>
+                                      </div>
+                                <!-- 타임로그 1개 인스턴스 end -->
+
+                              </div>
+
                        </div>
 
 

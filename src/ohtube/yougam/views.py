@@ -7,6 +7,7 @@ from .models import Comment
 from .models import Video
 from .forms import PostForm
 from .models import ReplyData
+from .models import TimeLog
 
 import os
 import datetime, dateutil.parser
@@ -334,3 +335,9 @@ def crtdetail(request, video):
       loaded_count_list.append(video_url.sentiment_fear)
       print(loaded_count_list)
       return render(request, 'input_url.html', {"count": loaded_count_list})
+
+
+def user(request):
+
+	logs = TimeLog.objects.filter()
+	return render(request, "yougam/user.html", {"logs": logs})
