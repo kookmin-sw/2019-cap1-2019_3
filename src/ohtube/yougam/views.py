@@ -141,6 +141,8 @@ from urllib.request import  urlopen
 def userdetail(request, video):
 
    video_url = Video.objects.get(pk=video)
+   temp_url = video_url.url
+   iframe_url = temp_url.replace('https://www.youtube.com/watch?v=','https://www.youtube.com/embed/')
 
    if Comment.objects.filter(video=video_url.id).count() < 1:
       comment_module_path=os.path.join(os.path.dirname( os.path.abspath( __file__ ) ), 'code/crawler')
@@ -247,7 +249,7 @@ def userdetail(request, video):
    print(loaded_count_list)
 
    comments = Comment.objects.filter(video=video)
-   return render(request, "yougam/user.html", {"count":loaded_count_list,"cmts":comments})
+   return render(request, "yougam/user.html", {"count":loaded_count_list,"cmts":comments,"iframe_url":iframe_url})
 
 def crtdetail(request, video):
 
