@@ -8,26 +8,27 @@ from Oracle import Oracle
 from Tensor_Mini_Xception import Tensor_Mini_Xception as TMX
 from ImgLoader import ImgLoader
 
-class MyEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, numpy.integer):
-            return int(obj)
-        elif isinstance(obj, numpy.floating):
-            return float(obj)
-        elif isinstance(obj, numpy.ndarray):
-            return obj.tolist()
-        else:
-            return super(MyEncoder, self).default(obj)
+
+
 
 def search(dirname):
     filenames = os.listdir(dirname)
-
     result = []
     for filename in filenames:
-        full_filename = dirname + '/' + filename #os.path.join(dirname, filename)
+        full_filename = os.path.join(dirname, filename)#dirname + '/' + filename #
         result.append(full_filename)
     return result
 
+def make_relative_to_absolute(R_path):
+    result = os.path.dirname( os.path.abspath( __file__ ) )
+    my_dirs = R_path.split('/')
+    for each in my_dirs:
+        if each == '.':
+            continue
+        result = os.path.join(result, each)
+        #print('mid term check', result)
+
+    return result
 def downloadYouTube(videourl, path):
     yt = YouTube(videourl)
     yt = yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first()
