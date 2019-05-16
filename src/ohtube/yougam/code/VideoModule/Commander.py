@@ -66,18 +66,19 @@ class Commander:
         self.imgLoader = ImgLoader()
 
 
-    def mainLogic(self, video_url):
-        #downloading
+
+    def for_youtube_video_piechart(self, use_i_th_frame, video_url):
+        #download
         serial = video_url.split('v=')[1]
         download_path = './videos'
         print('download path : ', download_path)
+
         video_name = downloadYouTube_if_not_exist(video_url, download_path, serial)
         print(video_name)
 
         #registing
         print("start registing")
         self.imgLoader.registVideo(video_name)
-        print("Video opened at server(Commender).")
 
         #process (use loop)
         emotion_list = []
@@ -86,10 +87,9 @@ class Commander:
         faces = []
         while(self.imgLoader.isOpened()):
             i+=1
-            if i > 3002 :
-                break
-            if i %1000==1:
-                print( i//30,'second')
+
+            if i%500 == 0:
+                print(i,'th frame is proceed.')
 
             img = self.imgLoader.getThisFrame()
 
@@ -97,45 +97,37 @@ class Commander:
                 print('img == None')
                 break
 
-            if i % 30 == 1 : #1frame per 1 second.#True:##i>2500 and i%2 ==1:
-                 preds = [0, 0, 0, 0, 0 ,0 ,0]
+            if i%use_i_th_frame==0:#per i th frame
+                 preds = [[0, 0, 0, 0, 0 ,0 ,0]]
                  preds, faces = self.oracle.predict_and_return_others(img)
-                 for each in preds:
-                     emotion_list.append(each)
-                 print(np.array(emotion_list).shape)
 
-            if len(faces) != 0:
-                self.oracle.just_drow(img, faces, preds)#must divide this into class
 
-            cv2.imshow("image", img)
-            cv2.waitKey(15)#pause for 0.010 second 1000:1s = 1000/30=0.33 : 1f
+                 pred_array = np.array(preds)
+                 pred_array = np.transpose(pred_array)
+                 pred_emotion_average_list = [np.average(each) for each in pred_array]
+                 pred_array = np.transpose(pred_emotion_average_list)
 
+                 #print(pred_array)
+                 if len(pred_array) != 0:
+                     emotion_list.append(pred_array)
+            
+        #print('start making json')
         emotion_array = np.array(emotion_list)
-        print(emotion_array.shape)
-        emotion_array = np.transpose(emotion_array)
-        print(emotion_array.shape)
-        emotion_average_list = [np.average(each) for each in emotion_array]
-        print(len(emotion_average_list))
-        print(np.array(emotion_average_list).shape)
 
+        emotion_array = np.transpose(emotion_array)
+
+        emotion_average_list = [np.average(each) for each in emotion_array]
+        #print( len(emotion_average_list) )
         EMOTIONS = ["angry","disgust","scared", "happy", "sad", "surprised","neutral"]
-        emotion_dict_list = []
+        emotion_dict_list = []#dict()
         emotion_dict = dict()
-        for j in range(len(emotion_average_list)):
+        for j in range(len(emotion_average_list)):#(7):
             emotion_dict[ EMOTIONS[j] ] = emotion_average_list[j]
             emotion_dict_list.append( { "label":EMOTIONS[j], "value":emotion_average_list[j] } )
 
-        print(emotion_dict_list)
-        print('#############')
-        with open('video_data.json', 'w') as f:
-            dumped = json.dumps(str(emotion_dict_list))[1:-1]
-            dumped = dumped.replace("'", '"')
-            f.write( dumped )
-
-        print('finished')
-        cv2.destroyAllWindows()
-
-        return emotion_list
+        dumped = json.dumps(str(emotion_dict_list))[1:-1]
+        dumped = dumped.replace("'", '"')
+        return dumped
 
 
 
