@@ -1,6 +1,7 @@
 from django.shortcuts import render ,get_object_or_404,redirect
 from django.http import HttpResponse
 import sys
+import json #add 0516
 
 # Create your views here.
 from .models import Comment
@@ -8,6 +9,8 @@ from .models import Video
 from .forms import PostForm
 from .models import ReplyData
 from .models import TimeLog
+from .models import PieChart
+from django.utils.safestring import SafeString
 
 import os
 import datetime, dateutil.parser
@@ -338,6 +341,8 @@ def crtdetail(request, video):
 
 
 def user(request):
+   video_id = 1
+   logs = TimeLog.objects.filter()
+   poll_results = PieChart.objects.get(video_id=video_id)
 
-	logs = TimeLog.objects.filter()
-	return render(request, "yougam/user.html", {"logs": logs})
+   return render(request, "yougam/user.html", {"logs": logs, "json" : SafeString(poll_results.json_data)})

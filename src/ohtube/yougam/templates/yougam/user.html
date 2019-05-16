@@ -14,6 +14,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+
 <style>
 section {
   width: 90%;
@@ -41,10 +42,10 @@ section {
 
 
             <div class="robot slideInUp animated">
-                <div class="tooltip bg" style="font-size:15px; padding-top:10px;"> 웹캠 켜서 표정 제공하기 !</div>
+                <div class="tooltip bg" style="font-size:12px; padding-top:10px; text-align:center"> 웹캠 켜서 표정 제공하기!</div>
 
-                <a class="bg" style="padding-top:40px; color:white">
-                    ON AIR
+                <a class="bg" style="padding-top:25px; color:white">
+                    OFF
                 </a>
 
                 <div class="wave"></div>
@@ -80,7 +81,7 @@ section {
                       <div class="box">
 
                           <div style="height:40px; margin: 0 auto; padding-top: 10px;text-align:center; width:100%;">
-                              <h4> 영상 속 감성 타임로그 </h4>
+                              <h5> 영상 속 감성 타임로그 </h5>
                           </div>
 
                               <div class = "timelog" >
@@ -111,8 +112,90 @@ section {
                        </div>
 
 
-                      <div  class ="box" style="margin-top:20px; background-color: yellow;">
-                         <p>전체 영상 감성 분석 결과 시각화 </p>
+                      <div  class ="box" style="margin-top:20px;">
+
+                            <script src="https://d3js.org/d3.v5.min.js"></script>
+
+                            <div id="pie"></div>
+
+                            <script>
+
+                                const width = 300;
+                                const height = 300;
+                                const colorData = ["#A64E6E", "#F2BB77", "#F2A25C", "#FFE2DF", "#FFC001", "#FF6F61", "#F8A39D", "#81894E"];
+
+                                const data = {{ json }}
+
+                                const arc = d3.arc().innerRadius(80).outerRadius(Math.min(width, height) / 2);
+
+                                const arcLabel = (() => {
+                                  const radius = Math.min(width, height) / 2 * 0.8;
+                                  return d3.arc().innerRadius(radius).outerRadius(radius);
+                                })();
+
+
+                                const pie = d3.pie()
+
+                                  .sort((a, b) => b.value - a.value)
+                                  .value(d => d.value);
+
+
+                                const arcs = pie(data);
+
+                                const svg = d3.select('#pie').append('svg').style('width', width).style('height', height)
+                                  .attr('text-anchor', 'middle')
+
+                                  .style('font-size', '12px sans-serif');
+
+                                const g = svg.append('g')
+                                  .attr('transform', `translate(${width/2}, ${height/2})`);
+
+
+                                g.selectAll('path')
+                                  .data(arcs)
+                                  .enter().append('path')
+
+                                    .style("fill", function(d, i) {
+                                            return colorData[i];
+                                        })
+
+                                    .attr('stroke', 'white')
+                                    .attr('d', arc)
+                                    .append('title')
+                                    .text(d => `${d.data.label}: ${d.data.value}`);
+
+
+
+                                const text = g.selectAll('text')
+                                  .data(arcs)
+                                  .enter().append('text')
+                                    .attr('transform', d => `translate(${arcLabel.centroid(d)})`)
+                                    .attr('dy', '0.35em');
+
+
+                                text.append('tspan')
+                                  .attr('x', 0)
+                                  .attr('y', '-0.7em')
+                                  .style('font-weight', 'bold')
+                                  .text(d => d.data.label)
+
+
+                                text.filter(d => (d.endAngle - d.startAngle > 0.25)).append('tspan')
+                                  .attr('x', 0)
+                                  .attr('y', '0.7em')
+                                  .attr('fill-opacity', 0.7)
+                                  .text(function(d, i) {
+                                            return  d.endAngle-d.startAngle > 0.2 ?
+                                                     " (" + Math.round(1000*(d.endAngle-d.startAngle)/(Math.PI*2))/10 + "%)" : ""
+                                        });
+
+
+                                svg.node();
+
+
+
+                            </script>
+
                       </div>
 
                     </div>

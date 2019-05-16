@@ -64,3 +64,14 @@ class TimeLog(models.Model):
 
    def generate(self):
       self.save()
+
+
+class PieChart(models.Model):
+	video_id = models.CharField(max_length = 100)
+	json_data = models.CharField(max_length = 400)
+
+	def __str__(self):
+		return "video_id: {}".format(self.video_id)
+
+	def generate(self):
+		self.save()
