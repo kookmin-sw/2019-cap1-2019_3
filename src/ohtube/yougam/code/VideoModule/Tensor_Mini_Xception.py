@@ -9,6 +9,25 @@ from Oracle import Oracle
 from keras.models import load_model
 from keras.preprocessing.image import img_to_array
 
+
+def search(dirname):
+    filenames = os.listdir(dirname)
+    result = []
+    for filename in filenames:
+        full_filename = os.path.join(dirname, filename)
+        result.append(full_filename)
+    return result
+
+def make_relative_to_absolute(R_path):
+    result = os.path.dirname( os.path.abspath( __file__ ) )
+    my_dirs = R_path.split('/')
+    for each in my_dirs:
+        if each == '.':
+            continue
+        result = os.path.join(result, each)
+
+    return result
+
 class Tensor_Mini_Xception(Oracle):
     def __init__(self, modelPath, faceClassifierPath):
         self.model = load_model(modelPath)
