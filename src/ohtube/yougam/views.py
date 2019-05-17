@@ -274,7 +274,7 @@ def crtdetail(request, video):
 
         commander = Commander()
         dumped, max_emotion_list, i_list, face_list = commander.for_youtube_video_TimeLine(use_i_th_frame, video_url)
-        will_inserted = PieChart(video_id = video_url, json_data = dumped)
+        will_inserted = PieChart(video_id = str(video), json_data = dumped)
 
         img_path_list = []
         for j in range(len(i_list)):
@@ -316,12 +316,10 @@ def crtdetail(request, video):
         print("data already exist")
         pass
 
+    return render(request, "yougam/index.html")
+    #return HttpResponse("")
 
 
-
-
-
-    return HttpResponse("")
 def user(request):
    video_id = 1
    logs = TimeLog.objects.filter()

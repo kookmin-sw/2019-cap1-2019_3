@@ -30,8 +30,10 @@ def make_relative_to_absolute(R_path):
 
 class Tensor_Mini_Xception(Oracle):
     def __init__(self, modelPath, faceClassifierPath):
-        self.model = load_model(modelPath)
-        self.face_cascade = cv2.CascadeClassifier(faceClassifierPath)
+        self.model = load_model(make_relative_to_absolute(modelPath))
+        self.face_cascade = cv2.CascadeClassifier(make_relative_to_absolute(faceClassifierPath))
+        #self.face_cascade = cv2.CascadeClassifier(faceClassifierPath)#use this at window
+        #self.face_cascade = cv2.CascadeClassifier('C:\go\haarcascade_frontalface_default.xml')#in my pc
 
     def predict(self, image):
         gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
