@@ -362,6 +362,8 @@ def sending(request):#웹캠 전달 받은 것 처리
 
         commander = Commander()
         dumped = commander.for_web_cam(use_i_th_frame, save_path)
+        os.remove(save_path)
+
         print(dumped)
 
 

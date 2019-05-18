@@ -75,6 +75,9 @@ class Commander:
         i=0
         print("start extracting")
         faces = []
+        drow_this_faces = []
+        preds = [[0, 0, 0, 0, 0 ,0 ,0]]
+        drow_this_preds = [[]]
         while(self.imgLoader.isOpened()):
             i+=1
 
@@ -88,7 +91,7 @@ class Commander:
                 break
 
             if i%use_i_th_frame==0:#per i th frame
-                 preds = [[0, 0, 0, 0, 0 ,0 ,0]]
+                 #preds = [[0, 0, 0, 0, 0 ,0 ,0]]
                  preds, faces = self.oracle.predict_and_return_others(img)
 
                  pred_array = np.array(preds)
@@ -98,6 +101,15 @@ class Commander:
 
                  if len(pred_array) != 0:
                      emotion_list.append(pred_array)
+                     drow_this_faces = faces
+                     drow_this_preds = preds
+
+            #if len(faces) != 0:
+            self.oracle.just_drow(img, drow_this_faces, drow_this_preds)
+
+            cv2.imshow("image", img)
+            cv2.waitKey(35)#pause for 0.010 second 1000:1s = 1000/30=0.33 : 1f
+        cv2.destroyAllWindows()
             
         #print('start making json')
         emotion_array = np.array(emotion_list)
@@ -115,6 +127,9 @@ class Commander:
 
         dumped = json.dumps(str(emotion_dict_list))[1:-1]
         dumped = dumped.replace("'", '"')
+
+        self.imgLoader.release()
+
         return dumped
 
 

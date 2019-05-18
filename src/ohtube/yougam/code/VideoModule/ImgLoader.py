@@ -20,7 +20,8 @@ class ImgLoader:
     def isOpened(self):
         return self.vidcap.isOpened()
 
-
+    def release(self):
+        return self.vidcap.release()
 
 
     
