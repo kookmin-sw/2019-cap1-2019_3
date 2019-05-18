@@ -256,6 +256,8 @@ def userdetail(request, video):
    return render(request, "yougam/user.html", {"count":loaded_count_list,"cmts":comments,"iframe_url":iframe_url})
 
 def crtdetail(request, video):
+    #이 아래 코드가 유튜브 동영상 분석 결과를 저장하는 코드입니다.
+
     from PIL import Image
     import cv2
     video_instance = Video.objects.get(pk=video)
@@ -263,7 +265,7 @@ def crtdetail(request, video):
     video_url = video_instance.url
     use_i_th_frame = 300 #30==1sec
 
-    data = PieChart.objects.filter(video_id=video_url)
+    data = PieChart.objects.filter(video_id=video)#video_url) #url로 하고 싶으면 이걸 사용.
     if data.count() < 1:
         print("There are no data. start task")
         current_path = os.path.dirname( os.path.abspath( __file__ ) )
@@ -279,12 +281,13 @@ def crtdetail(request, video):
         img_path_list = []
         for j in range(len(i_list)):
             fileName = str(video) + "_" + str(i_list[j]) + ".png"
-            save_dir = os.path.abspath(os.path.join(current_path, 'images'))
+            save_dir = os.path.abspath(os.path.join(current_path, os.pardir))
+            save_dir = os.path.abspath(os.path.join(save_dir, 'media'))
             save_dir = os.path.abspath(os.path.join(save_dir, fileName))
             destRGB = cv2.cvtColor(face_list[j], cv2.COLOR_BGR2RGB)
             pic_file = Image.fromarray(destRGB, 'RGB')
             pic_file.save(save_dir)
-            img_path_list.append( './images/' +fileName )
+            img_path_list.append( fileName )
 
         timeLog_list = []
         for j in range(len(i_list)):
@@ -315,9 +318,7 @@ def crtdetail(request, video):
     else: #already exist
         print("data already exist")
         pass
-
-    return render(request, "yougam/index.html")
-    #return HttpResponse("")
+    return HttpResponse("")#빈결과 리턴
 
 
 def user(request):
