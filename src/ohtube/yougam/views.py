@@ -256,6 +256,11 @@ def userdetail(request, video):
    return render(request, "yougam/user.html", {"count":loaded_count_list,"cmts":comments,"iframe_url":iframe_url})
 
 def crtdetail(request, video):
+    return render(request, 'yougam/webcam.html')# webcam 페이지로 연결해야 하는 경우
+
+
+
+'''
     #이 아래 코드가 유튜브 동영상 분석 결과를 저장하는 코드입니다.
 
     from PIL import Image
@@ -318,7 +323,57 @@ def crtdetail(request, video):
     else: #already exist
         print("data already exist")
         pass
-    return HttpResponse("")#빈결과 리턴
+
+
+
+    video_id = video
+
+    video_instance = Video.objects.get(pk=video_id)
+    video_url = video_instance.url
+
+    logs = TimeLog.objects.filter(Url=video_url)
+    poll_results = PieChart.objects.get(video_id=video_id)
+
+    return render(request, "yougam/user.html", {"logs": logs, "json" : SafeString(poll_results.json_data)})
+
+#동영상 코드 여기까지 입니다.
+'''
+
+
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
+def sending(request):#웹캠 전달 받은 것 처리
+    if request.method == 'POST':
+        #경로설정
+        current_path = os.path.dirname( os.path.abspath( __file__ ) )
+        code_path = os.path.abspath(os.path.join(current_path, 'code'))
+        videoModule_path = os.path.abspath(os.path.join(code_path, 'VideoModule'))
+        sys.path.append(videoModule_path)
+
+        file_path = 'write.mp4'
+        save_path = os.path.abspath(os.path.join(current_path, file_path))
+        with open(save_path, 'wb') as f:##경로 지정 하고, 이름 유니크하게 바꿔야.
+            f.write(request.body)
+
+        #분석 및 저장
+        use_i_th_frame = 9 #30==1sec
+
+        from Commander import Commander
+
+        commander = Commander()
+        dumped = commander.for_web_cam(use_i_th_frame, save_path)
+        print(dumped)
+
+
+        #html에 그래프 띄우기
+
+
+    else:
+        return HttpResponse("Something Wrong in file uploading")
+
+    context = {}
+    return HttpResponse(json.dumps(context), "application/json")
+
 
 
 def user(request):
