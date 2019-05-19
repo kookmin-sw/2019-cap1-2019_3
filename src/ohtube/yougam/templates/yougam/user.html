@@ -40,19 +40,34 @@ section {
     <div class = "row" style="height:100px;">
           <div class="col" style="text-align: center;">
 
+                <link rel="stylesheet" href="{% static 'css/webcam.css' %}">
 
             <div class="robot slideInUp animated">
                 <div class="tooltip bg" style="font-size:12px; padding-top:10px; text-align:center"> 웹캠 켜서 표정 제공하기!</div>
 
-                <a class="bg" style="padding-top:25px; color:white">
-                    OFF
+
+<!--                중단하기 눌렀을때 글자 다시 off 로 변경요망 -->
+                <a class="bg" style="padding-top:25px; color:white" onclick="toggle()">
+                    <p id="onoff">OFF</p>
                 </a>
+
+
 
                 <div class="wave"></div>
             </div>
 
 
+
           </div>
+
+
+        <script>
+
+            function toggle() {
+                 $("#panel").slideToggle("slow");
+            }
+
+        </script>
 
 
 
@@ -78,9 +93,130 @@ section {
                      <!-- 영상 분석 모듈이 들어갈 부분 --->
                     <div class="row">
 
-                      <div class="box">
 
+                          <!--                          웹캠 슬라이딩시 들어갈 부분. 타임로그 부분을 살짝 밀어낸다. -->
+                          <div class="box" style="background-color:pink;">
+
+                               <div id="panel">
+
+
+                                   <div style=" width:100%; text-align:center; margin: 0 auto;">
+                                        <button  id="request" class="btn btn-outline-primary" onclick="requestVideo()" style="float:left;" >
+                                            웹캠켜기</button>
+                                        <button type="submit" id="stop" class="btn btn-outline-danger" onclick="stopRecording()" style="float:left;" >
+                                            녹화완료</button>
+
+                                   </div>
+
+
+                                   <div style="float:left;">
+                                       <video autoplay="true" id="video">
+
+                                       </video>
+
+                                        <p id="tag" style="display:none"> 촬영이 종료되었습니다. </p>
+                                   </div>
+
+                                </div>
+
+
+<!--                                웹캠 영상 보내기-->
+                                <script>
+
+                                var localstream;
+
+
+                                function requestVideo() {
+                                    $(".bg p").text("ON");
+                                    tag.style.display = 'none';
+
+                                    if (navigator.mediaDevices.getUserMedia) {
+                                        var video = document.querySelector("#video");
+                                        navigator.mediaDevices.getUserMedia({video: true})
+                                      .then(function(stream) {
+                                        video.srcObject = stream;
+                                        localstream = stream;
+
+                                        console.log("start");
+
+                                        recorder = new MediaRecorder(video.srcObject);
+                                        recorder.start();
+
+                                        console.log("start recoding");
+                                      })
+                                      .catch(function(err0r) {
+                                        console.log("Something went wrong!");
+                                      });
+                                    }
+                                }
+
+
+                                function stopRecording() {
+                                  recorder.ondataavailable = e => {
+                                    console.log(e);
+
+<!--                                    var a = document.createElement('a'),-->
+
+<!--                                    li = document.createElement('li');-->
+<!--                                    a.download = ['test.webm'].join('');-->
+
+
+<!--                                    a.href = URL.createObjectURL(e.data);-->
+<!--                                    console.log(a.href);-->
+<!--                                    test = URL.createObjectURL(e.data);-->
+<!--                                    a.textContent = a.download;-->
+
+<!--                                    li.appendChild(a);-->
+<!--                                    ul.appendChild(li);-->
+<!--                                    console.log(e.data);-->
+
+                                    uploadBlob(e.data);
+                                  };
+
+                                  recorder.stop();
+                                  console.log("recoding stop");
+                                  localstream.getTracks()[0].stop();
+
+                                  console.log("webcam stop");
+                                  tag.style.display = 'block';
+                                  $(".bg p").text("OFF");
+                                }
+
+
+
+                                function uploadBlob(blob) {
+                                    var form = new FormData();
+                                    form.append("video", blob);
+                                    console.log(blob);
+                                    console.log(form);
+
+                                    $.ajax({
+                                        url: "/yougam/sending/",
+                                            type: 'POST',
+                                            data: blob,
+                                            processData: false,
+                                            contentType: false,
+                                            success: function(response) {
+                                            alert('성공적으로 등록되었습니다.');
+                                        },
+                                        error: function(jqXHR, textStatus, errorMessage) {
+                                            alert('Error:' + JSON.stringify(errorMessage));
+                                        }
+                                    });
+
+
+
+
+                                }
+
+                            </script>
+
+
+
+
+<!--                            time log start-->
                           <div style="height:40px; margin: 0 auto; padding-top: 10px;text-align:center; width:100%;">
+
                               <h5> 영상 속 감성 타임로그 </h5>
                           </div>
 

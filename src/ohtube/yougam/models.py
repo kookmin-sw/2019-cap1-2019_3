@@ -75,3 +75,16 @@ class PieChart(models.Model):
 
 	def generate(self):
 		self.save()
+
+
+class WebCam(models.Model):
+	video_id = models.CharField(max_length=100)
+	json_data = models.CharField(max_length=400)
+	video_path = models.CharField(max_length=400, default='SOME STRING')
+
+	def __str__(self):
+		return "video_id: {}".format(self.video_id)
+
+	def generate(self):
+		self.save()
+

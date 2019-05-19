@@ -255,12 +255,9 @@ def userdetail(request, video):
    comments = Comment.objects.filter(video=video)
    return render(request, "yougam/user.html", {"count":loaded_count_list,"cmts":comments,"iframe_url":iframe_url})
 
+
 def crtdetail(request, video):
-    return render(request, 'yougam/webcam.html')# webcam 페이지로 연결해야 하는 경우
 
-
-
-'''
     #이 아래 코드가 유튜브 동영상 분석 결과를 저장하는 코드입니다.
 
     from PIL import Image
@@ -271,6 +268,7 @@ def crtdetail(request, video):
     use_i_th_frame = 300 #30==1sec
 
     data = PieChart.objects.filter(video_id=video)#video_url) #url로 하고 싶으면 이걸 사용.
+
     if data.count() < 1:
         print("There are no data. start task")
         current_path = os.path.dirname( os.path.abspath( __file__ ) )
@@ -324,8 +322,6 @@ def crtdetail(request, video):
         print("data already exist")
         pass
 
-
-
     video_id = video
 
     video_instance = Video.objects.get(pk=video_id)
@@ -337,12 +333,13 @@ def crtdetail(request, video):
     return render(request, "yougam/user.html", {"logs": logs, "json" : SafeString(poll_results.json_data)})
 
 #동영상 코드 여기까지 입니다.
-'''
+
 
 
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
-def sending(request):#웹캠 전달 받은 것 처리
+
+def sending(request, video): #웹캠 전달 받은 것 처리
     if request.method == 'POST':
         #경로설정
         current_path = os.path.dirname( os.path.abspath( __file__ ) )
@@ -362,12 +359,16 @@ def sending(request):#웹캠 전달 받은 것 처리
 
         commander = Commander()
         dumped = commander.for_web_cam(use_i_th_frame, save_path)
-        os.remove(save_path)
+        #os.remove(save_path)
 
         print(dumped)
 
 
-        #html에 그래프 띄우기
+        will_inserted = PieChart(video_id=str(video), json_data=dumped, video_path=save_path)
+        will_inserted.save()
+
+       # html에 그래프 띄우기
+       # 크리에이터 페이지에 그래프 띄울 json 전달
 
 
     else:
@@ -378,9 +379,9 @@ def sending(request):#웹캠 전달 받은 것 처리
 
 
 
-def user(request):
-   video_id = 1
-   logs = TimeLog.objects.filter()
-   poll_results = PieChart.objects.get(video_id=video_id)
-
-   return render(request, "yougam/user.html", {"logs": logs, "json" : SafeString(poll_results.json_data)})
+# def user(request):
+#    video_id = 1
+#    logs = TimeLog.objects.filter()
+#    poll_results = PieChart.objects.get(video_id=video_id)
+#
+#    return render(request, "yougam/user.html", {"logs": logs, "json" : SafeString(poll_results.json_data)})
