@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0ba222c7-fb2d-4598-a781-f07b6976e1e2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yougam/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/yougam/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yougam/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/yougam/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yougam/static/css/webcam_chart.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yougam/templates/yougam/webcam_chart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yougam/templates/yougam/user.html" beforeDir="false" afterPath="$PROJECT_DIR$/yougam/templates/yougam/user.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yougam/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/yougam/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yougam/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/yougam/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,8 +20,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/yougam/templates/yougam/user.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="223" column="92" lean-forward="true" selection-start-line="223" selection-start-column="29" selection-end-line="223" selection-end-column="92" />
+            <state relative-caret-position="215">
+              <caret line="303" column="47" lean-forward="true" selection-start-line="303" selection-start-column="47" selection-end-line="303" selection-end-column="47" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#header#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#header#0;n#html#0;n#!!top" expanded="true" />
@@ -41,20 +42,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/yougam/templates/yougam/webcam_chart.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3420">
-              <caret line="229" column="2" selection-start-line="229" selection-start-column="2" selection-end-line="229" selection-end-column="2" />
+            <state relative-caret-position="30">
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/yougam/urls.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="180">
-              <caret line="12" column="67" selection-start-line="12" selection-start-column="67" selection-end-line="12" selection-end-column="67" />
+              <caret line="12" column="63" selection-start-line="12" selection-start-column="63" selection-end-line="12" selection-end-column="63" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -65,8 +66,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/yougam/static/css/webcam_chart.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1110">
-              <caret line="74" column="1" selection-start-line="74" selection-start-column="1" selection-end-line="74" selection-end-column="1" />
+            <state relative-caret-position="180">
+              <caret line="12" column="13" selection-end-line="81" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -92,8 +93,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/yougam/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="366" column="28" lean-forward="true" selection-start-line="366" selection-start-column="28" selection-end-line="366" selection-end-column="28" />
+            <state relative-caret-position="206">
+              <caret line="382" lean-forward="true" selection-start-line="382" selection-end-line="382" />
               <folding>
                 <element signature="e#0#63#0" expanded="true" />
               </folding>
@@ -113,8 +114,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/yougam/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
+            <state relative-caret-position="311">
+              <caret line="90" lean-forward="true" selection-start-line="90" selection-end-line="90" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -148,6 +149,10 @@
     <findStrings>
       <find>image</find>
       <find>svg</find>
+      <find>color</find>
+      <find>fill</find>
+      <find>#</find>
+      <find>language</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -166,12 +171,12 @@
         <option value="$PROJECT_DIR$/yougam/templates/yougam/webcam.html" />
         <option value="$PROJECT_DIR$/yougam/static/css/webcam.css" />
         <option value="$PROJECT_DIR$/yougam/admin.py" />
-        <option value="$PROJECT_DIR$/yougam/templates/yougam/user.html" />
-        <option value="$PROJECT_DIR$/yougam/views.py" />
         <option value="$PROJECT_DIR$/yougam/models.py" />
+        <option value="$PROJECT_DIR$/yougam/urls.py" />
+        <option value="$PROJECT_DIR$/yougam/views.py" />
+        <option value="$PROJECT_DIR$/yougam/templates/yougam/user.html" />
         <option value="$PROJECT_DIR$/yougam/static/css/webcam_chart.css" />
         <option value="$PROJECT_DIR$/yougam/templates/yougam/webcam_chart.html" />
-        <option value="$PROJECT_DIR$/yougam/urls.py" />
       </list>
     </option>
   </component>
@@ -397,35 +402,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/yougam/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="366" column="28" lean-forward="true" selection-start-line="366" selection-start-column="28" selection-end-line="366" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yougam/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/yougam/tests.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yougam/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/yougam/templates/yougam/cre.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -451,10 +429,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/yougam/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="63" selection-start-line="12" selection-start-column="63" selection-end-line="12" selection-end-column="63" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yougam/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="382" lean-forward="true" selection-start-line="382" selection-end-line="382" />
+          <folding>
+            <element signature="e#0#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yougam/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yougam/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="90" lean-forward="true" selection-start-line="90" selection-end-line="90" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yougam/static/css/webcam_chart.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="13" selection-end-line="81" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/yougam/templates/yougam/user.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="223" column="92" lean-forward="true" selection-start-line="223" selection-start-column="29" selection-end-line="223" selection-end-column="92" />
+        <state relative-caret-position="215">
+          <caret line="303" column="47" lean-forward="true" selection-start-line="303" selection-start-column="47" selection-end-line="303" selection-end-column="47" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#header#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#header#0;n#html#0;n#!!top" expanded="true" />
@@ -474,27 +496,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/yougam/static/css/webcam_chart.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1110">
-          <caret line="74" column="1" selection-start-line="74" selection-start-column="1" selection-end-line="74" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/yougam/templates/yougam/webcam_chart.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3420">
-          <caret line="229" column="2" selection-start-line="229" selection-start-column="2" selection-end-line="229" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yougam/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="67" selection-start-line="12" selection-start-column="67" selection-end-line="12" selection-end-column="67" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="30">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
         </state>
       </provider>
     </entry>

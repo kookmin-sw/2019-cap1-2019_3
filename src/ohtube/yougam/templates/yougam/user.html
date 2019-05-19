@@ -154,22 +154,6 @@ section {
                                 function stopRecording() {
                                   recorder.ondataavailable = e => {
                                     console.log(e);
-
-<!--                                    var a = document.createElement('a'),-->
-
-<!--                                    li = document.createElement('li');-->
-<!--                                    a.download = ['test.webm'].join('');-->
-
-
-<!--                                    a.href = URL.createObjectURL(e.data);-->
-<!--                                    console.log(a.href);-->
-<!--                                    test = URL.createObjectURL(e.data);-->
-<!--                                    a.textContent = a.download;-->
-
-<!--                                    li.appendChild(a);-->
-<!--                                    ul.appendChild(li);-->
-<!--                                    console.log(e.data);-->
-
                                     uploadBlob(e.data);
                                   };
 

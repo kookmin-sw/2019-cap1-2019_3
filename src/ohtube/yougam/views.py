@@ -378,6 +378,8 @@ def sending(request, video): #웹캠 전달 받은 것 처리
     return HttpResponse(json.dumps(context), "application/json")
 
 
+def webcam_chart(request):
+   return render(request, "yougam/webcam_chart.html")
 
 # def user(request):
 #    video_id = 1

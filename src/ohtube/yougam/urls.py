@@ -10,6 +10,7 @@ urlpatterns = [
     path('', views.post, name = "index"),
     path('<str:video>/change/<int:cid>/<str:senti>', views.change, name='change'),
     path('user/',views.user, name='user'),
+    path('webcam_chart/',views.webcam_chart, name='webcam_chart'),
     path('<int:video>/user/', views.userdetail, name='userdetail'),
     path('youtube_type/<int:video>/creator/', views.crtdetail, name='crtdetail'),
     url(r'^sending/$', views.sending, name='sending'),    #webcam json message
