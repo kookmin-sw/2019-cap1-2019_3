@@ -113,7 +113,13 @@ text.source {
 
     const colorData = ["#A64E6E", "#F2BB77", "#F2A25C", "#FFE2DF", "#FFC001", "#FF6F61", "#F8A39D", "#81894E"];
 
-    const sample = [{label: "zz", value: 0.024862127}, {label: "disgust", value: 3.4155557e-05}, {label: "scared", value: 0.02009794}, {label: "happy", value: 0.3764441}, {label: "sad", value: 0.0150852045}, {label: "surprised", value: 0.009195391}, {label: "neutral", "value": 0.55428106}];
+    const sample = [{label: "화남", value: 0.024862127},
+    {label: "혐오", value: 3.4155557e-05},
+    {label: "놀람", value: 0.02009794},
+    {label: "행복", value: 0.3764441},
+    {label: "슬픔", value: 0.0150852045},
+    {label: "겁먹은", value: 0.009195391},
+    {label: "중립", "value": 0.55428106}];
 <!--    const data = {{ json }}-->
 
     const svg = d3.select('svg');
@@ -275,7 +281,7 @@ text.source {
       .attr('x', width / 2 + margin)
       .attr('y', 40)
       .attr('text-anchor', 'middle')
-      .text('{ Webcam.id } 시청자 웹캠을 통한 감성 분석 결과')
+      .text('1번 시청자의 웹캠 감성 분석 결과')
 
     svg.append('text')
       .attr('class', 'source')

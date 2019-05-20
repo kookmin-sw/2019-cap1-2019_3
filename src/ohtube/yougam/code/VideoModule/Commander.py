@@ -68,7 +68,7 @@ class Commander:
     def for_web_cam(self, use_i_th_frame, file_path):
         #registing
         print("start registing")
-        self.imgLoader.registVideo( make_relative_to_absolute(file_path) )
+        self.imgLoader.registVideo( file_path )
 
         #process (use loop)
         emotion_list = []

@@ -95,7 +95,7 @@ section {
 
 
                           <!--                          웹캠 슬라이딩시 들어갈 부분. 타임로그 부분을 살짝 밀어낸다. -->
-                          <div class="box" style="background-color:pink;">
+                          <div class="box" style="background-color:white">
 
                                <div id="panel">
 
@@ -216,7 +216,39 @@ section {
 
                                                         <img src="/yougam/media/{{i.img_path }}">
 
-                                                        <h4>{{ i.top_sentiment}}</h4>  {{ i.time }}
+                                                        <h4>
+
+                                                                {% if i.top_sentiment == "happy" %}
+                                                                    행복
+                                                                {% endif %}
+
+                                                                {% if i.top_sentiment == "sad" %}
+                                                                    슬픔
+                                                                {% endif %}
+
+                                                                {% if i.top_sentiment == "neutral" %}
+                                                                    중립
+                                                                {% endif %}
+
+                                                                {% if i.top_sentiment == "angry" %}
+                                                                    화남
+                                                                {% endif %}
+
+                                                                {% if i.top_sentiment == "scared" %}
+                                                                    겁먹은
+                                                                {% endif %}
+
+                                                                {% if i.top_sentiment == "surprised" %}
+                                                                    놀람
+                                                                {% endif %}
+
+                                                                {% if i.top_sentiment == "disgust" %}
+                                                                    혐오
+                                                                {% endif %}
+
+
+
+                                                        </h4>  {{ i.time }}
 
 
                                                         <br>
@@ -244,7 +276,15 @@ section {
                                 const height = 300;
                                 const colorData = ["#A64E6E", "#F2BB77", "#F2A25C", "#FFE2DF", "#FFC001", "#FF6F61", "#F8A39D", "#81894E"];
 
-                                const data = {{ json }}
+                                const data = {{ json }};
+
+                                data[0].label = "화남";
+                                data[1].label = "혐오";
+                                data[2].label = "놀람";
+                                data[3].label = "행복";
+                                data[4].label = "슬픔";
+                                data[5].label = "놀람";
+                                data[6].label = "중립";
 
                                 const arc = d3.arc().innerRadius(80).outerRadius(Math.min(width, height) / 2);
 

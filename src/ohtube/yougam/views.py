@@ -256,90 +256,92 @@ def userdetail(request, video):
    return render(request, "yougam/user.html", {"count":loaded_count_list,"cmts":comments,"iframe_url":iframe_url})
 
 
-def crtdetail(request, video):
+def crtdetail(request,video):
+   return render(request, "yougam/user.html")
 
-    #이 아래 코드가 유튜브 동영상 분석 결과를 저장하는 코드입니다.
+'''
+   #이 아래 코드가 유튜브 동영상 분석 결과를 저장하는 코드입니다.
 
-    from PIL import Image
-    import cv2
-    video_instance = Video.objects.get(pk=video)
+   from PIL import Image
+   import cv2
+   video_instance = Video.objects.get(pk=video)
 
-    video_url = video_instance.url
-    use_i_th_frame = 300 #30==1sec
+   video_url = video_instance.url
+   use_i_th_frame = 300 #30==1sec
 
-    data = PieChart.objects.filter(video_id=video)#video_url) #url로 하고 싶으면 이걸 사용.
+   data = PieChart.objects.filter(video_id=video)#video_url) #url로 하고 싶으면 이걸 사용.
 
-    if data.count() < 1:
-        print("There are no data. start task")
-        current_path = os.path.dirname( os.path.abspath( __file__ ) )
-        code_path = os.path.abspath(os.path.join(current_path, 'code'))
-        videoModule_path = os.path.abspath(os.path.join(code_path, 'VideoModule'))
-        sys.path.append(videoModule_path)
-        from Commander import Commander
+   if data.count() < 1:
+       print("There are no data. start task")
+       current_path = os.path.dirname( os.path.abspath( __file__ ) )
+       code_path = os.path.abspath(os.path.join(current_path, 'code'))
+       videoModule_path = os.path.abspath(os.path.join(code_path, 'VideoModule'))
+       sys.path.append(videoModule_path)
+       from Commander import Commander
 
-        commander = Commander()
-        dumped, max_emotion_list, i_list, face_list = commander.for_youtube_video_TimeLine(use_i_th_frame, video_url)
-        will_inserted = PieChart(video_id = str(video), json_data = dumped)
+       commander = Commander()
+       dumped, max_emotion_list, i_list, face_list = commander.for_youtube_video_TimeLine(use_i_th_frame, video_url)
+       will_inserted = PieChart(video_id = str(video), json_data = dumped)
 
-        img_path_list = []
-        for j in range(len(i_list)):
-            fileName = str(video) + "_" + str(i_list[j]) + ".png"
-            save_dir = os.path.abspath(os.path.join(current_path, os.pardir))
-            save_dir = os.path.abspath(os.path.join(save_dir, 'media'))
-            save_dir = os.path.abspath(os.path.join(save_dir, fileName))
-            destRGB = cv2.cvtColor(face_list[j], cv2.COLOR_BGR2RGB)
-            pic_file = Image.fromarray(destRGB, 'RGB')
-            pic_file.save(save_dir)
-            img_path_list.append( fileName )
+       img_path_list = []
+       for j in range(len(i_list)):
+           fileName = str(video) + "_" + str(i_list[j]) + ".png"
+           save_dir = os.path.abspath(os.path.join(current_path, os.pardir))
+           save_dir = os.path.abspath(os.path.join(save_dir, 'media'))
+           save_dir = os.path.abspath(os.path.join(save_dir, fileName))
+           destRGB = cv2.cvtColor(face_list[j], cv2.COLOR_BGR2RGB)
+           pic_file = Image.fromarray(destRGB, 'RGB')
+           pic_file.save(save_dir)
+           img_path_list.append( fileName )
 
-        timeLog_list = []
-        for j in range(len(i_list)):
-            second = (i_list[j]//30)%60
-            minute = ((i_list[j]//30)//60 )%60
-            hour = ((i_list[j]//30)//60 )//60
+       timeLog_list = []
+       for j in range(len(i_list)):
+           second = (i_list[j]//30)%60
+           minute = ((i_list[j]//30)//60 )%60
+           hour = ((i_list[j]//30)//60 )//60
 
-            time_str = ""
-            if hour<10:
-                time_str += ('0' + str(hour))
-            else:
-                time_str += str(hour)
-            time_str += ":"
-            if minute<10:
-                time_str += ('0' + str(minute))
-            else:
-                time_str += str(minute)
-            time_str += ":"
-            if second<10:
-                time_str += ('0' + str(second))
-            else:
-                time_str += str(second)
-            timeLog_list.append( TimeLog(top_sentiment = max_emotion_list[j], url = video_url, time = time_str, img_path = img_path_list[j]) )
-        for j in range(len(i_list)):
-            timeLog_list[j].save()
-        will_inserted.save()
+           time_str = ""
+           if hour<10:
+               time_str += ('0' + str(hour))
+           else:
+               time_str += str(hour)
+           time_str += ":"
+           if minute<10:
+               time_str += ('0' + str(minute))
+           else:
+               time_str += str(minute)
+           time_str += ":"
+           if second<10:
+               time_str += ('0' + str(second))
+           else:
+               time_str += str(second)
+           timeLog_list.append( TimeLog(top_sentiment = max_emotion_list[j], url = video_url, time = time_str, img_path = img_path_list[j]) )
+       for j in range(len(i_list)):
+           timeLog_list[j].save()
+       will_inserted.save()
 
-    else: #already exist
-        print("data already exist")
-        pass
+   else: #already exist
+       print("data already exist")
+       pass
 
-    video_id = video
+   video_id = video
 
-    video_instance = Video.objects.get(pk=video_id)
-    video_url = video_instance.url
+   video_instance = Video.objects.get(pk=video_id)
+   video_url = video_instance.url
 
-    logs = TimeLog.objects.filter(Url=video_url)
-    poll_results = PieChart.objects.get(video_id=video_id)
+   logs = TimeLog.objects.filter(url=video_url)
+   poll_results = PieChart.objects.get(video_id=video_id)
 
-    return render(request, "yougam/user.html", {"logs": logs, "json" : SafeString(poll_results.json_data)})
+   return render(request, "yougam/user.html", {"logs": logs, "json" : SafeString(poll_results.json_data)})
 
 #동영상 코드 여기까지 입니다.
-
+'''
 
 
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 
-def sending(request, video): #웹캠 전달 받은 것 처리
+def sending(request): #웹캠 전달 받은 것 처리
     if request.method == 'POST':
         #경로설정
         current_path = os.path.dirname( os.path.abspath( __file__ ) )
@@ -348,9 +350,16 @@ def sending(request, video): #웹캠 전달 받은 것 처리
         sys.path.append(videoModule_path)
 
         file_path = 'write.mp4'
+
+        # 폴더 하나 써서 추가하기
         save_path = os.path.abspath(os.path.join(current_path, file_path))
+
+        print("경로")
+        print(save_path)
+
         with open(save_path, 'wb') as f:##경로 지정 하고, 이름 유니크하게 바꿔야.
             f.write(request.body)
+
 
         #분석 및 저장
         use_i_th_frame = 9 #30==1sec
@@ -364,8 +373,8 @@ def sending(request, video): #웹캠 전달 받은 것 처리
         print(dumped)
 
 
-        will_inserted = PieChart(video_id=str(video), json_data=dumped, video_path=save_path)
-        will_inserted.save()
+        # will_inserted = PieChart(video_id=str(video), json_data=dumped, video_path=save_path)
+        # will_inserted.save()
 
        # html에 그래프 띄우기
        # 크리에이터 페이지에 그래프 띄울 json 전달
