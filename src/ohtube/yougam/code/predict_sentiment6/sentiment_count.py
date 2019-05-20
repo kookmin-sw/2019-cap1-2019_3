@@ -34,16 +34,30 @@ def predict_senti6(comment_list):
 
 
   for comment_key in comment_list:
+
+      emoticon_list = ["❤️","🧡","💛","💚","💙","💞","💓","💜","❣️","💕","💘","💗","💓","💝","💟","😻","💔","👍","👎","😘","😍","😃","😄","😁","😆","☺️","😊","😚","🤗","😭","😢","😤","😠","😡","🤬","😳","🤔"]
+      emotion_list = [" love you."," love you."," love you."," love you."," love you."," love you."," love you."," love you."," love you."," love you."," love you."," love you."," love you."," love you."," love you."," love you."," hate."," it is best."," hate."," love you."," love you."," it is good."," it is good."," it is good."," it is good."," it is good."," it is good."," it is good."," it is good."," it is sad."," it is sad."," not really."," hate."," hate."," hate."," i don't know"," i'll try."]
+
       row = comment_list[comment_key]['comment']
       comment = row.replace('\ufeff', '')
+      print("cc",comment)
       if len(comment) < 2:
         comment_list[comment_key]['label'] = 'neutral'
+        print("commenbt:,",comment)
         continue
-      removed_emoji = hangul.sub('', comment)
-      if len(removed_emoji) > 2:
+      removed_emoji = comment
+
+      if len(removed_emoji) >= 2:
+        
+        for i in range(0,len(emoticon_list)):
+                removed_emoji = removed_emoji.replace(emoticon_list[i],emotion_list[i])
+
         translation = translate_client.translate(removed_emoji, target_language='en')
         translated_sentence = translation['translatedText']
 
+        translated_sentence = translated_sentence.replace('&#39;',"'")
+
+        print("popp",translated_sentence)
         predict = labels2names[net.predict_from_sentence(translated_sentence.split(), text2features)]
         comment_list[comment_key]['label'] = predict
 
