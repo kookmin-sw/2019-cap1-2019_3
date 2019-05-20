@@ -9,16 +9,85 @@
 <link rel="stylesheet" href="{% static 'css/user.css' %}">
 <link rel="stylesheet" href="{% static 'css/tooltip.css' %}">
 
+
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/static/js/webcam.js"></script>
+<style type="text/css">
 
-
-<style>
 section {
-  width: 90%;
+  width: 80%;
 }
+
+@font-face {
+  font-family: "baedal";
+  src: url("/static/font/BMHANNAPro.ttf") format('truetype');
+}
+
+div {
+  font-family: "baedal";
+}
+
+a {
+  font-family: "나눔고딕";
+}
+
+.navbar-default{
+  background-color: white;
+}
+
+.btn-secondary{
+        font-family: "baedal";
+        color:white;
+        background-color:rgb(255,051,051);
+        opacity: 0.3;
+     }
+
+
+.btn-secondary:hover, .btn-success:active, .btn-success:focus {
+       color:white;
+       background-color: rgb(255,051,051);
+       border-color: rgb(255,051,051);
+     }
+
+.bg-warning{
+  font-family: "baedal";
+  border-radius: 8px 8px;
+  border: 0px;
+  margin-left: 15px;
+  width:100%;
+}
+
+.bg-danger{
+  font-family: "baedal";
+  border-radius: 8px 8px;
+  border: 0px;
+  margin-right: 20px;
+  width:100%;
+}
+
+.btn.outline {
+    background: #d0e5fc;
+    padding: 12px 22px;
+}
+.btn-primary.outline {
+    border: 2px solid #d0e5fc;
+    color: #183f80;
+}
+.btn-primary.outline:hover, .btn-primary.outline:focus, .btn-primary.outline:active, .btn-primary.outline.active, .open > .dropdown-toggle.btn-primary {
+    color: #d0e5fc;
+    border-color: #d0e5fc;
+}
+.btn-primary.outline:active, .btn-primary.outline.active {
+    border-color: #f9b3ba;
+    color: #f9b3ba;
+    box-shadow: none;
+}
+
+
 </style>
 
 <script src="//code.jquery.com/jquery.min.js"></script>
@@ -34,34 +103,72 @@ section {
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 
+<script src="{% static 'js/webcam.js' %}"></script>
+
 
 <header>
     <!--  3등분으로 나누어 어떤 모듈인지  -->
-    <div class = "row" style="height:100px;">
-          <div class="col" style="text-align: center;">
 
+    <div class = "row">
+
+          <div class="col" style="text-align: center; margin-top:10px;">
 
             <div class="robot slideInUp animated">
-                <div class="tooltip bg" style="font-size:12px; padding-top:10px; text-align:center"> 웹캠 켜서 표정 제공하기!</div>
+                <div class="tooltip bg" style="font-size:15px; padding-top:10px;"> 웹캠 켜서 표정 제공하기 !</div>
 
-                <a class="bg" style="padding-top:25px; color:white">
-                    OFF
+                <a class="bg" style="padding-top:40px; color:white">
+                    ON AIR
                 </a>
+
 
                 <div class="wave"></div>
             </div>
 
+              <!-- left-top -->
+              <div class="card bg-warning text-white" >
+                  <div class="card-body">비디오 분석</div>
+                </div>
+                <div class="box" style="background-color: white; margin-left:15px;" >
+
+                <div class="card bg-warning text-white" style="width:92%;margin-top:10px; border-radius: 0px 0px; height:11%; opacity:0.4">
+                    <div class="card-body">크리에이터 타임 로그</div>
+                  </div>
+
+              </div>
+
 
           </div>
 
 
 
-          <div class="col-5" style="text-align: center;">
-              <p> 유튜브 감성분석 서비스 - 유감 </p>
+          <div class="col-5" style="text-align:center; background-color:white; margin-bottom:10px;margin-top:10px;height:315px;">
+
+            <iframe width="560" height="315" src="{{iframe_url}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style=" width:100%; height:100%;">
+
+              </iframe>
           </div>
 
-          <div class="col" style="text-align: center; background-color: orange">
-              <p> 댓 분석 모듈 </p>
+          <div class="col" style="text-align: center; background-color: white; margin-right:20px; margin-top:10px;">
+
+            <div class="card bg-danger text-white">
+                <div class="card-body" >댓글 6가지 감성 분석</div>
+              </div>
+            <div class="box" style="background-color: white; margin-left:15px;">
+              <div class="card bg-danger text-white" style="width:92%; border-radius: 0px 0px; height:11%; opacity:0.3; margin-top:10px">
+                <div class="card-body">댓글 6감정 분류 그래프</div>
+              </div>
+
+              <section>
+              <canvas id="myChart" width="200" height="200" style="margin-left:15px"></canvas>
+              </section>
+              <script>var ans = JSON.parse("{{ count }}");
+              </script>
+
+              <script src="{% static 'chart_js/Chart.js' %}"></script>
+
+
+            </div>
+            <!-- right-top -->
           </div>
 
     </div>
@@ -77,131 +184,15 @@ section {
 
                      <!-- 영상 분석 모듈이 들어갈 부분 --->
                     <div class="row">
-
-                      <div class="box">
-
-                          <div style="height:40px; margin: 0 auto; padding-top: 10px;text-align:center; width:100%;">
-                              <h5> 영상 속 감성 타임로그 </h5>
-                          </div>
-
-                              <div class = "timelog" >
-                              <link rel="stylesheet" href="{% static 'css/timelogs.css' %}">
-
-                                      <div class="log ">
-
-                                            <div class="logboard">
+                        <div class="box" style="background-color: white; margin-left:15px;" >
+                          <div class="card bg-warning text-white" style="border-radius: 0px 0px; height:11%; opacity:0.4">
+                              <div class="card-body">영상 감정 그래프</div>
+                            </div>
+                        </div>
 
 
-                                                    {% for i in logs %}
-
-                                                        <img src="/yougam/media/{{i.img_path }}">
-
-                                                        <h4>{{ i.top_sentiment}}</h4>  {{ i.time }}
-
-
-                                                        <br>
-                                                    {% endfor %}
-
-
-                                            </div>
-                                      </div>
-                                <!-- 타임로그 1개 인스턴스 end -->
-
-                              </div>
-
-                       </div>
-
-
-                      <div  class ="box" style="margin-top:20px;">
-
-                            <script src="https://d3js.org/d3.v5.min.js"></script>
-
-                            <div id="pie"></div>
-
-                            <script>
-
-                                const width = 300;
-                                const height = 300;
-                                const colorData = ["#A64E6E", "#F2BB77", "#F2A25C", "#FFE2DF", "#FFC001", "#FF6F61", "#F8A39D", "#81894E"];
-
-                                const data = {{ json }}
-
-                                const arc = d3.arc().innerRadius(80).outerRadius(Math.min(width, height) / 2);
-
-                                const arcLabel = (() => {
-                                  const radius = Math.min(width, height) / 2 * 0.8;
-                                  return d3.arc().innerRadius(radius).outerRadius(radius);
-                                })();
-
-
-                                const pie = d3.pie()
-
-                                  .sort((a, b) => b.value - a.value)
-                                  .value(d => d.value);
-
-
-                                const arcs = pie(data);
-
-                                const svg = d3.select('#pie').append('svg').style('width', width).style('height', height)
-                                  .attr('text-anchor', 'middle')
-
-                                  .style('font-size', '12px sans-serif');
-
-                                const g = svg.append('g')
-                                  .attr('transform', `translate(${width/2}, ${height/2})`);
-
-
-                                g.selectAll('path')
-                                  .data(arcs)
-                                  .enter().append('path')
-
-                                    .style("fill", function(d, i) {
-                                            return colorData[i];
-                                        })
-
-                                    .attr('stroke', 'white')
-                                    .attr('d', arc)
-                                    .append('title')
-                                    .text(d => `${d.data.label}: ${d.data.value}`);
-
-
-
-                                const text = g.selectAll('text')
-                                  .data(arcs)
-                                  .enter().append('text')
-                                    .attr('transform', d => `translate(${arcLabel.centroid(d)})`)
-                                    .attr('dy', '0.35em');
-
-
-                                text.append('tspan')
-                                  .attr('x', 0)
-                                  .attr('y', '-0.7em')
-                                  .style('font-weight', 'bold')
-                                  .text(d => d.data.label)
-
-
-                                text.filter(d => (d.endAngle - d.startAngle > 0.25)).append('tspan')
-                                  .attr('x', 0)
-                                  .attr('y', '0.7em')
-                                  .attr('fill-opacity', 0.7)
-                                  .text(function(d, i) {
-                                            return  d.endAngle-d.startAngle > 0.2 ?
-                                                     " (" + Math.round(1000*(d.endAngle-d.startAngle)/(Math.PI*2))/10 + "%)" : ""
-                                        });
-
-
-                                svg.node();
-
-
-
-                            </script>
-
-                      </div>
-
-                    </div>
-
-            </div>
-
+                  </div>
+          </div>
 
 
             <!-- wider -->
@@ -209,19 +200,14 @@ section {
             <div class="col-5">
 
                       <!-- 유튜브 영상 삽입 -->
-                      <div style="position: relative; height:0; padding-bottom: 56.25%;">
-                          <iframe width="560" height="315" src="{{iframe_url}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; width:100%; height:100%;">
+                      <!-- <div style="position: relative; height:0; padding-bottom: 56.25%;">
 
-                          </iframe>
-                        </div>
-
-
-                      <div class="box" style="background-color: pink; margin-top:5%">
-                          <p> 댓글 분석 모듈 </p>
-                          <button type = "button " id = "good" type="submit" class="btn btn-info">좋아요👍</button>
-                        <button id = "soso" type="submit" class="btn btn-success">보통이에요👊</button>
-                        <button id = "bad" type="submit" class="btn btn-danger">별로에요👎</button>
-                        <ul id="₩" class = "list-group">
+                        </div> -->
+                        <div class="box">
+                        <button type = "button " id = "good" type="submit" class="btn btn-primary btn-lg outline">좋아요👍</button>
+                        <button id = "soso" type="submit" class="btn btn-primary btn-lg outline">보통이에요👊</button>
+                        <button id = "bad" type="submit" class="btn btn-primary btn-lg outline">별로에요👎</button>
+                        <ul id="positive" class = "list-group">
                           {% for comment in cmts%}
                             {% if comment.label == 2 %}
                               <li class="list-group-item">
@@ -264,18 +250,17 @@ section {
                                     {% else %}
                                     {% endif %}
                                     </div>
-                                  <div class="media-body">
-                                    <div style="float:left"><strong>{{comment.author}}</strong> {{comment.period}}
-                                      <div class="btn-group">
-                                          <button style="float:left;" type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
-                                             변경하기</button>
-                                          <div class="dropdown-menu dropdown-menu-left">
-                                            <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/1">보통이에요👊로 변경 </a>
-                                            <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/0">별로에요👎로 변경 </a>
-                                          </div>
-                                      </div>
-                                    </div><br><br><br>
-                                    <div style="float:left">{{comment.cmt}}</div>
+                                 <div class="media-body">
+                                    <div style="float:left"><strong>{{comment.author}}</strong> {{comment.period}} &nbsp</div>
+                                    <div style="float:left" class="btn-group">
+                                        <button style="float:left;" type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
+                                           변경하기</button>
+                                        <div class="dropdown-menu dropdown-menu-left">
+                                          <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/1">보통이에요👊로 변경 </a>
+                                          <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/0">별로에요👎로 변경 </a>
+                                        </div>
+                                    </div>
+                                    <div style="margin-top:100px;float:left;">{{comment.cmt}}</div>
 
                                   </div>
                                 </div>
@@ -419,6 +404,8 @@ section {
                           {% endfor %}
                         </ul>
                       </div>
+
+
             </div>
 
 
@@ -429,23 +416,32 @@ section {
                     <!-- 댓글 모듈 부분 -->
                     <div class="row" >
 
-                          <div class="box" style="background-color: white">
-                            <p> 전체 댓글 감성분석 그래프 </p>
-                            <section>
-                            <canvas id="myChart" width="200" height="200"></canvas>
-                            </section>
-                            <script>var ans = JSON.parse("{{ count }}");
-                            </script>
+                          <div class="box" style="background-color: white; margin-left:15px">
+                            <div class="card bg-danger text-white" style="width:92%; border-radius: 0px 0px; height:11%; opacity:0.3;">
+                              <div class="card-body">워드클라우드</div>
+                            </div>
+                            <div class="btn-group" role="group" aria-label="Basic example" style="margin-top:10px">
+                              <button type="button" class="btn btn-secondary" id = "neutral">중립</button>
+                              <button type="button" class="btn btn-secondary" id = "happy">행복</button>
+                              <button type="button" class="btn btn-secondary" id = "sad">슬픔</button>
+                              <button type="button" class="btn btn-secondary" id = "surprise">놀람</button>
+                              <button type="button" class="btn btn-secondary" id = "anger">화남</button>
+                              <button type="button" class="btn btn-secondary" id = "fear">두려움</button>
+                            </div>
+                            <div>
+                              <img id ="wc" src = "/static/wordcloud_dataset/wordcloud_img/happy/9_happy.png" width = "320" height = "320" style="margin-top:10px">
+                            </div>
+                          </div>
 
-                            <script src="{% static 'chart_js/Chart.js' %}"></script>
+                              </div>
                             <script>
                             window.onload = function() {
                               var ctx = document.getElementById('myChart');
-
+                              console.log(ans)
                               var myChart = new Chart(ctx, {
                                 type: 'radar',
                                 data: {
-                                    labels:  ['Neutral', 'Happy', 'Sad', 'Surprise', 'Anger', 'Fear'],
+                                    labels:  ['중립', '행복', '슬픔', '놀람', '화남', '두려움'],
                                     datasets: [{
                                       label: 'sentiment',
                                       backgroundColor: "rgba(200,0,0,0.2)",
@@ -453,15 +449,18 @@ section {
                                     }]
                                 }
                             });
-                          }
+
+                              var vid = {{video_id}};
+                              vid = String(vid);
+                              var image = document.getElementById('wc');
+                              var senti = 'neutral';
+                              var wc_path = "/static/wordcloud_dataset/wordcloud_img/neutral/" + vid + "_" + senti + ".png";
+                              wc.src = wc_path;
+                              console.log(wc_path);
+                            }
+
+
                             </script>
-                          </div>
-
-                    <!--  워드클라우드  -->
-
-                          <div class="box" style="margin-top:20px; background-color: skyblue">
-
-                            <p> 워드클라우드 부분 </p>
 
                           </div>
 
@@ -477,5 +476,83 @@ section {
 
 
 <script>
+$(document).ready(function(){
+  $("#positive").hide();
+  $("#negative").hide();
+  $("#netural").hide();
+
+  $("#good").on("click",function(event){
+    $("#positive").toggle();
+    $("#bad").on("click",function(event){
+      $("#positive").hide();
+    });
+     $("#soso").on("click",function(event){
+      $("#positive").hide();
+    });
+  });
+
+  $("#soso").on("click",function(event){
+    $("#netural").toggle();
+    $("#good").on("click",function(event){
+      $("#netural").hide();
+    });
+    $("#bad").on("click",function(event){
+      $("#netural").hide();
+    });
+  });
+  $("#bad").on("click",function(event){
+    $("#negative").toggle();
+    $("#good").on("click",function(event){
+      $("#negative").hide();
+    });
+     $("#soso").on("click",function(event){
+      $("#negative").hide();
+    });
+  });
+
+  var vid = {{video_id}};
+  vid = String(vid);
+  var image = document.getElementById('wc');
+  $("#neutral").on("click",function(event){
+    var senti = 'neutral'
+    var wc_path = "/static/wordcloud_dataset/wordcloud_img/neutral/" + vid + "_" + senti + ".png";
+    wc.src = wc_path;
+    console.log(wc_path)
+  });
+  $("#happy").on("click",function(event){
+    var senti = 'happy'
+    var wc_path = "/static/wordcloud_dataset/wordcloud_img/happy/" + vid + "_" + senti + ".png";
+    wc.src = wc_path;
+    console.log(wc_path)
+  });
+  $("#sad").on("click",function(event){
+    var senti = 'sad'
+    var wc_path = "/static/wordcloud_dataset/wordcloud_img/sad/" + vid + "_" + senti + ".png";
+    wc.src = wc_path;
+    console.log(wc_path)
+  });
+  $("#surprise").on("click",function(event){
+    var senti = 'surprise'
+    var wc_path = "/static/wordcloud_dataset/wordcloud_img/surprise/" + vid + "_" + senti + ".png";
+    wc.src = wc_path;
+    console.log(wc_path)
+  });
+  $("#anger").on("click",function(event){
+    var senti = 'anger'
+    var wc_path = "/static/wordcloud_dataset/wordcloud_img/anger/" + vid + "_" + senti + ".png";
+    wc.src = wc_path;
+    console.log(wc_path)
+  });
+  $("#fear").on("click",function(event){
+    var senti = 'fear'
+    var wc_path = "/static/wordcloud_dataset/wordcloud_img/fear/" + vid + "_" + senti + ".png";
+    wc.src = wc_path;
+    console.log(wc_path)
+  });
+
+
+});
 
 </script>
+
+</html>
