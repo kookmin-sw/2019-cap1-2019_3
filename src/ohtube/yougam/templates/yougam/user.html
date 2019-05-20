@@ -4,19 +4,19 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>유튜브 감성분석 - 유감</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<title>유튜브 감성분석 - 유감dd</title>
+
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="{% static 'css/user.css' %}">
+<link rel="stylesheet" href="{% static 'css/webcam.css' %}">
 <link rel="stylesheet" href="{% static 'css/tooltip.css' %}">
-
-
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="/static/js/webcam.js"></script>
-<style type="text/css">
+
+<style>
 
 section {
   width: 80%;
@@ -43,14 +43,20 @@ a {
         font-family: "baedal";
         color:white;
         background-color:rgb(255,051,051);
+        border-color: rgb(255,051,051);
         opacity: 0.3;
+        font-size: 15px;
+        border-color:
      }
+
+.btn-group{
+  height:10%;
+}
 
 
 .btn-secondary:hover, .btn-success:active, .btn-success:focus {
        color:white;
        background-color: rgb(255,051,051);
-       border-color: rgb(255,051,051);
      }
 
 .bg-warning{
@@ -58,7 +64,9 @@ a {
   border-radius: 8px 8px;
   border: 0px;
   margin-left: 15px;
+  margin-top:10px;
   width:100%;
+  height: 15%;
 }
 
 .bg-danger{
@@ -66,7 +74,9 @@ a {
   border-radius: 8px 8px;
   border: 0px;
   margin-right: 20px;
+  margin-top:10px;
   width:100%;
+  height: 15%;
 }
 
 .btn.outline {
@@ -78,7 +88,7 @@ a {
     color: #183f80;
 }
 .btn-primary.outline:hover, .btn-primary.outline:focus, .btn-primary.outline:active, .btn-primary.outline.active, .open > .dropdown-toggle.btn-primary {
-    color: #d0e5fc;
+    color: #000;
     border-color: #d0e5fc;
 }
 .btn-primary.outline:active, .btn-primary.outline.active {
@@ -86,26 +96,7 @@ a {
     color: #f9b3ba;
     box-shadow: none;
 }
-
-
 </style>
-
-<script src="//code.jquery.com/jquery.min.js"></script>
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-<!-- 부가적인 테마 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-
-<script src="{% static 'js/webcam.js' %}"></script>
-
-
 <header>
     <!--  3등분으로 나누어 어떤 모듈인지  -->
 
@@ -128,11 +119,10 @@ a {
               <div class="card bg-warning text-white" >
                   <div class="card-body">비디오 분석</div>
                 </div>
-                <div class="box" style="background-color: white; margin-left:15px;" >
-
-                <div class="card bg-warning text-white" style="width:92%;margin-top:10px; border-radius: 0px 0px; height:11%; opacity:0.4">
+                <div class="card bg-warning text-white" style="border-radius: 0px 0px; opacity:0.4;">
                     <div class="card-body">크리에이터 타임 로그</div>
                   </div>
+                <div class="box" style="background-color: white; margin-left:15px;" >
 
               </div>
 
@@ -144,19 +134,19 @@ a {
           <div class="col-5" style="text-align:center; background-color:white; margin-bottom:10px;margin-top:10px;height:315px;">
 
             <iframe width="560" height="315" src="{{iframe_url}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style=" width:100%; height:100%;">
-
               </iframe>
+            <p>유튜브 영상 제목입니다.</p>
           </div>
 
-          <div class="col" style="text-align: center; background-color: white; margin-right:20px; margin-top:10px;">
+          <div class="col" style="text-align: center; background-color: white; margin-top:10px;">
 
             <div class="card bg-danger text-white">
                 <div class="card-body" >댓글 6가지 감성 분석</div>
               </div>
-            <div class="box" style="background-color: white; margin-left:15px;">
               <div class="card bg-danger text-white" style="width:92%; border-radius: 0px 0px; height:11%; opacity:0.3; margin-top:10px">
                 <div class="card-body">댓글 6감정 분류 그래프</div>
               </div>
+            <div class="box" style="background-color: white; margin-left:15px;">
 
               <section>
               <canvas id="myChart" width="200" height="200" style="margin-left:15px"></canvas>
@@ -184,10 +174,11 @@ a {
 
                      <!-- 영상 분석 모듈이 들어갈 부분 --->
                     <div class="row">
-                        <div class="box" style="background-color: white; margin-left:15px;" >
-                          <div class="card bg-warning text-white" style="border-radius: 0px 0px; height:11%; opacity:0.4">
-                              <div class="card-body">영상 감정 그래프</div>
-                            </div>
+                      <div class="card bg-warning text-white" style="width:90%; border-radius: 0px 0px; height:10%; opacity:0.4">
+                          <div class="card-body">영상 감정 그래프</div>
+                        </div>
+                        <div class="box" style="background-color: white; margin-left:25px;" >
+
                         </div>
 
 
@@ -203,207 +194,239 @@ a {
                       <!-- <div style="position: relative; height:0; padding-bottom: 56.25%;">
 
                         </div> -->
-                        <div class="box">
-                        <button type = "button " id = "good" type="submit" class="btn btn-primary btn-lg outline">좋아요👍</button>
-                        <button id = "soso" type="submit" class="btn btn-primary btn-lg outline">보통이에요👊</button>
-                        <button id = "bad" type="submit" class="btn btn-primary btn-lg outline">별로에요👎</button>
-                        <ul id="positive" class = "list-group">
-                          {% for comment in cmts%}
-                            {% if comment.label == 2 %}
-                              <li class="list-group-item">
-                                <div class="media">
-                                  <div class="media-left">
-                                    {% if comment.randnum == 1 %}
-                                      <img src="{% static "img/img_avatar1.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
-                                    {% if comment.randnum == 2 %}
-                                      <img src="{% static "img/img_avatar2.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
-                                    {% if comment.randnum == 3 %}
-                                      <img src="{% static "img/img_avatar3.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
-                                    {% if comment.randnum == 4 %}
-                                      <img src="{% static "img/img_avatar4.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
-                                    {% if comment.randnum == 5 %}
-                                      <img src="{% static "img/img_avatar5.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
-                                    {% if comment.randnum == 6 %}
-                                      <img src="{% static "img/img_avatar6.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
-                                    {% if comment.randnum == 7 %}
-                                      <img src="{% static "img/img_avatar7.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
-                                    {% if comment.randnum == 8 %}
-                                      <img src="{% static "img/img_avatar8.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
-                                    {% if comment.randnum == 9 %}
-                                      <img src="{% static "img/img_avatar9.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
-                                    </div>
-                                 <div class="media-body">
-                                    <div style="float:left"><strong>{{comment.author}}</strong> {{comment.period}} &nbsp</div>
-                                    <div style="float:left" class="btn-group">
-                                        <button style="float:left;" type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
-                                           변경하기</button>
-                                        <div class="dropdown-menu dropdown-menu-left">
-                                          <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/1">보통이에요👊로 변경 </a>
-                                          <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/0">별로에요👎로 변경 </a>
+                        <div class="box" style="margin-top:5%">
+                          <button type = "button " id = "good" type="submit" class="btn btn-primary btn-lg outline">좋아요👍</button> &nbsp&nbsp&nbsp
+                          <button id = "soso" type="submit" class="btn btn-primary btn-lg outline">보통이에요👊</button> &nbsp&nbsp&nbsp
+                          <button id = "bad" type="submit" class="btn btn-primary btn-lg outline">별로에요👎</button>
+                          <ul style="margin-top:20px;"id="positive" class = "list-group">
+                            {% for comment in cmts%}
+                              {% if comment.label == 2 %}
+                                <li class="list-group-item">
+                                  <div class="media">
+                                    <div class="media-left">
+                                      {% if comment.randnum == 1 %}
+                                        <img src="{% static "img/img_avatar1.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 2 %}
+                                        <img src="{% static "img/img_avatar2.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 3 %}
+                                        <img src="{% static "img/img_avatar3.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 4 %}
+                                        <img src="{% static "img/img_avatar4.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 5 %}
+                                        <img src="{% static "img/img_avatar5.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 6 %}
+                                        <img src="{% static "img/img_avatar6.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 7 %}
+                                        <img src="{% static "img/img_avatar7.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 8 %}
+                                        <img src="{% static "img/img_avatar8.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 9 %}
+                                        <img src="{% static "img/img_avatar9.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      </div>
+                                   <div class="media-body">
+                                      <div style="float:left"><strong>{{comment.author}}</strong> {{comment.period}} &nbsp</div>
+                                        <button style="float:left;" type="button" class="btn btn-light" data-toggle="modal" data-target="#myModal{{comment.cid}}">변경하기</button>
+                                          <!-- The Modal -->
+                                        <div class="modal" id="myModal{{comment.cid}}">
+                                          <div class="modal-dialog">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h4 class="modal-title">사용자 추론 변경</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+
+                                              <!-- Modal body -->
+                                              <div class="modal-body">
+                                               <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/1">보통이에요👊로 변경 </a>
+                                               <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/0">별로에요👎로 변경</a>
+                                              </div>
+                                            </div>
+                                          </div>
                                         </div>
+
+
+                                      <div style="clear:left;margin-top:15px;float:left;margin-right:20px; ">{{comment.cmt}}</div>
                                     </div>
-                                    <div style="margin-top:100px;float:left;">{{comment.cmt}}</div>
+
 
                                   </div>
-                                </div>
 
-                              </li>
+                                </li>
 
-                            {% else %}
-                            {% endif %}
-                          {% endfor %}
-                        </ul>
+                              {% else %}
+                              {% endif %}
+                            {% endfor %}
+                          </ul>
 
-                        <ul id="negative" class = "list-group">
-                          {% for comment in cmts%}
-                            {% if comment.label == 0 %}
-                              <li class="list-group-item">
-                                <div class="media">
-                                  <div class="media-left">
-                                    {% if comment.randnum == 1 %}
-                                      <img src="{% static "img/img_avatar1.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
-                                    {% if comment.randnum == 2 %}
-                                      <img src="{% static "img/img_avatar2.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
-                                    {% if comment.randnum == 3 %}
-                                      <img src="{% static "img/img_avatar3.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
-                                    {% if comment.randnum == 4 %}
-                                      <img src="{% static "img/img_avatar4.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
-                                    {% if comment.randnum == 5 %}
-                                      <img src="{% static "img/img_avatar5.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
-                                    {% if comment.randnum == 6 %}
-                                      <img src="{% static "img/img_avatar6.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
-                                    {% if comment.randnum == 7 %}
-                                      <img src="{% static "img/img_avatar7.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
-                                    {% if comment.randnum == 8 %}
-                                      <img src="{% static "img/img_avatar8.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
-                                    {% if comment.randnum == 9 %}
-                                      <img src="{% static "img/img_avatar9.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
-                                    </div>
-                                 <div class="media-body">
-                                  <div style="float:left"><strong>{{comment.author}}</strong> {{comment.period}} &nbsp </div>
+                          <ul style="margin-top:20px;" id="negative" class = "list-group">
+                            {% for comment in cmts%}
+                              {% if comment.label == 0 %}
+                                <li class="list-group-item">
+                                  <div class="media">
+                                    <div class="media-left">
+                                      {% if comment.randnum == 1 %}
+                                        <img src="{% static "img/img_avatar1.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 2 %}
+                                        <img src="{% static "img/img_avatar2.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 3 %}
+                                        <img src="{% static "img/img_avatar3.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 4 %}
+                                        <img src="{% static "img/img_avatar4.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 5 %}
+                                        <img src="{% static "img/img_avatar5.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 6 %}
+                                        <img src="{% static "img/img_avatar6.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 7 %}
+                                        <img src="{% static "img/img_avatar7.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 8 %}
+                                        <img src="{% static "img/img_avatar8.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 9 %}
+                                        <img src="{% static "img/img_avatar9.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      </div>
 
-                                    <div class="btn-group">
-
-                                        <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
-                                           변경하기</button>
-                                        <div class="dropdown-menu">
-                                          <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/2">좋아요👍로 변경</a>
-                                          <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/1">보통이에요👊로 변경</a>
+                                      <div class="media-body">
+                                      <div style="float:left"><strong>{{comment.author}}</strong> {{comment.period}} &nbsp</div>
+                                     <button style="float:left;" type="button" class="btn btn-light" data-toggle="modal" data-target="#myModal{{comment.cid}}">변경하기</button>
+                                          <!-- The Modal -->
+                                        <div class="modal" id="myModal{{comment.cid}}">
+                                          <div class="modal-dialog">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h4 class="modal-title">사용자 추론 변경</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                              <!-- Modal body -->
+                                              <div class="modal-body">
+                                                <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/2">좋아요👍로 변경</a>
+                                            <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/1">보통이에요👊로 변경</a>
+                                              </div>
+                                            </div>
+                                          </div>
                                         </div>
-                                    </div><br>
-                                  <div>{{comment.cmt}}</div>
-
-                                </div>
-
-                              </li>
-
-                            {% else %}
-                            {% endif %}
-                          {% endfor %}
-                        </ul>
-                        <ul id="netural" class = "list-group">
-                          {% for comment in cmts%}
-                            {% if comment.label == 1 %}
-                              <li class="list-group-item">
-                                <div class="media">
-                                  <div class="media-left">
-                                    {% if comment.randnum == 1 %}
-                                      <img src="{% static "img/img_avatar1.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
-                                    {% if comment.randnum == 2 %}
-                                      <img src="{% static "img/img_avatar2.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
-                                    {% if comment.randnum == 3 %}
-                                      <img src="{% static "img/img_avatar3.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
-                                    {% if comment.randnum == 4 %}
-                                      <img src="{% static "img/img_avatar4.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
-                                    {% if comment.randnum == 5 %}
-                                      <img src="{% static "img/img_avatar5.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
-                                    {% if comment.randnum == 6 %}
-                                      <img src="{% static "img/img_avatar6.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
-                                    {% if comment.randnum == 7 %}
-                                      <img src="{% static "img/img_avatar7.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
-                                    {% if comment.randnum == 8 %}
-                                      <img src="{% static "img/img_avatar8.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
-                                    {% if comment.randnum == 9 %}
-                                      <img src="{% static "img/img_avatar9.png" %}" class="media-object" style="width:40px">
-                                    {% else %}
-                                    {% endif %}
+                                      <div style="clear:left;margin-top:15px;float:left;margin-right:20px; ">{{comment.cmt}}</div>
                                     </div>
-                                 <div class="media-body">
-                                  <div style="float:left"><strong>{{comment.author}}</strong> {{comment.period}} &nbsp </div>
 
 
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
-                                           변경하기</button>
-                                        <div class="dropdown-menu">
-                                          <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/2">좋아요👍로 변경</a>
-                                          <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/0">별로에요👎로 변경</a>
+                                </li>
+
+                              {% else %}
+                              {% endif %}
+                            {% endfor %}
+                          </ul>
+
+
+                          <ul style="margin-top:20px;" id="netural" class = "list-group">
+                            {% for comment in cmts%}
+                              {% if comment.label == 1 %}
+                                <li class="list-group-item">
+                                  <div class="media">
+                                    <div class="media-left">
+                                      {% if comment.randnum == 1 %}
+                                        <img src="{% static "img/img_avatar1.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 2 %}
+                                        <img src="{% static "img/img_avatar2.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 3 %}
+                                        <img src="{% static "img/img_avatar3.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 4 %}
+                                        <img src="{% static "img/img_avatar4.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 5 %}
+                                        <img src="{% static "img/img_avatar5.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 6 %}
+                                        <img src="{% static "img/img_avatar6.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 7 %}
+                                        <img src="{% static "img/img_avatar7.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 8 %}
+                                        <img src="{% static "img/img_avatar8.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 9 %}
+                                        <img src="{% static "img/img_avatar9.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      </div>
+
+                                  <div class="media-body">
+                                      <div style="float:left"><strong>{{comment.author}}</strong> {{comment.period}} &nbsp</div>
+
+                                       <button style="float:left;" type="button" class="btn btn-light" data-toggle="modal" data-target="#myModal{{comment.cid}}">변경하기</button>
+                                          <!-- The Modal -->
+                                        <div class="modal" id="myModal{{comment.cid}}">
+                                          <div class="modal-dialog">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h4 class="modal-title">사용자 추론 변경</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                              <!-- Modal body -->
+                                              <div class="modal-body">
+                                                <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/2">좋아요👍로 변경</a>
+                                            <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/0">별로에요👎로 변경</a>
+                                              </div>
+                                            </div>
+                                          </div>
                                         </div>
+
+                                      <div style="clear:left;margin-top:15px;float:left;margin-right:20px; ">{{comment.cmt}}</div>
                                     </div>
-                                  <br>
-                                   <div>{{comment.cmt}}</div>
 
-                                </div>
 
-                              </li>
+                                </li>
 
-                            {% else %}
-                            {% endif %}
-                          {% endfor %}
-                        </ul>
-                      </div>
+                              {% else %}
+                              {% endif %}
+                            {% endfor %}
+                          </ul>
+                        </div>
 
 
             </div>
@@ -415,12 +438,12 @@ a {
 
                     <!-- 댓글 모듈 부분 -->
                     <div class="row" >
-
+                      <div class="card bg-danger text-white" style="width:90%; border-radius: 0px 0px; height:11%; opacity:0.3;">
+                        <div class="card-body">워드클라우드</div>
+                      </div>
                           <div class="box" style="background-color: white; margin-left:15px">
-                            <div class="card bg-danger text-white" style="width:92%; border-radius: 0px 0px; height:11%; opacity:0.3;">
-                              <div class="card-body">워드클라우드</div>
-                            </div>
-                            <div class="btn-group" role="group" aria-label="Basic example" style="margin-top:10px">
+
+                            <div class="btn-group" role="group" aria-label="Basic example" style="margin-top:10px; margin-right:30px;">
                               <button type="button" class="btn btn-secondary" id = "neutral">중립</button>
                               <button type="button" class="btn btn-secondary" id = "happy">행복</button>
                               <button type="button" class="btn btn-secondary" id = "sad">슬픔</button>
@@ -429,7 +452,7 @@ a {
                               <button type="button" class="btn btn-secondary" id = "fear">두려움</button>
                             </div>
                             <div>
-                              <img id ="wc" src = "/static/wordcloud_dataset/wordcloud_img/happy/9_happy.png" width = "320" height = "320" style="margin-top:10px">
+                              <img id ="wc" src = "/static/wordcloud_dataset/wordcloud_img/happy/9_happy.png" width = "320" height = "320" style="margin-top:10px; margin-right:30px;">
                             </div>
                           </div>
 
@@ -511,6 +534,7 @@ $(document).ready(function(){
   });
 
   var vid = {{video_id}};
+  console.log(vid);
   vid = String(vid);
   var image = document.getElementById('wc');
   $("#neutral").on("click",function(event){
