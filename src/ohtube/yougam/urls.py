@@ -12,7 +12,7 @@ urlpatterns = [
     path('user/',views.user, name='user'),
     path('<int:video>/user/', views.userdetail, name='userdetail'),
     path('youtube_type/<int:video>/creator/', views.crtdetail, name='crtdetail'),
-    url(r'^sending/$', views.sending, name='sending'),    #webcam json message
+    path('sending/', views.sending, name='sending'),    #webcam json message
 ]
 
 # 서버에서 이미지 받아올때, 경로 추가
