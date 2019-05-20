@@ -1,29 +1,251 @@
 <!DOCTYPE html>
-{%load staticfiles %}
-<html lang="ko">
+<html lang="en">
+{% load staticfiles %}
 
 <head>
-  <title>My Little Lotto</title>
+<meta charset="utf-8">	
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-  <link href="//fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 </head>
 <style>
 
+section {
+  width: 50%;
+}
+.modal-works {
+font-size: 30px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #fff;
+    margin: 25px 20px;
+}
+
+.modal-works span {
+    margin-right: 15px;
+    padding: 5px 10px;
+}
+p{
+font-size: 30px;
+}
 </style>
-<body>
-{{no1}}
-<br><br>
-{{no2}}
-<br><br>
-{{no3}}
-</body>
+<body >
 
-<script>
-</script>
+	<!-- Navigation -->
+<div style="text-align:center"><h1>크리에이터를 위한 Dash </h1></div>
 
+
+		<div class="row">
+			<div  style="margin-left:80px;">
+				<img src="{% static "img/portfolio-3.jpg" %}" alt="img02" class="img-responsive" />
+					<h2>시청자 표정 분석 통계</h2>
+					<p>Viewers Facial Expresstion Analysis Statistics</p>
+					<a href="#" data-toggle="modal" data-target="#Modal-1">View more</a>
+			</div>
+			<div >
+				<img src="{% static "img/portfolio-5.jpg" %}" alt="img02" class="img-responsive" />
+					<h2>영상을 제공한 시청자들</h2>
+					<p>Viewers Who Provided Video</p>
+					<a href="#" data-toggle="modal" data-target="#Modal-2">View more</a>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div  style="margin-left:80px;">
+				<figure style="background-color: white;"class="effect-bubba">
+						<img data-toggle="modal" data-target="#Modal-3" src="{% static "img/portfolio-2.jpg" %}" alt="img02" class="img-responsive" />
+						<figcaption>
+							<h2>인기 댓글의 감성</h2>
+							<p>Sensibility Of Popular Comments</p>
+						</figcaption>
+					</figure>
+			</div>
+			<div>
+				<figure style="background-color:white;"class="effect-bubba">
+						<img src="{% static "img/portfolio-6.jpg" %}" alt="img02" class="img-responsive" />
+						<figcaption>
+							<h2>전체 댓글 감성 분포 분포도</h2>
+							<p>Comment Emotional Distribution Plot</p>
+							<a href="#" data-toggle="modal" data-target="#Modal-4">View more</a>
+						</figcaption>
+					</figure>
+			</div>
+		</div>
+
+
+	<!-- Modal for portfolio item 1 -->
+	<div class="modal fade" id="Modal-1" tabindex="-1" role="dialog" aria-labelledby="Modal-label-1">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="Modal-label-1">Dean & Letter</h4>
+				</div>
+				<div class="modal-body">
+					<div class="modal-works"><span>Branding</span><span>Web Design</span></div>
+					<p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal for portfolio item 2 -->
+	<div class="modal fade" id="Modal-2" tabindex="-1" role="dialog" aria-labelledby="Modal-label-2">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="Modal-label-2">Startup Framework</h4>
+				</div>
+				<div class="modal-body">
+					<img src="images/demo/portfolio-2.jpg" alt="img01" class="img-responsive" />
+					<div class="modal-works"><span>Branding</span><span>Web Design</span></div>
+					<p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal for portfolio item 3 -->
+	<div class="modal fade" id="Modal-3" tabindex="-1" role="dialog" aria-labelledby="Modal-label-3">
+		<div class="modal-dialog modal-xl" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="Modal-label-3">댓글 결과</h4>
+				</div>
+				<div class="modal-body">
+							<h3 style="margin-left: 140px;margin-bottom: 10px;">댓글 긍정 중립 부정 분포 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 인기 댓글 TOP3</h3>
+					  		<section style="float:left;">
+                            <canvas id="myChart" width="100" height="100"></canvas>
+                            </section>
+                            <script>
+                            </script>
+
+                            <script src="{% static 'chart_js/Chart.js' %}"></script>
+                            <script>
+                            window.onload = function() {
+                              var ctx = document.getElementById('myChart');
+
+                              var myChart = new Chart(ctx, {
+                                type: 'doughnut',
+                                data: {
+                                    labels:  ['긍정', '중립', '부정'],
+                                    datasets: [{
+                                      label: 'sentiment',
+                                      backgroundColor: ["#ec6e85","#f7cf6b","#57a0e5"],
+                                      data: [{{num_pos}},{{num_net}},{{num_neg}}],
+                                    }]
+                                }
+                            });
+                          }
+                            </script>
+                    <div style="margin-left: 200px;">
+					<div class="modal-works"><span style="background-color: #fe8a71;">인기 댓글 1위</span>
+					{% if no1.label == 0 %}
+						<span style="background-color: red;">부정👎</span>
+					{% else %}
+                    {% endif %}
+                    {% if no1.label == 2 %}
+						<span style="background-color: green;">긍정👍</span>
+					{% else %}
+                    {% endif %}
+                    {% if no1.label == 1 %}
+						<span style="background-color: blue;">중립👊</span>
+					{% else %}
+                    {% endif %}
+					</div>
+					
+					<p>{{no1.cmt}}</p> <p> 좋아요 수:  {{no1.like}}</p>
+					<div class="modal-works"><span style="background-color: #f6cd61;">인기 댓글 2위</span>
+					{% if no2.label == 0 %}
+						<span style="background-color: red;">부정👎</span>
+					{% else %}
+                    {% endif %}
+                    {% if no2.label == 2 %}
+						<span style="background-color: green;">긍정👍</span>
+					{% else %}
+                    {% endif %}
+                    {% if no2.label == 1 %}
+						<span style="background-color: blue;">중립👊</span>
+					{% else %}
+                    {% endif %}
+					</div>
+					<p>{{no2.cmt}}</p> <p> 좋아요 수:  {{no2.like}}</p>
+					<div class="modal-works"><span style="background-color: #3da4ab;">인기 댓글 3위</span>
+					{% if no3.label == 0 %}
+						<span style="background-color: red;">부정👎</span>
+					{% else %}
+                    {% endif %}
+                    {% if no3.label == 2 %}
+						<span style="background-color: green;">긍정👍</span>
+					{% else %}
+                    {% endif %}
+                    {% if no3.label == 1 %}
+						<span style="background-color: blue;">중립👊</span>
+					{% else %}
+                    {% endif %}</div>
+					<p>{{no3.cmt}}</p> <p> 좋아요 수:  {{no3.like}}</p>
+
+				</div></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal for portfolio item 4 -->
+	<div class="modal fade" id="Modal-4" tabindex="-1" role="dialog" aria-labelledby="Modal-label-4">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="Modal-label-4">Smart Name</h4>
+				</div>
+				<div class="modal-body">
+					<img src="images/demo/portfolio-4.jpg" alt="img01" class="img-responsive" />
+					<div class="modal-works"><span>Top3</span></div>
+					<p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal for portfolio item 5 -->
+	<div class="modal fade" id="Modal-5" tabindex="-1" role="dialog" aria-labelledby="Modal-label-5">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="Modal-label-5">Fast People</h4>
+				</div>
+				<div class="modal-body">
+					<img src="images/demo/portfolio-5.jpg" alt="img01" class="img-responsive" />
+					<div class="modal-works"><span>Branding</span><span>Web Design</span></div>
+					<p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	</body>
 </html>
