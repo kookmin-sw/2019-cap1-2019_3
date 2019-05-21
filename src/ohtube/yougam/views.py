@@ -35,13 +35,13 @@ def change(request,video,cid,senti):
       cmt.label = 0
       cmt.save()
       comments = Comment.objects.filter(video=video)
-      return render(request, "yougam/user.html", {"count":loaded_count_list,"cmts":comments,"iframe_url":iframe_url})
+      return render(request, "yougam/user.html", {"count":loaded_count_list,"cmts":comments,"iframe_url":iframe_url, "video_id": video_url.id})
    elif(senti=="1"):
       cmt = Comment.objects.get(video=video,cid=cid)
       cmt.label = 1
       cmt.save()
       comments = Comment.objects.filter(video=video)
-      return render(request, "yougam/user.html", {"count":loaded_count_list,"cmts":comments,"iframe_url":iframe_url})
+      return render(request, "yougam/user.html", {"count":loaded_count_list,"cmts":comments,"iframe_url":iframe_url, "video_id": video_url.id})
    else:
       cmt = Comment.objects.get(video=video,cid=cid)
       cmt.label = 2
@@ -180,7 +180,7 @@ def userdetail(request, video):
       import predict
       import spellcheck
       import random
-      
+
       import sentiment_wordcloud
 
       comment_obj = YouTubeApi(100,video_url.url,YOUTUBE_API_KEY)
