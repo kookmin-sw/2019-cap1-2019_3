@@ -19,7 +19,7 @@ def labeling(comment_list):
 	okt = Okt()
 	comment_dict = {}
 
-	with open(train_path) as f:
+	with open(train_path, encoding="utf-8") as f:
 		train_docs = json.load(f)
 	tokens = [t for d in train_docs for t in d[0]]
 
