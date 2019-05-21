@@ -59,24 +59,23 @@ a {
        background-color: rgb(255,051,051);
      }
 
-.bg-warning{
+.card.bg-warning{
   font-family: "baedal";
   border-radius: 8px 8px;
   border: 0px;
   margin-left: 15px;
   margin-top:10px;
   width:100%;
-  height: 15%;
+  height: 10%;
 }
 
-.bg-danger{
+.card.bg-danger{
   font-family: "baedal";
   border-radius: 8px 8px;
   border: 0px;
-  margin-right: 20px;
   margin-top:10px;
   width:100%;
-  height: 15%;
+  height: 10%;
 }
 
 .btn.outline {
@@ -116,14 +115,14 @@ a {
             </div>
 
               <!-- left-top -->
-              <div class="card bg-warning text-white" >
-                  <div class="card-body">비디오 분석</div>
+              <div class="card bg-warning text-white">
+                  <div class="card-body" style="margin-top:-10px;">비디오 분석</div>
                 </div>
-                <div class="card bg-warning text-white" style="border-radius: 0px 0px; opacity:0.4;">
-                    <div class="card-body">크리에이터 타임 로그</div>
-                  </div>
-                <div class="box" style="background-color: white; margin-left:15px;" >
 
+                <div class="box" style="background-color: white; margin-left:15px;" >
+                  <div class="card bg-warning text-white" style="width:92%; border-radius: 0px 0px; opacity:0.5;">
+                      <div class="card-body" style="margin-top:-15px">크리에이터 타임 로그</div>
+                    </div>
               </div>
 
 
@@ -133,23 +132,22 @@ a {
 
           <div class="col-5" style="text-align:center; background-color:white; margin-bottom:10px;margin-top:10px;height:315px;">
 
-            <iframe width="560" height="315" src="{{iframe_url}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style=" width:100%; height:100%;">
+            <iframe width="560" height="315" src="{{iframe_url}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%; height:100%; margin-top:10px">
               </iframe>
             <p>유튜브 영상 제목입니다.</p>
           </div>
 
           <div class="col" style="text-align: center; background-color: white; margin-top:10px;">
 
-            <div class="card bg-danger text-white">
-                <div class="card-body" >댓글 6가지 감성 분석</div>
+            <div class="card bg-danger text-white" style="margin-left:-15px;">
+                <div class="card-body" style="margin-top:-10px;">댓글 6가지 감성 분석</div>
               </div>
-              <div class="card bg-danger text-white" style="width:92%; border-radius: 0px 0px; height:11%; opacity:0.3; margin-top:10px">
-                <div class="card-body">댓글 6감정 분류 그래프</div>
+            <div class="box" style="background-color: white; margin-right:15px;">
+              <div class="card bg-danger text-white graph" style="width:92%; border-radius: 0px 0px; opacity:0.3;">
+                <div class="card-body" style="margin-top:-15px;">댓글 6감정 분류 그래프</div>
               </div>
-            <div class="box" style="background-color: white; margin-left:15px;">
-
               <section>
-              <canvas id="myChart" width="200" height="200" style="margin-left:15px"></canvas>
+              <canvas id="myChart" width="200" height="200" style="margin-left:15px; margin-top:20px;"></canvas>
               </section>
               <script>var ans = JSON.parse("{{ count }}");
               </script>
@@ -170,19 +168,15 @@ a {
     <div class="row">
 
             <!-- left partition -->
-            <div class="col">
+            <div class="col" style="text-align: center;">
 
                      <!-- 영상 분석 모듈이 들어갈 부분 --->
-                    <div class="row">
-                      <div class="card bg-warning text-white" style="width:90%; border-radius: 0px 0px; height:10%; opacity:0.4">
-                          <div class="card-body">영상 감정 그래프</div>
-                        </div>
-                        <div class="box" style="background-color: white; margin-left:25px;" >
-
+                        <div class="box" style="background-color: white; margin-left:15px;">
+                          <div class="card bg-warning text-white" style="width:95%; border-radius: 0px 0px;opacity:0.5">
+                              <div class="card-body" style="margin-top:-15px">영상 감정 그래프</div>
+                            </div>
                         </div>
 
-
-                  </div>
           </div>
 
 
@@ -194,7 +188,7 @@ a {
                       <!-- <div style="position: relative; height:0; padding-bottom: 56.25%;">
 
                         </div> -->
-                        <div class="box" style="margin-top:5%">
+                        <div class="box" style="text-align:center; margin-left:8px;">
                           <button type = "button " id = "good" type="submit" class="btn btn-primary btn-lg outline">좋아요👍</button> &nbsp&nbsp&nbsp
                           <button id = "soso" type="submit" class="btn btn-primary btn-lg outline">보통이에요👊</button> &nbsp&nbsp&nbsp
                           <button id = "bad" type="submit" class="btn btn-primary btn-lg outline">별로에요👎</button>
@@ -437,11 +431,11 @@ a {
             <div class="col">
 
                     <!-- 댓글 모듈 부분 -->
-                    <div class="row" >
-                      <div class="card bg-danger text-white" style="width:90%; border-radius: 0px 0px; height:11%; opacity:0.3;">
-                        <div class="card-body">워드클라우드</div>
-                      </div>
-                          <div class="box" style="background-color: white; margin-left:15px">
+
+                          <div class="box" style="background-color: white;">
+                            <div class="card bg-danger text-white" style="width:92%; border-radius: 0px 0px;opacity:0.3;">
+                              <div class="card-body" style="margin-top:-15px;">워드클라우드</div>
+                            </div>
 
                             <div class="btn-group" role="group" aria-label="Basic example" style="margin-top:10px; margin-right:30px;">
                               <button type="button" class="btn btn-secondary" id = "neutral">중립</button>
@@ -451,12 +445,12 @@ a {
                               <button type="button" class="btn btn-secondary" id = "anger">화남</button>
                               <button type="button" class="btn btn-secondary" id = "fear">두려움</button>
                             </div>
+                            <div id ="clickbutton" style="margin-right:30px; margin-top:30px">감성을 클릭해주세요!</div>
                             <div>
-                              <img id ="wc" src = "/static/wordcloud_dataset/wordcloud_img/happy/9_happy.png" width = "320" height = "320" style="margin-top:10px; margin-right:30px;">
+                              <img id ="wc" src = "/static/wordcloud_dataset/wordcloud_img/basic.png" onerror="imgError()"  width = "320" height = "220" style="margin-right:30px; margin-top:10px;">
                             </div>
                           </div>
 
-                              </div>
                             <script>
                             window.onload = function() {
                               var ctx = document.getElementById('myChart');
@@ -477,7 +471,7 @@ a {
                               vid = String(vid);
                               var image = document.getElementById('wc');
                               var senti = 'neutral';
-                              var wc_path = "/static/wordcloud_dataset/wordcloud_img/neutral/" + vid + "_" + senti + ".png";
+                              var wc_path = "/static/wordcloud_dataset/wordcloud_img/basic.png";
                               wc.src = wc_path;
                               console.log(wc_path);
                             }
@@ -503,6 +497,7 @@ $(document).ready(function(){
   $("#positive").hide();
   $("#negative").hide();
   $("#netural").hide();
+  $("#imgerror").hide();
 
   $("#good").on("click",function(event){
     $("#positive").toggle();
@@ -538,44 +533,66 @@ $(document).ready(function(){
   vid = String(vid);
   var image = document.getElementById('wc');
   $("#neutral").on("click",function(event){
+    $("#clickbutton").hide();
     var senti = 'neutral'
     var wc_path = "/static/wordcloud_dataset/wordcloud_img/neutral/" + vid + "_" + senti + ".png";
     wc.src = wc_path;
+    wc.height = "320";
     console.log(wc_path)
   });
   $("#happy").on("click",function(event){
+    $("#clickbutton").hide();
     var senti = 'happy'
     var wc_path = "/static/wordcloud_dataset/wordcloud_img/happy/" + vid + "_" + senti + ".png";
     wc.src = wc_path;
+    wc.height = "320";
     console.log(wc_path)
   });
   $("#sad").on("click",function(event){
+    $("#clickbutton").hide();
     var senti = 'sad'
     var wc_path = "/static/wordcloud_dataset/wordcloud_img/sad/" + vid + "_" + senti + ".png";
     wc.src = wc_path;
+    wc.height = "320";
     console.log(wc_path)
   });
   $("#surprise").on("click",function(event){
+    $("#clickbutton").hide();
     var senti = 'surprise'
     var wc_path = "/static/wordcloud_dataset/wordcloud_img/surprise/" + vid + "_" + senti + ".png";
     wc.src = wc_path;
+    wc.height = "320";
     console.log(wc_path)
   });
   $("#anger").on("click",function(event){
+    $("#clickbutton").hide();
     var senti = 'anger'
     var wc_path = "/static/wordcloud_dataset/wordcloud_img/anger/" + vid + "_" + senti + ".png";
     wc.src = wc_path;
+    wc.height = "320";
     console.log(wc_path)
   });
   $("#fear").on("click",function(event){
+    $("#clickbutton").hide();
     var senti = 'fear'
     var wc_path = "/static/wordcloud_dataset/wordcloud_img/fear/" + vid + "_" + senti + ".png";
     wc.src = wc_path;
+    wc.height = "320";
     console.log(wc_path)
   });
 
 
 });
+
+function imgError(){
+  var basicimg = document.getElementById('clickbutton');
+  var image = document.getElementById('wc');
+  var wc_path = "/static/wordcloud_dataset/wordcloud_img/basic.png";
+  wc.src = wc_path;
+  wc.height = "270";
+  basicimg.innerHTML = "해당 감성의 댓글이 존재하지 않습니다.";
+  $("#clickbutton").show();
+}
 
 </script>
 
