@@ -119,6 +119,23 @@ class YouTubeApi():
         return self.comments
 
 
+    def get_video_title(self):
+        vid = str()
+        video_id = urlparse(str(self.videourl))
+        q = parse_qs(video_id.query)
+        vid = q["v"][0]
+
+        parms = {
+                    'part': 'snippet',
+                    'id': vid,
+                    'key': self.key
+                }
+        matches = self.openURL(YOUTUBE_VIDEO_URL, parms)
+        mat = json.loads(matches)
+
+        return(mat["items"][0]["snippet"]["title"])
+
+
 
     def openURL(self, url, parms):
             f = urlopen(url + '?' + urlencode(parms))
@@ -129,7 +146,7 @@ class YouTubeApi():
 
 
 def main():
-    y = YouTubeApi(100,'https://www.youtube.com/watch?v=r4fvSf4xGU4','AIzaSyD5EuiUIl4UGa1uKt0yb1IGfUNWtISbIog')
+    y = YouTubeApi(100,'https://www.youtube.com/watch?v=r4fvSf4xGU4','')
     y.get_video_comment()
 
 if __name__ == '__main__':
