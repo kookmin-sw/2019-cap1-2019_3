@@ -273,10 +273,100 @@ def userdetail(request, video):
    temp_url = video_url.url
    iframe_url = temp_url.replace('https://www.youtube.com/watch?v=','https://www.youtube.com/embed/')
    return render(request, "yougam/user.html", {"count":loaded_count_list,"cmts":comments, "video_id":video_url.id, "iframe_url":iframe_url})
-
-
 def crtdetail(request, video):
-    return render(request, 'yougam/webcam.html')# webcam 페이지로 연결해야 하는 경우
+
+   video_url = Video.objects.get(pk=video)
+
+
+   if Comment.objects.filter(video=video_url.id).count() < 1:
+      comment_module_path=os.path.join(os.path.dirname( os.path.abspath( __file__ ) ), 'code/crawler')
+      sys.path.append(comment_module_path)
+
+      module_path=os.path.join(os.path.dirname(os.path.abspath( __file__ ) ), 'code/predict_sentiment')
+      sys.path.append(module_path)
+
+      comment_module_path2=os.path.join(os.path.dirname( os.path.abspath( __file__ ) ), 'code/predict_sentiment6')
+      sys.path.append(comment_module_path2)
+
+      with open("yougam/static/api_key/youtube_api.txt", "r") as y_api :
+         YOUTUBE_API_KEY = y_api.readline()
+
+      from youtube_api_cmd import YouTubeApi
+      import sentiment_count
+      import predict
+      import spellcheck
+      import random
+
+      comment_obj = YouTubeApi(100,video_url.url,YOUTUBE_API_KEY)
+
+      comment_list = comment_obj.get_video_comment()
+      print("--crawling complete--")
+
+      comments = spellcheck.spellchecker(comment_list)
+      print("--spellcheck complete--")
+
+      label = predict.labeling(comments)
+      print("--label complete--")
+
+       #------crawling----------
+
+      predicted_comment_list = sentiment_count.predict_senti6(comment_list)
+      predict_replies_list = {}
+      reply_idx = 1
+
+      for comment_info in predicted_comment_list:
+         comment_text = predicted_comment_list[comment_info]['comment']
+         comment_author = predicted_comment_list[comment_info]['author']
+         comment_period = predicted_comment_list[comment_info]['period']
+         comment_like = predicted_comment_list[comment_info]['like']
+         comment_label = predicted_comment_list[comment_info]['label']
+         comment_labelpn = label[comment_info]['label_pn']
+         parsed_date = dateutil.parser.parse(comment_period)
+         parsed_date = parsed_date.strftime('%Y/%m/%d')
+         ran = random.randint(1,9)
+         parent_comment = video_url.comment_set.create(video = video, cid=comment_info,cmt = comment_text,label= comment_labelpn,label6 = comment_label, author = comment_author, period = parsed_date, like = comment_like,randnum=ran)
+         # print(predicted_comment_list[comment_info])
+
+         if 'replies' in predicted_comment_list[comment_info].keys():
+            replies_list = predicted_comment_list[comment_info]['replies']
+            replies_list2 = label[comment_info]['replies']
+            predicted_replies_list = sentiment_count.predict_senti6(replies_list)
+            predicted_replies_list2 = spellcheck.spellchecker(replies_list2)
+            predicted_replies_list2 = predict.labeling(predicted_replies_list2)
+
+            parent_id = parent_comment.id
+            for reply_info in predicted_replies_list:
+               reply_text = predicted_replies_list[reply_info]["comment"]
+               reply_author = predicted_replies_list[reply_info]["author"]
+               reply_period = predicted_replies_list[reply_info]["period"]
+               reply_like = predicted_replies_list[reply_info]["like"]
+               reply_label = predicted_replies_list[reply_info]["label"]
+               reply_labelpn = predicted_replies_list2[reply_info]["label_pn"]
+               parsed_date = dateutil.parser.parse(reply_period)
+               parsed_date = parsed_date.strftime('%Y/%m/%d')
+               predict_replies_list[reply_idx] = {'comment': reply_text, 'author': reply_author, 'label' : reply_label}
+               parent_comment.replydata_set.create(parent_id = parent_id, comment = reply_text, label = reply_labelpn , label6 = reply_label, author = reply_author, period = reply_period, like = reply_like)
+               reply_idx += 1
+
+         print("--predict complete--")
+
+
+   comments = Comment.objects.filter(video=video)
+
+   vid = Video.objects.get(id=video)
+   no1 = Comment.objects.filter(video=vid).order_by('-like')[0]
+   no2 = Comment.objects.filter(video=vid).order_by('-like')[1]
+   no3 = Comment.objects.filter(video=vid).order_by('-like')[2]
+
+   num_pos = Comment.objects.filter(video=vid).filter(label=2).count()
+   num_net = Comment.objects.filter(video=vid).filter(label=1).count()
+   num_neg = Comment.objects.filter(video=vid).filter(label=0).count()
+
+   return render(request,"yougam/cre.html",{"no1":no1,"no2":no2,"no3":no3,"num_pos":num_pos,"num_neg":num_neg,"num_net":num_net})
+
+
+# def crtdetail(request, video):
+#     return render(request, 'yougam/webcam.html')# webcam 페이지로 연결해야 하는 경우
 
 
 
