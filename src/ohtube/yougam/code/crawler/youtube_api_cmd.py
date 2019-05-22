@@ -7,7 +7,7 @@ from urllib.request import  urlopen
 
 
 YOUTUBE_COMMENT_URL = 'https://www.googleapis.com/youtube/v3/commentThreads'
-YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search'
+YOUTUBE_VIDEO_URL = 'https://www.googleapis.com/youtube/v3/videos'
 
 
 class YouTubeApi():
