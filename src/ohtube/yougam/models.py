@@ -38,7 +38,7 @@ class Comment(models.Model):
 
 
 class ReplyData(models.Model):
-	video = models.IntegerField(default="")
+	video = models.IntegerField(default=-1)
 	parent_id = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True)
 	comment = models.TextField(default="")
 	pid = models.CharField(max_length=255,default="")
