@@ -163,28 +163,36 @@ def userdetail(request, video):
          if 'replies' in predicted_comment_list[comment_info].keys():
             replies_list = predicted_comment_list[comment_info]['replies']
             replies_list2 = label[comment_info]['replies']
-            predicted_replies_list = sentiment_count.predict_senti6(replies_list)
+            # predicted_replies_list = sentiment_count.predict_senti6(replies_list)
             predicted_replies_list2 = spellcheck.spellchecker(replies_list2)
             predicted_replies_list2 = predict.labeling(predicted_replies_list2)
 
             parent_id = parent_comment.id
-            for reply_info in predicted_replies_list:
-               reply_text = predicted_replies_list[reply_info]["comment"]
-               reply_author = predicted_replies_list[reply_info]["author"]
-               reply_period = predicted_replies_list[reply_info]["period"]
-               reply_like = predicted_replies_list[reply_info]["like"]
-               reply_label = predicted_replies_list[reply_info]["label"]
-               reply_labelpn = predicted_replies_list2[reply_info]["label_pn"]
+            for reply_info in replies_list:
+               predict_replies_list[reply_idx] = replies_list[reply_info]
+               reply_text = replies_list[reply_info]["comment"]
+               reply_author = replies_list[reply_info]["author"]
+               reply_period = replies_list[reply_info]["period"]
+               reply_like = replies_list[reply_info]["like"]
+               # reply_label = replies_list[reply_info]["label"]
+               reply_labelpn = replies_list[reply_info]["label_pn"]
                parsed_date = dateutil.parser.parse(reply_period)
                parsed_date = parsed_date.strftime('%Y/%m/%d')
-               predict_replies_list[reply_idx] = {'comment': reply_text, 'author': reply_author, 'label' : reply_label}
-               parent_comment.replydata_set.create(video = video,pid=comment_info, parent_id = parent_id, comment = reply_text, label = reply_labelpn , label6 = reply_label, author = reply_author, period = parsed_date, like = reply_like)
+               this_reply = parent_comment.replydata_set.create(video = video,pid=comment_info, parent_id = parent_id, comment = reply_text, label = reply_labelpn, author = reply_author, period = parsed_date, like = reply_like)
+               predict_replies_list[reply_idx]["rid"] = this_reply.id
                reply_idx += 1
 
-         print("--comment6 predict complete--")
+      predicted_replies_list = sentiment_count.predict_senti6(predict_replies_list)
+      for i in predicted_replies_list:
+          find_id = predicted_replies_list[i]["rid"]
+          found_reply = ReplyData.objects.get(id=find_id)
+          found_reply.label6 = predicted_replies_list[i]["label"]
+          found_reply.generate()
+      print("--comment6 predict complete--")
+
       predict_count_cmt = sentiment_count.sentenceCount(predicted_comment_list)
-      predict_count_reply = sentiment_count.sentenceCount(predict_replies_list)
-      sentiment_wordcloud.wordcloud(predicted_comment_list, predict_replies_list, video_url.id)
+      predict_count_reply = sentiment_count.sentenceCount(predicted_replies_list)
+      sentiment_wordcloud.wordcloud(predicted_comment_list, predicted_replies_list, video_url.id)
 
       cmt_count_list = []
       reply_count_list = []
@@ -345,31 +353,36 @@ def crtdetail(request, video):
          if 'replies' in predicted_comment_list[comment_info].keys():
             replies_list = predicted_comment_list[comment_info]['replies']
             replies_list2 = label[comment_info]['replies']
-            predicted_replies_list = sentiment_count.predict_senti6(replies_list)
+            # predicted_replies_list = sentiment_count.predict_senti6(replies_list)
             predicted_replies_list2 = spellcheck.spellchecker(replies_list2)
             predicted_replies_list2 = predict.labeling(predicted_replies_list2)
 
             parent_id = parent_comment.id
-            for reply_info in predicted_replies_list:
-               reply_text = predicted_replies_list[reply_info]["comment"]
-               reply_author = predicted_replies_list[reply_info]["author"]
-               reply_period = predicted_replies_list[reply_info]["period"]
-               reply_like = predicted_replies_list[reply_info]["like"]
-               reply_label = predicted_replies_list[reply_info]["label"]
-               reply_labelpn = predicted_replies_list2[reply_info]["label_pn"]
+            for reply_info in replies_list:
+               predict_replies_list[reply_idx] = replies_list[reply_info]
+               reply_text = replies_list[reply_info]["comment"]
+               reply_author = replies_list[reply_info]["author"]
+               reply_period = replies_list[reply_info]["period"]
+               reply_like = replies_list[reply_info]["like"]
+               # reply_label = replies_list[reply_info]["label"]
+               reply_labelpn = replies_list[reply_info]["label_pn"]
                parsed_date = dateutil.parser.parse(reply_period)
                parsed_date = parsed_date.strftime('%Y/%m/%d')
-               predict_replies_list[reply_idx] = {'comment': reply_text, 'author': reply_author, 'label' : reply_label}
-               parent_comment.replydata_set.create(parent_id = parent_id, comment = reply_text, label = reply_labelpn , label6 = reply_label, author = reply_author, period = reply_period, like = reply_like)
+               this_reply = parent_comment.replydata_set.create(video = video,pid=comment_info, parent_id = parent_id, comment = reply_text, label = reply_labelpn, author = reply_author, period = parsed_date, like = reply_like)
+               predict_replies_list[reply_idx]["rid"] = this_reply.id
                reply_idx += 1
 
-         print("--comment6 predict complete--")
-
+      predicted_replies_list = sentiment_count.predict_senti6(predict_replies_list)
+      for i in predicted_replies_list:
+          find_id = predicted_replies_list[i]["rid"]
+          found_reply = ReplyData.objects.get(id=find_id)
+          found_reply.label6 = predicted_replies_list[i]["label"]
+          found_reply.generate()
+      print("--comment6 predict complete--")
 
       predict_count_cmt = sentiment_count.sentenceCount(predicted_comment_list)
-      predict_count_reply = sentiment_count.sentenceCount(predict_replies_list)
-      sentiment_wordcloud.wordcloud(predicted_comment_list, predict_replies_list, video_url.id)
-      
+      predict_count_reply = sentiment_count.sentenceCount(predicted_replies_list)
+
       cmt_count_list = []
       reply_count_list = []
       count_list = []
@@ -409,6 +422,7 @@ def crtdetail(request, video):
    num_pos = Comment.objects.filter(video=vid).filter(label=2).count() + ReplyData.objects.filter(video=str(vid)).filter(label=2).count()
    num_net = Comment.objects.filter(video=vid).filter(label=1).count() + ReplyData.objects.filter(video=str(vid)).filter(label=1).count()
    num_neg = Comment.objects.filter(video=vid).filter(label=0).count() + ReplyData.objects.filter(video=str(vid)).filter(label=0).count()
+
 
 
 
