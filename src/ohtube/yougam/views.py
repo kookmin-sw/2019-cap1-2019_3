@@ -406,10 +406,9 @@ def crtdetail(request, video):
    no2 = Comment.objects.filter(video=vid).order_by('-like')[1]
    no3 = Comment.objects.filter(video=vid).order_by('-like')[2]
 
-   num_pos = Comment.objects.filter(video=vid).filter(label=2).count()
-   num_net = Comment.objects.filter(video=vid).filter(label=1).count()
-   num_neg = Comment.objects.filter(video=vid).filter(label=0).count()
-
+   num_pos = Comment.objects.filter(video=vid).filter(label=2).count() + ReplyData.objects.filter(video=str(vid)).filter(label=2).count()
+   num_net = Comment.objects.filter(video=vid).filter(label=1).count() + ReplyData.objects.filter(video=str(vid)).filter(label=1).count()
+   num_neg = Comment.objects.filter(video=vid).filter(label=0).count() + ReplyData.objects.filter(video=str(vid)).filter(label=0).count()
 
 
 

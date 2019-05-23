@@ -11,7 +11,7 @@ urlpatterns = [
     path('<str:video>/change/<int:cid>/<str:senti>', views.change, name='change'),
     path('user/',views.user, name='user'),
     path('<int:video>/user/', views.userdetail, name='userdetail'),
-    path('youtube_type/<int:video>/creator/', views.crtdetail, name='crtdetail'),
+    path('<int:video>/creator/', views.crtdetail, name='crtdetail'),
     path('sending/', views.sending, name='sending'),    #webcam json message
 ]
 
