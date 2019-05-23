@@ -4,7 +4,7 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>유튜브 감성분석 - 유감dd</title>
+<title>유튜브 감성분석 - 유감</title>
 
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="{% static 'css/user.css' %}">
@@ -105,14 +105,19 @@ a {
 
             <div class="robot slideInUp animated">
                 <div class="tooltip bg" style="font-size:15px; padding-top:10px;"> 웹캠 켜서 표정 제공하기 !</div>
-
-                <a class="bg" style="padding-top:40px; color:white">
-                    ON AIR
+                <a class="bg" style="padding-top:25px; color:white" onclick="toggle()">
+                    <p id="onoff">OFF</p>
                 </a>
 
 
                 <div class="wave"></div>
             </div>
+
+            <script>
+                function toggle() {
+                     $("#panel").slideToggle("slow");
+                }
+            </script>
 
               <!-- left-top -->
               <div class="card bg-warning text-white">
@@ -122,7 +127,52 @@ a {
                 <div class="box" style="background-color: white; margin-left:15px;" >
                   <div class="card bg-warning text-white" style="width:92%; border-radius: 0px 0px; opacity:0.5;">
                       <div class="card-body" style="margin-top:-15px">크리에이터 타임 로그</div>
+
                     </div>
+                         <div class = "timelog" >
+                              <link rel="stylesheet" href="{% static 'css/timelogs.css' %}">
+                                      <div class="log">
+                                            <div class="logboard">
+                                                    {% for i in logs %}
+                                                        <img src="/yougam/media/{{i.img_path }}">
+
+                                                        <h4>
+
+                                                                {% if i.top_sentiment == "happy" %}
+                                                                    행복
+                                                                {% endif %}
+
+                                                                {% if i.top_sentiment == "sad" %}
+                                                                    슬픔
+                                                                {% endif %}
+
+                                                                {% if i.top_sentiment == "neutral" %}
+                                                                    중립
+                                                                {% endif %}
+
+                                                                {% if i.top_sentiment == "angry" %}
+                                                                    화남
+                                                                {% endif %}
+
+                                                                {% if i.top_sentiment == "scared" %}
+                                                                    겁먹은
+                                                                {% endif %}
+
+                                                                {% if i.top_sentiment == "surprised" %}
+                                                                    놀람
+                                                                {% endif %}
+
+                                                                {% if i.top_sentiment == "disgust" %}
+                                                                    혐오
+                                                                {% endif %}
+                                                        </h4>  {{ i.time }}
+                                                        <br>
+                                                    {% endfor %}
+                                            </div>
+                                      </div>
+                                <!-- 타임로그 1개 인스턴스 end -->
+
+                              </div>
               </div>
 
 
@@ -134,7 +184,7 @@ a {
 
             <iframe width="560" height="315" src="{{iframe_url}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%; height:100%; margin-top:10px">
               </iframe>
-            <p>유튜브 영상 제목입니다.</p>
+            <p id="video-title" style="font-size:20px; margin-top:20px;">{{video_title}}</p>
           </div>
 
           <div class="col" style="text-align: center; background-color: white; margin-top:10px;">
@@ -174,7 +224,72 @@ a {
                         <div class="box" style="background-color: white; margin-left:15px;">
                           <div class="card bg-warning text-white" style="width:95%; border-radius: 0px 0px;opacity:0.5">
                               <div class="card-body" style="margin-top:-15px">영상 감정 그래프</div>
-                            </div>
+
+                           </div>
+                              <div  class ="box" style="margin-top:20px;">
+
+                            <script src="https://d3js.org/d3.v5.min.js"></script>
+
+                            <div id="pie"></div>
+
+                            <script>
+                                const width = 300;
+                                const height = 300;
+                                const colorData = ["#A64E6E", "#F2BB77", "#F2A25C", "#FFE2DF", "#FFC001", "#FF6F61", "#F8A39D", "#81894E"];
+                                const data = {{ json }};
+                                data[0].label = "화남";
+                                data[1].label = "혐오";
+                                data[2].label = "놀람";
+                                data[3].label = "행복";
+                                data[4].label = "슬픔";
+                                data[5].label = "놀람";
+                                data[6].label = "중립";
+                                const arc = d3.arc().innerRadius(80).outerRadius(Math.min(width, height) / 2);
+                                const arcLabel = (() => {
+                                  const radius = Math.min(width, height) / 2 * 0.8;
+                                  return d3.arc().innerRadius(radius).outerRadius(radius);
+                                })();
+                                const pie = d3.pie()
+                                  .sort((a, b) => b.value - a.value)
+                                  .value(d => d.value);
+                                const arcs = pie(data);
+                                const svg = d3.select('#pie').append('svg').style('width', width).style('height', height)
+                                  .attr('text-anchor', 'middle')
+                                  .style('font-size', '12px sans-serif');
+                                const g = svg.append('g')
+                                  .attr('transform', `translate(${width/2}, ${height/2})`);
+                                g.selectAll('path')
+                                  .data(arcs)
+                                  .enter().append('path')
+                                    .style("fill", function(d, i) {
+                                            return colorData[i];
+                                        })
+                                    .attr('stroke', 'white')
+                                    .attr('d', arc)
+                                    .append('title')
+                                    .text(d => `${d.data.label}: ${d.data.value}`);
+                                const text = g.selectAll('text')
+                                  .data(arcs)
+                                  .enter().append('text')
+                                    .attr('transform', d => `translate(${arcLabel.centroid(d)})`)
+                                    .attr('dy', '0.35em');
+                                text.append('tspan')
+                                  .attr('x', 0)
+                                  .attr('y', '-0.7em')
+                                  .style('font-weight', 'bold')
+                                  .text(d => d.data.label)
+                                text.filter(d => (d.endAngle - d.startAngle > 0.25)).append('tspan')
+                                  .attr('x', 0)
+                                  .attr('y', '0.7em')
+                                  .attr('fill-opacity', 0.7)
+                                  .text(function(d, i) {
+                                            return  d.endAngle-d.startAngle > 0.2 ?
+                                                     " (" + Math.round(1000*(d.endAngle-d.startAngle)/(Math.PI*2))/10 + "%)" : ""
+                                        });
+                                svg.node();
+                            </script>
+
+                      </div>
                         </div>
 
           </div>
