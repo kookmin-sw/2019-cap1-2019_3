@@ -34,13 +34,14 @@ class Comment(models.Model):
 		self.save()
 
 	def __str__(self):
-		return "comment ID: {}, author: {}".format(self.cid, self.cmt)
+		return str(self.id)
 
 
 class ReplyData(models.Model):
-    video = models.IntegerField(default="")
+	video = models.IntegerField(default="")
 	parent_id = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True)
 	comment = models.TextField(default="")
+	pid = models.CharField(max_length=255,default="")
 	label  = models.IntegerField(default=3)
 	label6 = models.CharField(max_length = 100)
 	author = models.CharField(max_length = 255)

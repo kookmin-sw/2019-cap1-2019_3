@@ -17,37 +17,46 @@ import datetime, dateutil.parser
 
 def change(request,video,cid,senti):
 
-   video_url = Video.objects.get(pk=video)
-   temp_url = video_url.url
+   video_urls = Video.objects.get(pk=video)
+   temp_url = video_urls.url
    iframe_url = temp_url.replace('https://www.youtube.com/watch?v=','https://www.youtube.com/embed/')
 
    loaded_count_list = []
-   loaded_count_list.append(video_url.sentiment_neutral)
-   loaded_count_list.append(video_url.sentiment_happy)
-   loaded_count_list.append(video_url.sentiment_sad)
-   loaded_count_list.append(video_url.sentiment_surprise)
-   loaded_count_list.append(video_url.sentiment_anger)
-   loaded_count_list.append(video_url.sentiment_fear)
+   loaded_count_list.append(video_urls.sentiment_neutral)
+   loaded_count_list.append(video_urls.sentiment_happy)
+   loaded_count_list.append(video_urls.sentiment_sad)
+   loaded_count_list.append(video_urls.sentiment_surprise)
+   loaded_count_list.append(video_urls.sentiment_anger)
+   loaded_count_list.append(video_urls.sentiment_fear)
    print(loaded_count_list)
+
+   video_title = video_urls.title
+   reply = ReplyData.objects.filter(video=video)
+
+   video_id = video
+   video_instance = Video.objects.get(pk=video_id)
+   video_url = video_instance.url
+   logs = TimeLog.objects.filter(url=video_url)
+   poll_results = PieChart.objects.get(video_id=video_id)
 
    if(senti=="0"):
       cmt = Comment.objects.get(video=video,cid=cid)
       cmt.label = 0
       cmt.save()
       comments = Comment.objects.filter(video=video)
-      return render(request, "yougam/user.html", {"count":loaded_count_list,"cmts":comments,"iframe_url":iframe_url, "video_id": video_url.id})
+      return render(request, "yougam/user.html", {"count":loaded_count_list,"cmts":comments,"iframe_url":iframe_url, "video_id": video_urls.id,"logs":logs,"json": SafeString(poll_results.json_data),"video_title":video_title,"reply":reply})
    elif(senti=="1"):
       cmt = Comment.objects.get(video=video,cid=cid)
       cmt.label = 1
       cmt.save()
       comments = Comment.objects.filter(video=video)
-      return render(request, "yougam/user.html", {"count":loaded_count_list,"cmts":comments,"iframe_url":iframe_url, "video_id": video_url.id})
+      return render(request, "yougam/user.html", {"count":loaded_count_list,"cmts":comments,"iframe_url":iframe_url, "video_id": video_urls.id,"logs":logs,"json": SafeString(poll_results.json_data),"video_title":video_title,"reply":reply})
    else:
       cmt = Comment.objects.get(video=video,cid=cid)
       cmt.label = 2
       cmt.save()
       comments = Comment.objects.filter(video=video)
-      return render(request, "yougam/user.html", {"count":loaded_count_list,"cmts":comments,"iframe_url":iframe_url, "video_id": video_url.id})
+      return render(request, "yougam/user.html", {"count":loaded_count_list,"cmts":comments,"iframe_url":iframe_url, "video_id": video_urls.id,"logs":logs,"json": SafeString(poll_results.json_data),"video_title":video_title,"reply":reply})
 
 def post(request):
    if request.method == "POST":
@@ -75,72 +84,6 @@ def post(request):
       return redirect('crtdetail', video = vid)
 
    else : return HttpResponse("type is empty!")
-
-
-
-def creator(request,video):
-   vid = Video.objects.get(id=video)
-   if Comment.objects.filter(video=vid).count() < 1:
-      module_path=os.path.join(os.path.dirname(os.path.abspath( __file__ ) ), 'code')
-      sys.path.append(module_path)
-      temp = Video.objects.get(id=video)
-      url = temp.url
-
-      import predict
-      from youtube_api_cmd import YouTubeApi
-      import spellcheck
-
-      key = ''
-
-      y = YouTubeApi(100,url,key)
-      dic = {}
-      label = {}
-      comments = {}
-      dic = y.get_video_comment()
-      print("댓글 수집 완료")
-      comments = spellcheck.spellchecker(dic)
-      print("맞춤법 수정 완료")
-      label = predict.labeling(comments)
-      print("라벨링 완료")
-      for i in range(1,len(dic)+1):
-         vid = Video.objects.get(id=video)
-         d = dateutil.parser.parse(dic[i]["period"])
-         d = d.strftime('%Y/%m/%d')
-         c = Comment(video=vid,cid=i,cmt=dic[i]['comment'],label=label[i],author=dic[i]["author"],period=d,like=dic[i]["like"])
-         c.generate()
-
-   #이미 분석한것은 보여주기만 하면됨
-   else:
-      pass
-   comments = Comment.objects.filter(video=video)
-
-   vid = Video.objects.get(id=video)
-   no1 = Comment.objects.filter(video=vid).order_by('-like')[0]
-   no2 = Comment.objects.filter(video=vid).order_by('-like')[1]
-   no3 = Comment.objects.filter(video=vid).order_by('-like')[2]
-
-
-   return render(request,"yougam/cre.html",{"no1":{no1.cmt,no1.label},"no2":{no2.cmt,no2.label},"no3":{no3.cmt,no3.label}})
-
-
-
-
-def user(request):
-   return render(request,"yougam/user.html")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 from django.http import HttpResponse
@@ -180,6 +123,7 @@ def userdetail(request, video):
       import predict
       import spellcheck
       import random
+
       import sentiment_wordcloud
 
       comment_obj = YouTubeApi(100,video_url.url,YOUTUBE_API_KEY)
@@ -189,13 +133,13 @@ def userdetail(request, video):
       video_url.title = video_title
       video_url.generate()
       print(video_title)
-      print("--crawling complete--")
+      print("--comment collect complete--")
 
       comments = spellcheck.spellchecker(comment_list)
-      print("--spellcheck complete--")
+      print("--comment spellcheck complete--")
 
       label = predict.labeling(comments)
-      print("--label complete--")
+      print("--comment positibe/negative complete--")
 
        #------crawling----------
 
@@ -234,10 +178,10 @@ def userdetail(request, video):
                parsed_date = dateutil.parser.parse(reply_period)
                parsed_date = parsed_date.strftime('%Y/%m/%d')
                predict_replies_list[reply_idx] = {'comment': reply_text, 'author': reply_author, 'label' : reply_label}
-               parent_comment.replydata_set.create(video = video, parent_id = parent_id, comment = reply_text, label = reply_labelpn , label6 = reply_label, author = reply_author, period = reply_period, like = reply_like)
+               parent_comment.replydata_set.create(video = video,pid=comment_info, parent_id = parent_id, comment = reply_text, label = reply_labelpn , label6 = reply_label, author = reply_author, period = parsed_date, like = reply_like)
                reply_idx += 1
 
-         print("--predict complete--")
+         print("--comment6 predict complete--")
       predict_count_cmt = sentiment_count.sentenceCount(predicted_comment_list)
       predict_count_reply = sentiment_count.sentenceCount(predict_replies_list)
       sentiment_wordcloud.wordcloud(predicted_comment_list, predict_replies_list, video_url.id)
@@ -273,12 +217,74 @@ def userdetail(request, video):
    print(loaded_count_list)
 
    comments = Comment.objects.filter(video=video)
-   video_title = video_url.title
-   print(video_title)
+   reply = ReplyData.objects.filter(video=video)
    temp_url = video_url.url
+   video_title = video_url.title
    iframe_url = temp_url.replace('https://www.youtube.com/watch?v=','https://www.youtube.com/embed/')
-   return render(request, "yougam/user.html", {"count":loaded_count_list,"cmts":comments, "video_id":video_url.id, "iframe_url":iframe_url, "video_title":video_title})
+   vid = video_url.id
+   print("comment predict complete!")
+   print("video predict start!")
 
+   from PIL import Image
+   import cv2
+   video_instance = Video.objects.get(pk=video)
+   video_url = video_instance.url
+   use_i_th_frame = 300 #30==1sec
+   data = PieChart.objects.filter(video_id=video)#video_url) #url로 하고 싶으면 이걸 사용.
+   if data.count() < 1:
+      print("There are no data. start task")
+      current_path = os.path.dirname( os.path.abspath( __file__ ) )
+      code_path = os.path.abspath(os.path.join(current_path, 'code'))
+      videoModule_path = os.path.abspath(os.path.join(code_path, 'VideoModule'))
+      sys.path.append(videoModule_path)
+      from Commander import Commander
+      commander = Commander()
+      dumped, max_emotion_list, i_list, face_list = commander.for_youtube_video_TimeLine(use_i_th_frame, video_url)
+      will_inserted = PieChart(video_id = str(video), json_data = dumped)
+      img_path_list = []
+      for j in range(len(i_list)):
+         fileName = str(video) + "_" + str(i_list[j]) + ".png"
+         save_dir = os.path.abspath(os.path.join(current_path, os.pardir))
+         save_dir = os.path.abspath(os.path.join(save_dir, 'media'))
+         save_dir = os.path.abspath(os.path.join(save_dir, fileName))
+         destRGB = cv2.cvtColor(face_list[j], cv2.COLOR_BGR2RGB)
+         pic_file = Image.fromarray(destRGB, 'RGB')
+         pic_file.save(save_dir)
+         img_path_list.append( fileName )
+      timeLog_list = []
+      for j in range(len(i_list)):
+         second = (i_list[j]//30)%60
+         minute = ((i_list[j]//30)//60 )%60
+         hour = ((i_list[j]//30)//60 )//60
+         time_str = ""
+         if hour<10:
+             time_str += ('0' + str(hour))
+         else:
+             time_str += str(hour)
+         time_str += ":"
+         if minute<10:
+             time_str += ('0' + str(minute))
+         else:
+             time_str += str(minute)
+         time_str += ":"
+         if second<10:
+             time_str += ('0' + str(second))
+         else:
+             time_str += str(second)
+         timeLog_list.append( TimeLog(top_sentiment = max_emotion_list[j], url = video_url, time = time_str, img_path = img_path_list[j]) )
+      for j in range(len(i_list)):
+         timeLog_list[j].save()
+      will_inserted.save()
+   else:
+      print("data already exist")
+      pass
+   video_id = video
+   video_instance = Video.objects.get(pk=video_id)
+   video_url = video_instance.url
+   logs = TimeLog.objects.filter(url=video_url)
+   poll_results = PieChart.objects.get(video_id=video_id)
+
+   return render(request, "yougam/user.html", {"count":loaded_count_list,"cmts":comments, "video_id":vid, "iframe_url":iframe_url,"logs": logs, "json" : SafeString(poll_results.json_data), "video_title":video_title,"reply":reply})
 
 def crtdetail(request, video):
 
@@ -308,13 +314,14 @@ def crtdetail(request, video):
 
       comment_list = comment_obj.get_video_comment()
       video_title  = comment_obj.get_video_title()
-      print("--crawling complete--")
+
+      print("--comment collect complete--")
 
       comments = spellcheck.spellchecker(comment_list)
-      print("--spellcheck complete--")
+      print("--comment spellcheck complete--")
 
       label = predict.labeling(comments)
-      print("--label complete--")
+      print("--comment positive/negative label complete--")
 
        #------crawling----------
 
@@ -356,11 +363,13 @@ def crtdetail(request, video):
                parent_comment.replydata_set.create(parent_id = parent_id, comment = reply_text, label = reply_labelpn , label6 = reply_label, author = reply_author, period = reply_period, like = reply_like)
                reply_idx += 1
 
-         print("--predict complete--")
+         print("--comment6 predict complete--")
+
+
       predict_count_cmt = sentiment_count.sentenceCount(predicted_comment_list)
       predict_count_reply = sentiment_count.sentenceCount(predict_replies_list)
       sentiment_wordcloud.wordcloud(predicted_comment_list, predict_replies_list, video_url.id)
-
+      
       cmt_count_list = []
       reply_count_list = []
       count_list = []
@@ -391,8 +400,6 @@ def crtdetail(request, video):
    loaded_count_list.append(vid.sentiment_fear)
    print(loaded_count_list)
 
-
-
    comments = Comment.objects.filter(video=video)
    video_title = vid.title
    no1 = Comment.objects.filter(video=vid).order_by('-like')[0]
@@ -403,7 +410,81 @@ def crtdetail(request, video):
    num_net = Comment.objects.filter(video=vid).filter(label=1).count()
    num_neg = Comment.objects.filter(video=vid).filter(label=0).count()
 
+
+
+
    return render(request,"yougam/cre.html",{"no1":no1,"no2":no2,"no3":no3,"num_pos":num_pos,"num_neg":num_neg,"num_net":num_net, "video_title":video_title, "count":loaded_count_list})
+
+
+# def crtdetail(request, video):
+#     return render(request, 'yougam/webcam.html')# webcam 페이지로 연결해야 하는 경우
+
+
+
+'''
+    #이 아래 코드가 유튜브 동영상 분석 결과를 저장하는 코드입니다.
+    from PIL import Image
+    import cv2
+    video_instance = Video.objects.get(pk=video)
+    video_url = video_instance.url
+    use_i_th_frame = 300 #30==1sec
+    data = PieChart.objects.filter(video_id=video)#video_url) #url로 하고 싶으면 이걸 사용.
+    if data.count() < 1:
+        print("There are no data. start task")
+        current_path = os.path.dirname( os.path.abspath( __file__ ) )
+        code_path = os.path.abspath(os.path.join(current_path, 'code'))
+        videoModule_path = os.path.abspath(os.path.join(code_path, 'VideoModule'))
+        sys.path.append(videoModule_path)
+        from Commander import Commander
+        commander = Commander()
+        dumped, max_emotion_list, i_list, face_list = commander.for_youtube_video_TimeLine(use_i_th_frame, video_url)
+        will_inserted = PieChart(video_id = str(video), json_data = dumped)
+        img_path_list = []
+        for j in range(len(i_list)):
+            fileName = str(video) + "_" + str(i_list[j]) + ".png"
+            save_dir = os.path.abspath(os.path.join(current_path, os.pardir))
+            save_dir = os.path.abspath(os.path.join(save_dir, 'media'))
+            save_dir = os.path.abspath(os.path.join(save_dir, fileName))
+            destRGB = cv2.cvtColor(face_list[j], cv2.COLOR_BGR2RGB)
+            pic_file = Image.fromarray(destRGB, 'RGB')
+            pic_file.save(save_dir)
+            img_path_list.append( fileName )
+        timeLog_list = []
+        for j in range(len(i_list)):
+            second = (i_list[j]//30)%60
+            minute = ((i_list[j]//30)//60 )%60
+            hour = ((i_list[j]//30)//60 )//60
+            time_str = ""
+            if hour<10:
+                time_str += ('0' + str(hour))
+            else:
+                time_str += str(hour)
+            time_str += ":"
+            if minute<10:
+                time_str += ('0' + str(minute))
+            else:
+                time_str += str(minute)
+            time_str += ":"
+            if second<10:
+                time_str += ('0' + str(second))
+            else:
+                time_str += str(second)
+            timeLog_list.append( TimeLog(top_sentiment = max_emotion_list[j], url = video_url, time = time_str, img_path = img_path_list[j]) )
+        for j in range(len(i_list)):
+            timeLog_list[j].save()
+        will_inserted.save()
+    else: #already exist
+        print("data already exist")
+        pass
+    video_id = video
+    video_instance = Video.objects.get(pk=video_id)
+    video_url = video_instance.url
+    logs = TimeLog.objects.filter(Url=video_url)
+    poll_results = PieChart.objects.get(video_id=video_id)
+    return render(request, "yougam/user.html", {"logs": logs, "json" : SafeString(poll_results.json_data)})
+#동영상 코드 여기까지 입니다.
+'''
+
 
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt

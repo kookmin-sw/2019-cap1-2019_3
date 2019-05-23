@@ -127,7 +127,7 @@ a {
                 <div class="box" style="background-color: white; margin-left:15px;" >
                   <div class="card bg-warning text-white" style="width:92%; border-radius: 0px 0px; opacity:0.5;">
                       <div class="card-body" style="margin-top:-15px">크리에이터 타임 로그</div>
-
+                  
                     </div>
                          <div class = "timelog" >
                               <link rel="stylesheet" href="{% static 'css/timelogs.css' %}">
@@ -168,6 +168,8 @@ a {
                                                         </h4>  {{ i.time }}
                                                         <br>
                                                     {% endfor %}
+                                                    {% csrf_token %}
+
                                             </div>
                                       </div>
                                 <!-- 타임로그 1개 인스턴스 end -->
@@ -307,7 +309,9 @@ a {
                           <button type = "button " id = "good" type="submit" class="btn btn-primary btn-lg outline">좋아요👍</button> &nbsp&nbsp&nbsp
                           <button id = "soso" type="submit" class="btn btn-primary btn-lg outline">보통이에요👊</button> &nbsp&nbsp&nbsp
                           <button id = "bad" type="submit" class="btn btn-primary btn-lg outline">별로에요👎</button>
-                          <ul style="margin-top:20px;"id="positive" class = "list-group">
+                          
+                          <div style="height:300px; overflow: auto;">
+                                <ul style="margin-top:20px;"id="positive" class = "list-group">
                             {% for comment in cmts%}
                               {% if comment.label == 2 %}
                                 <li class="list-group-item">
@@ -349,6 +353,7 @@ a {
                                         <img src="{% static "img/img_avatar9.png" %}" class="media-object" style="width:40px">
                                       {% else %}
                                       {% endif %}
+
                                       </div>
                                    <div class="media-body">
                                       <div style="float:left"><strong>{{comment.author}}</strong> {{comment.period}} &nbsp</div>
@@ -371,10 +376,32 @@ a {
                                           </div>
                                         </div>
 
-
-                                      <div style="clear:left;margin-top:15px;float:left;margin-right:20px; ">{{comment.cmt}}</div>
+                                      <div style="clear:left;margin-top:15px;float:left;margin-right:20px; ">
+                                      {{comment.cmt}}</div>
                                     </div>
+                                  </div>
+                                  <div style="text-align: left; margin-left:40px;">
+                                      {% for rep in reply%}
 
+                                        {% if rep.pid ==  comment.cid %}
+
+                                          <button  class="btn btn-link" id = "btn{{rep.id}}" onclick="repclick(this.id)" style="clear:left"> 답글보기 </button>
+                                          <div id = "{{rep.id}}" style="display: none;margin-left: 40px;">
+                                            {{rep.comment}} by {{rep.author}} 
+                                            {% if rep.label ==  2 %}
+                                              <span style="padding:3px; background-color:#72bfb3;color:white;">긍정</span>
+                                            {% elif rep.label == 1 %}
+                                              <span style="padding:3px; background-color:#905cc4;color:white;">중립</span>
+                                            {% else %}
+                                              <span style="padding:3px; background-color:#f75175; color:white;">부정</span>
+                                            {% endif %}
+
+                                          </div>
+                                        {% else %}
+                                        {% endif %}
+
+                                      {% endfor %}
+                                      {% csrf_token %}
 
                                   </div>
 
@@ -449,14 +476,39 @@ a {
                                           </div>
                                         </div>
                                       <div style="clear:left;margin-top:15px;float:left;margin-right:20px; ">{{comment.cmt}}</div>
-                                    </div>
+                                    </div></div>
+                              <div style="text-align: left; margin-left:40px;">
+                                      {% for rep in reply%}
 
+                                        {% if rep.pid ==  comment.cid %}
+
+                                          <button  class="btn btn-link" id = "btn{{rep.id}}" onclick="repclick(this.id)" style="clear:left"> 답글보기 </button>
+                                          <div id = "{{rep.id}}" style="display: none;margin-left: 40px;">
+                                            {{rep.comment}} by {{rep.author}} 
+                                            {% if rep.label ==  2 %}
+                                              <span style="padding:3px; background-color:#72bfb3;color:white;">긍정</span>
+                                            {% elif rep.label == 1 %}
+                                              <span style="padding:3px; background-color:#905cc4;color:white;">중립</span>
+                                            {% else %}
+                                              <span style="padding:3px; background-color:#f75175; color:white;">부정</span>
+                                            {% endif %}
+
+                                          </div>
+                                        {% else %}
+                                        {% endif %}
+
+                                      {% endfor %}
+                                      {% csrf_token %}
+
+                                  </div>
 
                                 </li>
 
                               {% else %}
                               {% endif %}
                             {% endfor %}
+                            {% csrf_token %}
+
                           </ul>
 
 
@@ -526,7 +578,31 @@ a {
                                         </div>
 
                                       <div style="clear:left;margin-top:15px;float:left;margin-right:20px; ">{{comment.cmt}}</div>
-                                    </div>
+                                    </div></div>
+                                                                  <div style="text-align: left; margin-left:40px;">
+                                      {% for rep in reply%}
+
+                                        {% if rep.pid ==  comment.cid %}
+
+                                          <button  class="btn btn-link" id = "btn{{rep.id}}" onclick="repclick(this.id)" style="clear:left"> 답글보기 </button>
+                                          <div id = "{{rep.id}}" style="display: none;margin-left: 40px;">
+                                            {{rep.comment}} by {{rep.author}} 
+                                            {% if rep.label ==  2 %}
+                                              <span style="padding:3px; background-color:#72bfb3;color:white;">긍정</span>
+                                            {% elif rep.label == 1 %}
+                                              <span style="padding:3px; background-color:#905cc4;color:white;">중립</span>
+                                            {% else %}
+                                              <span style="padding:3px; background-color:#f75175; color:white;">부정</span>
+                                            {% endif %}
+
+                                          </div>
+                                        {% else %}
+                                        {% endif %}
+
+                                      {% endfor %}
+                                      {% csrf_token %}
+
+                                  </div>
 
 
                                 </li>
@@ -534,14 +610,18 @@ a {
                               {% else %}
                               {% endif %}
                             {% endfor %}
+                            {% csrf_token %}
+
                           </ul>
+                            
+                          </div>
+
+
+                          
                         </div>
 
 
             </div>
-
-
-
             <!-- right partition -->
             <div class="col">
 
@@ -609,10 +689,12 @@ a {
 
 <script>
 $(document).ready(function(){
+
   $("#positive").hide();
   $("#negative").hide();
   $("#netural").hide();
   $("#imgerror").hide();
+  $("#8").hide();
 
   $("#good").on("click",function(event){
     $("#positive").toggle();
@@ -696,8 +778,15 @@ $(document).ready(function(){
     console.log(wc_path)
   });
 
-
+  
 });
+
+function repclick(clickid){
+  console.log(clickid);
+  var index = clickid.replace("btn","");
+  $("#"+index).show();
+}
+
 
 function imgError(){
   var basicimg = document.getElementById('clickbutton');
