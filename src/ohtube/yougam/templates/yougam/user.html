@@ -127,7 +127,7 @@ a {
                 <div class="box" style="background-color: white; margin-left:15px;" >
                   <div class="card bg-warning text-white" style="width:92%; border-radius: 0px 0px; opacity:0.5;">
                       <div class="card-body" style="margin-top:-15px">크리에이터 타임 로그</div>
-                  
+
                     </div>
                          <div class = "timelog" >
                               <link rel="stylesheet" href="{% static 'css/timelogs.css' %}">
@@ -309,7 +309,7 @@ a {
                           <button type = "button " id = "good" type="submit" class="btn btn-primary btn-lg outline">좋아요👍</button> &nbsp&nbsp&nbsp
                           <button id = "soso" type="submit" class="btn btn-primary btn-lg outline">보통이에요👊</button> &nbsp&nbsp&nbsp
                           <button id = "bad" type="submit" class="btn btn-primary btn-lg outline">별로에요👎</button>
-                          
+
                           <div style="height:300px; overflow: auto;">
                                 <ul style="margin-top:20px;"id="positive" class = "list-group">
                             {% for comment in cmts%}
@@ -387,7 +387,7 @@ a {
 
                                           <button  class="btn btn-link" id = "btn{{rep.id}}" onclick="repclick(this.id)" style="clear:left"> 답글보기 </button>
                                           <div id = "{{rep.id}}" style="display: none;margin-left: 40px;">
-                                            {{rep.comment}} by {{rep.author}} 
+                                            {{rep.comment}} by {{rep.author}}
                                             {% if rep.label ==  2 %}
                                               <span style="padding:3px; background-color:#72bfb3;color:white;">긍정</span>
                                             {% elif rep.label == 1 %}
@@ -484,7 +484,7 @@ a {
 
                                           <button  class="btn btn-link" id = "btn{{rep.id}}" onclick="repclick(this.id)" style="clear:left"> 답글보기 </button>
                                           <div id = "{{rep.id}}" style="display: none;margin-left: 40px;">
-                                            {{rep.comment}} by {{rep.author}} 
+                                            {{rep.comment}} by {{rep.author}}
                                             {% if rep.label ==  2 %}
                                               <span style="padding:3px; background-color:#72bfb3;color:white;">긍정</span>
                                             {% elif rep.label == 1 %}
@@ -586,7 +586,7 @@ a {
 
                                           <button  class="btn btn-link" id = "btn{{rep.id}}" onclick="repclick(this.id)" style="clear:left"> 답글보기 </button>
                                           <div id = "{{rep.id}}" style="display: none;margin-left: 40px;">
-                                            {{rep.comment}} by {{rep.author}} 
+                                            {{rep.comment}} by {{rep.author}}
                                             {% if rep.label ==  2 %}
                                               <span style="padding:3px; background-color:#72bfb3;color:white;">긍정</span>
                                             {% elif rep.label == 1 %}
@@ -613,11 +613,11 @@ a {
                             {% csrf_token %}
 
                           </ul>
-                            
+
                           </div>
 
 
-                          
+
                         </div>
 
 
@@ -694,7 +694,6 @@ $(document).ready(function(){
   $("#negative").hide();
   $("#netural").hide();
   $("#imgerror").hide();
-  $("#8").hide();
 
   $("#good").on("click",function(event){
     $("#positive").toggle();
@@ -778,7 +777,7 @@ $(document).ready(function(){
     console.log(wc_path)
   });
 
-  
+
 });
 
 function repclick(clickid){

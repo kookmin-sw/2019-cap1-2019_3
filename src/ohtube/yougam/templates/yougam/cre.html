@@ -126,7 +126,7 @@ text.source {
 			  		<section style="float:left;">
                     <canvas style="margin-left:30px; "id="myChart" width="100" height="95"></canvas>
                     </section>
-          
+
                     <script src="{% static 'chart_js/Chart.js' %}"></script>
                     <script>
 	                    window.onload = function() {
@@ -163,8 +163,8 @@ text.source {
 
  							{% else %}
 		                    {% endif %}
-	                    	<p style="margin-top: 10px;">{{no1.cmt}}</p> 
-						
+	                    	<p style="margin-top: 10px;">{{no1.cmt}}</p>
+
 						</div>
 					</div>
 
@@ -179,21 +179,21 @@ text.source {
 							{% else %}
 		                    {% endif %}
 		                    {% if no2.label == 2 %}
-								
+
 								<span style="padding:3px; background-color:#72bfb3;color:white;"><strong>긍정</strong></span>
 								<span style="padding:3px;background-color: #98c8ea; color:#261b6d"><strong>UP&nbsp👍{{no2.like}}</strong></span>
 
 							{% else %}
 		                    {% endif %}
 		                    {% if no2.label == 1 %}
-								
+
 								<span style="padding:3px; background-color:#905cc4;color:white;"><strong>중립</strong></span>
 								<span style="padding:3px;background-color: #98c8ea; color:#261b6d"><strong>UP&nbsp👍{{no2.like}}</strong></span>
 
 							{% else %}
 		                    {% endif %}
-	                    	<p style="margin-top: 10px;">{{no2.cmt}}</p> 
-						
+	                    	<p style="margin-top: 10px;">{{no2.cmt}}</p>
+
 						</div>
 
 
@@ -215,24 +215,24 @@ text.source {
 							{% else %}
 		                    {% endif %}
 		                    {% if no3.label == 1 %}
-								
+
 
 								<span style="padding:3px; background-color:#905cc4;color:white;"><strong>중립</strong></span>
 								<span style="padding:3px;background-color: #98c8ea; color:#261b6d"><strong>UP&nbsp👍{{no3.like}}</strong></span>
 
 							{% else %}
 		                    {% endif %}
-		                    	<p style="margin-top: 10px;">{{no3.cmt}}</p> 
+		                    	<p style="margin-top: 10px;">{{no3.cmt}}</p>
 		                </div>
 					</div>
 
 
 				<div class="dot-container">
-				  <span class="dot" onclick="currentSlide(1)"></span> 
-				  <span class="dot" onclick="currentSlide(2)"></span> 
-				  <span class="dot" onclick="currentSlide(3)"></span> 
+				  <span class="dot" onclick="currentSlide(1)"></span>
+				  <span class="dot" onclick="currentSlide(2)"></span>
+				  <span class="dot" onclick="currentSlide(3)"></span>
 				</div>
-                   
+
 
       </div>
 
@@ -240,6 +240,29 @@ text.source {
             <div style="width:400px;margin-left: 80px;text-align: center;" class="alert alert-danger alert-dismissible" id="myAlert">
 		    			<strong style="padding-left:50px;">전체 댓글 감성 분포도 </strong>
 		  		  </div>
+            <div>
+            <section>
+            <canvas id="sc6" width="200" height="200" style="margin-left:15px; margin-top:20px; margin-left:170px;"></canvas>
+            </section>
+            <script>var ans = JSON.parse("{{ count }}");
+            </script>
+
+            <script>
+              var sc6 = document.getElementById('sc6');
+              console.log(ans)
+              var sentiment6 = new Chart(sc6, {
+                type: 'radar',
+                data: {
+                    labels:  ['중립', '행복', '슬픔', '놀람', '화남', '두려움'],
+                    datasets: [{
+                      label: 'sentiment',
+                      backgroundColor: "rgba(200,0,0,0.2)",
+                      data: ans
+                    }]
+                }
+            });
+            </script>
+          </div>
       </div>
 
     </div>
@@ -408,15 +431,15 @@ function showSlides(n) {
   var i;
   var slides = document.getElementsByClassName("mySlides");
   var dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}    
+  if (n > slides.length) {slideIndex = 1}
   if (n < 1) {slideIndex = slides.length}
   for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";  
+      slides[i].style.display = "none";
   }
   for (i = 0; i < dots.length; i++) {
       dots[i].className = dots[i].className.replace(" active", "");
   }
-  slides[slideIndex-1].style.display = "block";  
+  slides[slideIndex-1].style.display = "block";
   dots[slideIndex-1].className += " active";
 }
 </script>
