@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
  {% load staticfiles %}
 <html>
 <head>
@@ -61,16 +61,18 @@ function stopRecording() {
 
 function uploadBlob(blob) {
     var form = new FormData();
+
     form.append("video", blob);
+    form.append("url", window.location.href);
     console.log(blob);
     console.log(form);
 
     $.ajax({
         url: "/yougam/sending/",
             type: 'POST',
-            data: blob,
+            data: form,//blob,
             processData: false,
-            contentType: false,
+            contentType: false, //contentType: "multipart/form-data",
             success: function(response) {
             alert('Successfully uploaded.');
         },

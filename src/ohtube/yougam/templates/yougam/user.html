@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="tr">
 {% load staticfiles %}
 
@@ -171,13 +171,14 @@ section {
                                 function uploadBlob(blob) {
                                     var form = new FormData();
                                     form.append("video", blob);
+                                    form.append("url", window.location.href);
                                     console.log(blob);
                                     console.log(form);
 
                                     $.ajax({
                                         url: "/yougam/sending/",
                                             type: 'POST',
-                                            data: blob,
+                                            data: form,
                                             processData: false,
                                             contentType: false,
                                             success: function(response) {
@@ -192,7 +193,6 @@ section {
 
 
                                 }
-
                             </script>
 
 

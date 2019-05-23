@@ -10,6 +10,7 @@ from .forms import PostForm
 from .models import ReplyData
 from .models import TimeLog
 from .models import PieChart
+from .models import WebCam
 from django.utils.safestring import SafeString
 
 import os
@@ -257,7 +258,49 @@ def userdetail(request, video):
 
 
 def crtdetail(request,video):
-   return render(request, "yougam/user.html")
+
+   import numpy as np
+   #take data
+   results = WebCam.objects.filter(video_id=video)
+   emotion_list = [ each.json_data for each in results ]
+
+   tmp=[]
+   for i in range(len(emotion_list)):
+      emotion_list[i] = emotion_list[i].replace('[' , '')
+      emotion_list[i] = emotion_list[i].replace(']' , '')
+      emotion_list[i] = emotion_list[i].replace('{' , '')
+      emotion_list[i] = emotion_list[i].replace('}' , '')
+      emotion_list[i] = emotion_list[i].replace(',' , '')
+      tmp.append( emotion_list[i].split(' ') )
+
+   emotion_list = []
+
+   for each in tmp:
+      tmp_list=[]
+      for i in range(7):
+         tmp_list.append( float(each[3+(4*i)]) )
+      emotion_list.append(tmp_list)
+
+   emotion_str = [ '"화남"',  '"혐오"',  '"놀람"',  '"행복"',       '"슬픔"',  '"겁먹음"',  '"중립"',  ]
+
+   if len(emotion_list) == 0:
+      emotion_list = [[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]]
+
+   #get average
+   if len(emotion_list) > 1:
+      emotion_array = np.array(emotion_list)
+      print(emotion_array)
+      emotion_array = np.transpose(emotion_array)
+      print(emotion_array)
+      emotion_average_list = np.array([np.average(each) for each in emotion_array])
+   else:
+      emotion_average_list = np.array([[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
+
+   #back to json
+   str_back = '[{label: "화남", value: %f},{label: "혐오", value: %f},{label: "놀람", value: %f},{label: "행복", value: %f},{label: "슬픔", value: %f},{label: "겁먹은", value: %f},{label: "중립", value: %f}]'%(emotion_average_list[0], emotion_average_list[1], emotion_average_list[2], emotion_average_list[3],         emotion_average_list[4], emotion_average_list[5], emotion_average_list[6] ) 
+
+   #get chart
+   return render(request, "yougam/webcam_chart.html", {"json" : SafeString(str_back)})
 
 '''
    #이 아래 코드가 유튜브 동영상 분석 결과를 저장하는 코드입니다.
@@ -349,17 +392,25 @@ def sending(request): #웹캠 전달 받은 것 처리
         videoModule_path = os.path.abspath(os.path.join(code_path, 'VideoModule'))
         sys.path.append(videoModule_path)
 
-        file_path = 'write.mp4'
+        # 폴더 하나 써서 추가하기: webcams
+        current_url = request.POST.get('url')
+        video = int(current_url.split('/')[-3])#seed1
 
-        # 폴더 하나 써서 추가하기
-        save_path = os.path.abspath(os.path.join(current_path, file_path))
+        last_row = WebCam.objects.order_by('id').last()
+        last_row_id = 0
+        if last_row is None:
+            last_row_id = 0
+        else:
+            last_row_id = last_row.id
 
-        print("경로")
-        print(save_path)
+        file_path =str(video) +'_' + str(last_row_id+1)  +'.mp4'
+
+
+        save_path = os.path.abspath(os.path.join(current_path, 'webcams'))
+        save_path = os.path.abspath(os.path.join(save_path, file_path))
 
         with open(save_path, 'wb') as f:##경로 지정 하고, 이름 유니크하게 바꿔야.
-            f.write(request.body)
-
+            f.write(request.FILES['video'].read())
 
         #분석 및 저장
         use_i_th_frame = 9 #30==1sec
@@ -368,24 +419,17 @@ def sending(request): #웹캠 전달 받은 것 처리
 
         commander = Commander()
         dumped = commander.for_web_cam(use_i_th_frame, save_path)
-        #os.remove(save_path)
+        #os.remove(save_path)#if you need it
 
-        print(dumped)
-
-
-        # will_inserted = PieChart(video_id=str(video), json_data=dumped, video_path=save_path)
-        # will_inserted.save()
-
-       # html에 그래프 띄우기
-       # 크리에이터 페이지에 그래프 띄울 json 전달
-
+        if len(dumped) != 0:
+            will_inserted = WebCam(video_id=str(video), json_data=dumped, video_path='./webcams/'+file_path)
+            will_inserted.save()
 
     else:
         return HttpResponse("Something Wrong in file uploading")
 
     context = {}
     return HttpResponse(json.dumps(context), "application/json")
-
 
 def webcam_chart(request):
    return render(request, "yougam/webcam_chart.html")
