@@ -5,6 +5,7 @@ import random
 
 class Video(models.Model):
    url = models.CharField(max_length=255,default="")
+   title = models.CharField(max_length=255,default="")
    sentiment_neutral = models.IntegerField(default=0)
    sentiment_happy = models.IntegerField(default=0)
    sentiment_sad = models.IntegerField(default=0)
@@ -37,6 +38,7 @@ class Comment(models.Model):
 
 
 class ReplyData(models.Model):
+    video = models.IntegerField(default="")
 	parent_id = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True)
 	comment = models.TextField(default="")
 	label  = models.IntegerField(default=3)
