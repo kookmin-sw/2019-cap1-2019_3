@@ -100,21 +100,26 @@ section {
                                <div id="panel">
 
 
-                                   <div style=" width:100%; text-align:center; margin: 0 auto;">
-                                        <button  id="request" class="btn btn-outline-primary" onclick="requestVideo()" style="float:left;" >
+                                   <div style=" width:100%; text-align:center; padding-left:70px; padding-top:3px;">
+                                        <button  id="request"  onclick="requestVideo()" style="float:left;" >
                                             웹캠켜기</button>
                                         <button type="submit" id="stop" class="btn btn-outline-danger" onclick="stopRecording()" style="float:left;" >
                                             녹화완료</button>
 
+
+
                                    </div>
 
 
-                                   <div style="float:left;">
+                                   <div style="float:left; padding-top:3px; position:relative">
                                        <video autoplay="true" id="video">
 
                                        </video>
 
-                                        <p id="tag" style="display:none"> 촬영이 종료되었습니다. </p>
+                                        <p id="tag" style="position: absolute; display:none; color:white; font-size:13px;
+                                           padding-left:125px; padding-top: 100px;
+                                        ">
+                                            촬영이 종료되었습니다. </p>
                                    </div>
 
                                 </div>
@@ -182,10 +187,10 @@ section {
                                             processData: false,
                                             contentType: false,
                                             success: function(response) {
-                                            alert('성공적으로 등록되었습니다.');
+                                            console.log('성공적으로 등록되었습니다.');
                                         },
                                         error: function(jqXHR, textStatus, errorMessage) {
-                                            alert('Error:' + JSON.stringify(errorMessage));
+                                            console.log('Error:' + JSON.stringify(errorMessage));
                                         }
                                     });
 

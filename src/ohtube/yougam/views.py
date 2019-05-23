@@ -281,7 +281,7 @@ def crtdetail(request,video):
          tmp_list.append( float(each[3+(4*i)]) )
       emotion_list.append(tmp_list)
 
-   emotion_str = [ '"화남"',  '"혐오"',  '"놀람"',  '"행복"',       '"슬픔"',  '"겁먹음"',  '"중립"',  ]
+   emotion_str = [ '"화남"',  '"혐오"',  '"놀람"',  '"행복"', '"슬픔"',  '"겁먹음"',  '"중립"',  ]
 
    if len(emotion_list) == 0:
       emotion_list = [[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]]
@@ -297,7 +297,7 @@ def crtdetail(request,video):
       emotion_average_list = np.array([[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
 
    #back to json
-   str_back = '[{label: "화남", value: %f},{label: "혐오", value: %f},{label: "놀람", value: %f},{label: "행복", value: %f},{label: "슬픔", value: %f},{label: "겁먹은", value: %f},{label: "중립", value: %f}]'%(emotion_average_list[0], emotion_average_list[1], emotion_average_list[2], emotion_average_list[3],         emotion_average_list[4], emotion_average_list[5], emotion_average_list[6] ) 
+   str_back = '[{label: "화남", value: %f},{label: "혐오", value: %f},{label: "놀람", value: %f},{label: "행복", value: %f},{label: "슬픔", value: %f},{label: "겁먹은", value: %f},{label: "중립", value: %f}]'%(emotion_average_list[0], emotion_average_list[1], emotion_average_list[2], emotion_average_list[3],emotion_average_list[4], emotion_average_list[5], emotion_average_list[6] )
 
    #get chart
    return render(request, "yougam/webcam_chart.html", {"json" : SafeString(str_back)})
