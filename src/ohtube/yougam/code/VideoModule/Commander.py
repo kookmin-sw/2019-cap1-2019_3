@@ -78,6 +78,10 @@ class Commander:
         drow_this_faces = []
         preds = [[0, 0, 0, 0, 0 ,0 ,0]]
         drow_this_preds = [[]]
+
+        capture = []
+        cur_faces_len = 0
+
         while(self.imgLoader.isOpened()):
             i+=1
 
@@ -104,12 +108,26 @@ class Commander:
                      drow_this_faces = faces
                      drow_this_preds = preds
 
-            #if len(faces) != 0:
-            self.oracle.just_drow(img, drow_this_faces, drow_this_preds)
+                 this_faces_len = len(faces)
+                 if this_faces_len >0 and this_faces_len < 4:
+                     if this_faces_len > cur_faces_len:
+                         
+                         cur_faces_len = this_faces_len
+                         capture = img
+                         #print(cur_faces_len)
 
-            cv2.imshow("image", img)
-            cv2.waitKey(35)#pause for 0.010 second 1000:1s = 1000/30=0.33 : 1f
-        cv2.destroyAllWindows()
+                         #self.oracle.just_drow(img, drow_this_faces, drow_this_preds)
+                         #cv2.imshow("image", img)
+                         #cv2.waitKey(0)#pause for 0.010 second 1000:1s = 1000/30=0.33 : 1f
+                         #cv2.destroyAllWindows()
+
+
+            #if len(faces) != 0:
+            #self.oracle.just_drow(img, drow_this_faces, drow_this_preds)
+
+        #    cv2.imshow("image", img)
+        #    cv2.waitKey(35)#pause for 0.010 second 1000:1s = 1000/30=0.33 : 1f
+        #cv2.destroyAllWindows()
             
         #print('start making json')
         emotion_array = np.array(emotion_list)
@@ -130,7 +148,7 @@ class Commander:
 
         self.imgLoader.release()
 
-        return dumped
+        return dumped , capture
 
 
     def for_youtube_video_piechart(self, use_i_th_frame, video_url):

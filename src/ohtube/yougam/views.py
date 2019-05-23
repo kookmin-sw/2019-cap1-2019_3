@@ -289,9 +289,7 @@ def crtdetail(request,video):
    #get average
    if len(emotion_list) > 1:
       emotion_array = np.array(emotion_list)
-      print(emotion_array)
       emotion_array = np.transpose(emotion_array)
-      print(emotion_array)
       emotion_average_list = np.array([np.average(each) for each in emotion_array])
    else:
       emotion_average_list = np.array([[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
@@ -396,7 +394,7 @@ def sending(request): #웹캠 전달 받은 것 처리
         current_url = request.POST.get('url')
         video = int(current_url.split('/')[-3])#seed1
 
-        last_row = WebCam.objects.order_by('id').last()
+        last_row = WebCam.objects.order_by('id').last()####
         last_row_id = 0
         if last_row is None:
             last_row_id = 0
@@ -416,13 +414,25 @@ def sending(request): #웹캠 전달 받은 것 처리
         use_i_th_frame = 9 #30==1sec
 
         from Commander import Commander
-
+        import cv2
+        from PIL import Image
+        import numpy as np
         commander = Commander()
-        dumped = commander.for_web_cam(use_i_th_frame, save_path)
-        #os.remove(save_path)#if you need it
+        dumped, capture = commander.for_web_cam(use_i_th_frame, save_path)
+
+        capture_path =str(video) +'_' + str(last_row_id+1)  +'.png'
+        capture_save_path = os.path.abspath(os.path.join(current_path, 'captures'))
+        capture_save_path = os.path.abspath(os.path.join(capture_save_path, capture_path))
+        #print(capture_save_path)
+
 
         if len(dumped) != 0:
-            will_inserted = WebCam(video_id=str(video), json_data=dumped, video_path='./webcams/'+file_path)
+            destRGB = cv2.cvtColor(capture, cv2.COLOR_BGR2RGB)
+            captured_img = Image.fromarray(destRGB, 'RGB')
+
+            captured_img.save(capture_save_path)
+
+            will_inserted = WebCam(video_id=str(video), json_data=dumped, video_path='./webcams/'+file_path, capture_path='./captures/')
             will_inserted.save()
 
     else:
@@ -430,6 +440,7 @@ def sending(request): #웹캠 전달 받은 것 처리
 
     context = {}
     return HttpResponse(json.dumps(context), "application/json")
+
 
 def webcam_chart(request):
    return render(request, "yougam/webcam_chart.html")
