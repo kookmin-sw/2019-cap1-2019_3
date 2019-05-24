@@ -94,7 +94,7 @@ class Commander:
 
         capture = []
         cur_faces_len = 0
-
+        count =0
         while(self.imgLoader.isOpened()):
             i+=1
 
@@ -121,18 +121,13 @@ class Commander:
                      drow_this_faces = faces
                      drow_this_preds = preds
 
-                 this_faces_len = len(faces)
-                 if this_faces_len >0 and this_faces_len < 4:
-                     if this_faces_len > cur_faces_len:
+                 if count<5:
+                     #print('test here count ', count)
+                     for (fX,fY,fW,fH) in faces:
+                         capture = img[fY:fY + fH, fX:fX + fW]#cut face image
+                         count +=1
+                         break
                          
-                         cur_faces_len = this_faces_len
-                         capture = img
-                         #print(cur_faces_len)
-
-                         #self.oracle.just_drow(img, drow_this_faces, drow_this_preds)
-                         #cv2.imshow("image", img)
-                         #cv2.waitKey(0)#pause for 0.010 second 1000:1s = 1000/30=0.33 : 1f
-                         #cv2.destroyAllWindows()
 
 
             #if len(faces) != 0:

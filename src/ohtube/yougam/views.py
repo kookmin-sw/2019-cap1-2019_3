@@ -440,6 +440,9 @@ def crtdetail(request, video):
    #take data
    if(WebCam.objects.filter(video_id=video).count() > 0):
       results = WebCam.objects.filter(video_id=video)
+      print("@@@@@@@@@@@@@@@@")
+      print(results[0].json_data)
+      print("@@@@@@@@@@@@@@@@")
       emotion_list = [ each.json_data for each in results ]
 
       tmp=[]
@@ -467,21 +470,29 @@ def crtdetail(request, video):
       #get average
       if len(emotion_list) > 1:
          emotion_array = np.array(emotion_list)
-         print(emotion_array)
+         #print(emotion_array)
          emotion_array = np.transpose(emotion_array)
-         print(emotion_array)
+         #print(emotion_array)
          emotion_average_list = np.array([np.average(each) for each in emotion_array])
       else:
          emotion_average_list = np.array([[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
 
       #back to json
       str_back = '[{label: "화남", value: %f},{label: "혐오", value: %f},{label: "놀람", value: %f},{label: "행복", value: %f},{label: "슬픔", value: %f},{label: "겁먹은", value: %f},{label: "중립", value: %f}]'%(emotion_average_list[0], emotion_average_list[1], emotion_average_list[2], emotion_average_list[3],emotion_average_list[4], emotion_average_list[5], emotion_average_list[6] )
+      print(str_back)
+      capture = WebCam.objects.filter(video_id=video)###time log랑똑같이 꺼냄####
+      for each in capture:
+          print(each)
+
    else:
       str_back = '[{label: "화남", value: %f},{label: "혐오", value: %f},{label: "놀람", value: %f},{label: "행복", value: %f},{label: "슬픔", value: %f},{label: "겁먹은", value: %f},{label: "중립", value: %f}]'%(0.0, 0.0, 0.0, 0.0,0.0,0.0,0.0)
 
 
    #return render(request,"yougam/cre.html",{"no1":no1,"no2":no2,"no3":no3,"num_pos":num_pos,"num_neg":num_neg,"num_net":num_net, "video_title":video_title, "count":loaded_count_list,"json" : SafeString(str_back)})
    return render(request,"yougam/cre.html",{"json" : SafeString(str_back)})
+   #return render(request,"yougam/cre.html",{"json" : SafeString(results[0].json_data)})
+
+
 
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
@@ -507,7 +518,8 @@ def sending(request): #웹캠 전달 받은 것 처리
         file_path =str(video) +'_' + str(last_row_id+1)  +'.mp4'
 
 
-        save_path = os.path.abspath(os.path.join(current_path, 'webcams'))
+        save_path = os.path.abspath(os.path.join(current_path, os.pardir))
+        save_path = os.path.abspath(os.path.join(save_path, 'media'))
         save_path = os.path.abspath(os.path.join(save_path, file_path))
 
         with open(save_path, 'wb') as f:##경로 지정 하고, 이름 유니크하게 바꿔야.
@@ -524,9 +536,14 @@ def sending(request): #웹캠 전달 받은 것 처리
         dumped, capture = commander.for_web_cam(use_i_th_frame, save_path)
 
         capture_path =str(video) +'_' + str(last_row_id+1)  +'.png'
-        capture_save_path = os.path.abspath(os.path.join(current_path, 'captures'))
+
+
+        capture_save_path = os.path.abspath(os.path.join(current_path, os.pardir))
+        capture_save_path = os.path.abspath(os.path.join(capture_save_path, 'media'))
         capture_save_path = os.path.abspath(os.path.join(capture_save_path, capture_path))
+
         #print(capture_save_path)
+
 
 
         if len(dumped) != 0:
@@ -535,7 +552,7 @@ def sending(request): #웹캠 전달 받은 것 처리
 
             captured_img.save(capture_save_path)
 
-            will_inserted = WebCam(video_id=str(video), json_data=dumped, video_path='./webcams/'+file_path, capture_path='./captures/')
+            will_inserted = WebCam(video_id=str(video), json_data=dumped, video_path=save_path, capture_path=capture_save_path)
             will_inserted.save()
 
     else:
