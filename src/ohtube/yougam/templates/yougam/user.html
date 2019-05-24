@@ -8,8 +8,8 @@
 
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="{% static 'css/user.css' %}">
-<link rel="stylesheet" href="{% static 'css/webcam.css' %}">
-<link rel="stylesheet" href="{% static 'css/tooltip.css' %}">
+<link rel="stylesheet" href="{% static 'css/webcam3.css' %}">
+<link rel="stylesheet" href="{% static 'css/tooltip2.css' %}">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
@@ -95,42 +95,239 @@ a {
     color: #f9b3ba;
     box-shadow: none;
 }
+
+      .timelog img {
+      width:80px;
+      height:80px;
+      border-radius: 50px;
+      border: 2px solid pink;s
+}
+
+
+.timelog {
+    width: 100%;
+    height:100%;
+    text-align: center;
+    margin : 0 auto;
+    margin-left:100;
+    /*background-color: red;*/
+
+}
+
+.log {
+    width:90%;
+    margin-bottom :10px;
+    float: left;
+    margin-left: 20px;
+  
+}
+
+.logboard {
+    padding-top:10px;
+    margin: 0 auto;
+    overflow-x: scroll;
+    height:300px;
+}
+
+scrollbar-face-color:pink;
+
+
+
+
+
+
+.bg{background-image:-webkit-linear-gradient(right,#F64F6D,#F64F6D);background-image:-moz-linear-gradient(right,#F64F6D,#F64F6D);background-image:-o-linear-gradient(right,#F64F6D,#F64F6D);background-image:-ms-linear-gradient(right,#F64F6D,#F64F6D);background-image:linear-gradient(to left,#F64F6D,#F64F6D)}
+
+.bg{background-image:-webkit-linear-gradient(right,rgba(246, 79, 109, .95),rgba(246, 79, 102, .95));background-image:-moz-linear-gradient(right,rgba(246, 79, 102, .95),rgba(246, 79, 102, .95));background-image:-o-linear-gradient(right,rgba(246, 79, 102, .95),rgba(246,79, 102, .95));background-image:-ms-linear-gradient(right,rgba(246, 79, 102, .95),rgba(246, 79, 102, .95));background-image:linear-gradient(to left,rgba(246, 79, 102, .95),rgba(246, 79, 102, .95))}
+
+
+.tooltip{visibility:hidden}
+
+.dotMenu ul li:hover a,.ocTitle,.progDesc,.progDesc p,.progTitle,.singleProperties ul li span:last-child,
+
+.singleTitle h1{text-overflow:ellipsis}a,abbr,acronym,address,applet,article,aside,audio,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,iframe,img,input,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,sub,summary,sup,table,tbody,td,textarea,tfoot,th,thead,time,tr,tt,ul,var,video{margin:0;padding:0;border:0;vertical-align:baseline;box-sizing:border-box}body{line-height:1;font-family:Roboto,sans-serif;background:#fafafa}
+
+.tooltip:before{content:" ";pointer-events:none}
+
+.robot a,ul.fmSocial li,ul.fmSocial li a{display:block}
+
+.robot{position:fixed;left:50px;top:30PX;z-index:22}
+
+.searchBox,.wave{top:0;bottom:0;right:0;left:0}
+
+.robot a{width:70px;height:70px;-webkit-border-radius:50px;-moz-border-radius:50px;border-radius:50px;z-index:22;position:relative;padding:16px}
+.robot .wave:after,.tooltip,.tooltip:before,.wave{position:absolute}
+.robot .wave:after,.robot .wave:before{background-color:rgba(246, 79, 102, 0.4);content:' ';display:block;width:70px;border-radius:200px;height:70px}
+.robot .wave:before{position:absolute;z-index:3;-webkit-animation:ping 3s infinite;animation:ping 3s infinite;animation-delay:2s}
+.robot .wave:after{z-index:2;-webkit-animation:ping2 3s infinite;animation:ping2 3s infinite;animation-delay:2s}
+@-webkit-keyframes ping{0%{transform:scale(1);opacity:0}50%{transform:scale(1.25);opacity:1}75%{transform:scale(1.25);opacity:0}100%{opacity:0}}@keyframes ping{0%{transform:scale(1);opacity:0}50%{transform:scale(1.25);opacity:1}75%{transform:scale(1.25);opacity:0}100%{opacity:0}}@-webkit-keyframes ping2{0%{transform:scale(1);opacity:0}50%{transform:scale(1.5);opacity:1}75%{transform:scale(1.5);opacity:0}100%{opacity:0}}@keyframes ping2{0%{transform:scale(1);opacity:0}50%{transform:scale(1.5);opacity:1}75%{transform:scale(1.5);opacity:0}100%{opacity:0}}
+
+.tooltip{text-align:center;}
+.tooltip{-webkit-box-shadow:0 2px 4px rgba(17,21,25,.36);-moz-box-shadow:0 2px 4px rgba(17,21,25,.36);box-shadow:0 2px 4px rgba(17,21,25,.36);top:-60px;height:30px;width:140px;color:#fff;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;line-height:40px;left:-35px;font-size:13px;opacity:0;transition:.3s}
+.tooltip:before{top:100%;left:50%;border:solid transparent;height:0;width:0;border-color:rgba(246, 79, 102, 0);border-top-color:#F64F6D;border-width:8px;margin-left:-8px}
+.robot:hover .tooltip{top:-35px;visibility:visible;opacity:1;transition:.3s}
+
+@media only screen and (max-width:1600px){.fixedRekLeft,.fixedRekRight{display:none}}
+@media only screen and (max-width:1280px){.fixedRekLeft,.fixedRekRight,.indexRight .blogSecim li:nth-child(+n+5),.sidebarPop li:nth-child(+n+7){display:none}
+
+.owl-item img{width:100%;height:inherit}
+.robot{display:none}
+.owl-dots{display:table}
+
 </style>
-<header>
+<body>
     <!--  3등분으로 나누어 어떤 모듈인지  -->
 
     <div class = "row">
 
           <div class="col" style="text-align: center; margin-top:10px;">
 
-            <div class="robot slideInUp animated">
-                <div class="tooltip bg" style="font-size:15px; padding-top:10px;"> 웹캠 켜서 표정 제공하기 !</div>
-                <a class="bg" style="padding-top:25px; color:white" onclick="toggle()">
-                    <p id="onoff">OFF</p>
-                </a>
-
-
-                <div class="wave"></div>
-            </div>
-
-            <script>
-                function toggle() {
-                     $("#panel").slideToggle("slow");
-                }
-            </script>
 
               <!-- left-top -->
               <div class="card bg-warning text-white">
                   <div class="card-body" style="margin-top:-10px;">비디오 분석</div>
                 </div>
+            
 
+
+                  <!-- tooltip -->
+                  <div class="robot slideInUp animated">
+                            <div class="tooltip bg" style="font-size:12px; padding-top:2px; text-align:center; "> 웹캠 켜서 표정 제공하기!</div>
+
+
+                            <a class="bg" style="padding-top:25px; color:white" onclick="toggle()">
+                                <p id="onoff">OFF</p>
+                            </a>
+
+                            <div class="wave"></div>
+                  </div>
+
+                            <script>
+                                function toggle() {
+                                     $("#panel").slideToggle("slow");
+                                }
+                            </script>
+
+
+                <!-- webcam -->
                 <div class="box" style="background-color: white; margin-left:15px;" >
                   <div class="card bg-warning text-white" style="width:92%; border-radius: 0px 0px; opacity:0.5;">
                       <div class="card-body" style="margin-top:-15px">크리에이터 타임 로그</div>
-
                     </div>
+
+
+
+
+
+                        <!-- timelog -->
                          <div class = "timelog" >
-                              <link rel="stylesheet" href="{% static 'css/timelogs.css' %}">
+
+
+                               <div id="panel">
+
+
+                                   <div style=" width:100%; text-align:center; padding-left:100px; padding-top:3px;">
+                                        <button  id="request"  onclick="requestVideo()" style="float:left;" >
+                                            웹캠켜기</button>
+                                        <button type="submit" id="stop" class="btn btn-outline-danger" onclick="stopRecording()" style="float:left;" >
+                                            녹화완료</button>
+
+
+
+                                   </div>
+
+
+                                   <div style="float:left; padding-top:3px; position:relative">
+                                       <video autoplay="true" id="video">
+
+                                       </video>
+
+                                        <p id="tag" style="position: absolute; display:none; color:white; font-size:13px;
+                                           padding-left:125px; padding-top: 100px;
+                                        ">
+                                            촬영이 종료되었습니다. </p>
+                                   </div>
+
+                                </div>
+
+
+                                <script>
+
+                                var localstream;
+
+
+                                function requestVideo() {
+                                    $(".bg p").text("ON");
+                                    tag.style.display = 'none';
+
+                                    if (navigator.mediaDevices.getUserMedia) {
+                                        var video = document.querySelector("#video");
+                                        navigator.mediaDevices.getUserMedia({video: true})
+                                      .then(function(stream) {
+                                        video.srcObject = stream;
+                                        localstream = stream;
+
+                                        console.log("start");
+
+                                        recorder = new MediaRecorder(video.srcObject);
+                                        recorder.start();
+
+                                        console.log("start recoding");
+                                      })
+                                      .catch(function(err0r) {
+                                        console.log("Something went wrong!");
+                                      });
+                                    }
+                                }
+
+
+                                function stopRecording() {
+                                  recorder.ondataavailable = e => {
+                                    console.log(e);
+                                    uploadBlob(e.data);
+                                  };
+
+                                  recorder.stop();
+                                  console.log("recoding stop");
+                                  localstream.getTracks()[0].stop();
+
+                                  console.log("webcam stop");
+                                  tag.style.display = 'block';
+                                  $(".bg p").text("OFF");
+                                }
+
+
+
+                                function uploadBlob(blob) {
+                                    var form = new FormData();
+                                    form.append("video", blob);
+                                    form.append("url", window.location.href);
+                                    console.log(blob);
+                                    console.log(form);
+
+                                    $.ajax({
+                                        url: "/yougam/sending/",
+                                            type: 'POST',
+                                            data: form,
+                                            processData: false,
+                                            contentType: false,
+                                            success: function(response) {
+                                            console.log('성공적으로 등록되었습니다.');
+                                        },
+                                        error: function(jqXHR, textStatus, errorMessage) {
+                                            console.log('Error:' + JSON.stringify(errorMessage));
+                                        }
+                                    });
+
+
+
+
+                                }
+                            </script>
+
+
+
+                              
                                       <div class="log">
                                             <div class="logboard">
                                                     {% for i in logs %}
@@ -213,14 +410,15 @@ a {
 
     </div>
 
-</header>
 
-<body>
+
 
     <div class="row">
 
             <!-- left partition -->
             <div class="col" style="text-align: center;">
+
+
 
                      <!-- 영상 분석 모듈이 들어갈 부분 --->
                         <div class="box" style="background-color: white; margin-left:15px;">

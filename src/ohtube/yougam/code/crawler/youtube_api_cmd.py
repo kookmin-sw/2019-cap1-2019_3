@@ -4,7 +4,7 @@ from urllib import *
 import argparse
 from urllib.parse import urlparse, urlencode, parse_qs
 from urllib.request import  urlopen
-
+import ssl
 
 YOUTUBE_COMMENT_URL = 'https://www.googleapis.com/youtube/v3/commentThreads'
 YOUTUBE_VIDEO_URL = 'https://www.googleapis.com/youtube/v3/videos'
@@ -136,14 +136,13 @@ class YouTubeApi():
         return(mat["items"][0]["snippet"]["title"])
 
 
-
     def openURL(self, url, parms):
-            f = urlopen(url + '?' + urlencode(parms))
+            context = ssl._create_unverified_context()
+            f = urlopen(url + '?' + urlencode(parms), context=context)
             data = f.read()
             f.close()
             matches = data.decode("utf-8")
             return matches
-
 
 def main():
     y = YouTubeApi(100,'https://www.youtube.com/watch?v=r4fvSf4xGU4','')

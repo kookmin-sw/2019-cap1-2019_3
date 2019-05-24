@@ -7,6 +7,7 @@ import json
 from Oracle import Oracle
 from Tensor_Mini_Xception import Tensor_Mini_Xception as TMX
 from ImgLoader import ImgLoader
+from subprocess import call
 
 
 
@@ -29,14 +30,27 @@ def make_relative_to_absolute(R_path):
         #print('mid term check', result)
 
     return result
+
+
+
+
 def downloadYouTube(videourl, path):
-    yt = YouTube(videourl)
-    yt = yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first()
-    if not os.path.exists(path):
-        os.makedirs(path)
-    yt.download(path)
+    current_path = os.path.dirname( os.path.abspath( __file__ ) )
+    download_path = os.path.abspath(os.path.join(current_path, 'videos'))
 
+    video_url = videourl
 
+    serial = video_url.split('v=')[1]
+
+    download_path = os.path.abspath(os.path.join(download_path, serial))
+
+    os.mkdir(download_path)
+
+    download_path += '/%(title)s.%(ext)s'
+
+    print(download_path)
+    command = "youtube-dl -o "+ download_path + " --no-check-certificate " + videourl
+    call(command.split(), shell=False)
 
 def downloadYouTube_if_not_exist(video_url, download_path, serial):
     my_download_path = make_relative_to_absolute(download_path)

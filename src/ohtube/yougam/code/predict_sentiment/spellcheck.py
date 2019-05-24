@@ -39,17 +39,21 @@ def spellchecker(comment_list):
             response = requests.get(url,params=params).text
             response = response.replace(params['_callback'] + '(','')
             response = response.replace(');','')
-            response_dict = json.loads(response)
+            try:
+                response_dict = json.loads(response)
 
-            result_text = response_dict['message']['result']['html']
-            result_text = re.sub(r'<\/?.*?>','',result_text)
-            #removed_emoji = hangul.sub('', result_text)
-            removed_emoji = result_text
-            translation = translate_client.translate(removed_emoji, target_language='ko')
-            translated_sentence = translation['translatedText']
-            for i in range(0,len(emoticon_list)):
-                translated_sentence = translated_sentence.replace(emoticon_list[i],emotion_list[i])
-            comment_list[comment_key]['cor_comment'] = translated_sentence
+                result_text = response_dict['message']['result']['html']
+                result_text = re.sub(r'<\/?.*?>','',result_text)
+                #removed_emoji = hangul.sub('', result_text)
+                removed_emoji = result_text
+                translation = translate_client.translate(removed_emoji, target_language='ko')
+                translated_sentence = translation['translatedText']
+                for i in range(0,len(emoticon_list)):
+                    translated_sentence = translated_sentence.replace(emoticon_list[i],emotion_list[i])
+                comment_list[comment_key]['cor_comment'] = translated_sentence
+            except:
+                comment_list[comment_key]['cor_comment'] = comment
+
         else:
             comment_list[comment_key]['cor_comment'] = comment
    

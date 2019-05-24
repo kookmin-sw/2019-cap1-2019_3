@@ -10,6 +10,8 @@ from .forms import PostForm
 from .models import ReplyData
 from .models import TimeLog
 from .models import PieChart
+from .models import WebCam
+
 from django.utils.safestring import SafeString
 
 import os
@@ -294,6 +296,10 @@ def userdetail(request, video):
 
    return render(request, "yougam/user.html", {"count":loaded_count_list,"cmts":comments, "video_id":vid, "iframe_url":iframe_url,"logs": logs, "json" : SafeString(poll_results.json_data), "video_title":video_title,"reply":reply})
 
+
+
+
+
 def crtdetail(request, video):
 
    video_url = Video.objects.get(pk=video)
@@ -426,82 +432,55 @@ def crtdetail(request, video):
 
 
 
-   return render(request,"yougam/cre.html",{"no1":no1,"no2":no2,"no3":no3,"num_pos":num_pos,"num_neg":num_neg,"num_net":num_net, "video_title":video_title, "count":loaded_count_list})
+   import numpy as np
+   #take data
+   if(WebCam.objects.filter(video_id=video).count() > 0):
+      results = WebCam.objects.filter(video_id=video)
+      emotion_list = [ each.json_data for each in results ]
+
+      tmp=[]
+      for i in range(len(emotion_list)):
+         emotion_list[i] = emotion_list[i].replace('[' , '')
+         emotion_list[i] = emotion_list[i].replace(']' , '')
+         emotion_list[i] = emotion_list[i].replace('{' , '')
+         emotion_list[i] = emotion_list[i].replace('}' , '')
+         emotion_list[i] = emotion_list[i].replace(',' , '')
+         tmp.append( emotion_list[i].split(' ') )
+
+      emotion_list = []
+
+      for each in tmp:
+         tmp_list=[]
+         for i in range(7):
+            tmp_list.append( float(each[3+(4*i)]) )
+         emotion_list.append(tmp_list)
+
+      emotion_str = [ '"화남"',  '"혐오"',  '"놀람"',  '"행복"', '"슬픔"',  '"겁먹음"',  '"중립"',  ]
+
+      if len(emotion_list) == 0:
+         emotion_list = [[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]]
+
+      #get average
+      if len(emotion_list) > 1:
+         emotion_array = np.array(emotion_list)
+         print(emotion_array)
+         emotion_array = np.transpose(emotion_array)
+         print(emotion_array)
+         emotion_average_list = np.array([np.average(each) for each in emotion_array])
+      else:
+         emotion_average_list = np.array([[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
+
+      #back to json
+      str_back = '[{label: "화남", value: %f},{label: "혐오", value: %f},{label: "놀람", value: %f},{label: "행복", value: %f},{label: "슬픔", value: %f},{label: "겁먹은", value: %f},{label: "중립", value: %f}]'%(emotion_average_list[0], emotion_average_list[1], emotion_average_list[2], emotion_average_list[3],emotion_average_list[4], emotion_average_list[5], emotion_average_list[6] )
+   else:
+      str_back = '[{label: "화남", value: %f},{label: "혐오", value: %f},{label: "놀람", value: %f},{label: "행복", value: %f},{label: "슬픔", value: %f},{label: "겁먹은", value: %f},{label: "중립", value: %f}]'%(0.0, 0.0, 0.0, 0.0,0.0,0.0,0.0)
 
 
-# def crtdetail(request, video):
-#     return render(request, 'yougam/webcam.html')# webcam 페이지로 연결해야 하는 경우
-
-
-
-'''
-    #이 아래 코드가 유튜브 동영상 분석 결과를 저장하는 코드입니다.
-    from PIL import Image
-    import cv2
-    video_instance = Video.objects.get(pk=video)
-    video_url = video_instance.url
-    use_i_th_frame = 300 #30==1sec
-    data = PieChart.objects.filter(video_id=video)#video_url) #url로 하고 싶으면 이걸 사용.
-    if data.count() < 1:
-        print("There are no data. start task")
-        current_path = os.path.dirname( os.path.abspath( __file__ ) )
-        code_path = os.path.abspath(os.path.join(current_path, 'code'))
-        videoModule_path = os.path.abspath(os.path.join(code_path, 'VideoModule'))
-        sys.path.append(videoModule_path)
-        from Commander import Commander
-        commander = Commander()
-        dumped, max_emotion_list, i_list, face_list = commander.for_youtube_video_TimeLine(use_i_th_frame, video_url)
-        will_inserted = PieChart(video_id = str(video), json_data = dumped)
-        img_path_list = []
-        for j in range(len(i_list)):
-            fileName = str(video) + "_" + str(i_list[j]) + ".png"
-            save_dir = os.path.abspath(os.path.join(current_path, os.pardir))
-            save_dir = os.path.abspath(os.path.join(save_dir, 'media'))
-            save_dir = os.path.abspath(os.path.join(save_dir, fileName))
-            destRGB = cv2.cvtColor(face_list[j], cv2.COLOR_BGR2RGB)
-            pic_file = Image.fromarray(destRGB, 'RGB')
-            pic_file.save(save_dir)
-            img_path_list.append( fileName )
-        timeLog_list = []
-        for j in range(len(i_list)):
-            second = (i_list[j]//30)%60
-            minute = ((i_list[j]//30)//60 )%60
-            hour = ((i_list[j]//30)//60 )//60
-            time_str = ""
-            if hour<10:
-                time_str += ('0' + str(hour))
-            else:
-                time_str += str(hour)
-            time_str += ":"
-            if minute<10:
-                time_str += ('0' + str(minute))
-            else:
-                time_str += str(minute)
-            time_str += ":"
-            if second<10:
-                time_str += ('0' + str(second))
-            else:
-                time_str += str(second)
-            timeLog_list.append( TimeLog(top_sentiment = max_emotion_list[j], url = video_url, time = time_str, img_path = img_path_list[j]) )
-        for j in range(len(i_list)):
-            timeLog_list[j].save()
-        will_inserted.save()
-    else: #already exist
-        print("data already exist")
-        pass
-    video_id = video
-    video_instance = Video.objects.get(pk=video_id)
-    video_url = video_instance.url
-    logs = TimeLog.objects.filter(Url=video_url)
-    poll_results = PieChart.objects.get(video_id=video_id)
-    return render(request, "yougam/user.html", {"logs": logs, "json" : SafeString(poll_results.json_data)})
-#동영상 코드 여기까지 입니다.
-'''
-
+   return render(request,"yougam/cre.html",{"no1":no1,"no2":no2,"no3":no3,"num_pos":num_pos,"num_neg":num_neg,"num_net":num_net, "video_title":video_title, "count":loaded_count_list,"json" : SafeString(str_back)})
 
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
-def sending(request):#웹캠 전달 받은 것 처리
+def sending(request): #웹캠 전달 받은 것 처리
     if request.method == 'POST':
         #경로설정
         current_path = os.path.dirname( os.path.abspath( __file__ ) )
@@ -509,25 +488,50 @@ def sending(request):#웹캠 전달 받은 것 처리
         videoModule_path = os.path.abspath(os.path.join(code_path, 'VideoModule'))
         sys.path.append(videoModule_path)
 
-        file_path = 'write.mp4'
-        save_path = os.path.abspath(os.path.join(current_path, file_path))
+        # 폴더 하나 써서 추가하기: webcams
+        current_url = request.POST.get('url')
+        video = int(current_url.split('/')[-3])#seed1
+
+        last_row = WebCam.objects.order_by('id').last()####
+        last_row_id = 0
+        if last_row is None:
+            last_row_id = 0
+        else:
+            last_row_id = last_row.id
+
+        file_path =str(video) +'_' + str(last_row_id+1)  +'.mp4'
+
+
+        save_path = os.path.abspath(os.path.join(current_path, 'webcams'))
+        save_path = os.path.abspath(os.path.join(save_path, file_path))
+
         with open(save_path, 'wb') as f:##경로 지정 하고, 이름 유니크하게 바꿔야.
-            f.write(request.body)
+            f.write(request.FILES['video'].read())
 
         #분석 및 저장
         use_i_th_frame = 9 #30==1sec
 
         from Commander import Commander
-
+        import cv2
+        from PIL import Image
+        import numpy as np
         commander = Commander()
-        dumped = commander.for_web_cam(use_i_th_frame, save_path)
-        os.remove(save_path)
+        dumped, capture = commander.for_web_cam(use_i_th_frame, save_path)
 
-        print(dumped)
+        capture_path =str(video) +'_' + str(last_row_id+1)  +'.png'
+        capture_save_path = os.path.abspath(os.path.join(current_path, 'captures'))
+        capture_save_path = os.path.abspath(os.path.join(capture_save_path, capture_path))
+        #print(capture_save_path)
 
 
-        #html에 그래프 띄우기
+        if len(dumped) != 0:
+            destRGB = cv2.cvtColor(capture, cv2.COLOR_BGR2RGB)
+            captured_img = Image.fromarray(destRGB, 'RGB')
 
+            captured_img.save(capture_save_path)
+
+            will_inserted = WebCam(video_id=str(video), json_data=dumped, video_path='./webcams/'+file_path, capture_path='./captures/')
+            will_inserted.save()
 
     else:
         return HttpResponse("Something Wrong in file uploading")
@@ -536,10 +540,4 @@ def sending(request):#웹캠 전달 받은 것 처리
     return HttpResponse(json.dumps(context), "application/json")
 
 
-
-def user(request):
-   video_id = 1
-   logs = TimeLog.objects.filter()
-   poll_results = PieChart.objects.get(video_id=video_id)
-
-   return render(request, "yougam/user.html", {"logs": logs, "json" : SafeString(poll_results.json_data)})
+    
