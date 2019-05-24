@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
-import socket
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -27,20 +26,7 @@ SECRET_KEY = '&t+1f&8f=^n%+=z_1r54)0rn8_-h7!d!9#=pdpa2jxkqlushw8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
-
-# http start
-SECURE_SSL_REDIRECT = True
-
-CORS_REPLACE_HTTPS_REFERER      = False
-HOST_SCHEME                     = "http://"
-SECURE_PROXY_SSL_HEADER         = None
-SECURE_SSL_REDIRECT             = False
-SESSION_COOKIE_SECURE           = False
-CSRF_COOKIE_SECURE              = False
-SECURE_HSTS_SECONDS             = None
-SECURE_HSTS_INCLUDE_SUBDOMAINS  = False
-SECURE_FRAME_DENY               = False
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -53,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'yougam',
-    "sslserver",
 
 ]
 
@@ -139,11 +124,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
+
 # 이미지 파일을 저장할 폴더 지정
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_ROOT_URL = '.'
-
-
-MEDIA_URL = '/captures/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'captures')

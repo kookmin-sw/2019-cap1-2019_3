@@ -1,13 +1,10 @@
 #panel {
-      padding-left:3px;
+      padding-left:1px;
       display: none;
       border: solid 10px pink;
       border-radius : 20px;
       width:94%;
       height: 300px;
-      margin-left:20px;
-      background-color: white;
-
       text-align: center;
 
 }
@@ -67,4 +64,3 @@ border:0px solid #a0d5c5; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
  margin-left:5px;
 }
 </style>
-

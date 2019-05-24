@@ -5,6 +5,7 @@ import random
 
 class Video(models.Model):
    url = models.CharField(max_length=255,default="")
+   title = models.CharField(max_length=255,default="")
    sentiment_neutral = models.IntegerField(default=0)
    sentiment_happy = models.IntegerField(default=0)
    sentiment_sad = models.IntegerField(default=0)
@@ -33,12 +34,14 @@ class Comment(models.Model):
 		self.save()
 
 	def __str__(self):
-		return "comment ID: {}, author: {}".format(self.cid, self.cmt)
+		return str(self.id)
 
 
 class ReplyData(models.Model):
+	video = models.IntegerField(default=-1)
 	parent_id = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True)
 	comment = models.TextField(default="")
+	pid = models.CharField(max_length=255,default="")
 	label  = models.IntegerField(default=3)
 	label6 = models.CharField(max_length = 100)
 	author = models.CharField(max_length = 255)
@@ -76,12 +79,10 @@ class PieChart(models.Model):
 	def generate(self):
 		self.save()
 
-
 class WebCam(models.Model):
 	video_id = models.CharField(max_length=100)
 	json_data = models.CharField(max_length=400)
 	video_path = models.CharField(max_length=400, default='SOME STRING')
-	capture_path = models.CharField(max_length=400, default='SOME STRING')
 
 	def __str__(self):
 		return "video_id: {}".format(self.video_id)

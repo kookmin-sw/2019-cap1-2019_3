@@ -4,10 +4,10 @@ from urllib import *
 import argparse
 from urllib.parse import urlparse, urlencode, parse_qs
 from urllib.request import  urlopen
-
+import ssl
 
 YOUTUBE_COMMENT_URL = 'https://www.googleapis.com/youtube/v3/commentThreads'
-YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search'
+YOUTUBE_VIDEO_URL = 'https://www.googleapis.com/youtube/v3/videos'
 
 
 class YouTubeApi():
@@ -119,17 +119,33 @@ class YouTubeApi():
         return self.comments
 
 
+    def get_video_title(self):
+        vid = str()
+        video_id = urlparse(str(self.videourl))
+        q = parse_qs(video_id.query)
+        vid = q["v"][0]
+
+        parms = {
+                    'part': 'snippet',
+                    'id': vid,
+                    'key': self.key
+                }
+        matches = self.openURL(YOUTUBE_VIDEO_URL, parms)
+        mat = json.loads(matches)
+
+        return(mat["items"][0]["snippet"]["title"])
+
 
     def openURL(self, url, parms):
-            f = urlopen(url + '?' + urlencode(parms))
+            context = ssl._create_unverified_context()
+            f = urlopen(url + '?' + urlencode(parms), context=context)
             data = f.read()
             f.close()
             matches = data.decode("utf-8")
             return matches
 
-
 def main():
-    y = YouTubeApi(100,'https://www.youtube.com/watch?v=r4fvSf4xGU4','AIzaSyD5EuiUIl4UGa1uKt0yb1IGfUNWtISbIog')
+    y = YouTubeApi(100,'https://www.youtube.com/watch?v=r4fvSf4xGU4','')
     y.get_video_comment()
 
 if __name__ == '__main__':

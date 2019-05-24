@@ -23,9 +23,6 @@
    	@import url('https://fonts.googleapis.com/css?family=Roboto');
 
 
-    body {
-        overflow:hidden;
-    }
     #naverIdLogin img{
       width:155px !important;
       height:auto !important;
@@ -240,12 +237,6 @@
     content: "LOADING...";
   }
 }
-
-#kakao-login-btn {
-    width:155px;
-    height:auto;
-    float:left;
-}
 </style>
 
   <body>
@@ -279,96 +270,35 @@
 
 
                           <!-- center 부분 (wide) -->
-                          <div class="col-md-6" style=" height:400px; text-align: center;  color:#fff; ">
+                          <div class="col-md-6" style=" height:400px; text-align: center;  color:#fff; padding-top:20px;">
 
                                 <!-- 로고 -->
-                                <h3> 유튜브 감성분석 - 유감 </h3><br>
+                                <h3> 유튜브 감성분석 사이트 </h3><br>
                                 <!-- <img src="../../Images/OhTube_Logo.png" style="width:200px; height:200px;"><br> -->
-
 
 
                                 <!-- 소셜 로그인 부분 -->
                                 <div id="snsLogin">
-
-                                  <!-- 네이버아이디로그인 버튼 노출 영역 -->
-
-
-
-                                        <div id="naverIdLogin">
-                                    <a id="naverIdLogin_loginButton" href="#" role="button"><img src="https://static.nid.naver.com/oauth/big_g.PNG" width="150px"></a>
-                                    </div>
-
+                                  <!-- 네이버아이디로로그인 버튼 노출 영역 -->
+                                    <p>
+                                      <div id="naverIdLogin"><a id="naverIdLogin_loginButton" href="#" role="button"><img src="https://static.nid.naver.com/oauth/big_g.PNG" width="150px"></a></div>
+                                    </p>
 
                                     <br><br>
-
-
 
                                     <!-- 페이스북 아이디 로그인 버튼 -->
-
                                     <div class="fb-login-button" data-width="" data-size="medium" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="false" style="float:left;"></div>
-                                     <br> <br>
-
-
-
-                                    <!--  카카오 아이디 로그인 -->
-                                    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-
-
-
-                                    <a id="kakao-login-btn"></a>
-                                    <a href="http://developers.kakao.com/logout"></a>
-
-
-                                    <script>
-                                        //<![CDATA[
-                                       // 사용할 앱의 JavaScript 키를 설정해 주세요.
-                                       Kakao.init('a514e7df1ca6ccfc85334e262d4fe796');
-
-                                       // 카카오 로그인 버튼을 생성합니다.
-                                       Kakao.Auth.createLoginButton({
-                                         container: '#kakao-login-btn',
-                                         success: function(authObj) {
-
-                // alert(JSON.stringify(authObj));
-                // console.log(JSON.stringify(authObj));
-
-                //카카오톡 로그인 API시작(닉네임, 프로필 사진)
-                Kakao.API.request({
-                    url: '/v1/user/me',
-                        success: function(res) {
-                            console.log(res);
-                            alert(JSON.stringify(res.properties.nickname)+ " 님 환영합니다 !");
-
-
-                 },
-
-                    fail: function (error) {
-                        alert(JSON.stringify(error));
-                    }
-
-                });
-
-            },
-                                         fail: function(err) {
-                                         alert(JSON.stringify(err));
-                                         }
-                                       });
-                                        //
-
-                                    </script>
-
 
                                     <br><br>
-                                    <button id="gnbLogin" class="btn btn-default"> 로그아웃 </button>
+
 
                                 </div>
-
-
+                                  <button id="gnbLogin"> 로그아웃 </button>
 
                                 <!-- 사용자 or 크리에이터 라디오 버튼 -->
 
                                 <!-- 검색창 & 버튼-->
-                                <form method= "POST" class="post-form form-inline" style="padding-top:5px;">
+                                <form method= "POST" class="post-form form-inline" style="padding-top:20px;">
                                   <div style="padding-top:20px;">
                                       <label class="radio-inline">
                                         <input type="radio" name="userRadio" id="Radio1" value="user"> 시청자 분석
