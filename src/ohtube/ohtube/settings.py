@@ -139,8 +139,11 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
-
 # 이미지 파일을 저장할 폴더 지정
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_ROOT_URL = '.'
+
+
+MEDIA_URL = '/captures/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'captures')

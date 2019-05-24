@@ -261,41 +261,44 @@ def crtdetail(request,video):
 
    import numpy as np
    #take data
-   results = WebCam.objects.filter(video_id=video)
-   emotion_list = [ each.json_data for each in results ]
+   if(WebCam.objects.filter(video_id=video).count() > 0):
+      results = WebCam.objects.filter(video_id=video)
+      emotion_list = [ each.json_data for each in results ]
 
-   tmp=[]
-   for i in range(len(emotion_list)):
-      emotion_list[i] = emotion_list[i].replace('[' , '')
-      emotion_list[i] = emotion_list[i].replace(']' , '')
-      emotion_list[i] = emotion_list[i].replace('{' , '')
-      emotion_list[i] = emotion_list[i].replace('}' , '')
-      emotion_list[i] = emotion_list[i].replace(',' , '')
-      tmp.append( emotion_list[i].split(' ') )
+      tmp=[]
+      for i in range(len(emotion_list)):
+         emotion_list[i] = emotion_list[i].replace('[' , '')
+         emotion_list[i] = emotion_list[i].replace(']' , '')
+         emotion_list[i] = emotion_list[i].replace('{' , '')
+         emotion_list[i] = emotion_list[i].replace('}' , '')
+         emotion_list[i] = emotion_list[i].replace(',' , '')
+         tmp.append( emotion_list[i].split(' ') )
 
-   emotion_list = []
+      emotion_list = []
 
-   for each in tmp:
-      tmp_list=[]
-      for i in range(7):
-         tmp_list.append( float(each[3+(4*i)]) )
-      emotion_list.append(tmp_list)
+      for each in tmp:
+         tmp_list=[]
+         for i in range(7):
+            tmp_list.append( float(each[3+(4*i)]) )
+         emotion_list.append(tmp_list)
 
-   emotion_str = [ '"화남"',  '"혐오"',  '"놀람"',  '"행복"', '"슬픔"',  '"겁먹음"',  '"중립"',  ]
+      emotion_str = [ '"화남"',  '"혐오"',  '"놀람"',  '"행복"', '"슬픔"',  '"겁먹음"',  '"중립"',  ]
 
-   if len(emotion_list) == 0:
-      emotion_list = [[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]]
+      if len(emotion_list) == 0:
+         emotion_list = [[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]]
 
-   #get average
-   if len(emotion_list) > 1:
-      emotion_array = np.array(emotion_list)
-      emotion_array = np.transpose(emotion_array)
-      emotion_average_list = np.array([np.average(each) for each in emotion_array])
+      #get average
+      if len(emotion_list) > 1:
+         emotion_array = np.array(emotion_list)
+         emotion_array = np.transpose(emotion_array)
+         emotion_average_list = np.array([np.average(each) for each in emotion_array])
+      else:
+         emotion_average_list = np.array([[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
+
+      #back to json
+      str_back = '[{label: "화남", value: %f},{label: "혐오", value: %f},{label: "놀람", value: %f},{label: "행복", value: %f},{label: "슬픔", value: %f},{label: "겁먹은", value: %f},{label: "중립", value: %f}]'%(emotion_average_list[0], emotion_average_list[1], emotion_average_list[2], emotion_average_list[3],emotion_average_list[4], emotion_average_list[5], emotion_average_list[6] )
    else:
-      emotion_average_list = np.array([[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
-
-   #back to json
-   str_back = '[{label: "화남", value: %f},{label: "혐오", value: %f},{label: "놀람", value: %f},{label: "행복", value: %f},{label: "슬픔", value: %f},{label: "겁먹은", value: %f},{label: "중립", value: %f}]'%(emotion_average_list[0], emotion_average_list[1], emotion_average_list[2], emotion_average_list[3],emotion_average_list[4], emotion_average_list[5], emotion_average_list[6] )
+      str_back = '[{label: "화남", value: %f},{label: "혐오", value: %f},{label: "놀람", value: %f},{label: "행복", value: %f},{label: "슬픔", value: %f},{label: "겁먹은", value: %f},{label: "중립", value: %f}]'%(0.0, 0.0, 0.0, 0.0,0.0, 0.0,0.0 )
 
    #get chart
    return render(request, "yougam/webcam_chart.html", {"json" : SafeString(str_back)})
@@ -373,7 +376,7 @@ def crtdetail(request,video):
    logs = TimeLog.objects.filter(url=video_url)
    poll_results = PieChart.objects.get(video_id=video_id)
 
-   return render(request, "yougam/user.html", {"logs": logs, "json" : SafeString(poll_results.json_data)})
+   return render(request, "yougam/webcam_chart.html", {"logs": logs, "json" : SafeString(poll_results.json_data)})
 
 #동영상 코드 여기까지 입니다.
 '''
@@ -443,11 +446,8 @@ def sending(request): #웹캠 전달 받은 것 처리
 
 
 def webcam_chart(request):
-   return render(request, "yougam/webcam_chart.html")
+   return render(request, "yougam/user_img.html")
 
-# def user(request):
-#    video_id = 1
-#    logs = TimeLog.objects.filter()
-#    poll_results = PieChart.objects.get(video_id=video_id)
-#
-#    return render(request, "yougam/user.html", {"logs": logs, "json" : SafeString(poll_results.json_data)})
+
+def webcam(request):
+   return render(request, "yougam/webcam.html")

@@ -5,6 +5,7 @@ from .models import ReplyData
 from .models import TimeLog
 from .models import PieChart
 from .models import WebCam
+from .models import test
 
  # Register your models here.
 admin.site.register(Comment)
@@ -13,3 +14,4 @@ admin.site.register(ReplyData)
 admin.site.register(TimeLog)
 admin.site.register(PieChart)
 admin.site.register(WebCam)
+admin.site.register(test)

@@ -88,4 +88,3 @@ class WebCam(models.Model):
 
 	def generate(self):
 		self.save()
-
