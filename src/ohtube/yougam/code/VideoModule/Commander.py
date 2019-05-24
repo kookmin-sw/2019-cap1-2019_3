@@ -46,7 +46,7 @@ def downloadYouTube(videourl, path):
     download_path += '/%(title)s.%(ext)s'
 
     print(download_path)
-    command = "youtube-dl -o "+ download_path + " --no-check-certificate " + videourl
+    command = "youtube-dl -f 133 -o "+ download_path + " --no-check-certificate " + videourl
     call(command.split(), shell=False)
 
 
