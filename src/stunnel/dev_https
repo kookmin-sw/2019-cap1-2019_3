@@ -1,0 +1,10 @@
+[https]
+accept=8443
+connect=8001
+
+
+TIMEOUTclose=1
+
+foreground = yes
+cert = /Users/juhyang/CAP/2019-cap1-2019_3/src/stunnel/cert.pem
+

@@ -1,0 +1,706 @@
+<!DOCTYPE html>{% load staticfiles %}
+<html lang="ko">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>유튜브 감성분석 - 유감</title>
+
+    <!-- 부트스트랩 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- 네이버 -->
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+    <!-- 페이스북 -->
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v3.3&appId=1715628155250059&autoLogAppEvents=1"></script>
+
+  </head>
+
+
+  <style type="text/css">
+
+   	@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+
+    body {
+        overflow:hidden;
+    }
+    #naverIdLogin img{
+      width:155px !important;
+      height:auto !important;
+      float:left;
+    }
+
+    .content-movie img {
+      width:100% !important;
+      height:100% !important;
+    }
+
+    .hovereffect {
+      width: 100%;
+      height: 100%;
+      float: left;
+      overflow: hidden;
+      position: relative;
+      text-align: center;
+      cursor: default;
+    }
+
+    .hovereffect .overlay {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      /*background-color: rgba(75,75,75,0.7);*/
+      -webkit-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .hovereffect:hover .overlay {
+      background-color:rgba(0,0,0,0.7);
+    }
+
+    .hovereffect img {
+      display: block;
+      position: relative;
+    }
+
+    .hovereffect button {
+      display: inline-block;
+      background-color: transparent;
+      opacity: 0;
+
+      filter: alpha(opacity=0);
+      -webkit-transform: scale(0);
+      -ms-transform: scale(0);
+      transform: scale(0);
+      -webkit-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+      font-weight: normal;
+      margin: 7px;
+      color: #fff;
+      border: solid 1px;
+
+    }
+
+    .hovereffect:hover button {
+      margin-top:30%;
+
+      opacity: 1;
+      font-style: red;
+      filter: alpha(opacity=100);
+      -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+      transform: scale(1);
+    }
+
+    .thumbnail:hover {
+      text-decoration: none;
+      border: 5px solid rgb(220,43,64,0.7) !important;
+    }
+
+    .nav {
+      position: fixed;
+
+    }
+
+    .content-url {
+     /* background-image: url("../img/image1.jpg");
+      background-size: cover;*/
+
+
+    }
+
+
+    /*비디오 삽입 태그*/
+   #myVideo {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    overflow: hidden;
+    z-index: -999;
+  }
+
+  #overlayImg {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    overflow: hidden;
+    z-index: -99;
+   background-color:rgba(0,0,0,0.5);
+  }
+
+  #snsLogin {
+    text-align: center;
+    margin: 0 auto;
+    width:200px;
+    padding-left:20px;
+
+  }
+.container2 {
+  padding-left: 260px;
+  height: 100vh;
+  width: 100vw;
+  font-family: Helvetica;
+}
+
+.loader {
+  height: 25px;
+  width: 270px;
+  position: relative;
+  top: 20;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.loader--dot {
+  animation-name: loader;
+  animation-timing-function: ease-in-out;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  height: 20px;
+  width: 20px;
+  border-radius: 100%;
+  background-color: black;
+  position: absolute;
+  border: 2px solid white;
+}
+.loader--dot:first-child {
+  background-color: #8cc759;
+  animation-delay: 0.5s;
+}
+.loader--dot:nth-child(2) {
+  background-color: #8c6daf;
+  animation-delay: 0.4s;
+}
+.loader--dot:nth-child(3) {
+  background-color: #ef5d74;
+  animation-delay: 0.3s;
+}
+.loader--dot:nth-child(4) {
+  background-color: #f9a74b;
+  animation-delay: 0.2s;
+}
+.loader--dot:nth-child(5) {
+  background-color: #60beeb;
+  animation-delay: 0.1s;
+}
+.loader--dot:nth-child(6) {
+  background-color: #fbef5a;
+  animation-delay: 0s;
+}
+.loader--text {
+  position: absolute;
+  top: 200%;
+  left: 0;
+  right: 0;
+  width: 4rem;
+  margin: auto;
+}
+.loader--text:after {
+  content: "LOADING";
+  font-weight: bold;
+  animation-name: loading-text;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes loader {
+  15% {
+    transform: translateX(0);
+  }
+  45% {
+    transform: translateX(230px);
+  }
+  65% {
+    transform: translateX(230px);
+  }
+  95% {
+    transform: translateX(0);
+  }
+}
+@keyframes loading-text {
+  0% {
+    content: "LOADING";
+  }
+  25% {
+    content: "LOADING.";
+  }
+  50% {
+    content: "LOADING..";
+  }
+  75% {
+    content: "LOADING...";
+  }
+}
+
+#kakao-login-btn {
+    width:155px;
+    height:auto;
+    float:left;
+}
+</style>
+
+  <body>
+    <div class="content" style="width:100%; float:left; margin: 0 auto;" >
+
+
+
+
+        <!-- nav, logo, url strat -->
+        <div class="content-url" style="position: relative; height:400px; text-align: center ">
+
+                        <nav class="navbar navbar-expand-sm bg-light" id="myNavbar">
+                          <ul class="nav navbar-nav navbar-right">
+
+                            <li><a href="#overlayImg">Home</a></li>
+                            <li><a href="#service">Service</a></li>
+                            <li><a href="#guide">Guide</a></li>
+                            <li><a href="#about">Our Team</a></li>
+                            <li><a href="#contact">Contact Us</a></li>
+                          </ul>
+         </nav>
+
+                        <video autoplay muted loop id="myVideo" volume="0">
+                          <source  src="{% static "img/temp.mov" %}" type="video/mp4">
+                        </video>
+
+                      <div id="overlayImg"></div>
+
+                      <div class="row">
+                          <div class="col-md-3" style=""></div>
+
+
+                          <!-- center 부분 (wide) -->
+                          <div class="col-md-6" style=" height:400px; text-align: center;  color:#fff; ">
+
+                                <!-- 로고 -->
+                                <h3> 유튜브 감성분석 - 유감 </h3><br>
+                                <!-- <img src="../../Images/OhTube_Logo.png" style="width:200px; height:200px;"><br> -->
+
+
+
+                                <!-- 소셜 로그인 부분 -->
+                                <div id="snsLogin">
+
+                                  <!-- 네이버아이디로그인 버튼 노출 영역 -->
+
+
+
+                                        <div id="naverIdLogin">
+                                    <a id="naverIdLogin_loginButton" href="#" role="button"><img src="https://static.nid.naver.com/oauth/big_g.PNG" width="150px"></a>
+                                    </div>
+
+
+                                    <br><br>
+
+
+
+                                    <!-- 페이스북 아이디 로그인 버튼 -->
+
+                                    <div class="fb-login-button" data-width="" data-size="medium" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="false" style="float:left;"></div>
+                                     <br> <br>
+
+
+
+                                    <!--  카카오 아이디 로그인 -->
+                                    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+
+
+                                    <a id="kakao-login-btn"></a>
+                                    <a href="http://developers.kakao.com/logout"></a>
+
+
+                                    <script>
+                                        //<![CDATA[
+                                       // 사용할 앱의 JavaScript 키를 설정해 주세요.
+                                       Kakao.init('a514e7df1ca6ccfc85334e262d4fe796');
+
+                                       // 카카오 로그인 버튼을 생성합니다.
+                                       Kakao.Auth.createLoginButton({
+                                         container: '#kakao-login-btn',
+                                         success: function(authObj) {
+
+                // alert(JSON.stringify(authObj));
+                // console.log(JSON.stringify(authObj));
+
+                //카카오톡 로그인 API시작(닉네임, 프로필 사진)
+                Kakao.API.request({
+                    url: '/v1/user/me',
+                        success: function(res) {
+                            console.log(res);
+                            alert(JSON.stringify(res.properties.nickname)+ " 님 환영합니다 !");
+
+
+                 },
+
+                    fail: function (error) {
+                        alert(JSON.stringify(error));
+                    }
+
+                });
+
+            },
+                                         fail: function(err) {
+                                         alert(JSON.stringify(err));
+                                         }
+                                       });
+                                        //
+
+                                    </script>
+
+
+                                    <br><br>
+                                    <button id="gnbLogin" class="btn btn-default"> 로그아웃 </button>
+
+                                </div>
+
+
+
+                                <!-- 사용자 or 크리에이터 라디오 버튼 -->
+
+                                <!-- 검색창 & 버튼-->
+                                <form method= "POST" class="post-form form-inline" style="padding-top:5px;">
+                                  <div style="padding-top:20px;">
+                                      <label class="radio-inline">
+                                        <input type="radio" name="userRadio" id="Radio1" value="user"> 시청자 분석
+                                      </label>
+
+                                      <label class="radio-inline" style="margin-left:40px;">
+                                        <input type="radio" name="creatorRadio" id="Radio2" value="creator"> 크리에이터 분석
+                                      </label>
+                                  </div>
+
+
+
+
+                                  <div class="form-group" >
+
+                                    {% csrf_token %}
+                                    {{form}}
+
+                                  </div>
+
+                                  <button type="submit" class="btn btn-default" id = "Go">Go</button>
+                                 <p id="loader-text" style="color:#ffffff"></p>
+                                <div class='container2'>
+                                  <div class='loader'>
+                                    <div class='loader--dot'></div>
+                                    <div class='loader--dot'></div>
+                                    <div class='loader--dot'></div>
+                                    <div class='loader--dot'></div>
+                                    <div class='loader--dot'></div>
+                                    <div class='loader--dot'></div>
+                                    <div class='loader--text'></div>
+                                  </div>
+                                </div>
+                                </form>
+
+
+                          <div class="col-md-3" style=" "></div>
+                        </div>
+                      </div>
+
+        </div>
+        <!-- logo, url end -->
+
+
+
+
+        <!-- movie list strat -->
+        <div class="content-movie" style="height:400px; text-align: center; margin: 0 auto;
+        margin-top:0px; ">
+                                <div style="float:left; width:100%; height:100px; ">
+                                  <h2>추천 영상</h2>
+                                  <br>
+                                </div><br><br><br><br><br>
+                                <!-- each card start -->
+                                <div class="col-xs-6 col-md-3" style="float:left; margin : 0 auto;">
+                                  <div class="thumbnail">
+
+                                    <!-- hover -->
+                                    <div class="hovereffect" style="margin-bottom: 20px;">
+                                        <img src="{% static "img/sample1.png" %}" alt="...">
+
+                                        <div class="overlay">
+
+                                          <a href="#"><button type="button" class="btn btn-default">시청자 분석</button></a>
+                                           <button type="button" class="btn btn-default">크리에이터 분석</button>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- title -->
+                                    <div class="caption">
+                                      <h4>영국남자 불닭볶음면 도전</h4>
+                                    </div>
+
+                                  </div>
+                                </div>
+                                <!-- each card end -->
+
+
+                                <!-- each card start -->
+                                <div class="col-xs-6 col-md-3">
+                                  <div class="thumbnail">
+
+                                    <!-- hover -->
+                                    <div class="hovereffect" style="margin-bottom: 20px;">
+                                        <img src="{% static "img/sample2.png" %}" alt="...">
+
+                                        <div class="overlay">
+
+                                          <button type="button" class="btn btn-default">시청자 분석</button>
+                                           <button type="button" class="btn btn-default">크리에이터 분석</button>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- title -->
+                                    <div class="caption">
+                                      <h4>도로시 매운 우족찜 먹방</h4>
+                                    </div>
+
+                                  </div>
+                                </div>
+                                <!-- each card end -->
+
+                                <!-- each card start -->
+                                <div class="col-xs-6 col-md-3">
+                                  <div class="thumbnail">
+
+                                    <!-- hover -->
+                                    <div class="hovereffect" style="margin-bottom: 20px;">
+                                        <img src="{% static "img/sample3.png" %}" alt="...">
+
+                                        <div class="overlay">
+
+                                          <button type="button" class="btn btn-default">시청자 분석</button>
+                                           <button type="button" class="btn btn-default">크리에이터 분석</button>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- title -->
+                                    <div class="caption">
+                                      <h4>방탄소년단 외국인 리액션</h4>
+                                    </div>
+
+                                  </div>
+                                </div>
+                                <!-- each card end -->
+
+                                <!-- each card start -->
+                                <div class="col-xs-6 col-md-3">
+                                  <div class="thumbnail">
+
+                                    <!-- hover -->
+                                    <div class="hovereffect" style="margin-bottom: 20px;">
+                                        <img src="{% static "img/sample4.png" %}" alt="...">
+
+                                        <div class="overlay">
+
+                                          <button type="button" class="btn btn-default">시청자 분석</button>
+                                           <button type="button" class="btn btn-default">크리에이터 분석</button>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- title -->
+                                    <div class="caption">
+                                      <h4>밴쯔 트러플 짜파게티 먹방</h4>
+                                    </div>
+
+                                  </div>
+                                </div>
+                                <!-- each card end -->
+
+
+
+                          </div>
+                          <!-- row end -->
+
+
+        <!-- movie list end -->
+        <!-- sevice info start-->
+        <div style="margin-top:300px;padding-top:100px;"id="service" class="section-padding">
+            <div class="container">
+              <div class="row"  >
+                <div class="page-title text-center">
+                  <h1>Our Service</h1><br>
+                  <p>본 프로젝트에서는 유튜브 영상을 분석하여 시청자에게는 원하는 감성의 영상과 댓글을 골라 볼 수 있도록 보여주고<br>크리에이터에게는 시청자의 반응을 웹캠으로 가져와서 감성을 분석한 결과를 제공하여 시청자가 어떤 감성으로 본인의 영상을 감상했는지 판단할 수 있는 새로운 지표를 제안함으로써 <br>유튜브 크리에이터와 시청자가 양질의 영상을 창작하고 시청할 수 있도록 하기 위해 유감, 즉 유튜브에 대한 감성분석을 하는 프로젝트를 기획했습니다.</p><br>
+                  <hr class="pg-titl-bdr-btm"></hr>
+                </div>
+                <div style="padding-top:20px;" class="col-md-4">
+                  <div class="service-box">
+                    <div style="text-align:center;" class="service-text">
+                      <img src="{% static "img/video.png" %}" width="100px" height="100px" >
+                      <h3>Video Sentiment Analysis</h3>
+                      <p> 크리에이터의 표정 변화를 분석해 타임라인을 제공합니다.</p>
+                      <p>시청자의 웹캠으로 받은 표정을 화남, 두려움, 경멸, 놀람, 행복, 슬픔, 중립으로 분석하여 시청자가 어떤 감성으로 동영상을 시청했는지 차트로 나타냅니다.</p>
+                    </div>
+                  </div>
+                </div>
+                <div style="padding-top:20px;"  class="col-md-4">
+                  <div class="service-box">
+                    <div style="text-align:center;" class="service-text">
+                      <img src="{% static "img/speech-bubble.png" %}" width="100px" height="100px" >
+
+                      <h3>Commen Sentiment Analysis</h3>
+                      <p> 유튜브 댓글 감성을 분석해 긍정, 중립, 부정 댓글을 분류합니다. </p>
+                      <p> 6가지 감정인 행복, 슬픔, 화남, 놀람, 중립, 두려움으로 댓글의 감성 분포도와 워드클라우드를 제공합니다. </p>
+                    </div>
+                  </div>
+                </div>
+                <div style="padding-top:20px;"  class="col-md-4">
+                  <div class="service-box">
+
+                    <div style="text-align:center;" class="service-text">
+                    <img src="{% static "img/report.png" %}" width="100px" height="100px" >
+
+                      <h3>Visualization</h3>
+                      <p>댓글과 영상을 분석해 고객에 맞는 원형차트 , 타임라인 , 레이더차트와 같은 통계 자료를 제공합니다.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--service info start-->
+
+          <!--guide info start-->
+          <div id="guide" style="margin-top:400px; class="section-padding">
+            <h1 style="text-align:center">Yougam Guide</h1><br>
+            <div class="container">
+              <div class="row">
+                <div class="page-title text-center">
+                  <div style="padding-top:20px;" class="col-md-3">
+
+                  <img src="{% static "img/user.png" %}" width="150px" height="150px" >
+                  <h1>1. SNS 로그인</h1><br>
+                  <p>yougam은 SNS 공유 기능이 있습니다. 따라서 google,naver,facebook을 통한 로그인이 가능합니다.</p>
+
+                  <hr class="pg-titl-bdr-btm"></hr>
+                  </div>
+                  <div style="padding-top:20px;" class="col-md-6">
+                  <img src="{% static "img/domain.png" %}" width="150px" height="150px" >
+
+                 <h1>2. 시청자 분석 VS 크리에이터 분석</h1><br>
+                  <p>yougam은 타겟층을 시청자와 크리에이터로 분류해 각각 사용자의 목적에 맞게<br> 제공하는 정보를 달리 합니다.필요한 정보에 따라 라디오버튼을 선택할 수 있습니다.</p><br>
+
+                  <hr class="pg-titl-bdr-btm"></hr></div>
+                  <div style="padding-top:20px;" class="col-md-3">
+                  <img src="{% static "img/www.png" %}" width="150px" height="150px" >
+                 <h1>3. URL입력</h1><br>
+                  <p>분석하고싶은 유튜브 주소를<br> 입력할 수 있습니다.</p><br>
+                  <hr class="pg-titl-bdr-btm"></hr></div>
+                </div>
+              </div>
+
+
+               <div class="row">
+                <div class="page-title text-center">
+                   <div style="padding-top:20px;" class="col-md-4">
+
+                  <img src="{% static "img/quality.png" %}" width="150px" height="150px" >
+
+                 <h1>4. 추천영상</h1><br>
+                  <p> url을 입력하지 않고도 yougam에서 제공하는 추천영상을 클릭해서 분석 결과를 볼 수 있습니다.
+                  해당 영상에 마우스를 올리면 시청자 시점과 크리에이터 시점을 클릭 할 수 있습니다.</p><br>
+
+                  <hr class="pg-titl-bdr-btm"></hr> </div>
+                  <div style="padding-top:20px;" class="col-md-4">
+
+                  <img src="{% static "img/speech.png" %}" width="150px" height="150px" >
+                  <h1>5. 사용자가 <br>예측 내용 수정 </h1><br>
+                  <p>긍정,부정,중립으로 분류된 댓글을 사용자가 잘못된 추론이라고 판단할 경우 변경하기 버튼을 눌러 수정할 수 있습니다.</p><br>
+
+                  <hr class="pg-titl-bdr-btm"></hr></div>
+                  <div style="padding-top:20px;" class="col-md-4">
+
+                  <img src="{% static "img/cloud.png" %}" width="150px" height="150px" >
+
+                 <h1>6. 6가지 감정에 따른 <br>워드 클라우드</h1><br>
+                  <p>6가지 감정을 각각 클릭시 해당 감정의 댓글들을<br> 모아 워드 클라우드를 보여줍니다.</p><br>
+
+                  <hr class="pg-titl-bdr-btm"></hr></div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!--guide info end-->
+          <div class="row">
+                <div class="page-title text-center">
+                   <div style="padding-top:20px;" class="col-md-4">
+
+                  <img src="{% static "img/quality.png" %}" width="150px" height="150px" >
+
+                 <h1>7. 추천영상</h1><br>
+                  <p> url을 입력하지 않고도 yougam에서 제공하는 추천영상을 클릭해서 분석 결과를 볼 수 있습니다.
+                  해당 영상에 마우스를 올리면 시청자 시점과 크리에이터 시점을 클릭 할 수 있습니다.</p><br>
+
+                  <hr class="pg-titl-bdr-btm"></hr> </div>
+                  <div style="padding-top:20px;" class="col-md-4">
+
+                  <img src="{% static "img/speech.png" %}" width="150px" height="150px" >
+                  <h1>5. 사용자가 <br>예측 내용 수정 </h1><br>
+                  <p>긍정,부정,중립으로 분류된 댓글을 사용자가 잘못된 추론이라고 판단할 경우 변경하기 버튼을 눌러 수정할 수 있습니다.</p><br>
+
+                  <hr class="pg-titl-bdr-btm"></hr></div>
+                  <div style="padding-top:20px;" class="col-md-4">
+
+                  <img src="{% static "img/cloud.png" %}" width="150px" height="150px" >
+
+                 <h1>6. 6가지 감정에 따른 <br>워드 클라우드</h1><br>
+                  <p>6가지 감정을 각각 클릭시 해당 감정의 댓글들을<br> 모아 워드 클라우드를 보여줍니다.</p><br>
+
+                  <hr class="pg-titl-bdr-btm"></hr></div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!--guide info end-->
+
+
+
+    <!-- content end -->
+  </body>
+
+
+
+<!-- script -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+
+
+  <script>
+   $( document ).ready(function() {
+        $(".loader").hide();
+
+        $('#loader-text').hide();
+
+    });
+   $("#Go").click(function () {
+      $(".loader").show();
+      $(".form-group").hide();
+      $('#Go').hide();
+
+      $('#loader-text').show();
+
+    });
+  </script>
+
+</html>
