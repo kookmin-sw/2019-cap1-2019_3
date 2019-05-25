@@ -102,7 +102,7 @@ from urllib.request import  urlopen
 
 
 def userdetail(request, video):
-   '''
+   
    video_url = Video.objects.get(pk=video)
    temp_url = video_url.url
    iframe_url = temp_url.replace('https://www.youtube.com/watch?v=','https://www.youtube.com/embed/')
@@ -235,7 +235,7 @@ def userdetail(request, video):
    print("comment predict complete!")
    print("video predict start!")
 
-   '''
+   
 
    from PIL import Image
    import cv2
@@ -296,16 +296,12 @@ def userdetail(request, video):
    logs = TimeLog.objects.filter(url=video_url)
    poll_results = PieChart.objects.get(video_id=video_id)
 
-   #return render(request, "yougam/user.html", {"count":loaded_count_list,"cmts":comments, "video_id":vid, "iframe_url":iframe_url,"logs": logs, "json" : SafeString(poll_results.json_data), "video_title":video_title,"reply":reply})
-   return render(request, "yougam/user.html", {"logs": logs, "json" : SafeString(poll_results.json_data)})
-
-
-
+   return render(request, "yougam/user.html", {"count":loaded_count_list,"cmts":comments, "video_id":vid, "iframe_url":iframe_url,"logs": logs, "json" : SafeString(poll_results.json_data), "video_title":video_title,"reply":reply})
 
 
 
 def crtdetail(request, video):
-   '''
+   
    video_url = Video.objects.get(pk=video)
 
 
@@ -432,9 +428,7 @@ def crtdetail(request, video):
    num_pos = Comment.objects.filter(video=vid).filter(label=2).count() + ReplyData.objects.filter(video=str(vid)).filter(label=2).count()
    num_net = Comment.objects.filter(video=vid).filter(label=1).count() + ReplyData.objects.filter(video=str(vid)).filter(label=1).count()
    num_neg = Comment.objects.filter(video=vid).filter(label=0).count() + ReplyData.objects.filter(video=str(vid)).filter(label=0).count()
-   '''
-
-
+   
 
    import numpy as np
    #take data
@@ -453,7 +447,7 @@ def crtdetail(request, video):
          emotion_list[i] = emotion_list[i].replace('}' , '')
          emotion_list[i] = emotion_list[i].replace(',' , '')
          tmp.append( emotion_list[i].split(' ') )
-
+      print(emotion_list)
       emotion_list = []
 
       for each in tmp:
@@ -476,22 +470,25 @@ def crtdetail(request, video):
          emotion_average_list = np.array([np.average(each) for each in emotion_array])
       else:
          emotion_average_list = np.array([[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
+      
+      print(emotion_average_list)
+
+
 
       #back to json
       str_back = '[{label: "화남", value: %f},{label: "혐오", value: %f},{label: "놀람", value: %f},{label: "행복", value: %f},{label: "슬픔", value: %f},{label: "겁먹은", value: %f},{label: "중립", value: %f}]'%(emotion_average_list[0], emotion_average_list[1], emotion_average_list[2], emotion_average_list[3],emotion_average_list[4], emotion_average_list[5], emotion_average_list[6] )
       print(str_back)
+
       capture = WebCam.objects.filter(video_id=video)###time log랑똑같이 꺼냄####
       for each in capture:
           print(each)
 
    else:
       str_back = '[{label: "화남", value: %f},{label: "혐오", value: %f},{label: "놀람", value: %f},{label: "행복", value: %f},{label: "슬픔", value: %f},{label: "겁먹은", value: %f},{label: "중립", value: %f}]'%(0.0, 0.0, 0.0, 0.0,0.0,0.0,0.0)
-
-
-   #return render(request,"yougam/cre.html",{"no1":no1,"no2":no2,"no3":no3,"num_pos":num_pos,"num_neg":num_neg,"num_net":num_net, "video_title":video_title, "count":loaded_count_list,"json" : SafeString(str_back)})
-   return render(request,"yougam/cre.html",{"json" : SafeString(str_back)})
-   #return render(request,"yougam/cre.html",{"json" : SafeString(results[0].json_data)})
-
+   
+   video_id = video
+   return render(request,"yougam/cre.html",{"no1":no1,"no2":no2,"no3":no3,"num_pos":num_pos,"num_neg":num_neg,"num_net":num_net, "video_title":video_title, "count":loaded_count_list,"json" : SafeString(str_back),"video_id":video_id})
+ 
 
 
 from django.views.decorators.csrf import csrf_exempt

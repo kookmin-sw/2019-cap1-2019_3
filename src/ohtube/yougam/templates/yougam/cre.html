@@ -106,10 +106,11 @@ text.source {
     <!-- <h2>Bar chart example</h2> -->
     <div style="background-color:blue; ">   <img src="{% static "img/title.png" %}" class="media-object" style="float:left;width:400px;margin-left:50px;margin-top: 10px;"></div>
     <div> <h4 style ="padding-top:40px;text-align: left;">&nbsp&nbsp{{video_title}} 의 분석 결과 입니다.</h4></div>
+
     <div style="clear:left;"class="row">
 
       <div style="margin-left:130px;"class="col-md-5" id='container'>
-          <svg></svg>
+          <svg>dd</svg>
       </div>
 
       <div class="col-md-5" id='container'>
@@ -246,6 +247,7 @@ text.source {
             </section>
             <script>var ans = JSON.parse("{{ count }}");
             </script>
+            <button style="float:right;margin-top:20px;"><a href="/yougam/{{video_id}}/user">사용자 분석으로 이동</a></button>
 
             <script>
               var sc6 = document.getElementById('sc6');
@@ -275,28 +277,18 @@ text.source {
 </body>
 
 
+
     <script>
 
 
     const colorData = ["#A64E6E", "#F2BB77", "#F2A25C", "#FFE2DF", "#FFC001", "#FF6F61", "#F8A39D", "#81894E"];
-
-<!--    
-    const sample = [{label: "화남", value: 0.024862127},
-    {label: "혐오", value: 3.4155557e-05},
-    {label: "놀람", value: 0.02009794},
-    {label: "행복", value: 0.3764441},
-    {label: "슬픔", value: 0.0150852045},
-    {label: "겁먹은", value: 0.009195391},
-    {label: "중립", "value": 0.55428106}];
-    const data = {{ json }};-->
-
-    const sample = {{ json }};
-
+    const sample = {{ json }}
     const svg = d3.select('svg');
     const svgContainer = d3.select('#container');
-    const margin = 80;
-    const width = 1000 - 2 * margin;
-    const height = 600 - 2 * margin;
+    const margin = 10;
+    const width = 600;
+    const height = 250;
+
     const chart = svg.append('g')
       .attr('transform', `translate(${margin}, ${margin})`);
     const xScale = d3.scaleBand()
@@ -391,36 +383,18 @@ text.source {
       .style('border','solid 1px black')
 <!--      바 텍스트 -->
 <!--      .style('fill', 'white')-->
-    svg
-      .append('text')
-      .attr('class', 'label')
-      .attr('x', -(height / 2) - margin)
-      .attr('y', margin / 2.4)
-      .attr('transform', 'rotate(-90)')
-      .attr('text-anchor', 'middle')
-      .text('분포도 (%)')
-    svg.append('text')
-      .attr('class', 'label')
-      .attr('x', width / 2 + margin)
-      .attr('y', height + margin * 1.7)
-      .attr('text-anchor', 'middle')
-      .text('7가지 감성')
-      .style('font-weight', 'bold')
-      .style('font-size', '14px')
+   
     svg.append('text')
       .attr('class', 'title')
       .attr('x', width / 2 + margin)
       .attr('y', 40)
       .attr('text-anchor', 'middle')
-      .text('1번 시청자의 웹캠 감성 분석 결과')
+      .text('시청자의 웹캠 감성 분석 평균 결과')
     svg.append('text')
       .attr('class', 'source')
       .attr('x', width - margin / 2)
       .attr('y', height + margin * 1.7)
       .attr('text-anchor', 'start')
-
-
-
 
 
     </script>

@@ -8,6 +8,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.post, name = "index"),
+    path('#overlayImg', views.post, name = "index"),
     path('<str:video>/change/<int:cid>/<str:senti>', views.change, name='change'),
     path('<int:video>/user/', views.userdetail, name='userdetail'),
     path('<int:video>/creator/', views.crtdetail, name='crtdetail'),
