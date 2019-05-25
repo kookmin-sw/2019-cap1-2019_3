@@ -99,6 +99,25 @@ text.source {
   background-color: #717171;
 }
 
+.user img {
+      width:80px;
+      height:80px;
+      border-radius: 50px;
+      border: 2px solid pink;s
+}
+
+.user {
+	float:left;
+	margin-left:20px;
+	margin-bottom:10px;
+}
+
+.userList {
+
+	overflow-x : auto;
+	height: 230px;
+}
+
 </style>
 
 <body>
@@ -110,10 +129,36 @@ text.source {
     <div style="clear:left;"class="row">
 
       <div style="margin-left:130px;"class="col-md-5" id='container'>
-          <svg>dd</svg>
+		  <div style="width:400px;margin-left: 80px;text-align: center;" class="alert alert-danger alert-dismissible" id="myAlert">
+		    			<strong style="padding-left:35px;"> 시청자들의 웹캠 감성분석 평균 결과</strong>
+		  </div>
+          <svg></svg>
       </div>
 
       <div class="col-md-5" id='container'>
+		  <div style="width:400px;margin-left: 80px;text-align: center;" class="alert alert-danger alert-dismissible" id="myAlert">
+		    			<strong style="padding-left:35px;"> 영상을 제공한 시청자들</strong>
+		  </div>
+
+
+		  <div class="userList">
+
+
+
+					{% for i in capture %}
+
+			  			<div class="user">
+							 <img src="/yougam/media/{{i.img_path }}">
+							<br>
+							{{ i.upload_date|date:"a f"}}
+
+						</div>
+
+					{% endfor %}
+
+
+		  </div>
+
       </div>
 
     </div>
@@ -286,8 +331,8 @@ text.source {
     const svg = d3.select('svg');
     const svgContainer = d3.select('#container');
     const margin = 10;
-    const width = 600;
-    const height = 250;
+    const width = 560;
+    const height = 200;
 
     const chart = svg.append('g')
       .attr('transform', `translate(${margin}, ${margin})`);
@@ -381,15 +426,7 @@ text.source {
       .text((a) => `${Math.round(a.value*100)}%`)
       .style('font-weight', 'bold')
       .style('border','solid 1px black')
-<!--      바 텍스트 -->
-<!--      .style('fill', 'white')-->
-   
-    svg.append('text')
-      .attr('class', 'title')
-      .attr('x', width / 2 + margin)
-      .attr('y', 40)
-      .attr('text-anchor', 'middle')
-      .text('시청자의 웹캠 감성 분석 평균 결과')
+
     svg.append('text')
       .attr('class', 'source')
       .attr('x', width - margin / 2)

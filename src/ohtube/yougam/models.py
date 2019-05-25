@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 import random
+from django.conf import settings
 # # Create your models here.
 
 class Video(models.Model):
@@ -84,6 +85,7 @@ class WebCam(models.Model):
 	json_data = models.CharField(max_length=400)
 	video_path = models.CharField(max_length=400, default='SOME STRING')
 	capture_path = models.ImageField()
+	upload_date = models.DateTimeField(auto_now_add=True)  # 레코드 생성시 현재 시간으로 자동 생성
 
 	def __str__(self):
 		return "video_id: {}".format(self.video_id)

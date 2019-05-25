@@ -488,8 +488,10 @@ def crtdetail(request, video):
    else:
       str_back = '[{label: "화남", value: %f},{label: "혐오", value: %f},{label: "놀람", value: %f},{label: "행복", value: %f},{label: "슬픔", value: %f},{label: "겁먹은", value: %f},{label: "중립", value: %f}]'%(0.0, 0.0, 0.0, 0.0,0.0,0.0,0.0)
 
+
    video_id = video
-   return render(request,"yougam/cre.html",{"no1":no1,"no2":no2,"no3":no3,"num_pos":num_pos,"num_neg":num_neg,"num_net":num_net, "video_title":video_title, "count":loaded_count_list,"json" : SafeString(str_back),"video_id":video_id})
+
+   return render(request,"yougam/cre.html",{"no1":no1,"no2":no2,"no3":no3,"num_pos":num_pos,"num_neg":num_neg,"num_net":num_net, "video_title":video_title, "count":loaded_count_list,"json" : SafeString(str_back),"video_id":video_id, "capture" : capture})
 
 
 
