@@ -40,6 +40,8 @@ class Text2features(object):
     def document2bow(self, document):
 
         bow = np.zeros((1, self.dictionary_size))
+        if len(document) == 0:
+            document = ["none"]
         inverse_Dlength = 1 / len(document)
 
         for word in document:
