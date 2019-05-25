@@ -102,7 +102,7 @@ from urllib.request import  urlopen
 
 
 def userdetail(request, video):
-   
+
    video_url = Video.objects.get(pk=video)
    temp_url = video_url.url
    iframe_url = temp_url.replace('https://www.youtube.com/watch?v=','https://www.youtube.com/embed/')
@@ -235,7 +235,7 @@ def userdetail(request, video):
    print("comment predict complete!")
    print("video predict start!")
 
-   
+
 
    from PIL import Image
    import cv2
@@ -301,7 +301,7 @@ def userdetail(request, video):
 
 
 def crtdetail(request, video):
-   
+
    video_url = Video.objects.get(pk=video)
 
 
@@ -428,7 +428,7 @@ def crtdetail(request, video):
    num_pos = Comment.objects.filter(video=vid).filter(label=2).count() + ReplyData.objects.filter(video=str(vid)).filter(label=2).count()
    num_net = Comment.objects.filter(video=vid).filter(label=1).count() + ReplyData.objects.filter(video=str(vid)).filter(label=1).count()
    num_neg = Comment.objects.filter(video=vid).filter(label=0).count() + ReplyData.objects.filter(video=str(vid)).filter(label=0).count()
-   
+
 
    import numpy as np
    #take data
@@ -462,7 +462,7 @@ def crtdetail(request, video):
          emotion_list = [[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]]
 
       #get average
-      if len(emotion_list) > 1:
+      if len(emotion_list) >= 1:
          emotion_array = np.array(emotion_list)
          #print(emotion_array)
          emotion_array = np.transpose(emotion_array)
@@ -470,7 +470,7 @@ def crtdetail(request, video):
          emotion_average_list = np.array([np.average(each) for each in emotion_array])
       else:
          emotion_average_list = np.array([[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
-      
+
       print(emotion_average_list)
 
 
@@ -485,10 +485,10 @@ def crtdetail(request, video):
 
    else:
       str_back = '[{label: "화남", value: %f},{label: "혐오", value: %f},{label: "놀람", value: %f},{label: "행복", value: %f},{label: "슬픔", value: %f},{label: "겁먹은", value: %f},{label: "중립", value: %f}]'%(0.0, 0.0, 0.0, 0.0,0.0,0.0,0.0)
-   
+
    video_id = video
    return render(request,"yougam/cre.html",{"no1":no1,"no2":no2,"no3":no3,"num_pos":num_pos,"num_neg":num_neg,"num_net":num_net, "video_title":video_title, "count":loaded_count_list,"json" : SafeString(str_back),"video_id":video_id})
- 
+
 
 
 from django.views.decorators.csrf import csrf_exempt
@@ -557,6 +557,3 @@ def sending(request): #웹캠 전달 받은 것 처리
 
     context = {}
     return HttpResponse(json.dumps(context), "application/json")
-
-
-    
