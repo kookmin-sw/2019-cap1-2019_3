@@ -79,10 +79,12 @@ def post(request):
       return render(request, "yougam/index.html",{"form": form})
 
 
-   if 'userRadio' in request.POST:
+   value = request.POST.get('typeRadio')
+
+   if 'user' == value :
       return redirect('userdetail', video = vid)
 
-   elif 'creatorRadio' in request.POST:
+   elif 'creator' == value :
       return redirect('crtdetail', video = vid)
 
    else : return HttpResponse("type is empty!")
