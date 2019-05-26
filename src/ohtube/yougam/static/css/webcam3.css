@@ -26,6 +26,7 @@ border:0px solid #b9abe6; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
  background-image: -o-linear-gradient(top, #ddd6f3, #FEAFCF);
  background-image: linear-gradient(to bottom, #ddd6f3, #FEAFCF);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ddd6f3, endColorstr=#FEAFCF);
  width:110px;
+ height:40px;
 
 }
 
@@ -50,6 +51,7 @@ border:0px solid #a0d5c5; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
  background-image: linear-gradient(to bottom, #C7E6DD, #FEAFCF);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#C7E6DD, endColorstr=#FEAFCF);
  width:110px;
  margin-left:5px;
+ height:40px;
 }
 
 #stop:hover{
@@ -62,5 +64,6 @@ border:0px solid #a0d5c5; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
  background-image: linear-gradient(to bottom, #a9dfcf, #fda4c1);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#a9dfcf, endColorstr=#fda4c1);
  width:110px;
  margin-left:5px;
+ height:40px;
 }
 </style>

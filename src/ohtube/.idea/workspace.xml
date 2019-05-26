@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0ba222c7-fb2d-4598-a781-f07b6976e1e2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ohtube/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/ohtube/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yougam/captures/1_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/yougam/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/yougam/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yougam/static/css/webcam3.css" beforeDir="false" afterPath="$PROJECT_DIR$/yougam/static/css/webcam3.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yougam/templates/yougam/cre.html" beforeDir="false" afterPath="$PROJECT_DIR$/yougam/templates/yougam/cre.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yougam/templates/yougam/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/yougam/templates/yougam/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yougam/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/yougam/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,8 +17,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/yougam/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7395">
-              <caret line="493" column="241" selection-start-line="493" selection-start-column="241" selection-end-line="493" selection-end-column="241" />
+            <state relative-caret-position="1426">
+              <caret line="493" lean-forward="true" selection-start-line="493" selection-end-line="493" />
               <folding>
                 <element signature="e#0#63#0" expanded="true" />
               </folding>
@@ -34,7 +29,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/yougam/templates/yougam/user.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
+            <state relative-caret-position="3633">
               <caret line="333" column="97" lean-forward="true" selection-start-line="333" selection-start-column="55" selection-end-line="333" selection-end-column="97" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -111,6 +106,15 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/yougam/static/css/webcam3.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="682">
+              <caret line="66" column="13" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/yougam/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="558">
@@ -147,8 +151,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/yougam/templates/yougam/cre.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="606">
-              <caret line="155" lean-forward="true" selection-start-line="155" selection-end-line="155" />
+            <state relative-caret-position="259">
+              <caret line="128" column="56" lean-forward="true" selection-start-line="128" selection-start-column="56" selection-end-line="128" selection-end-column="56" />
+              <folding>
+                <element signature="n#style#0;n#h4#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -175,6 +182,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>image</find>
+      <find>사용자</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -192,9 +200,10 @@
         <option value="$PROJECT_DIR$/yougam/templates/yougam/user.html" />
         <option value="$PROJECT_DIR$/yougam/static/css/timelogs.css" />
         <option value="$PROJECT_DIR$/yougam/templates/yougam/index.html" />
-        <option value="$PROJECT_DIR$/yougam/views.py" />
         <option value="$PROJECT_DIR$/ohtube/settings.py" />
         <option value="$PROJECT_DIR$/yougam/models.py" />
+        <option value="$PROJECT_DIR$/yougam/views.py" />
+        <option value="$PROJECT_DIR$/yougam/static/css/webcam3.css" />
         <option value="$PROJECT_DIR$/yougam/templates/yougam/cre.html" />
       </list>
     </option>
@@ -260,6 +269,13 @@
               <item name="ohtube" type="b2602c69:ProjectViewProjectNode" />
               <item name="ohtube" type="462c0819:PsiDirectoryNode" />
               <item name="yougam" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ohtube" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ohtube" type="462c0819:PsiDirectoryNode" />
+              <item name="yougam" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -278,11 +294,12 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/yougam/static/css" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/media" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/media" />
       <recent name="$PROJECT_DIR$/yougam/static/css" />
       <recent name="$PROJECT_DIR$/yougam/static/img" />
     </key>
@@ -423,16 +440,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/yougam/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7395">
-          <caret line="493" column="241" selection-start-line="493" selection-start-column="241" selection-end-line="493" selection-end-column="241" />
-          <folding>
-            <element signature="e#0#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/yougam/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -461,9 +468,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/yougam/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1426">
+          <caret line="493" lean-forward="true" selection-start-line="493" selection-end-line="493" />
+          <folding>
+            <element signature="e#0#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yougam/static/css/webcam3.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="682">
+          <caret line="66" column="13" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/yougam/templates/yougam/user.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
+        <state relative-caret-position="3633">
           <caret line="333" column="97" lean-forward="true" selection-start-line="333" selection-start-column="55" selection-end-line="333" selection-end-column="97" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -540,8 +564,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/yougam/templates/yougam/cre.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="606">
-          <caret line="155" lean-forward="true" selection-start-line="155" selection-end-line="155" />
+        <state relative-caret-position="259">
+          <caret line="128" column="56" lean-forward="true" selection-start-line="128" selection-start-column="56" selection-end-line="128" selection-end-column="56" />
+          <folding>
+            <element signature="n#style#0;n#h4#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

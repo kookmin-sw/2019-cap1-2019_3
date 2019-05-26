@@ -486,6 +486,7 @@ def crtdetail(request, video):
           print(each)
 
    else:
+      capture = WebCam.objects.filter(video_id=video)
       str_back = '[{label: "화남", value: %f},{label: "혐오", value: %f},{label: "놀람", value: %f},{label: "행복", value: %f},{label: "슬픔", value: %f},{label: "겁먹은", value: %f},{label: "중립", value: %f}]'%(0.0, 0.0, 0.0, 0.0,0.0,0.0,0.0)
 
 
@@ -553,7 +554,7 @@ def sending(request): #웹캠 전달 받은 것 처리
 
             captured_img.save(capture_save_path)
 
-            will_inserted = WebCam(video_id=str(video), json_data=dumped, video_path=save_path, capture_path=capture_save_path)
+            will_inserted = WebCam(video_id=str(video), json_data=dumped, video_path=save_path, capture_path=capture_path)
             will_inserted.save()
 
     else:

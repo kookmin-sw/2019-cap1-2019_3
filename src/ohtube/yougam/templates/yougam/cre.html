@@ -3,7 +3,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-  <title>Bar chart with D3.js</title>
+  <title>크리에이터 대시보드</title>
     {% load staticfiles %}
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <script src="https://d3js.org/d3.v5.min.js"></script>
@@ -118,13 +118,44 @@ text.source {
 	height: 230px;
 }
 
+#linkbt {
+float:left;
+margin-top:40px;
+margin-left:80px;
+
+
+border:1px solid #ff6268; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;font-size:14px;font-family:arial, helvetica, sans-serif; padding: 10px 10px 10px 10px; text-decoration:none; display:inline-block;font-weight:bold; color: #FFFFFF;
+ background-color: #FF9A9E; background-image: -webkit-gradient(linear, left top, left bottom, from(#FF9A9E), to(#FAD0C4));
+ background-image: -webkit-linear-gradient(top, #FF9A9E, #FAD0C4);
+ background-image: -moz-linear-gradient(top, #FF9A9E, #FAD0C4);
+ background-image: -ms-linear-gradient(top, #FF9A9E, #FAD0C4);
+ background-image: -o-linear-gradient(top, #FF9A9E, #FAD0C4);
+ background-image: linear-gradient(to bottom, #FF9A9E, #FAD0C4);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FF9A9E, endColorstr=#FAD0C4);
+
+}
+
+#linkbt:hover{
+
+ border:1px solid #ff343c;
+ background-color: #ff676d; background-image: -webkit-gradient(linear, left top, left bottom, from(#ff676d), to(#f6ab95));
+ background-image: -webkit-linear-gradient(top, #ff676d, #f6ab95);
+ background-image: -moz-linear-gradient(top, #ff676d, #f6ab95);
+ background-image: -ms-linear-gradient(top, #ff676d, #f6ab95);
+ background-image: -o-linear-gradient(top, #ff676d, #f6ab95);
+ background-image: linear-gradient(to bottom, #ff676d, #f6ab95);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ff676d, endColorstr=#f6ab95);
+
 </style>
 
 <body>
   <div id='layout'>
     <!-- <h2>Bar chart example</h2> -->
     <div style="background-color:blue; ">   <img src="{% static "img/title.png" %}" class="media-object" style="float:left;width:400px;margin-left:50px;margin-top: 10px;"></div>
-    <div> <h4 style ="padding-top:40px;text-align: left;">&nbsp&nbsp{{video_title}} 의 분석 결과 입니다.</h4></div>
+    <div>
+		<h4 style ="padding-top:40px;text-align: left; float:left;">&nbsp&nbsp{{video_title}} 의 분석 결과 입니다.</h4>
+		<button id="linkbt" onclick="location.href='/yougam/{{video_id}}/user'">사용자 분석으로 이동</button>
+	</div>
+
+
 
     <div style="clear:left;"class="row">
 
@@ -148,7 +179,9 @@ text.source {
 					{% for i in capture %}
 
 			  			<div class="user">
-							 <img src="/yougam/media/{{i.img_path }}">
+
+								 <img src="/yougam/media/{{i.capture_path}}">
+
 							<br>
 							{{ i.upload_date|date:"a f"}}
 
@@ -292,7 +325,8 @@ text.source {
             </section>
             <script>var ans = JSON.parse("{{ count }}");
             </script>
-            <button style="float:right;margin-top:20px;"><a href="/yougam/{{video_id}}/user">사용자 분석으로 이동</a></button>
+
+
 
             <script>
               var sc6 = document.getElementById('sc6');
