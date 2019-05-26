@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0ba222c7-fb2d-4598-a781-f07b6976e1e2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/yougam/static/css/webcam3.css" beforeDir="false" afterPath="$PROJECT_DIR$/yougam/static/css/webcam3.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yougam/templates/yougam/cre.html" beforeDir="false" afterPath="$PROJECT_DIR$/yougam/templates/yougam/cre.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yougam/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/yougam/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yougam/static/img/sample1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yougam/static/img/sample2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yougam/static/img/sample3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yougam/static/img/sample4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yougam/templates/yougam/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/yougam/templates/yougam/index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,7 +21,7 @@
         <entry file="file://$PROJECT_DIR$/yougam/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1426">
-              <caret line="493" lean-forward="true" selection-start-line="493" selection-end-line="493" />
+              <caret line="493" selection-start-line="493" selection-end-line="493" />
               <folding>
                 <element signature="e#0#63#0" expanded="true" />
               </folding>
@@ -30,7 +33,7 @@
         <entry file="file://$PROJECT_DIR$/yougam/templates/yougam/user.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="3633">
-              <caret line="333" column="97" lean-forward="true" selection-start-line="333" selection-start-column="55" selection-end-line="333" selection-end-column="97" />
+              <caret line="333" column="97" selection-start-line="333" selection-start-column="55" selection-end-line="333" selection-end-column="97" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -135,11 +138,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/yougam/templates/yougam/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-9063">
-              <caret line="26" column="16" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
+            <state relative-caret-position="443">
+              <caret line="493" column="45" lean-forward="true" selection-start-line="493" selection-start-column="45" selection-end-line="493" selection-end-column="45" />
               <folding>
                 <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -148,11 +151,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/yougam/templates/yougam/cre.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="128" column="56" lean-forward="true" selection-start-line="128" selection-start-column="56" selection-end-line="128" selection-end-column="56" />
+            <state relative-caret-position="-3118">
+              <caret line="128" column="56" selection-start-line="128" selection-start-column="56" selection-end-line="128" selection-end-column="56" />
               <folding>
                 <element signature="n#style#0;n#h4#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -199,12 +202,12 @@
         <option value="$PROJECT_DIR$/yougam/static/css/timelog.css" />
         <option value="$PROJECT_DIR$/yougam/templates/yougam/user.html" />
         <option value="$PROJECT_DIR$/yougam/static/css/timelogs.css" />
-        <option value="$PROJECT_DIR$/yougam/templates/yougam/index.html" />
         <option value="$PROJECT_DIR$/ohtube/settings.py" />
         <option value="$PROJECT_DIR$/yougam/models.py" />
         <option value="$PROJECT_DIR$/yougam/views.py" />
         <option value="$PROJECT_DIR$/yougam/static/css/webcam3.css" />
         <option value="$PROJECT_DIR$/yougam/templates/yougam/cre.html" />
+        <option value="$PROJECT_DIR$/yougam/templates/yougam/index.html" />
       </list>
     </option>
   </component>
@@ -276,6 +279,13 @@
               <item name="ohtube" type="b2602c69:ProjectViewProjectNode" />
               <item name="ohtube" type="462c0819:PsiDirectoryNode" />
               <item name="yougam" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="img" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ohtube" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ohtube" type="462c0819:PsiDirectoryNode" />
+              <item name="yougam" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -294,14 +304,14 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/media" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/yougam/static/img" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/yougam/static/img" />
       <recent name="$PROJECT_DIR$/media" />
       <recent name="$PROJECT_DIR$/yougam/static/css" />
-      <recent name="$PROJECT_DIR$/yougam/static/img" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -457,21 +467,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/yougam/templates/yougam/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-9063">
-          <caret line="26" column="16" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/yougam/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1426">
-          <caret line="493" lean-forward="true" selection-start-line="493" selection-end-line="493" />
+          <caret line="493" selection-start-line="493" selection-end-line="493" />
           <folding>
             <element signature="e#0#63#0" expanded="true" />
           </folding>
@@ -488,7 +487,7 @@
     <entry file="file://$PROJECT_DIR$/yougam/templates/yougam/user.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3633">
-          <caret line="333" column="97" lean-forward="true" selection-start-line="333" selection-start-column="55" selection-end-line="333" selection-end-column="97" />
+          <caret line="333" column="97" selection-start-line="333" selection-start-column="55" selection-end-line="333" selection-end-column="97" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -564,10 +563,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/yougam/templates/yougam/cre.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="128" column="56" lean-forward="true" selection-start-line="128" selection-start-column="56" selection-end-line="128" selection-end-column="56" />
+        <state relative-caret-position="-3118">
+          <caret line="128" column="56" selection-start-line="128" selection-start-column="56" selection-end-line="128" selection-end-column="56" />
           <folding>
             <element signature="n#style#0;n#h4#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yougam/templates/yougam/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="443">
+          <caret line="493" column="45" lean-forward="true" selection-start-line="493" selection-start-column="45" selection-end-line="493" selection-end-column="45" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
