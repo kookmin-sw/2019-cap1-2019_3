@@ -187,7 +187,70 @@ scrollbar-face-color:pink;
               <div class="card bg-warning text-white">
                   <div class="card-body" style="margin-top:-10px;">비디오 분석</div>
                 </div>
-            
+
+
+
+                            <!--            side bar start  -->
+
+                    <link rel="stylesheet" href="{% static 'css/sideBar.css' %}">
+
+                    <div class="share"><img src="{% static "img/share.png" %}"></div>
+                    <div class="side-bar">
+
+
+                            <div class="button2" style="background-color:#3b5998;">
+                              <div class="button2-content" style="content: 'facebook'" onclick="toSNS('facebook','유튜브감성분석 - 유감')">
+                                  <img src="{% static "img/facebook.png" %}">
+                              </div>
+                            </div>
+
+                            <div class="button2" style="background-color:#00c300;">
+                              <div class="button3-content" style="content: 'naver'" onclick="toSNS('line','유튜브감성분석 - 유감')">
+
+                                        <img src="{% static "img/line.png" %}">
+
+                              </div>
+                            </div>
+
+
+                            <div class="button2" style="background-color:#00acee">
+                              <div class="button5-content" style="content: 'twitter'" onclick="toSNS('twitter','유튜브감성분석 - 유감')" >
+                                  <img src="{% static "img/twitter.png" %}">
+                              </div>
+                            </div>
+
+
+                    </div>
+
+            <script>
+
+
+
+             function toSNS(sns, strTitle) {
+
+
+                    strURL = window.location.href;
+                    var snsArray = new Array();
+                    var strMsg = strTitle + " " + strURL;
+                    console.log(strMsg);
+
+                    var image = "{% static "img/kakao.png" %}";
+
+
+                     snsArray['twitter'] = "http://twitter.com/home?status=" + encodeURIComponent(strTitle) + ' ' + encodeURIComponent(strURL);
+                    snsArray['line'] = "http://line.me/R/msg/text/?" + encodeURIComponent(strTitle) + " " + encodeURIComponent(strURL);
+                    snsArray['facebook'] = "http://www.facebook.com/share.php?u=" + encodeURIComponent(strURL);
+                    snsArray['blog'] = "http://blog.naver.com/openapi/share?url=" + encodeURIComponent(strURL) + "&title=" + encodeURIComponent(strTitle);
+
+                            window.open(snsArray[sns]);
+                }
+
+
+
+
+            </script>
+
+            <!--            side bar end -->
 
 
                   <!-- tooltip -->

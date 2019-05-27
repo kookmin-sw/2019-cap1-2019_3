@@ -5,6 +5,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+                <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
+
 
     <title>유튜브 감성분석 - 유감</title>
 
@@ -25,6 +28,7 @@
 
     body {
         overflow-x:hidden;
+
     }
     #naverIdLogin img{
       width:155px !important;
@@ -246,6 +250,18 @@
     height:auto;
     float:left;
 }
+
+
+.top-button {
+position:fixed;
+bottom:0;
+right:0;
+z-index:1;
+
+}
+
+
+
 </style>
 
   <body>
@@ -266,13 +282,86 @@
                             <li><a href="#about">Our Team</a></li>
                             <li><a href="#contact">Contact Us</a></li>
                           </ul>
-         </nav>
+                        </nav>
 
                         <video autoplay muted loop id="myVideo" volume="0">
                           <source  src="{% static "img/temp.mov" %}" type="video/mp4">
                         </video>
 
                       <div id="overlayImg"></div>
+
+
+
+
+
+
+            <!--            side bar start  -->
+
+                    <link rel="stylesheet" href="{% static 'css/sideBar.css' %}">
+
+                    <div class="share"><img src="{% static "img/share.png" %}"></div>
+                    <div class="side-bar">
+
+
+                            <div class="button2" style="background-color:#3b5998;">
+                              <div class="button2-content" style="content: 'facebook'" onclick="toSNS('facebook','유튜브감성분석 - 유감')">
+                                  <img src="{% static "img/facebook.png" %}">
+                              </div>
+                            </div>
+
+                            <div class="button2" style="background-color:#00c300;">
+                              <div class="button3-content" style="content: 'naver'" onclick="toSNS('line','유튜브감성분석 - 유감')">
+
+                                        <img src="{% static "img/line.png" %}">
+
+                              </div>
+                            </div>
+
+
+                            <div class="button2" style="background-color:#00acee">
+                              <div class="button5-content" style="content: 'twitter'" onclick="toSNS('twitter','유튜브감성분석 - 유감')" >
+                                  <img src="{% static "img/twitter.png" %}">
+                              </div>
+                            </div>
+
+
+                    </div>
+
+            <script>
+
+
+            function toSNS(sns, strTitle) {
+
+
+                    strURL = window.location.href;
+                    var snsArray = new Array();
+                    var strMsg = strTitle + " " + strURL;
+                    console.log(strMsg);
+
+                    var image = "{% static "img/kakao.png" %}";
+
+
+                     snsArray['twitter'] = "http://twitter.com/home?status=" + encodeURIComponent(strTitle) + ' ' + encodeURIComponent(strURL);
+                    snsArray['line'] = "http://line.me/R/msg/text/?" + encodeURIComponent(strTitle) + " " + encodeURIComponent(strURL);
+                    snsArray['facebook'] = "http://www.facebook.com/share.php?u=" + encodeURIComponent(strURL);
+                    snsArray['blog'] = "http://blog.naver.com/openapi/share?url=" + encodeURIComponent(strURL) + "&title=" + encodeURIComponent(strTitle);
+
+                            window.open(snsArray[sns]);
+                }
+
+
+            </script>
+
+            <!--            side bar end -->
+
+
+            <!--            top button start -->
+
+                    <div class="top-button">
+			            <a href="#top"><img src="img/top.png" width="100" height="auto" alt=""></a>
+		            </div>
+
+            <!--            top button end -->
 
                       <div class="row">
                           <div class="col-md-3" style=""></div>
@@ -329,26 +418,26 @@
                                          container: '#kakao-login-btn',
                                          success: function(authObj) {
 
-                // alert(JSON.stringify(authObj));
-                // console.log(JSON.stringify(authObj));
+                                            // alert(JSON.stringify(authObj));
+                                            // console.log(JSON.stringify(authObj));
 
-                //카카오톡 로그인 API시작(닉네임, 프로필 사진)
-                Kakao.API.request({
-                    url: '/v1/user/me',
-                        success: function(res) {
-                            console.log(res);
-                            alert(JSON.stringify(res.properties.nickname)+ " 님 환영합니다 !");
+                                            //카카오톡 로그인 API시작(닉네임, 프로필 사진)
+                                            Kakao.API.request({
+                                                url: '/v1/user/me',
+                                                    success: function(res) {
+                                                        console.log(res);
+                                                        alert(JSON.stringify(res.properties.nickname)+ " 님 환영합니다 !");
 
 
-                 },
+                                             },
 
-                    fail: function (error) {
-                        alert(JSON.stringify(error));
-                    }
+                                                fail: function (error) {
+                                                    alert(JSON.stringify(error));
+                                                }
 
-                });
+                                                });
 
-            },
+                                            },
                                          fail: function(err) {
                                          alert(JSON.stringify(err));
                                          }
