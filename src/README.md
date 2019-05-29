@@ -10,11 +10,11 @@
 
 # 소스 실행
 
-소스코드 실행시 pip3 install -r requirements.txt 명령어를 통해 requirements속 pip패키지들을 설치 
+소스코드 실행시 pip3 install -r requirements.txt 명령어를 통해 requirements속 pip패키지들을 설치 합니다. 
 추가로 jdk까지 아래의 명령어로 설치
-$ sudo apt update
-$ sudo apt install default-jre
-$ sudo apt install default-jdk
+- $ sudo apt update
+- $ sudo apt install default-jre
+- $ sudo apt install default-jdk
 
 ohtube 폴더 속 manage.py가 있는 폴더에서 아래의 명령어로 실행
-python3 manage.py runsslserver 0.0.0.0:8000 
+- python3 manage.py runsslserver 0.0.0.0:8000 
