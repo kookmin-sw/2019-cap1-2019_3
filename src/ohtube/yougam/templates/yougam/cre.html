@@ -1,4 +1,4 @@
-﻿<html lang="en">
+<html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -119,6 +119,10 @@ text.source {
 }
 
 #linkbt {
+  position: fixed;
+  right:10;
+  top:0px;
+
 float:left;
 margin-top:40px;
 margin-left:80px;
@@ -144,16 +148,22 @@ border:1px solid #ff6268; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
  background-image: -o-linear-gradient(top, #ff676d, #f6ab95);
  background-image: linear-gradient(to bottom, #ff676d, #f6ab95);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ff676d, endColorstr=#f6ab95);
 
+.homeBT {
+
+}
+
 </style>
 
 <body>
   <div id='layout'>
     <!-- <h2>Bar chart example</h2> -->
-    <div style="background-color:blue; ">   <img src="{% static "img/title.png" %}" class="media-object" style="float:left;width:400px;margin-left:50px;margin-top: 10px;"></div>
+    <div style="background-color:blue; ">  <img src="{% static "img/title.png" %}" class="media-object" style="float:left;width:400px;margin-left:50px;margin-top: 10px;"></div>
     <div>
-		<h4 style ="padding-top:40px;text-align: left; float:left;">&nbsp&nbsp{{video_title}} 의 분석 결과 입니다.</h4>
+		<p style ="padding-top:40px;text-align: left; float:left; font-weight: bold; font-size:16px;">&nbsp&nbsp{{video_title}} 의 분석 결과 입니다.</p>
 		<button id="linkbt" onclick="location.href='/yougam/{{video_id}}/user'">사용자 분석으로 이동</button>
 	</div>
+
+
 
 
 
@@ -162,6 +172,15 @@ border:1px solid #ff6268; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
 		            <!--            side bar start  -->
 
                     <link rel="stylesheet" href="{% static 'css/sideBar.css' %}">
+
+
+                    <div style="background-color:#414040; color:white; font-size:10px; width: 60px; height:30px; position: fixed; right:30px; bottom: 100px; z-index: 1; border-radius: 30px; padding-top:8px; font-weight: bold">
+                      HOME
+                    </div>
+
+                    <div class="homeBT">
+                      <img onclick="location.href='https://kmu-yougam.tk/yougam/'" src="{% static "img/home.png" %}" style="height:100px; width:100px; position: fixed; right:10px; bottom: 0; z-index: 1;">
+                    </div>
 
                     <div class="share"><img src="{% static "img/share.png" %}"></div>
                     <div class="side-bar">
@@ -591,3 +610,4 @@ function showSlides(n) {
 </script>
 
 </html>
+

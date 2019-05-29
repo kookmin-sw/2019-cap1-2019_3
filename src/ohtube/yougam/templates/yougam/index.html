@@ -279,8 +279,6 @@ z-index:1;
                             <li><a href="#overlayImg">Home</a></li>
                             <li><a href="#service">Service</a></li>
                             <li><a href="#guide">Guide</a></li>
-                            <li><a href="#about">Our Team</a></li>
-                            <li><a href="#contact">Contact Us</a></li>
                           </ul>
                         </nav>
 
@@ -368,13 +366,14 @@ z-index:1;
 
 
                           <!-- center 부분 (wide) -->
-                          <div class="col-md-6" style=" height:400px; text-align: center;  color:#fff; ">
+                          <div class="col-md-6" style=" height:400px; text-align: center;  color:#fff; " id="test">
 
                                 <!-- 로고 -->
                                 <h3> 유튜브 감성분석 - 유감 </h3><br>
                                 <!-- <img src="../../Images/OhTube_Logo.png" style="width:200px; height:200px;"><br> -->
 
 
+                                <p id="loginTrue" style="display:none;"> 페이스북으로 로그인 되었습니다. </p>
 
                                 <!-- 소셜 로그인 부분 -->
                                 <div id="snsLogin">
@@ -404,8 +403,46 @@ z-index:1;
 
 
 
-                                    <a id="kakao-login-btn"></a>
-                                    <a href="http://developers.kakao.com/logout"></a>
+                                    
+
+
+
+                                    <script>
+                                      window.fbAsyncInit = function() {
+                                        FB.init({
+                                          appId      : '{1715628155250059}',
+                                          cookie     : true,
+                                          xfbml      : true,
+                                          version    : '{3.3}'
+                                        });
+
+                                        FB.AppEvents.logPageView();
+
+                                      };
+
+
+
+
+
+
+                                      (function(d, s, id){
+                                         var js, fjs = d.getElementsByTagName(s)[0];
+                                         if (d.getElementById(id)) {return;}
+                                         js = d.createElement(s); js.id = id;
+                                         js.src = "https://connect.facebook.net/en_US/sdk.js";
+                                         fjs.parentNode.insertBefore(js, fjs);
+                                       }(document, 'script', 'facebook-jssdk'));
+
+                                    
+                                    function checkLoginState() {
+                                      FB.getLoginStatus(function(response) {
+                                        statusChangeCallback(response);
+                                      });
+                                    }
+
+console.log("마지막");                   
+
+                 </script>
 
 
                                     <script>
@@ -426,7 +463,12 @@ z-index:1;
                                                 url: '/v1/user/me',
                                                     success: function(res) {
                                                         console.log(res);
-                                                        alert(JSON.stringify(res.properties.nickname)+ " 님 환영합니다 !");
+
+                                                        nickname = JSON.stringify(res.properties.nickname);
+                                                        loginTrue.style.display = "block";
+                                                        snsLogin.style.display = "none";
+                                                        $("#test p").text(nickname + "님, 카카오 계정으로 로그인중입니다. ");
+
 
 
                                              },
@@ -448,12 +490,15 @@ z-index:1;
 
 
                                     <br><br>
-                                    <button id="gnbLogin" class="btn btn-default"> 로그아웃 </button>
+
 
                                 </div>
 
+                                       <button id="gnbLogin" class="btn btn-default" onclick="logout()"> 로그아웃 </button>
 
 
+
+<!--                                        <a href="http://developers.kakao.com/logout">-->
                                 <!-- 사용자 or 크리에이터 라디오 버튼 -->
 
                                 <!-- 검색창 & 버튼-->
@@ -521,8 +566,8 @@ z-index:1;
 
                                         <div class="overlay">
 
-                                          <a href="#"><button type="button" class="btn btn-default">시청자 분석</button></a>
-                                           <button type="button" class="btn btn-default">크리에이터 분석</button>
+                                          <button type="button" class="btn btn-default" onclick="location.href='https://kmu-yougam.tk/yougam/4/user/'">시청자 분석</button>
+                                           <button type="button" class="btn btn-default" onclick="location.href='https://kmu-yougam.tk/yougam/4/creator/'" >크리에이터 분석</button>
                                         </div>
                                     </div>
 
@@ -547,8 +592,8 @@ z-index:1;
 
                                         <div class="overlay">
 
-                                          <button type="button" class="btn btn-default">시청자 분석</button>
-                                           <button type="button" class="btn btn-default">크리에이터 분석</button>
+                                          <button type="button" class="btn btn-default" onclick="location.href='https://kmu-yougam.tk/yougam/7/user/'">시청자 분석</button>
+                                           <button type="button" class="btn btn-default" onclick="location.href='https://kmu-yougam.tk/yougam/7/creator/'">크리에이터 분석</button>
                                         </div>
                                     </div>
 
@@ -572,8 +617,8 @@ z-index:1;
 
                                         <div class="overlay">
 
-                                          <button type="button" class="btn btn-default">시청자 분석</button>
-                                           <button type="button" class="btn btn-default">크리에이터 분석</button>
+                                          <button type="button" class="btn btn-default" onclick="location.href='https://kmu-yougam.tk/yougam/2/user/'">시청자 분석</button>
+                                           <button type="button" class="btn btn-default" onclick="location.href='https://kmu-yougam.tk/yougam/2/creator/'">크리에이터 분석</button>
                                         </div>
                                     </div>
 
@@ -597,8 +642,8 @@ z-index:1;
 
                                         <div class="overlay">
 
-                                          <button type="button" class="btn btn-default">시청자 분석</button>
-                                           <button type="button" class="btn btn-default">크리에이터 분석</button>
+                                          <button type="button" class="btn btn-default" onclick="location.href='https://kmu-yougam.tk/yougam/6/user/'">시청자 분석</button>
+                                           <button type="button" class="btn btn-default" onclick="location.href='https://kmu-yougam.tk/yougam/6/creator/'">크리에이터 분석</button>
                                         </div>
                                     </div>
 
