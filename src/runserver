@@ -1,6 +1,0 @@
-tunnel stunnel/dev_https &
-
-python3 ohtube/manage.py runserver 8001 &
-
-HTTPS=1 python3 ohtube/manage.py runserver 8443
-
