@@ -72,5 +72,5 @@ Creators are gaining attention as they grow exponentially, and they struggle to 
 <li> Analyze the facial expressions received from your webcam with anger, fear, contempt, surprise, happiness, sadness, and neutrality to indicate in the line chart how the audience watched the video.</li>
 
 ### 5.시연영상
-[![video](../../Images/계획UI.png)](https://www.youtube.com/watch?v=ypQIRBD6Aeo)
+[![video](./Images/계획UI.png)](https://www.youtube.com/watch?v=ypQIRBD6Aeo)
 ###### 이미지를 클릭하시면 영상을 보실 수 있습니다.
