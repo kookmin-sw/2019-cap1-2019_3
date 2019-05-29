@@ -1,0 +1,1064 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="tr">
+{% load staticfiles %}
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>유튜브 감성분석 - 유감</title>
+
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="{% static 'css/user.css' %}">
+<link rel="stylesheet" href="{% static 'css/webcam3.css' %}">
+<link rel="stylesheet" href="{% static 'css/tooltip2.css' %}">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<style>
+
+section {
+  width: 73%;
+}
+
+@font-face {
+  font-family: "baedal";
+  src: url("/static/font/BMHANNAPro.ttf") format('truetype');
+}
+
+div {
+  font-family: "baedal";
+}
+
+a {
+  font-family: "나눔고딕";
+}
+
+.navbar-default{
+  background-color: white;
+}
+
+.btn-secondary{
+        font-family: "baedal";
+        color:white;
+        background-color:rgb(255,051,051);
+        border-color: rgb(255,051,051);
+        opacity: 0.3;
+        font-size: 15px;
+        border-color:
+     }
+
+.btn-group{
+  height:10%;
+}
+
+
+.btn-secondary:hover, .btn-success:active, .btn-success:focus {
+       color:white;
+       background-color: rgb(255,051,051);
+     }
+
+.card.bg-warning{
+  font-family: "baedal";
+  border-radius: 8px 8px;
+  border: 0px;
+  margin-left: 15px;
+  margin-top:10px;
+  width:100%;
+  height: 10%;
+}
+
+.card.bg-danger{
+  font-family: "baedal";
+  border-radius: 8px 8px;
+  border: 0px;
+  margin-top:10px;
+  width:100%;
+  height: 10%;
+}
+
+.btn.outline {
+    background: #d0e5fc;
+    padding: 12px 22px;
+}
+.btn-primary.outline {
+    border: 2px solid #d0e5fc;
+    color: #183f80;
+}
+.btn-primary.outline:hover, .btn-primary.outline:focus, .btn-primary.outline:active, .btn-primary.outline.active, .open > .dropdown-toggle.btn-primary {
+    color: #000;
+    border-color: #d0e5fc;
+}
+.btn-primary.outline:active, .btn-primary.outline.active {
+    border-color: #f9b3ba;
+    color: #f9b3ba;
+    box-shadow: none;
+}
+
+      .timelog img {
+      width:80px;
+      height:80px;
+      border-radius: 50px;
+      border: 2px solid pink;s
+}
+
+
+.timelog {
+    width: 100%;
+    height:100%;
+    text-align: center;
+    margin : 0 auto;
+    margin-left:100;
+    /*background-color: red;*/
+
+}
+
+.log {
+    width:90%;
+    margin-bottom :10px;
+    float: left;
+    margin-left: 20px;
+
+}
+
+.logboard {
+    padding-top:10px;
+    margin: 0 auto;
+    overflow-x: scroll;
+    height:300px;
+}
+
+scrollbar-face-color:pink;
+
+
+
+
+
+
+.bg{background-image:-webkit-linear-gradient(right,#F64F6D,#F64F6D);background-image:-moz-linear-gradient(right,#F64F6D,#F64F6D);background-image:-o-linear-gradient(right,#F64F6D,#F64F6D);background-image:-ms-linear-gradient(right,#F64F6D,#F64F6D);background-image:linear-gradient(to left,#F64F6D,#F64F6D)}
+
+.bg{background-image:-webkit-linear-gradient(right,rgba(246, 79, 109, .95),rgba(246, 79, 102, .95));background-image:-moz-linear-gradient(right,rgba(246, 79, 102, .95),rgba(246, 79, 102, .95));background-image:-o-linear-gradient(right,rgba(246, 79, 102, .95),rgba(246,79, 102, .95));background-image:-ms-linear-gradient(right,rgba(246, 79, 102, .95),rgba(246, 79, 102, .95));background-image:linear-gradient(to left,rgba(246, 79, 102, .95),rgba(246, 79, 102, .95))}
+
+
+.tooltip{visibility:hidden}
+
+.dotMenu ul li:hover a,.ocTitle,.progDesc,.progDesc p,.progTitle,.singleProperties ul li span:last-child,
+
+.singleTitle h1{text-overflow:ellipsis}a,abbr,acronym,address,applet,article,aside,audio,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,iframe,img,input,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,sub,summary,sup,table,tbody,td,textarea,tfoot,th,thead,time,tr,tt,ul,var,video{margin:0;padding:0;border:0;vertical-align:baseline;box-sizing:border-box}body{line-height:1;font-family:Roboto,sans-serif;background:#fafafa}
+
+.tooltip:before{content:" ";pointer-events:none}
+
+.robot a,ul.fmSocial li,ul.fmSocial li a{display:block}
+
+.robot{position:fixed;left:50px;top:30PX;z-index:22}
+
+.searchBox,.wave{top:0;bottom:0;right:0;left:0}
+
+.robot a{width:70px;height:70px;-webkit-border-radius:50px;-moz-border-radius:50px;border-radius:50px;z-index:22;position:relative;padding:16px}
+.robot .wave:after,.tooltip,.tooltip:before,.wave{position:absolute}
+.robot .wave:after,.robot .wave:before{background-color:rgba(246, 79, 102, 0.4);content:' ';display:block;width:70px;border-radius:200px;height:70px}
+.robot .wave:before{position:absolute;z-index:3;-webkit-animation:ping 3s infinite;animation:ping 3s infinite;animation-delay:2s}
+.robot .wave:after{z-index:2;-webkit-animation:ping2 3s infinite;animation:ping2 3s infinite;animation-delay:2s}
+@-webkit-keyframes ping{0%{transform:scale(1);opacity:0}50%{transform:scale(1.25);opacity:1}75%{transform:scale(1.25);opacity:0}100%{opacity:0}}@keyframes ping{0%{transform:scale(1);opacity:0}50%{transform:scale(1.25);opacity:1}75%{transform:scale(1.25);opacity:0}100%{opacity:0}}@-webkit-keyframes ping2{0%{transform:scale(1);opacity:0}50%{transform:scale(1.5);opacity:1}75%{transform:scale(1.5);opacity:0}100%{opacity:0}}@keyframes ping2{0%{transform:scale(1);opacity:0}50%{transform:scale(1.5);opacity:1}75%{transform:scale(1.5);opacity:0}100%{opacity:0}}
+
+.tooltip{text-align:center;}
+.tooltip{-webkit-box-shadow:0 2px 4px rgba(17,21,25,.36);-moz-box-shadow:0 2px 4px rgba(17,21,25,.36);box-shadow:0 2px 4px rgba(17,21,25,.36);top:-60px;height:30px;width:140px;color:#fff;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;line-height:40px;left:-35px;font-size:13px;opacity:0;transition:.3s}
+.tooltip:before{top:100%;left:50%;border:solid transparent;height:0;width:0;border-color:rgba(246, 79, 102, 0);border-top-color:#F64F6D;border-width:8px;margin-left:-8px}
+.robot:hover .tooltip{top:-35px;visibility:visible;opacity:1;transition:.3s}
+
+@media only screen and (max-width:1600px){.fixedRekLeft,.fixedRekRight{display:none}}
+@media only screen and (max-width:1280px){.fixedRekLeft,.fixedRekRight,.indexRight .blogSecim li:nth-child(+n+5),.sidebarPop li:nth-child(+n+7){display:none}
+
+.owl-item img{width:100%;height:inherit}
+.robot{display:none}
+.owl-dots{display:table}
+
+</style>
+<body>
+    <!--  3등분으로 나누어 어떤 모듈인지  -->
+
+    <div class = "row">
+
+          <div class="col" style="text-align: center; margin-top:10px;">
+
+
+              <!-- left-top -->
+              <div class="card bg-warning text-white">
+                  <div class="card-body" style="margin-top:-10px;">비디오 분석</div>
+                </div>
+
+
+
+                            <!--            side bar start  -->
+
+                    <link rel="stylesheet" href="{% static 'css/sideBar.css' %}">
+
+                    <div class="share"><img src="{% static "img/share.png" %}"></div>
+                    <div class="side-bar">
+
+
+                            <div class="button2" style="background-color:#3b5998;">
+                              <div class="button2-content" style="content: 'facebook'" onclick="toSNS('facebook','유튜브감성분석 - 유감')">
+                                  <img src="{% static "img/facebook.png" %}">
+                              </div>
+                            </div>
+
+                            <div class="button2" style="background-color:#00c300;">
+                              <div class="button3-content" style="content: 'naver'" onclick="toSNS('line','유튜브감성분석 - 유감')">
+
+                                        <img src="{% static "img/line.png" %}">
+
+                              </div>
+                            </div>
+
+
+                            <div class="button2" style="background-color:#00acee">
+                              <div class="button5-content" style="content: 'twitter'" onclick="toSNS('twitter','유튜브감성분석 - 유감')" >
+                                  <img src="{% static "img/twitter.png" %}">
+                              </div>
+                            </div>
+
+
+                    </div>
+
+            <script>
+
+
+
+             function toSNS(sns, strTitle) {
+
+
+                    strURL = window.location.href;
+                    var snsArray = new Array();
+                    var strMsg = strTitle + " " + strURL;
+                    console.log(strMsg);
+
+                    var image = "{% static "img/kakao.png" %}";
+
+
+                     snsArray['twitter'] = "http://twitter.com/home?status=" + encodeURIComponent(strTitle) + ' ' + encodeURIComponent(strURL);
+                    snsArray['line'] = "http://line.me/R/msg/text/?" + encodeURIComponent(strTitle) + " " + encodeURIComponent(strURL);
+                    snsArray['facebook'] = "http://www.facebook.com/share.php?u=" + encodeURIComponent(strURL);
+                    snsArray['blog'] = "http://blog.naver.com/openapi/share?url=" + encodeURIComponent(strURL) + "&title=" + encodeURIComponent(strTitle);
+
+                            window.open(snsArray[sns]);
+                }
+
+
+
+
+            </script>
+
+            <!--            side bar end -->
+
+
+                  <!-- tooltip -->
+                  <div class="robot slideInUp animated">
+                            <div class="tooltip bg" style="font-size:12px; padding-top:2px; text-align:center; "> 웹캠 켜서 표정 제공하기!</div>
+
+
+                            <a class="bg" style="padding-top:25px; color:white" onclick="toggle()">
+                                <p id="onoff">OFF</p>
+                            </a>
+
+                            <div class="wave"></div>
+                  </div>
+
+                            <script>
+                                function toggle() {
+                                     $("#panel").slideToggle("slow");
+                                }
+                            </script>
+
+
+                <!-- webcam -->
+                <div class="box" style="background-color: white; margin-left:15px;" >
+                  <div class="card bg-warning text-white" style="width:92%; border-radius: 0px 0px; opacity:0.5;">
+                      <div class="card-body" style="margin-top:-15px">크리에이터 타임 로그</div>
+                    </div>
+
+
+
+
+
+                        <!-- timelog -->
+                         <div class = "timelog" >
+
+
+                               <div id="panel">
+
+
+                                   <div style=" width:100%; text-align:center; padding-left:100px; padding-top:3px;">
+                                        <button  id="request"  onclick="requestVideo()" style="float:left;" >
+                                            웹캠켜기</button>
+                                        <button type="submit" id="stop" class="btn btn-outline-danger" onclick="stopRecording()" style="float:left;" >
+                                            녹화완료</button>
+
+
+
+                                   </div>
+
+
+                                   <div style="float:left; padding-top:3px; position:relative">
+                                       <video autoplay="true" id="video">
+
+                                       </video>
+
+                                        <p id="tag" style="position: absolute; display:none; color:white; font-size:13px;
+                                           padding-left:125px; padding-top: 100px;
+                                        ">
+                                            촬영이 종료되었습니다. </p>
+                                   </div>
+
+                                </div>
+
+
+                                <script>
+
+                                var localstream;
+
+
+                                function requestVideo() {
+                                    $(".bg p").text("ON");
+                                    tag.style.display = 'none';
+
+                                    if (navigator.mediaDevices.getUserMedia) {
+                                        var video = document.querySelector("#video");
+                                        navigator.mediaDevices.getUserMedia({video: true})
+                                      .then(function(stream) {
+                                        video.srcObject = stream;
+                                        localstream = stream;
+
+                                        console.log("start");
+
+                                        recorder = new MediaRecorder(video.srcObject);
+                                        recorder.start();
+
+                                        console.log("start recoding");
+                                      })
+                                      .catch(function(err0r) {
+                                        console.log("Something went wrong!");
+                                      });
+                                    }
+                                }
+
+
+                                function stopRecording() {
+                                  recorder.ondataavailable = e => {
+                                    console.log(e);
+                                    uploadBlob(e.data);
+                                  };
+
+                                  recorder.stop();
+                                  console.log("recoding stop");
+                                  localstream.getTracks()[0].stop();
+
+                                  console.log("webcam stop");
+                                  tag.style.display = 'block';
+                                  $(".bg p").text("OFF");
+                                }
+
+
+
+                                function uploadBlob(blob) {
+                                    var form = new FormData();
+                                    form.append("video", blob);
+                                    form.append("url", window.location.href);
+                                    console.log(blob);
+                                    console.log(form);
+
+                                    $.ajax({
+                                        url: "/yougam/sending/",
+                                            type: 'POST',
+                                            data: form,
+                                            processData: false,
+                                            contentType: false,
+                                            success: function(response) {
+                                            console.log('성공적으로 등록되었습니다.');
+                                        },
+                                        error: function(jqXHR, textStatus, errorMessage) {
+                                            console.log('Error:' + JSON.stringify(errorMessage));
+                                        }
+                                    });
+
+
+
+
+                                }
+                            </script>
+
+
+
+
+                                      <div class="log">
+                                            <div class="logboard">
+                                                    {% for i in logs %}
+                                                        <img src="/yougam/media/{{i.img_path }}">
+
+                                                        <h4>
+
+                                                                {% if i.top_sentiment == "happy" %}
+                                                                    행복
+                                                                {% endif %}
+
+                                                                {% if i.top_sentiment == "sad" %}
+                                                                    슬픔
+                                                                {% endif %}
+
+                                                                {% if i.top_sentiment == "neutral" %}
+                                                                    중립
+                                                                {% endif %}
+
+                                                                {% if i.top_sentiment == "angry" %}
+                                                                    화남
+                                                                {% endif %}
+
+                                                                {% if i.top_sentiment == "scared" %}
+                                                                    겁먹은
+                                                                {% endif %}
+
+                                                                {% if i.top_sentiment == "surprised" %}
+                                                                    놀람
+                                                                {% endif %}
+
+                                                                {% if i.top_sentiment == "disgust" %}
+                                                                    혐오
+                                                                {% endif %}
+                                                        </h4>  {{ i.time }}
+                                                        <br>
+                                                    {% endfor %}
+                                                    {% csrf_token %}
+
+                                            </div>
+                                      </div>
+                                <!-- 타임로그 1개 인스턴스 end -->
+
+                              </div>
+              </div>
+
+
+          </div>
+
+
+
+          <div class="col-5" style="text-align:center; background-color:white; margin-bottom:10px;margin-top:10px;height:315px;">
+
+            <iframe width="560" height="315" src="{{iframe_url}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%; height:100%; margin-top:10px">
+              </iframe>
+            <p id="video-title" style="font-size:20px; margin-top:20px;">{{video_title}}</p>
+          </div>
+
+          <div class="col" style="text-align: center; background-color: white; margin-top:10px;">
+
+            <div class="card bg-danger text-white" style="margin-left:-15px;">
+                <div class="card-body" style="margin-top:-10px;">댓글 6가지 감성 분석</div>
+              </div>
+            <div class="box" style="background-color: white; margin-right:15px;">
+              <div class="card bg-danger text-white graph" style="width:92%; border-radius: 0px 0px; opacity:0.3;">
+                <div class="card-body" style="margin-top:-15px;">댓글 6감정 분류 그래프</div>
+              </div>
+              <section>
+              <canvas id="myChart" width="200" height="200" style="margin-left:15px; margin-top:20px;"></canvas>
+              </section>
+              <script>var ans = JSON.parse("{{ count }}");
+              </script>
+
+              <script src="{% static 'chart_js/Chart.js' %}"></script>
+
+
+            </div>
+            <!-- right-top -->
+          </div>
+
+    </div>
+
+
+
+
+    <div class="row">
+
+            <!-- left partition -->
+            <div class="col" style="text-align: center;">
+
+
+
+                     <!-- 영상 분석 모듈이 들어갈 부분 --->
+                        <div class="box" style="background-color: white; margin-left:15px;">
+                          <div class="card bg-warning text-white" style="width:95%; border-radius: 0px 0px;opacity:0.5">
+                              <div class="card-body" style="margin-top:-15px">영상 감정 그래프</div>
+
+                           </div>
+                              <div  class ="box" style="margin-top:20px;">
+
+                            <script src="https://d3js.org/d3.v5.min.js"></script>
+
+                            <div id="pie"></div>
+
+                            <script>
+                                const width = 300;
+                                const height = 300;
+                                const colorData = ["#A64E6E", "#F2BB77", "#F2A25C", "#FFE2DF", "#FFC001", "#FF6F61", "#F8A39D", "#81894E"];
+                                const data = {{ json }};
+                                data[0].label = "화남";
+                                data[1].label = "혐오";
+                                data[2].label = "놀람";
+                                data[3].label = "행복";
+                                data[4].label = "슬픔";
+                                data[5].label = "놀람";
+                                data[6].label = "중립";
+                                const arc = d3.arc().innerRadius(80).outerRadius(Math.min(width, height) / 2);
+                                const arcLabel = (() => {
+                                  const radius = Math.min(width, height) / 2 * 0.8;
+                                  return d3.arc().innerRadius(radius).outerRadius(radius);
+                                })();
+                                const pie = d3.pie()
+                                  .sort((a, b) => b.value - a.value)
+                                  .value(d => d.value);
+                                const arcs = pie(data);
+                                const svg = d3.select('#pie').append('svg').style('width', width).style('height', height)
+                                  .attr('text-anchor', 'middle')
+                                  .style('font-size', '12px sans-serif');
+                                const g = svg.append('g')
+                                  .attr('transform', `translate(${width/2}, ${height/2})`);
+                                g.selectAll('path')
+                                  .data(arcs)
+                                  .enter().append('path')
+                                    .style("fill", function(d, i) {
+                                            return colorData[i];
+                                        })
+                                    .attr('stroke', 'white')
+                                    .attr('d', arc)
+                                    .append('title')
+                                    .text(d => `${d.data.label}: ${d.data.value}`);
+                                const text = g.selectAll('text')
+                                  .data(arcs)
+                                  .enter().append('text')
+                                    .attr('transform', d => `translate(${arcLabel.centroid(d)})`)
+                                    .attr('dy', '0.35em');
+                                text.append('tspan')
+                                  .attr('x', 0)
+                                  .attr('y', '-0.7em')
+                                  .style('font-weight', 'bold')
+                                  .text(d => d.data.label)
+                                text.filter(d => (d.endAngle - d.startAngle > 0.25)).append('tspan')
+                                  .attr('x', 0)
+                                  .attr('y', '0.7em')
+                                  .attr('fill-opacity', 0.7)
+                                  .text(function(d, i) {
+                                            return  d.endAngle-d.startAngle > 0.2 ?
+                                                     " (" + Math.round(1000*(d.endAngle-d.startAngle)/(Math.PI*2))/10 + "%)" : ""
+                                        });
+                                svg.node();
+                            </script>
+
+                      </div>
+                        </div>
+
+          </div>
+
+
+            <!-- wider -->
+            <!-- center partition -->
+            <div class="col-5">
+
+                      <!-- 유튜브 영상 삽입 -->
+                      <!-- <div style="position: relative; height:0; padding-bottom: 56.25%;">
+
+                        </div> -->
+                        <div class="box" style="text-align:center; margin-left:8px;">
+                          <button type = "button " id = "good" type="submit" class="btn btn-primary btn-lg outline">좋아요👍</button> &nbsp&nbsp&nbsp
+                          <button id = "soso" type="submit" class="btn btn-primary btn-lg outline">보통이에요👊</button> &nbsp&nbsp&nbsp
+                          <button id = "bad" type="submit" class="btn btn-primary btn-lg outline">별로에요👎</button>
+
+                          <div style="height:300px; overflow: auto;">
+                                <ul style="margin-top:20px;"id="positive" class = "list-group">
+                            {% for comment in cmts%}
+                              {% if comment.label == 2 %}
+                                <li class="list-group-item">
+                                  <div class="media">
+                                    <div class="media-left">
+                                      {% if comment.randnum == 1 %}
+                                        <img src="{% static "img/img_avatar1.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 2 %}
+                                        <img src="{% static "img/img_avatar2.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 3 %}
+                                        <img src="{% static "img/img_avatar3.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 4 %}
+                                        <img src="{% static "img/img_avatar4.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 5 %}
+                                        <img src="{% static "img/img_avatar5.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 6 %}
+                                        <img src="{% static "img/img_avatar6.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 7 %}
+                                        <img src="{% static "img/img_avatar7.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 8 %}
+                                        <img src="{% static "img/img_avatar8.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 9 %}
+                                        <img src="{% static "img/img_avatar9.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+
+                                      </div>
+                                   <div class="media-body">
+                                      <div style="float:left"><strong>{{comment.author}}</strong> {{comment.period}} &nbsp</div>
+                                        <button style="float:left;" type="button" class="btn btn-light" data-toggle="modal" data-target="#myModal{{comment.cid}}">변경하기</button>
+                                          <!-- The Modal -->
+                                        <div class="modal" id="myModal{{comment.cid}}">
+                                          <div class="modal-dialog">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h4 class="modal-title">사용자 추론 변경</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+
+                                              <!-- Modal body -->
+                                              <div class="modal-body">
+                                               <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/1">보통이에요👊로 변경 </a>
+                                               <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/0">별로에요👎로 변경</a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                      <div style="clear:left;margin-top:15px;float:left;margin-right:20px; ">
+                                      {{comment.cmt}}</div>
+                                    </div>
+                                  </div>
+                                  <div style="text-align: left; margin-left:40px;">
+                                      {% for rep in reply%}
+
+                                        {% if rep.pid ==  comment.cid %}
+
+                                          <button  class="btn btn-link" id = "btn{{rep.id}}" onclick="repclick(this.id)" style="clear:left"> 답글보기 </button>
+                                          <div id = "{{rep.id}}" style="display: none;margin-left: 40px;">
+                                            {{rep.comment}} by {{rep.author}}
+                                            {% if rep.label ==  2 %}
+                                              <span style="padding:3px; background-color:#72bfb3;color:white;">긍정</span>
+                                            {% elif rep.label == 1 %}
+                                              <span style="padding:3px; background-color:#905cc4;color:white;">중립</span>
+                                            {% else %}
+                                              <span style="padding:3px; background-color:#f75175; color:white;">부정</span>
+                                            {% endif %}
+
+                                          </div>
+                                        {% else %}
+                                        {% endif %}
+
+                                      {% endfor %}
+                                      {% csrf_token %}
+
+                                  </div>
+
+                                </li>
+
+                              {% else %}
+                              {% endif %}
+                            {% endfor %}
+                          </ul>
+
+                          <ul style="margin-top:20px;" id="negative" class = "list-group">
+                            {% for comment in cmts%}
+                              {% if comment.label == 0 %}
+                                <li class="list-group-item">
+                                  <div class="media">
+                                    <div class="media-left">
+                                      {% if comment.randnum == 1 %}
+                                        <img src="{% static "img/img_avatar1.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 2 %}
+                                        <img src="{% static "img/img_avatar2.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 3 %}
+                                        <img src="{% static "img/img_avatar3.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 4 %}
+                                        <img src="{% static "img/img_avatar4.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 5 %}
+                                        <img src="{% static "img/img_avatar5.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 6 %}
+                                        <img src="{% static "img/img_avatar6.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 7 %}
+                                        <img src="{% static "img/img_avatar7.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 8 %}
+                                        <img src="{% static "img/img_avatar8.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 9 %}
+                                        <img src="{% static "img/img_avatar9.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      </div>
+
+                                      <div class="media-body">
+                                      <div style="float:left"><strong>{{comment.author}}</strong> {{comment.period}} &nbsp</div>
+                                     <button style="float:left;" type="button" class="btn btn-light" data-toggle="modal" data-target="#myModal{{comment.cid}}">변경하기</button>
+                                          <!-- The Modal -->
+                                        <div class="modal" id="myModal{{comment.cid}}">
+                                          <div class="modal-dialog">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h4 class="modal-title">사용자 추론 변경</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                              <!-- Modal body -->
+                                              <div class="modal-body">
+                                                <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/2">좋아요👍로 변경</a>
+                                            <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/1">보통이에요👊로 변경</a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      <div style="clear:left;margin-top:15px;float:left;margin-right:20px; ">{{comment.cmt}}</div>
+                                    </div></div>
+                              <div style="text-align: left; margin-left:40px;">
+                                      {% for rep in reply%}
+
+                                        {% if rep.pid ==  comment.cid %}
+
+                                          <button  class="btn btn-link" id = "btn{{rep.id}}" onclick="repclick(this.id)" style="clear:left"> 답글보기 </button>
+                                          <div id = "{{rep.id}}" style="display: none;margin-left: 40px;">
+                                            {{rep.comment}} by {{rep.author}}
+                                            {% if rep.label ==  2 %}
+                                              <span style="padding:3px; background-color:#72bfb3;color:white;">긍정</span>
+                                            {% elif rep.label == 1 %}
+                                              <span style="padding:3px; background-color:#905cc4;color:white;">중립</span>
+                                            {% else %}
+                                              <span style="padding:3px; background-color:#f75175; color:white;">부정</span>
+                                            {% endif %}
+
+                                          </div>
+                                        {% else %}
+                                        {% endif %}
+
+                                      {% endfor %}
+                                      {% csrf_token %}
+
+                                  </div>
+
+                                </li>
+
+                              {% else %}
+                              {% endif %}
+                            {% endfor %}
+                            {% csrf_token %}
+
+                          </ul>
+
+
+                          <ul style="margin-top:20px;" id="netural" class = "list-group">
+                            {% for comment in cmts%}
+                              {% if comment.label == 1 %}
+                                <li class="list-group-item">
+                                  <div class="media">
+                                    <div class="media-left">
+                                      {% if comment.randnum == 1 %}
+                                        <img src="{% static "img/img_avatar1.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 2 %}
+                                        <img src="{% static "img/img_avatar2.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 3 %}
+                                        <img src="{% static "img/img_avatar3.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 4 %}
+                                        <img src="{% static "img/img_avatar4.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 5 %}
+                                        <img src="{% static "img/img_avatar5.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 6 %}
+                                        <img src="{% static "img/img_avatar6.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 7 %}
+                                        <img src="{% static "img/img_avatar7.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 8 %}
+                                        <img src="{% static "img/img_avatar8.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      {% if comment.randnum == 9 %}
+                                        <img src="{% static "img/img_avatar9.png" %}" class="media-object" style="width:40px">
+                                      {% else %}
+                                      {% endif %}
+                                      </div>
+
+                                  <div class="media-body">
+                                      <div style="float:left"><strong>{{comment.author}}</strong> {{comment.period}} &nbsp</div>
+
+                                       <button style="float:left;" type="button" class="btn btn-light" data-toggle="modal" data-target="#myModal{{comment.cid}}">변경하기</button>
+                                          <!-- The Modal -->
+                                        <div class="modal" id="myModal{{comment.cid}}">
+                                          <div class="modal-dialog">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h4 class="modal-title">사용자 추론 변경</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                              <!-- Modal body -->
+                                              <div class="modal-body">
+                                                <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/2">좋아요👍로 변경</a>
+                                            <a class="dropdown-item" href="/yougam/{{comment.video}}/change/{{ comment.cid }}/0">별로에요👎로 변경</a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                      <div style="clear:left;margin-top:15px;float:left;margin-right:20px; ">{{comment.cmt}}</div>
+                                    </div></div>
+                                                                  <div style="text-align: left; margin-left:40px;">
+                                      {% for rep in reply%}
+
+                                        {% if rep.pid ==  comment.cid %}
+
+                                          <button  class="btn btn-link" id = "btn{{rep.id}}" onclick="repclick(this.id)" style="clear:left"> 답글보기 </button>
+                                          <div id = "{{rep.id}}" style="display: none;margin-left: 40px;">
+                                            {{rep.comment}} by {{rep.author}}
+                                            {% if rep.label ==  2 %}
+                                              <span style="padding:3px; background-color:#72bfb3;color:white;">긍정</span>
+                                            {% elif rep.label == 1 %}
+                                              <span style="padding:3px; background-color:#905cc4;color:white;">중립</span>
+                                            {% else %}
+                                              <span style="padding:3px; background-color:#f75175; color:white;">부정</span>
+                                            {% endif %}
+
+                                          </div>
+                                        {% else %}
+                                        {% endif %}
+
+                                      {% endfor %}
+                                      {% csrf_token %}
+
+                                  </div>
+
+
+                                </li>
+
+                              {% else %}
+                              {% endif %}
+                            {% endfor %}
+                            {% csrf_token %}
+
+                          </ul>
+
+                          </div>
+
+
+
+                        </div>
+
+
+            </div>
+            <!-- right partition -->
+            <div class="col">
+
+                    <!-- 댓글 모듈 부분 -->
+
+                          <div class="box" style="background-color: white;">
+                            <div class="card bg-danger text-white" style="width:92%; border-radius: 0px 0px;opacity:0.3;">
+                              <div class="card-body" style="margin-top:-15px;">워드클라우드</div>
+                            </div>
+
+                            <div class="btn-group" role="group" aria-label="Basic example" style="margin-top:10px; margin-right:30px;">
+                              <button type="button" class="btn btn-secondary" id = "neutral">중립</button>
+                              <button type="button" class="btn btn-secondary" id = "happy">행복</button>
+                              <button type="button" class="btn btn-secondary" id = "sad">슬픔</button>
+                              <button type="button" class="btn btn-secondary" id = "surprise">놀람</button>
+                              <button type="button" class="btn btn-secondary" id = "anger">화남</button>
+                              <button type="button" class="btn btn-secondary" id = "fear">두려움</button>
+                            </div>
+                            <div id ="clickbutton" style="margin-right:30px; margin-top:30px">감성을 클릭해주세요!</div>
+                            <div>
+                              <img id ="wc" src = "/static/wordcloud_dataset/wordcloud_img/basic.png" onerror="imgError()"  width = "320" height = "220" style="margin-right:30px; margin-top:10px;">
+                            </div>
+                             <button style="float:center;margin-top:10px;"><a href="/yougam/{{video_id}}/creator">크리에이터 분석으로 이동</a></button>
+                          </div>
+
+                            <script>
+                            window.onload = function() {
+                              var ctx = document.getElementById('myChart');
+                              console.log(ans)
+                              var myChart = new Chart(ctx, {
+                                type: 'radar',
+                                data: {
+                                    labels:  ['중립', '행복', '슬픔', '놀람', '화남', '두려움'],
+                                    datasets: [{
+                                      label: 'sentiment',
+                                      backgroundColor: "rgba(200,0,0,0.2)",
+                                      data: ans
+                                    }]
+                                }
+                            });
+
+                              var vid = {{video_id}};
+                              vid = String(vid);
+                              var image = document.getElementById('wc');
+                              var senti = 'neutral';
+                              var wc_path = "/static/wordcloud_dataset/wordcloud_img/basic.png";
+                              wc.src = wc_path;
+                              console.log(wc_path);
+                            }
+
+
+                            </script>
+
+                          </div>
+
+                    </div>
+
+            </div>
+
+      </div>
+
+    </div>
+</body>
+
+
+
+<script>
+$(document).ready(function(){
+
+  $("#positive").hide();
+  $("#negative").hide();
+  $("#netural").hide();
+  $("#imgerror").hide();
+
+  $("#good").on("click",function(event){
+    $("#positive").toggle();
+    $("#bad").on("click",function(event){
+      $("#positive").hide();
+    });
+     $("#soso").on("click",function(event){
+      $("#positive").hide();
+    });
+  });
+
+  $("#soso").on("click",function(event){
+    $("#netural").toggle();
+    $("#good").on("click",function(event){
+      $("#netural").hide();
+    });
+    $("#bad").on("click",function(event){
+      $("#netural").hide();
+    });
+  });
+  $("#bad").on("click",function(event){
+    $("#negative").toggle();
+    $("#good").on("click",function(event){
+      $("#negative").hide();
+    });
+     $("#soso").on("click",function(event){
+      $("#negative").hide();
+    });
+  });
+
+  var vid = {{video_id}};
+  console.log(vid);
+  vid = String(vid);
+  var image = document.getElementById('wc');
+  $("#neutral").on("click",function(event){
+    $("#clickbutton").hide();
+    var senti = 'neutral'
+    var wc_path = "/static/wordcloud_dataset/wordcloud_img/neutral/" + vid + "_" + senti + ".png";
+    wc.src = wc_path;
+    wc.height = "320";
+    console.log(wc_path)
+  });
+  $("#happy").on("click",function(event){
+    $("#clickbutton").hide();
+    var senti = 'happy'
+    var wc_path = "/static/wordcloud_dataset/wordcloud_img/happy/" + vid + "_" + senti + ".png";
+    wc.src = wc_path;
+    wc.height = "320";
+    console.log(wc_path)
+  });
+  $("#sad").on("click",function(event){
+    $("#clickbutton").hide();
+    var senti = 'sad'
+    var wc_path = "/static/wordcloud_dataset/wordcloud_img/sad/" + vid + "_" + senti + ".png";
+    wc.src = wc_path;
+    wc.height = "320";
+    console.log(wc_path)
+  });
+  $("#surprise").on("click",function(event){
+    $("#clickbutton").hide();
+    var senti = 'surprise'
+    var wc_path = "/static/wordcloud_dataset/wordcloud_img/surprise/" + vid + "_" + senti + ".png";
+    wc.src = wc_path;
+    wc.height = "320";
+    console.log(wc_path)
+  });
+  $("#anger").on("click",function(event){
+    $("#clickbutton").hide();
+    var senti = 'anger'
+    var wc_path = "/static/wordcloud_dataset/wordcloud_img/anger/" + vid + "_" + senti + ".png";
+    wc.src = wc_path;
+    wc.height = "320";
+    console.log(wc_path)
+  });
+  $("#fear").on("click",function(event){
+    $("#clickbutton").hide();
+    var senti = 'fear'
+    var wc_path = "/static/wordcloud_dataset/wordcloud_img/fear/" + vid + "_" + senti + ".png";
+    wc.src = wc_path;
+    wc.height = "320";
+    console.log(wc_path)
+  });
+
+
+});
+
+function repclick(clickid){
+  console.log(clickid);
+  var index = clickid.replace("btn","");
+  $("#"+index).show();
+}
+
+
+function imgError(){
+  var basicimg = document.getElementById('clickbutton');
+  var image = document.getElementById('wc');
+  var wc_path = "/static/wordcloud_dataset/wordcloud_img/basic.png";
+  wc.src = wc_path;
+  wc.height = "270";
+  basicimg.innerHTML = "해당 감성의 댓글이 존재하지 않습니다.";
+  $("#clickbutton").show();
+}
+
+</script>
+
+</html>

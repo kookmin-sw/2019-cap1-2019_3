@@ -1,0 +1,218 @@
+.side-bar {
+
+
+position:fixed;
+width:75px;
+height:240px;
+
+padding-left : 6.5px;
+padding-top : 20px;
+
+background-color: rgba( 255, 255, 255, 0.5 );
+right:0px;
+top:200px;
+border:solid #ff9a9e;
+border-radius:18px;
+z-index:1;
+
+margin:15px;
+float:left;
+vertical-align:middle;
+
+}
+
+.button2 {
+  display:block;
+  margin-bottom : 15px;
+   background: rgba(100, 100, 200, 1);
+  width:53px;
+  height:53px;
+  border-radius:50px;
+  border:3px solid white;
+  margin-left:0px;
+  transition: all .8s;
+  overflow:hidden;
+  bottom:0px;
+  position:relative;
+
+
+}
+
+.button2:hover {
+  display:block;
+  width:60px;
+  height:60px;
+  background: rgba(100, 100, 200, .1);
+  border-radius:35px;
+  border:7px solid rgba(100, 100, 200, .4);
+  cursor:pointer;
+  transition: all .1s;
+  overflow:hidden;
+  bottom:3px;
+  position:relative;
+}
+
+
+.button2-content {
+    font-family:Helvetica;
+  font-size:10px;
+  font-weight:normal;
+
+  line-height:50px;
+  line-width:50px;
+  color: rgba(255, 255, 255, 1);
+
+   margin : 0 auto;
+
+   width:50px;
+   height:50px;
+
+  position: relative;
+  transition: all .3s;
+
+
+  bottom:3px;
+  right:5px;
+
+}
+
+ .button4-content, .button5-content {
+  font-family:Helvetica;
+  font-size:10px;
+  font-weight:normal;
+
+  line-height:50px;
+  line-width:50px;
+  color: rgba(255, 255, 255, 1);
+
+   margin : 0 auto;
+
+   width:50px;
+   height:50px;
+
+  position: relative;
+  transition: all .3s;
+
+
+  bottom:3px;
+  right:6px;
+
+}
+
+.button3-content {
+    font-family:Helvetica;
+  font-size:10px;
+  font-weight:normal;
+
+  line-height:50px;
+  line-width:50px;
+  color: rgba(255, 255, 255, 1);
+
+   margin : 0 auto;
+
+   width:50px;
+   height:50px;
+
+  position: relative;
+  transition: all .3s;
+
+
+  bottom:4px;
+  right:6px;
+
+}
+
+.button2-content:before{
+  content : 'facebook';
+  position: absolute;
+  background-color: #3b5998;
+  width:50px;
+  height:50px;
+  border-radius:25px;
+  color:white;
+  top:50px;
+  font-size:5px;
+  right:-3px;
+
+}
+
+.button3-content:before {
+    content :'Line';
+    position: absolute;
+  background-color: #00c300;
+  width:50px;
+  height:50px;
+  border-radius:25px;
+  color:white;
+  top:50px;
+  font-size:5px;
+  right:-3px;
+}
+
+.button4-content:before {
+    content :'kakao';
+    position: absolute;
+
+  background-color: #ffe812;
+  width:50px;
+  height:50px;
+  border-radius:25px;
+  color:white;
+  top:50px;
+  font-size:5px;
+
+  right:-3px;
+}
+
+.button5-content:before {
+    content :'twitter';
+    position: absolute;
+  background-color: #00acee;
+  width:50px;
+  height:50px;
+  border-radius:25px;
+
+
+  color:white;
+  top:50px;
+  font-size:5px;
+  right:-3px;
+}
+
+
+
+.button2:hover .button2-content, .button2:hover .button3-content, .button2:hover .button4-content, .button2:hover .button5-content{
+
+  font-family:Helvetica;
+  font-size:10px;
+  font-weight:normal;
+  line-height:50px;
+  color: rgba(255, 255, 255, 0);
+  width:50px;
+  transition: all .2s;
+  background-color: rgba(100, 100, 200, 0);
+  height:50px;
+  bottom:50px;
+}
+
+.button2 img {
+
+    width:60px;
+    height:60px;
+    text-align : center;
+}
+
+.share {
+width:65px;
+height:100px;
+position:fixed;
+right:20px;
+top:150px;
+background-size:contain;
+z-index:1;
+}
+
+.share img {
+ width:60px;
+ height:60px;
+}
