@@ -28,7 +28,7 @@
 
 ```markdown
 * email: 97jjy@kookmin.ac.kr
-* role: 팀장 ,댓글 감성 분석 , 텍스트 전처리 
+* role: 팀장 ,댓글 감성 분석 , 댓글 전처리
 ```
 ### 김주향
 <img src="https://github.com/kookmin-sw/2019-cap1-2019_3/blob/master/Images/kim.jpeg"   width = "300px" height = "300px"></img>
@@ -71,3 +71,6 @@ Creators are gaining attention as they grow exponentially, and they struggle to 
 <li> provide the emotional distribution of comments with six emotions: happiness, sadness, anger, surprise, neutrality, and fear.</li>
 <li> Analyze the facial expressions received from your webcam with anger, fear, contempt, surprise, happiness, sadness, and neutrality to indicate in the line chart how the audience watched the video.</li>
 
+### 5.시연영상
+[![video](../../Images/계획UI.png)](https://www.youtube.com/watch?v=ypQIRBD6Aeo)
+###### 이미지를 클릭하시면 영상을 보실 수 있습니다.
