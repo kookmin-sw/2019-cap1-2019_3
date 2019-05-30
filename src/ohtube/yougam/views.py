@@ -218,14 +218,30 @@ def userdetail(request, video):
       video_url.sentiment_fear = count_list[5]
       video_url.generate()
 
-   video_url = Video.objects.get(pk=video_url.id)
-   loaded_count_list = []
-   loaded_count_list.append(video_url.sentiment_neutral)
-   loaded_count_list.append(video_url.sentiment_happy)
-   loaded_count_list.append(video_url.sentiment_sad)
-   loaded_count_list.append(video_url.sentiment_surprise)
-   loaded_count_list.append(video_url.sentiment_anger)
-   loaded_count_list.append(video_url.sentiment_fear)
+
+   cmt_neutral = Comment.objects.filter(video=video, label6='neutral').count()
+   cmt_happy = Comment.objects.filter(video=video, label6='happy').count()
+   cmt_sad = Comment.objects.filter(video=video, label6='sad').count()
+   cmt_surprise = Comment.objects.filter(video=video, label6='surprise').count()
+   cmt_anger = Comment.objects.filter(video=video, label6='anger').count()
+   cmt_fear = Comment.objects.filter(video=video, label6='fear').count()
+
+   rep_neutral = Comment.objects.filter(video=video, label6='neutral').count()
+   rep_happy = Comment.objects.filter(video=video, label6='happy').count()
+   rep_sad = Comment.objects.filter(video=video, label6='sad').count()
+   rep_surprise = Comment.objects.filter(video=video, label6='surprise').count()
+   rep_anger = Comment.objects.filter(video=video, label6='anger').count()
+   rep_fear = Comment.objects.filter(video=video, label6='fear').count()
+
+
+
+   loaded_count_list = [0,0,0,0,0,0]
+   loaded_count_list[0] = cmt_neutral + rep_neutral
+   loaded_count_list[1] = cmt_happy + rep_happy
+   loaded_count_list[2] = cmt_sad + rep_sad
+   loaded_count_list[3] = cmt_surprise + rep_surprise
+   loaded_count_list[4] = cmt_anger + rep_anger
+   loaded_count_list[5] = cmt_fear + rep_fear
    print(loaded_count_list)
 
    comments = Comment.objects.filter(video=video)
@@ -391,18 +407,17 @@ def crtdetail(request, video):
       predict_count_cmt = sentiment_count.sentenceCount(predicted_comment_list)
       predict_count_reply = sentiment_count.sentenceCount(predicted_replies_list)
 
-      cmt_count_list = []
-      reply_count_list = []
-      count_list = []
 
-      for senti in predict_count_cmt:
-         cmt_count_list.append(predict_count_cmt[senti])
-      for senti in predict_count_reply:
-         reply_count_list.append(predict_count_reply[senti])
 
-      for i in range(0,6):
-         count_list.append(cmt_count_list[i] + reply_count_list[i])
-         print(count_list[i])
+      count_list = [0,0,0,0,0,0]
+
+      count_list[0] = predict_count_cmt['neutral'] + predict_count_reply['neutral']
+      count_list[1] = predict_count_cmt['happy'] + predict_count_reply['happy']
+      count_list[2] = predict_count_cmt['sad'] + predict_count_reply['sad']
+      count_list[3] = predict_count_cmt['surprise'] + predict_count_reply['surprise']
+      count_list[4] = predict_count_cmt['anger'] + predict_count_reply['anger']
+      count_list[5] = predict_count_cmt['fear'] + predict_count_reply['fear']
+
       video_url.sentiment_neutral = count_list[0]
       video_url.sentiment_happy = count_list[1]
       video_url.sentiment_sad = count_list[2]
@@ -412,14 +427,29 @@ def crtdetail(request, video):
       video_url.generate()
 
    vid = Video.objects.get(pk=video_url.id)
-   loaded_count_list = []
-   loaded_count_list.append(vid.sentiment_neutral)
-   loaded_count_list.append(vid.sentiment_happy)
-   loaded_count_list.append(vid.sentiment_sad)
-   loaded_count_list.append(vid.sentiment_surprise)
-   loaded_count_list.append(vid.sentiment_anger)
-   loaded_count_list.append(vid.sentiment_fear)
+   cmt_neutral = Comment.objects.filter(video=video, label6='neutral').count()
+   cmt_happy = Comment.objects.filter(video=video, label6='happy').count()
+   cmt_sad = Comment.objects.filter(video=video, label6='sad').count()
+   cmt_surprise = Comment.objects.filter(video=video, label6='surprise').count()
+   cmt_anger = Comment.objects.filter(video=video, label6='anger').count()
+   cmt_fear = Comment.objects.filter(video=video, label6='fear').count()
+
+   rep_neutral = Comment.objects.filter(video=video, label6='neutral').count()
+   rep_happy = Comment.objects.filter(video=video, label6='happy').count()
+   rep_sad = Comment.objects.filter(video=video, label6='sad').count()
+   rep_surprise = Comment.objects.filter(video=video, label6='surprise').count()
+   rep_anger = Comment.objects.filter(video=video, label6='anger').count()
+   rep_fear = Comment.objects.filter(video=video, label6='fear').count()
+
+   loaded_count_list = [0,0,0,0,0,0]
+   loaded_count_list[0] = cmt_neutral + rep_neutral
+   loaded_count_list[1] = cmt_happy + rep_happy
+   loaded_count_list[2] = cmt_sad + rep_sad
+   loaded_count_list[3] = cmt_surprise + rep_surprise
+   loaded_count_list[4] = cmt_anger + rep_anger
+   loaded_count_list[5] = cmt_fear + rep_fear
    print(loaded_count_list)
+
 
    comments = Comment.objects.filter(video=video)
    video_title = vid.title
@@ -449,7 +479,7 @@ def crtdetail(request, video):
          emotion_list[i] = emotion_list[i].replace('}' , '')
          emotion_list[i] = emotion_list[i].replace(',' , '')
          tmp.append( emotion_list[i].split(' ') )
-      print(emotion_list)
+      print(tmp)
       emotion_list = []
 
       for each in tmp:
@@ -458,7 +488,7 @@ def crtdetail(request, video):
             tmp_list.append( float(each[3+(4*i)]) )
          emotion_list.append(tmp_list)
 
-      emotion_str = [ '"화남"',  '"혐오"',  '"놀람"',  '"행복"', '"슬픔"',  '"겁먹음"',  '"중립"',  ]
+      emotion_str = [ '"화남"',  '"혐오"',  '"겁먹은"',  '"행복"', '"슬픔"',  '"놀람"',  '"중립"',  ]
 
       if len(emotion_list) == 0:
          emotion_list = [[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]]
@@ -478,7 +508,7 @@ def crtdetail(request, video):
 
 
       #back to json
-      str_back = '[{label: "화남", value: %f},{label: "혐오", value: %f},{label: "놀람", value: %f},{label: "행복", value: %f},{label: "슬픔", value: %f},{label: "겁먹은", value: %f},{label: "중립", value: %f}]'%(emotion_average_list[0], emotion_average_list[1], emotion_average_list[2], emotion_average_list[3],emotion_average_list[4], emotion_average_list[5], emotion_average_list[6] )
+      str_back = '[{label: "화남", value: %f},{label: "혐오", value: %f},{label: "겁먹은", value: %f},{label: "행복", value: %f},{label: "슬픔", value: %f},{label: "놀람", value: %f},{label: "중립", value: %f}]'%(emotion_average_list[0], emotion_average_list[1], emotion_average_list[2], emotion_average_list[3],emotion_average_list[4], emotion_average_list[5], emotion_average_list[6] )
       print(str_back)
 
       capture = WebCam.objects.filter(video_id=video)###time log랑똑같이 꺼냄####
@@ -487,7 +517,7 @@ def crtdetail(request, video):
 
    else:
       capture = WebCam.objects.filter(video_id=video)
-      str_back = '[{label: "화남", value: %f},{label: "혐오", value: %f},{label: "놀람", value: %f},{label: "행복", value: %f},{label: "슬픔", value: %f},{label: "겁먹은", value: %f},{label: "중립", value: %f}]'%(0.0, 0.0, 0.0, 0.0,0.0,0.0,0.0)
+      str_back = '[{label: "화남", value: %f},{label: "혐오", value: %f},{label: "겁먹은", value: %f},{label: "행복", value: %f},{label: "슬픔", value: %f},{label: "놀람", value: %f},{label: "중립", value: %f}]'%(0.0, 0.0, 0.0, 0.0,0.0,0.0,0.0)
 
 
    video_id = video
