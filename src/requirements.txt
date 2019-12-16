@@ -1,6 +1,6 @@
 django==2.2
 nltk==3.4.1
-tensorflow==1.13.1
+tensorflow==1.15.0
 keras==2.2.4
 requests==2.22.0
 pandas==0.24.2
