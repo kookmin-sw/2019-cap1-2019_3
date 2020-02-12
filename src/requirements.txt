@@ -1,4 +1,4 @@
-django==2.2
+django==2.2.10
 nltk==3.4.1
 tensorflow==1.13.1
 keras==2.2.4
