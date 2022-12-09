@@ -46,8 +46,6 @@
 ```
 
 ### 이진주
-![team](./Images/lee.jpeg)
-
 
 ```markdown
 * email: ljj9885@gmail.com
