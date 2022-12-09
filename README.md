@@ -47,7 +47,6 @@
 ```
 
 ### 이진주
-<img src="https://github.com/kookmin-sw/2019-cap1-2019_3/blob/master/Images/lee.jpeg"  width = "300px" height = "300px"></img>
 
 
 ```markdown
