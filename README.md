@@ -50,7 +50,6 @@
 
 
 ```markdown
-* email: ljj9885@gmail.com
 * role: 댓글 감성 분석  , 유튜브 댓글 크롤링
 ```
 
